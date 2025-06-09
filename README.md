@@ -25,9 +25,9 @@ possible. Check out some of our partners below:
 
 [![AdGuard DNS](https://i.imgur.com/gDKTUbm.png)](https://adguard-dns.io?aid=135732)
 
-[![Control D](https://i.imgur.com/9xC1OAK.png)](https://www.controld.com/?utm_source=osprey)
+[![Control D](https://i.imgur.com/9xC1OAK.png)](https://controld.com/?utm_source=osprey)
 
-[![PrecisionSec](https://i.imgur.com/cwJWCog.png)](https://www.precisionsec.com/?utm_source=osprey)
+[![PrecisionSec](https://i.imgur.com/cwJWCog.png)](https://precisionsec.com/?utm_source=osprey)
 
 ## Detections
 

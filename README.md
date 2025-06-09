@@ -23,13 +23,17 @@
 Osprey has **officially partnered** with industry-leading security companies to provide you with the best protection
 possible. Check out some of our partners below:
 
-[![PrecisionSec](https://i.imgur.com/7jfyHtR.png)](https://precisionsec.com/?utm_source=osprey)
+[![AdGuard DNS](https://i.imgur.com/gDKTUbm.png)](https://www.adguard-dns.io?aid=135732)
+
+[![PrecisionSec](https://i.imgur.com/cwJWCog.png)](https://www.precisionsec.com/?utm_source=osprey)
+
+[![Control D](https://i.imgur.com/9xC1OAK.png)](https://www.controld.com/?utm_source=osprey)
 
 ## Detections
 
-Osprey blocks websites that are classified as:
+> **Note:** 'Restricted' refers to adult content blocked by optional filters.
 
-> Note: 'Restricted' refers to adult content blocked by optional filters. 
+Osprey blocks websites that are classified as:
 
 - [Malicious](https://us.norton.com/blog/malware/what-are-malicious-websites)
 - [Phishing](https://f-secure.com/us-en/articles/what-is-phishing)
@@ -57,37 +61,39 @@ entirely using [the system policies](https://github.com/Foulest/Osprey/wiki/Sett
 
 You can configure the extension's protection options in the settings:
 
-![Osprey Settings (Page 1)](https://i.imgur.com/NlyRGZb.png)
-![Osprey Settings (Page 2)](https://i.imgur.com/fxxMvWE.png)
+![Osprey Settings (Page 1)](https://i.imgur.com/g5vsAcf.png)
+![Osprey Settings (Page 2)](https://i.imgur.com/iJFKzBV.png)
 
 ## Protection Providers
 
 The following providers are **enabled** by default:
 
-- [PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey) (Official Partner)
+- **[AdGuard Security DNS](https://www.adguard-dns.io/en/public-dns.html)**
+- **[Control D Security DNS](https://www.controld.com/free-dns)**
+- **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
 - [Bitdefender TrafficLight](https://www.bitdefender.com/en-us/consumer/trafficlight)
 - [G DATA WebProtection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
 - [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
 - [Norton SafeWeb](https://safeweb.norton.com)
-- [AdGuard Security DNS](https://www.adguard-dns.io/en/public-dns.html)
 - [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
 - [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
 - [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/#two-flavors-1-1-1-2-no-malware-1-1-1-3-no-malware-or-adult-content)
-- [Control D Security DNS](https://www.controld.com/free-dns)
+- [DNS4EU Security DNS](https://www.joindns4.eu/for-public)
 - [Quad9 Security DNS](https://www.quad9.net)
 - [Switch.ch Security DNS](https://www.switch.ch/en/dns-firewall)
 
 The following providers are **disabled** by default:
 
-- [AdGuard Family DNS](https://www.adguard-dns.io/en/public-dns.html)
+- **[AdGuard Family DNS](https://www.adguard-dns.io/en/public-dns.html)**
+- **[Control D Family DNS](https://www.controld.com/free-dns)**
 - [CIRA Security DNS](https://www.cira.ca/en/canadian-shield)
 - [CIRA Family DNS](https://www.cira.ca/en/canadian-shield)
 - [CleanBrowsing Family DNS](https://www.cleanbrowsing.org/filters/#step1)
 - [CleanBrowsing Adult DNS](https://www.cleanbrowsing.org/filters/#step2)
 - [Cloudflare Family DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families)
-- [Control D Family DNS](https://www.controld.com/free-dns)
 - [DNS0.eu Security DNS](https://www.dns0.eu/zero)
 - [DNS0.eu Kids DNS](https://www.dns0.eu/kids)
+- [DNS4EU Family DNS](https://www.joindns4.eu/for-public)
 - [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
 - [OpenDNS Family Shield DNS](https://www.opendns.com/home-internet-security)
 
@@ -125,6 +131,8 @@ about URL page privacy, the DNS APIs are there for you.
 
 ## Installation
 
+> **Note:** You need to have a GitHub account to download artifacts.
+
 You can install Osprey from the web stores listed at the top.
 
 For other installations, you can install the extension manually:
@@ -141,7 +149,7 @@ For other installations, you can install the extension manually:
 
 ### Firefox
 
-> Note: This only works
+> **Note:** This only works
 > for [builds of Firefox that allow unsigned addons.](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox)
 
 1. Navigate to the [Actions section](https://github.com/Foulest/Osprey/actions/workflows) and click

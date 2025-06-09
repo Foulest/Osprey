@@ -7,33 +7,35 @@ const Settings = (function () {
 
     let defaultSettings = {
         // Page 1
+        adGuardSecurityEnabled: true,
+        adGuardFamilyEnabled: false,
+        controlDSecurityEnabled: true,
+        controlDFamilyEnabled: false,
         precisionSecEnabled: true,
         bitdefenderEnabled: true,
         gDataEnabled: true,
-        smartScreenEnabled: true,
-        nortonEnabled: true,
-        adGuardSecurityEnabled: true,
-        adGuardFamilyEnabled: false,
 
         // Page 2
+        smartScreenEnabled: true,
+        nortonEnabled: true,
         certEEEnabled: true,
         ciraSecurityEnabled: false,
         ciraFamilyEnabled: false,
         cleanBrowsingSecurityEnabled: true,
         cleanBrowsingFamilyEnabled: false,
-        cleanBrowsingAdultEnabled: false,
-        cloudflareSecurityEnabled: true,
 
         // Page 3
+        cleanBrowsingAdultEnabled: false,
+        cloudflareSecurityEnabled: true,
         cloudflareFamilyEnabled: false,
-        controlDSecurityEnabled: true,
-        controlDFamilyEnabled: false,
         dns0SecurityEnabled: false,
         dns0KidsEnabled: false,
-        openDNSSecurityEnabled: false,
-        openDNSFamilyShieldEnabled: false,
+        dns4EUSecurityEnabled: true,
+        dns4EUFamilyEnabled: false,
 
         // Page 4
+        openDNSSecurityEnabled: false,
+        openDNSFamilyShieldEnabled: false,
         quad9Enabled: true,
         switchCHEnabled: true,
 

@@ -48,6 +48,26 @@
       "maximum": 2592000,
       "default": 86400
     },
+    "AdGuardSecurityEnabled": {
+      "title": "AdGuard Security Enabled",
+      "description": "If set to true, AdGuard Security will be enabled.",
+      "type": "boolean"
+    },
+    "AdGuardFamilyEnabled": {
+      "title": "AdGuard Family Enabled",
+      "description": "If set to true, AdGuard Family will be enabled.",
+      "type": "boolean"
+    },
+    "ControlDSecurityEnabled": {
+      "title": "Control D Security Enabled",
+      "description": "If set to true, Control D Security will be enabled.",
+      "type": "boolean"
+    },
+    "ControlDFamilyEnabled": {
+      "title": "Control D Family Enabled",
+      "description": "If set to true, Control D Family will be enabled.",
+      "type": "boolean"
+    },
     "PrecisionSecEnabled": {
       "title": "PrecisionSec Enabled",
       "description": "If set to true, PrecisionSec will be enabled.",
@@ -71,16 +91,6 @@
     "NortonEnabled": {
       "title": "Norton Enabled",
       "description": "If set to true, Norton will be enabled.",
-      "type": "boolean"
-    },
-    "AdGuardSecurityEnabled": {
-      "title": "AdGuard Security Enabled",
-      "description": "If set to true, AdGuard Security will be enabled.",
-      "type": "boolean"
-    },
-    "AdGuardFamilyEnabled": {
-      "title": "AdGuard Family Enabled",
-      "description": "If set to true, AdGuard Family will be enabled.",
       "type": "boolean"
     },
     "CERTEEEnabled": {
@@ -123,24 +133,24 @@
       "description": "If set to true, Cloudflare Family will be enabled.",
       "type": "boolean"
     },
-    "ControlDSecurityEnabled": {
-      "title": "Control D Security Enabled",
-      "description": "If set to true, Control D Security will be enabled.",
-      "type": "boolean"
-    },
-    "ControlDFamilyEnabled": {
-      "title": "Control D Family Enabled",
-      "description": "If set to true, Control D Family will be enabled.",
-      "type": "boolean"
-    },
     "DNS0SecurityEnabled": {
-      "title": "DNS0 Security Enabled",
-      "description": "If set to true, DNS0 Security will be enabled.",
+      "title": "DNS0.eu Security Enabled",
+      "description": "If set to true, DNS0.eu Security will be enabled.",
       "type": "boolean"
     },
     "DNS0KidsEnabled": {
-      "title": "DNS0 Kids Enabled",
-      "description": "If set to true, DNS0 Kids will be enabled.",
+      "title": "DNS0.eu Kids Enabled",
+      "description": "If set to true, DNS0.eu Kids will be enabled.",
+      "type": "boolean"
+    },
+    "DNS4EUSecurityEnabled": {
+      "title": "DNS4EU Security Enabled",
+      "description": "If set to true, DNS4EU Security will be enabled.",
+      "type": "boolean"
+    },
+    "DNS4EUFamilyEnabled": {
+      "title": "DNS4EU Family Enabled",
+      "description": "If set to true, DNS4EU Family will be enabled.",
       "type": "boolean"
     },
     "OpenDNSSecurityEnabled": {

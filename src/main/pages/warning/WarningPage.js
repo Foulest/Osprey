@@ -48,6 +48,44 @@ window.WarningSingleton = window.WarningSingleton || (function () {
         // Create a function to get the report URL lazily when needed
         const getReportUrl = () => {
             switch (originInt) {
+                case ProtectionResult.ResultOrigin.ADGUARD_SECURITY:
+                    // Verified working as of: 05/25/2025
+                    // Response time: 1-2 days
+                    return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C"
+                        + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
+                        + "%0A%0AProduct%3A%20AdGuard%20DNS"
+                        + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
+                        + "%0ADetected%20as%3A%20" + encodedResult
+                        + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+
+                case ProtectionResult.ResultOrigin.ADGUARD_FAMILY:
+                    // Verified working as of: 05/25/2025
+                    // Response time: 1-2 days
+                    return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C"
+                        + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
+                        + "%0A%0AProduct%3A%20AdGuard%20Family%20DNS"
+                        + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
+                        + "%0ADetected%20as%3A%20" + encodedResult
+                        + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+
+                case ProtectionResult.ResultOrigin.CONTROL_D_SECURITY:
+                    // TODO: Needs verification of response from support team.
+                    return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C"
+                        + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
+                        + "%0A%0AProduct%3A%20Control%20D%20P1%20DNS"
+                        + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
+                        + "%0ADetected%20as%3A%20" + encodedResult
+                        + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+
+                case ProtectionResult.ResultOrigin.CONTROL_D_FAMILY:
+                    // TODO: Needs verification of response from support team.
+                    return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C"
+                        + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
+                        + "%0A%0AProduct%3A%20Control%20D%20Family%20DNS"
+                        + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
+                        + "%0ADetected%20as%3A%20" + encodedResult
+                        + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+
                 case ProtectionResult.ResultOrigin.PRECISIONSEC:
                     // Verified working as of: 05/28/2025
                     // Response time: 1-2 days
@@ -77,26 +115,6 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                 case ProtectionResult.ResultOrigin.NORTON:
                     return new URL("https://safeweb.norton.com/report?url=" + encodedBlockedUrl);
 
-                case ProtectionResult.ResultOrigin.ADGUARD_SECURITY:
-                    // Verified working as of: 05/25/2025
-                    // Response time: 1-2 days
-                    return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C"
-                        + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
-                        + "%0A%0AProduct%3A%20AdGuard%20DNS"
-                        + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
-                        + "%0ADetected%20as%3A%20" + encodedResult
-                        + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
-
-                case ProtectionResult.ResultOrigin.ADGUARD_FAMILY:
-                    // Verified working as of: 05/25/2025
-                    // Response time: 1-2 days
-                    return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C"
-                        + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
-                        + "%0A%0AProduct%3A%20AdGuard%20Family%20DNS"
-                        + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
-                        + "%0ADetected%20as%3A%20" + encodedResult
-                        + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
-
                 case ProtectionResult.ResultOrigin.CERT_EE:
                     // Verified working as of: 05/06/2025
                     // Response time: 2-3 days
@@ -109,7 +127,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
 
                 case ProtectionResult.ResultOrigin.CIRA_SECURITY:
                 case ProtectionResult.ResultOrigin.CIRA_FAMILY:
-                    return new URL("https://www.cira.ca/en/canadian-shield/suppor");
+                    return new URL("https://www.cira.ca/en/canadian-shield/support");
 
                 case ProtectionResult.ResultOrigin.CLEANBROWSING_SECURITY:
                     // Verified working as of: 05/12/2025
@@ -145,27 +163,27 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                 case ProtectionResult.ResultOrigin.CLOUDFLARE_FAMILY:
                     return new URL("https://radar.cloudflare.com/domains/feedback/" + encodedBlockedUrl);
 
-                case ProtectionResult.ResultOrigin.CONTROL_D_SECURITY:
-                    // TODO: Needs verification of response from support team.
-                    return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C"
-                        + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
-                        + "%0A%0AProduct%3A%20Control%20D%20P1%20DNS"
-                        + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
-                        + "%0ADetected%20as%3A%20" + encodedResult
-                        + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
-
-                case ProtectionResult.ResultOrigin.CONTROL_D_FAMILY:
-                    // TODO: Needs verification of response from support team.
-                    return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C"
-                        + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
-                        + "%0A%0AProduct%3A%20Control%20D%20Family%20DNS"
-                        + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
-                        + "%0ADetected%20as%3A%20" + encodedResult
-                        + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
-
                 case ProtectionResult.ResultOrigin.DNS0_SECURITY:
                 case ProtectionResult.ResultOrigin.DNS0_KIDS:
                     return new URL("https://www.dns0.eu/report");
+
+                case ProtectionResult.ResultOrigin.DNS4EU_SECURITY:
+                    // TODO: Needs verification of response from support team.
+                    return new URL("mailto:contact@dns4.eu?subject=False%20Positive&body=Hello%2C"
+                        + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
+                        + "%0A%0AProduct%3A%20DNS4EU%20Protective%20Resolution%20DNS"
+                        + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
+                        + "%0ADetected%20as%3A%20" + encodedResult
+                        + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+
+                case ProtectionResult.ResultOrigin.DNS4EU_FAMILY:
+                    // TODO: Needs verification of response from support team.
+                    return new URL("mailto:contact@dns4.eu?subject=False%20Positive&body=Hello%2C"
+                        + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
+                        + "%0A%0AProduct%3A%20DNS4EU%20Protective%20Resolution%20with%20Child%20Protection%20DNS"
+                        + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
+                        + "%0ADetected%20as%3A%20" + encodedResult
+                        + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.OPENDNS_SECURITY:
                     // TODO: Needs verification of response from support team.

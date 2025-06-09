@@ -27,6 +27,7 @@ class CacheManager {
                 "cloudflareSecurity", "cloudflareFamily",
                 "controlDSecurity", "controlDFamily",
                 "dns0Security", "dns0Kids",
+                "dns4EUSecurity", "dns4EUFamily",
                 "openDNSSecurity", "openDNSFamilyShield",
                 "quad9",
                 "switchCH"

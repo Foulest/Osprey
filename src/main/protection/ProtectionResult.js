@@ -34,138 +34,146 @@ ProtectionResult.ResultOrigin = {
     UNKNOWN: 0,
 
     // Page 1
-    PRECISIONSEC: 1,
-    BITDEFENDER: 2,
-    G_DATA: 3,
-    SMARTSCREEN: 4,
-    NORTON: 5,
-    ADGUARD_SECURITY: 6,
-    ADGUARD_FAMILY: 7,
+    ADGUARD_SECURITY: 1,
+    ADGUARD_FAMILY: 2,
+    CONTROL_D_SECURITY: 3,
+    CONTROL_D_FAMILY: 4,
+    PRECISIONSEC: 5,
+    BITDEFENDER: 6,
+    G_DATA: 7,
 
     // Page 2
-    CERT_EE: 8,
-    CIRA_SECURITY: 9,
-    CIRA_FAMILY: 10,
-    CLEANBROWSING_SECURITY: 11,
-    CLEANBROWSING_FAMILY: 12,
-    CLEANBROWSING_ADULT: 13,
-    CLOUDFLARE_SECURITY: 14,
+    SMARTSCREEN: 8,
+    NORTON: 9,
+    CERT_EE: 10,
+    CIRA_SECURITY: 11,
+    CIRA_FAMILY: 12,
+    CLEANBROWSING_SECURITY: 13,
+    CLEANBROWSING_FAMILY: 14,
 
     // Page 3
-    CLOUDFLARE_FAMILY: 15,
-    CONTROL_D_SECURITY: 16,
-    CONTROL_D_FAMILY: 17,
+    CLEANBROWSING_ADULT: 15,
+    CLOUDFLARE_SECURITY: 16,
+    CLOUDFLARE_FAMILY: 17,
     DNS0_SECURITY: 18,
     DNS0_KIDS: 19,
-    OPENDNS_SECURITY: 20,
-    OPENDNS_FAMILY_SHIELD: 21,
+    DNS4EU_SECURITY: 20,
+    DNS4EU_FAMILY: 21,
 
     // Page 4
-    QUAD9: 22,
-    SWITCH_CH: 23,
+    OPENDNS_SECURITY: 22,
+    OPENDNS_FAMILY_SHIELD: 23,
+    QUAD9: 24,
+    SWITCH_CH: 25,
 };
 
 ProtectionResult.ResultOriginNames = {
     0: "Unknown",
 
     // Page 1
-    1: "PrecisionSec Web Protection",
-    2: "Bitdefender TrafficLight",
-    3: "G DATA WebProtection",
-    4: "Microsoft SmartScreen",
-    5: "Norton SafeWeb",
-    6: "AdGuard Security DNS",
-    7: "AdGuard Family DNS",
+    1: "AdGuard Security DNS",
+    2: "AdGuard Family DNS",
+    3: "Control D Security DNS",
+    4: "Control D Family DNS",
+    5: "PrecisionSec Web Protection",
+    6: "Bitdefender TrafficLight",
+    7: "G DATA WebProtection",
 
     // Page 2
-    8: "CERT-EE Security DNS",
-    9: "CIRA Security DNS",
-    10: "CIRA Family DNS",
-    11: "CleanBrowsing Security DNS",
-    12: "CleanBrowsing Family DNS",
-    13: "CleanBrowsing Adult DNS",
-    14: "Cloudflare Security DNS",
+    8: "Microsoft SmartScreen",
+    9: "Norton SafeWeb",
+    10: "CERT-EE Security DNS",
+    11: "CIRA Security DNS",
+    12: "CIRA Family DNS",
+    13: "CleanBrowsing Security DNS",
+    14: "CleanBrowsing Family DNS",
 
     // Page 3
-    15: "Cloudflare Family DNS",
-    16: "Control D Security DNS",
-    17: "Control D Family DNS",
-    18: "DNS0 Security DNS",
-    19: "DNS0 Kids DNS",
-    20: "OpenDNS Security DNS",
-    21: "OpenDNS Family Shield DNS",
+    15: "CleanBrowsing Adult DNS",
+    16: "Cloudflare Security DNS",
+    17: "Cloudflare Family DNS",
+    18: "DNS0.eu Security DNS",
+    19: "DNS0.eu Kids DNS",
+    20: "DNS4EU Security DNS",
+    21: "DNS4EU Family DNS",
 
     // Page 4
-    22: "Quad9 Security DNS",
-    23: "Switch.ch Security DNS"
+    22: "OpenDNS Security DNS",
+    23: "OpenDNS Family Shield DNS",
+    24: "Quad9 Security DNS",
+    25: "Switch.ch Security DNS"
 };
 
 ProtectionResult.ShortOriginNames = {
     0: "Unknown",
 
     // Page 1
-    1: "PrecisionSec",
-    2: "Bitdefender",
-    3: "G DATA",
-    4: "SmartScreen",
-    5: "Norton",
-    6: "AdGuard Security",
-    7: "AdGuard Family",
+    1: "AdGuard Security",
+    2: "AdGuard Family",
+    3: "Control D Security",
+    4: "Control D Family",
+    5: "PrecisionSec",
+    6: "Bitdefender",
+    7: "G DATA",
 
     // Page 2
-    8: "CERT-EE",
-    9: "CIRA Security",
-    10: "CIRA Family",
-    11: "CleanBrowsing Security",
-    12: "CleanBrowsing Family",
-    13: "CleanBrowsing Adult",
-    14: "Cloudflare Security",
+    8: "SmartScreen",
+    9: "Norton",
+    10: "CERT-EE",
+    11: "CIRA Security",
+    12: "CIRA Family",
+    13: "CleanBrowsing Security",
+    14: "CleanBrowsing Family",
 
     // Page 3
-    15: "Cloudflare Family",
-    16: "Control D Security",
-    17: "Control D Family",
-    18: "DNS0 Security",
-    19: "DNS0 Kids",
-    20: "OpenDNS Security",
-    21: "OpenDNS Family Shield",
+    15: "CleanBrowsing Adult",
+    16: "Cloudflare Security",
+    17: "Cloudflare Family",
+    18: "DNS0.eu Security",
+    19: "DNS0.eu Kids",
+    20: "DNS4EU Security",
+    21: "DNS4EU Family",
 
     // Page 4
-    22: "Quad9",
-    23: "Switch.ch"
+    22: "OpenDNS Security",
+    23: "OpenDNS Family Shield",
+    24: "Quad9",
+    25: "Switch.ch"
 };
 
 ProtectionResult.CacheOriginNames = {
     0: "unknown",
 
     // Page 1
-    1: "precisionSec",
-    2: "bitdefender",
-    3: "gData",
-    4: "smartScreen",
-    5: "norton",
-    6: "adGuardSecurity",
-    7: "adGuardFamily",
+    1: "adGuardSecurity",
+    2: "adGuardFamily",
+    3: "controlDSecurity",
+    4: "controlDFamily",
+    5: "precisionSec",
+    6: "bitdefender",
+    7: "gData",
 
     // Page 2
-    8: "certEE",
-    9: "ciraSecurity",
-    10: "ciraFamily",
-    11: "cleanBrowsingSecurity",
-    12: "cleanBrowsingFamily",
-    13: "cleanBrowsingAdult",
-    14: "cloudflareSecurity",
+    8: "smartScreen",
+    9: "norton",
+    10: "certEE",
+    11: "ciraSecurity",
+    12: "ciraFamily",
+    13: "cleanBrowsingSecurity",
+    14: "cleanBrowsingFamily",
 
     // Page 3
-    15: "cloudflareFamily",
-    16: "controlDSecurity",
-    17: "controlDFamily",
+    15: "cleanBrowsingAdult",
+    16: "cloudflareSecurity",
+    17: "cloudflareFamily",
     18: "dns0Security",
     19: "dns0Kids",
-    20: "openDNSSecurity",
-    21: "openDNSFamilyShield",
+    20: "dns4EUSecurity",
+    21: "dns4EUFamily",
 
     // Page 4
-    22: "quad9",
-    23: "switchCH"
+    22: "openDNSSecurity",
+    23: "openDNSFamilyShield",
+    24: "quad9",
+    25: "switchCH"
 };

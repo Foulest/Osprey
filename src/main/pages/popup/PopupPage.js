@@ -14,6 +14,34 @@ window.PopupSingleton = window.PopupSingleton || (function () {
     // Security systems configuration - only defined once
     const securitySystems = [
         {
+            name: "adGuardSecurityEnabled",
+            title: "AdGuard Security DNS",
+            labelElementId: "adGuardSecurityStatus",
+            switchElementId: "adGuardSecuritySwitch",
+            messageType: Messages.MessageType.ADGUARD_SECURITY_TOGGLED,
+        },
+        {
+            name: "adGuardFamilyEnabled",
+            title: "AdGuard Family DNS",
+            labelElementId: "adGuardFamilyStatus",
+            switchElementId: "adGuardFamilySwitch",
+            messageType: Messages.MessageType.ADGUARD_FAMILY_TOGGLED,
+        },
+        {
+            name: "controlDSecurityEnabled",
+            title: "Control D Security DNS",
+            labelElementId: "controlDSecurityStatus",
+            switchElementId: "controlDSecuritySwitch",
+            messageType: Messages.MessageType.CONTROL_D_SECURITY_TOGGLED,
+        },
+        {
+            name: "controlDFamilyEnabled",
+            title: "Control D Family DNS",
+            labelElementId: "controlDFamilyStatus",
+            switchElementId: "controlDFamilySwitch",
+            messageType: Messages.MessageType.CONTROL_D_FAMILY_TOGGLED,
+        },
+        {
             name: "precisionSecEnabled",
             title: "PrecisionSec Web Protection",
             labelElementId: "precisionSecStatus",
@@ -47,20 +75,6 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             labelElementId: "nortonStatus",
             switchElementId: "nortonSwitch",
             messageType: Messages.MessageType.NORTON_TOGGLED,
-        },
-        {
-            name: "adGuardSecurityEnabled",
-            title: "AdGuard Security DNS",
-            labelElementId: "adGuardSecurityStatus",
-            switchElementId: "adGuardSecuritySwitch",
-            messageType: Messages.MessageType.ADGUARD_SECURITY_TOGGLED,
-        },
-        {
-            name: "adGuardFamilyEnabled",
-            title: "AdGuard Family DNS",
-            labelElementId: "adGuardFamilyStatus",
-            switchElementId: "adGuardFamilySwitch",
-            messageType: Messages.MessageType.ADGUARD_FAMILY_TOGGLED,
         },
         {
             name: "certEEEnabled",
@@ -119,20 +133,6 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             messageType: Messages.MessageType.CLOUDFLARE_FAMILY_TOGGLED,
         },
         {
-            name: "controlDSecurityEnabled",
-            title: "Control D Security DNS",
-            labelElementId: "controlDSecurityStatus",
-            switchElementId: "controlDSecuritySwitch",
-            messageType: Messages.MessageType.CONTROL_D_SECURITY_TOGGLED,
-        },
-        {
-            name: "controlDFamilyEnabled",
-            title: "Control D Family DNS",
-            labelElementId: "controlDFamilyStatus",
-            switchElementId: "controlDFamilySwitch",
-            messageType: Messages.MessageType.CONTROL_D_FAMILY_TOGGLED,
-        },
-        {
             name: "dns0SecurityEnabled",
             title: "DNS0.eu Security DNS",
             labelElementId: "dns0SecurityStatus",
@@ -145,6 +145,20 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             labelElementId: "dns0KidsStatus",
             switchElementId: "dns0KidsSwitch",
             messageType: Messages.MessageType.DNS0_KIDS_TOGGLED,
+        },
+        {
+            name: "dns4EUSecurityEnabled",
+            title: "DNS4EU Security DNS",
+            labelElementId: "dns4EUSecurityStatus",
+            switchElementId: "dns4EUSecuritySwitch",
+            messageType: Messages.MessageType.DNS4EU_SECURITY_TOGGLED,
+        },
+        {
+            name: "dns4EUFamilyEnabled",
+            title: "DNS4EU Family DNS",
+            labelElementId: "dns4EUFamilyStatus",
+            switchElementId: "dns4EUFamilySwitch",
+            messageType: Messages.MessageType.DNS4EU_FAMILY_TOGGLED,
         },
         {
             name: "openDNSSecurityEnabled",

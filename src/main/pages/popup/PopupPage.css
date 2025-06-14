@@ -55,6 +55,22 @@ h3 {
     margin-bottom: 15px;
 }
 
+h4 {
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+h5 {
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    padding: 0;
+    margin-top: 2px;
+    margin-bottom: 10px;
+}
+
 /* --------------------------------------------------
    Section Styles
 -------------------------------------------------- */
@@ -74,6 +90,13 @@ section {
     display: inline-block;
     font-size: 14px;
     margin: 5px 5px 15px 5px;
+}
+
+.status-other {
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px 5px 16px 5px;
 }
 
 /* --------------------------------------------------
@@ -140,7 +163,7 @@ section {
 
 .page {
     display: none;
-    height: 457px;
+    height: 458px;
     width: 320px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -163,4 +186,15 @@ section {
 
 .partner-label:hover {
     text-decoration: underline;
+}
+
+/* --------------------------------------------------
+   Other Labels
+-------------------------------------------------- */
+.other-label {
+    position: relative;
+    bottom: 2px;
+    left: 2px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }

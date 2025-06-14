@@ -1,12 +1,15 @@
 "use strict";
 
+let reportedByText;
+
 // Use a global singleton pattern to ensure we don't duplicate resources
 window.WarningSingleton = window.WarningSingleton || (function () {
+
     // Browser API compatibility between Chrome and Firefox
     const browserAPI = typeof browser === 'undefined' ? chrome : browser;
 
     /**
-     * Initialize the popup or refresh if already initialized
+     * Initialize the popup or refresh if already initialized.
      */
     const initialize = function () {
         // Extract the threat code from the current page URL
@@ -44,6 +47,18 @@ window.WarningSingleton = window.WarningSingleton || (function () {
 
         // Set reported by text
         domElements.reportedBy.innerText = systemName || "Unknown";
+        reportedByText = domElements.reportedBy.innerText;
+
+        // Listens for PONG messages to update the reported by count
+        browserAPI.runtime.onMessage.addListener((message) => {
+            if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PONG && message.count > 1) {
+                domElements.reportedBy.innerText = reportedByText + " (and " + message.count + " others)";
+            }
+        });
+
+        // Sends a PING message to get the count of reported sites
+        browserAPI.runtime.sendMessage({messageType: Messages.MessageType.BLOCKED_COUNTER_PING}).catch(() => {
+        });
 
         // Create a function to get the report URL lazily when needed
         const getReportUrl = () => {
@@ -108,12 +123,6 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                         + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
                         + "%0ADetected%20as%3A%20" + encodedResult
                         + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
-
-                case ProtectionResult.ResultOrigin.SMARTSCREEN:
-                    return new URL("https://feedback.smartscreen.microsoft.com/feedback.aspx?t=16&url=" + blockedUrl);
-
-                case ProtectionResult.ResultOrigin.NORTON:
-                    return new URL("https://safeweb.norton.com/report?url=" + encodedBlockedUrl);
 
                 case ProtectionResult.ResultOrigin.CERT_EE:
                     // Verified working as of: 05/06/2025
@@ -185,6 +194,12 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                         + "%0ADetected%20as%3A%20" + encodedResult
                         + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
+                case ProtectionResult.ResultOrigin.SMARTSCREEN:
+                    return new URL("https://feedback.smartscreen.microsoft.com/feedback.aspx?t=16&url=" + blockedUrl);
+
+                case ProtectionResult.ResultOrigin.NORTON:
+                    return new URL("https://safeweb.norton.com/report?url=" + encodedBlockedUrl);
+
                 case ProtectionResult.ResultOrigin.OPENDNS_SECURITY:
                     // TODO: Needs verification of response from support team.
                     return new URL("mailto:support@opendns.com?subject=False%20Positive&body=Hello%2C"
@@ -227,7 +242,13 @@ window.WarningSingleton = window.WarningSingleton || (function () {
             }
         };
 
-        // Unified message sending function with error handling
+        /**
+         * Sends a message to the background script with the specified message type and additional data.
+         *
+         * @param messageType - The type of message to send.
+         * @param additionalData - Additional data to include in the message.
+         * @returns {Promise<void>} - A promise that resolves when the message is sent.
+         */
         const sendMessage = async (messageType, additionalData = {}) => {
             try {
                 // Convert URL objects to strings before sending

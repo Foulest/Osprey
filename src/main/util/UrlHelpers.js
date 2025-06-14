@@ -5,6 +5,7 @@ const UrlHelpers = {
 
     /**
      * Extracts the blocked URL (the site being reported as malicious) from the query parameters of a URL.
+     *
      * @param {string} url - The URL containing the blocked site information.
      * @returns {string|null} - The blocked URL, or null if not found.
      */
@@ -12,6 +13,7 @@ const UrlHelpers = {
 
     /**
      * Extracts the origin of the protection result from the query parameters of a URL.
+     *
      * @param url - The URL containing the origin information
      * @returns {string} - The origin of the protection result
      */
@@ -27,6 +29,7 @@ const UrlHelpers = {
 
     /**
      * Constructs the URL for the browser's block page, which shows a warning when a site is blocked.
+     *
      * @param {object} protectionResult - The result object containing details about the threat.
      * @returns {string} - The full URL for the block page.
      */
@@ -56,6 +59,7 @@ const UrlHelpers = {
 
     /**
      * Normalizes a hostname by removing "www." if it exists.
+     *
      * @param {string} hostname - The hostname to normalize.
      * @returns {string} - The normalized hostname.
      */

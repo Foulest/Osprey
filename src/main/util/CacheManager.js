@@ -3,41 +3,45 @@
 // Manages the cache for the allowed protection providers.
 // Updated to attach a tab ID (int) to each entry in the processing queue.
 class CacheManager {
-    constructor(allowedKey = 'allowedCache', processingKey = 'processingCache', debounceDelay = 5000) {
+    constructor(allowedKey = 'allowedCache', blockedKey = 'blockedCache', processingKey = 'processingCache', debounceDelay = 5000) {
         Settings.get(settings => {
             this.expirationTime = settings.cacheExpirationSeconds;
             this.allowedKey = allowedKey;
+            this.blockedKey = blockedKey;
             this.processingKey = processingKey;
             this.debounceDelay = debounceDelay;
             this.timeoutId = null;
 
             const providers = [
-                // HTTP-based providers
-                "precisionSec",
-                "bitdefender",
-                "gData",
-                "smartScreen",
-                "norton",
-
-                // DNS-based providers
+                // Official Partners
                 "adGuardSecurity", "adGuardFamily",
+                "controlDSecurity", "controlDFamily",
+                "precisionSec",
+
+                // Non-Partnered Providers
+                "bitdefender",
                 "certEE",
                 "ciraSecurity", "ciraFamily",
                 "cleanBrowsingSecurity", "cleanBrowsingFamily", "cleanBrowsingAdult",
                 "cloudflareSecurity", "cloudflareFamily",
-                "controlDSecurity", "controlDFamily",
                 "dns0Security", "dns0Kids",
                 "dns4EUSecurity", "dns4EUFamily",
+                "gData",
+                "smartScreen",
+                "norton",
                 "openDNSSecurity", "openDNSFamilyShield",
                 "quad9",
                 "switchCH"
             ];
 
             this.allowedCaches = {};
+            this.blockedCaches = {};
             this.processingCaches = {};
 
+            // Initialize caches for each provider
             providers.forEach(name => {
                 this.allowedCaches[name] = new Map();
+                this.blockedCaches[name] = new Map();
                 this.processingCaches[name] = new Map();
             });
 
@@ -50,6 +54,24 @@ class CacheManager {
                 Object.keys(this.allowedCaches).forEach(name => {
                     if (storedAllowed[name]) {
                         this.allowedCaches[name] = new Map(Object.entries(storedAllowed[name]));
+                    }
+                });
+            });
+
+            // Load blocked caches (without tabId) from local storage
+            Storage.getFromLocalStore(this.blockedKey, storedBlocked => {
+                if (!storedBlocked) {
+                    return;
+                }
+
+                Object.keys(this.blockedCaches).forEach(name => {
+                    if (storedBlocked[name]) {
+                        this.blockedCaches[name] = new Map(
+                            Object.entries(storedBlocked[name]).map(([url, entry]) => [
+                                url,
+                                {exp: entry.exp, resultType: entry.resultType}
+                            ])
+                        );
                     }
                 });
             });
@@ -70,19 +92,30 @@ class CacheManager {
     }
 
     /**
-     * Update the allowed caches in localStorage.
+     * Update the caches that use localStorage (allowed and blocked caches).
      *
      * @param debounced - If true, updates will be debounced to avoid frequent writes.
      */
     updateLocalStorage(debounced) {
         const write = () => {
-            const out = {};
+            const allowedOut = {};
+            const blockedOut = {};
 
             Object.keys(this.allowedCaches).forEach(name => {
-                out[name] = Object.fromEntries(this.allowedCaches[name]);
+                allowedOut[name] = Object.fromEntries(this.allowedCaches[name]);
             });
 
-            Storage.setToLocalStore(this.allowedKey, out);
+            Object.keys(this.blockedCaches).forEach(name => {
+                blockedOut[name] = Object.fromEntries(
+                    Array.from(this.blockedCaches[name], ([url, entry]) => [
+                        url,
+                        {exp: entry.exp, resultType: entry.resultType}
+                    ])
+                );
+            });
+
+            Storage.setToLocalStore(this.allowedKey, allowedOut);
+            Storage.setToLocalStore(this.blockedKey, blockedOut);
         };
 
         if (debounced) {
@@ -98,7 +131,7 @@ class CacheManager {
     }
 
     /**
-     * Update the processing caches in sessionStorage.
+     * Update the caches that use sessionStorage (processing caches).
      *
      * @param debounced - If true, updates will be debounced to avoid frequent writes.
      */
@@ -134,6 +167,14 @@ class CacheManager {
     }
 
     /**
+     * Clears all blocked caches.
+     */
+    clearBlockedCache() {
+        Object.values(this.blockedCaches).forEach(m => m.clear());
+        this.updateLocalStorage(false);
+    }
+
+    /**
      * Clears all processing caches.
      */
     clearProcessingCache() {
@@ -142,9 +183,9 @@ class CacheManager {
     }
 
     /**
-     * Cleans up expired entries from both allowed and processing caches.
+     * Cleans up expired entries from all caches.
      *
-     * @returns {number} - The number of expired entries removed from both caches.
+     * @returns {number} - The number of expired entries removed from all caches.
      */
     cleanExpiredEntries() {
         const now = Date.now();
@@ -153,7 +194,7 @@ class CacheManager {
         const cleanGroup = (group, onDirty) => {
             Object.values(group).forEach(map => {
                 for (const [key, value] of map.entries()) {
-                    const expTime = (typeof value === 'number') ? value : value.exp;
+                    const expTime = (value && typeof value === 'object' && 'exp' in value) ? value.exp : value;
 
                     if (expTime < now) {
                         map.delete(key);
@@ -168,6 +209,7 @@ class CacheManager {
         };
 
         cleanGroup(this.allowedCaches, () => this.updateLocalStorage(true));
+        cleanGroup(this.blockedCaches, () => this.updateLocalStorage(true));
         cleanGroup(this.processingCaches, () => this.updateSessionStorage(true));
         return removed;
     }
@@ -341,6 +383,204 @@ class CacheManager {
             }
 
             this.updateLocalStorage(true);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    /**
+     * Checks if a URL is in the blocked cache for a specific provider.
+     *
+     * @param url {string|URL} - The URL to check, can be a string or a URL object.
+     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
+     * @returns {boolean} - Returns true if the URL is in the allowed cache and not expired, false otherwise.
+     */
+    isUrlInBlockedCache(url, name) {
+        try {
+            const key = this.normalizeUrl(url);
+            const map = this.blockedCaches[name];
+
+            if (!map || !map.has(key)) {
+                return false;
+            }
+
+            const entry = map.get(key);
+
+            if (entry.exp > Date.now()) {
+                return true;
+            }
+
+            map.delete(key);
+            this.updateLocalStorage(false);
+        } catch (e) {
+            console.error(e);
+        }
+        return false;
+    }
+
+    /**
+     * Checks if a string is in the blocked cache for a specific provider.
+     *
+     * @param str {string} - The string to check.
+     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
+     * @returns {boolean} - Returns true if the string is in the allowed cache and not expired, false otherwise.
+     */
+    isStringInBlockedCache(str, name) {
+        try {
+            const map = this.blockedCaches[name];
+
+            if (!map || !map.has(str)) {
+                return false;
+            }
+
+            const entry = map.get(str);
+
+            if (entry.exp > Date.now()) {
+                return true;
+            }
+
+            map.delete(str);
+            this.updateLocalStorage(false);
+        } catch (e) {
+            console.error(e);
+        }
+        return false;
+    }
+
+    /**
+     * Add a URL to the blocked cache for a specific provider.
+     *
+     * @param url {string|URL} - The URL to add, can be a string or a URL object.
+     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
+     * @param resultType {string} - The resultType of the URL (e.g., "malicious", "phishing").
+     */
+    addUrlToBlockedCache(url, name, resultType) {
+        try {
+            const key = this.normalizeUrl(url);
+            const expTime = Date.now() + this.expirationTime * 1000;
+
+            if (this.cleanExpiredEntries() === 0) {
+                this.updateLocalStorage(false);
+            }
+
+            const cache = this.blockedCaches[name];
+
+            if (name === "all") {
+                Object.values(this.blockedCaches).forEach(m =>
+                    m.set(key, {exp: expTime, resultType: resultType})
+                );
+            } else if (cache) {
+                cache.set(key, {exp: expTime, resultType: resultType});
+            } else {
+                console.warn(`Cache "${name}" not found`);
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    /**
+     * Add a string key to the blocked cache for a specific provider.
+     *
+     * @param str {string} - The string to add.
+     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
+     * @param resultType {string} - The resultType of the string (e.g., "malicious", "phishing").
+     */
+    addStringToBlockedCache(str, name, resultType) {
+        try {
+            const expTime = Date.now() + this.expirationTime * 1000;
+
+            if (this.cleanExpiredEntries() === 0) {
+                this.updateLocalStorage(false);
+            }
+
+            const cache = this.blockedCaches[name];
+
+            if (name === "all") {
+                Object.values(this.blockedCaches).forEach(m =>
+                    m.set(str, {exp: expTime, resultType: resultType})
+                );
+            } else if (cache) {
+                cache.set(str, {exp: expTime, resultType: resultType});
+            } else {
+                console.warn(`Cache "${name}" not found`);
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    /**
+     * Get the result type of a blocked URL from the cache for a specific provider.
+     *
+     * @param url {string|URL} - The URL to check, can be a string or a URL object.
+     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
+     * @returns {*|null} - Returns the result type (e.g., "Malicious", "Phishing") if found and not expired, null otherwise.
+     */
+    getBlockedResultType(url, name) {
+        try {
+            const key = this.normalizeUrl(url);
+            const cache = this.blockedCaches[name];
+
+            if (!cache || !cache.has(key)) {
+                return null;
+            }
+
+            const entry = cache.get(key);
+
+            if (entry.exp > Date.now()) {
+                return entry.resultType; // e.g. "Malicious" or "Phishing"
+            } else {
+                cache.delete(key);
+                this.updateLocalStorage(false);
+            }
+        } catch (e) {
+            console.error(e);
+        }
+        return null;
+    }
+
+    /**
+     * Remove a URL from the blocked cache for a specific provider.
+     *
+     * @param url {string|URL} - The URL to remove, can be a string or a URL object.
+     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
+     */
+    removeUrlFromBlockedCache(url, name) {
+        try {
+            const key = this.normalizeUrl(url);
+
+            if (name === "all") {
+                Object.values(this.blockedCaches).forEach(m => m.delete(key));
+            } else if (this.blockedCaches[name]) {
+                this.blockedCaches[name].delete(key);
+            } else {
+                console.warn(`Cache "${name}" not found`);
+            }
+
+            this.updateLocalStorage(false);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    /**
+     * Remove a string key from the blocked cache for a specific provider.
+     *
+     * @param str {string} - The string to remove.
+     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
+     */
+    removeStringFromBlockedCache(str, name) {
+        try {
+            if (name === "all") {
+                Object.values(this.blockedCaches).forEach(m => m.delete(str));
+            } else if (this.blockedCaches[name]) {
+                this.blockedCaches[name].delete(str);
+            } else {
+                console.warn(`Cache "${name}" not found`);
+            }
+
+            this.updateLocalStorage(false);
         } catch (e) {
             console.error(e);
         }

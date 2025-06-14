@@ -2,29 +2,26 @@
 
 // Manages user preferences and configurations.
 const Settings = (function () {
+
     // Key for storing settings in local storage
     const settingsKey = "Settings";
 
     let defaultSettings = {
-        // Page 1
+        // Official Partners
         adGuardSecurityEnabled: true,
         adGuardFamilyEnabled: false,
         controlDSecurityEnabled: true,
         controlDFamilyEnabled: false,
         precisionSecEnabled: true,
+
+        // Non-Partnered Providers
         bitdefenderEnabled: true,
         gDataEnabled: true,
-
-        // Page 2
-        smartScreenEnabled: true,
-        nortonEnabled: true,
         certEEEnabled: true,
         ciraSecurityEnabled: false,
         ciraFamilyEnabled: false,
         cleanBrowsingSecurityEnabled: true,
         cleanBrowsingFamilyEnabled: false,
-
-        // Page 3
         cleanBrowsingAdultEnabled: false,
         cloudflareSecurityEnabled: true,
         cloudflareFamilyEnabled: false,
@@ -32,23 +29,27 @@ const Settings = (function () {
         dns0KidsEnabled: false,
         dns4EUSecurityEnabled: true,
         dns4EUFamilyEnabled: false,
-
-        // Page 4
+        smartScreenEnabled: true,
+        nortonEnabled: true,
         openDNSSecurityEnabled: false,
         openDNSFamilyShieldEnabled: false,
         quad9Enabled: true,
         switchCHEnabled: true,
 
         // General Settings
+        contextMenuEnabled: true,
         notificationsEnabled: false,
         ignoreFrameNavigation: true,
         hideContinueButtons: false,
         hideReportButton: false,
+        lockProtectionOptions: false,
+        hideProtectionOptions: false,
         cacheExpirationSeconds: 86400,
     };
 
     /**
      * Compares two objects and updates the target object with values from the source object if they differ.
+     *
      * @param {Object} target - The target object to update.
      * @param {Object} source - The source object to compare with.
      * @returns {boolean} - Returns true if any values were updated, false otherwise.
@@ -72,6 +73,7 @@ const Settings = (function () {
     return {
         /**
          * Retrieves settings from local storage and merges them with default settings.
+         *
          * @param {Function} callback - The function to call with the retrieved settings.
          */
         get: function (callback) {
@@ -89,6 +91,7 @@ const Settings = (function () {
 
         /**
          * Saves settings to local storage, merging them with any previously stored settings.
+         *
          * @param {Object} newSettings - The new settings to save.
          * @param {Function} [callback] - Optional callback to call after settings are saved.
          */

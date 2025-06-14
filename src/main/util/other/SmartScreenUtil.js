@@ -107,7 +107,12 @@ const SmartScreenUtil = function () {
         return [a, b, c, d]
     };
 
-    // Function to convert integer array to string
+    /**
+     * Converts an array of integers to a string representation.
+     *
+     * @param array - The array of integers to convert.
+     * @returns {string} - The string representation of the array.
+     */
     const intArrayToString = function (array) {
         let resultString = "";
 
@@ -121,12 +126,26 @@ const SmartScreenUtil = function () {
         return resultString
     };
 
-    // Function to reverse bits in an integer
+    /**
+     * Reverses the bits of a 32-bit integer.
+     *
+     * @param value - The 32-bit integer to reverse.
+     * @returns {*} - The integer with its bits reversed.
+     */
     const reverseBits = function (value) {
         return (value >>> 16) + (value << 16)
     };
 
-    // Function to perform a hash operation
+    /**
+     * Performs a hash operation on the state using the provided multipliers.
+     *
+     * @param state - The state object containing the buffer and index.
+     * @param mult1 - The first multiplier for the hash operation.
+     * @param mult2 - The second multiplier for the hash operation.
+     * @param mult3 - The third multiplier for the hash operation.
+     * @param mult4 - The fourth multiplier for the hash operation.
+     * @param mult5 - The fifth multiplier for the hash operation.
+     */
     const hashOperation = function (state, mult1, mult2, mult3, mult4, mult5) {
         state.t += state.buffer.getWord(state.index++);
         state.t = Math.imul(state.t, mult1) + Math.imul(reverseBits(state.t), mult2);
@@ -135,7 +154,17 @@ const SmartScreenUtil = function () {
         state.sum += state.t;
     };
 
-    // Function to perform a second type of hash operation
+    /**
+     * Performs an extended hash operation on the state using the provided multipliers.
+     *
+     * @param state - The state object containing the buffer and index.
+     * @param mult1 - The first multiplier for the hash operation.
+     * @param mult2 - The second multiplier for the hash operation.
+     * @param mult3 - The third multiplier for the hash operation.
+     * @param mult4 - The fourth multiplier for the hash operation.
+     * @param mult5 - The fifth multiplier for the hash operation.
+     * @param mult6 - The sixth multiplier for the hash operation.
+     */
     const hashOperationExtended = function (state, mult1, mult2, mult3, mult4, mult5, mult6) {
         state.t += state.buffer.getWord(state.index++);
         state.t = Math.imul(state.t, mult1);
@@ -150,6 +179,12 @@ const SmartScreenUtil = function () {
 
     // Return the public API of the SmartScreenUtil module
     return {
+        /**
+         * Generates a hash for the given input string.
+         *
+         * @param input - The input string to hash.
+         * @returns {{key: string, hash: string}} - An object containing the base64 encoded key and hash.
+         */
         hash: function (input) {
             const hashOutput = computeHash(input);
 
@@ -166,7 +201,13 @@ const SmartScreenUtil = function () {
             const intermediateOutput = [0, 0];
             const finalOutput = [0, 0];
 
-            // Process the first half of the hash calculation
+            /**
+             * Performs the first half of the hash calculation.
+             *
+             * @param {Object} inputBuffer - The input buffer containing the data to hash.
+             * @param {Array} hashArray - The array containing hash constants.
+             * @param {Array} output - The output array to store the hash result.
+             */
             if (function (inputBuffer, hashArray, output) {
                 let hashState = {
                     buffer: inputBuffer,
@@ -195,7 +236,13 @@ const SmartScreenUtil = function () {
             }(outputData, hashOutput, finalOutput)) {
                 const additionalOutput = [0, 0];
 
-                // Process the second half of the hash calculation
+                /**
+                 * Performs the second half of the hash calculation.
+                 *
+                 * @param {Object} inputBuffer - The input buffer containing the data to hash.
+                 * @param {Array} hashArray - The array containing hash constants.
+                 * @param {Array} output - The output array to store the hash result.
+                 */
                 (function (inputBuffer, hashArray, output) {
                     let hashState = {
                         buffer: inputBuffer,

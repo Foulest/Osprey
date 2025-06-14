@@ -2,6 +2,7 @@
 
 // Use a global singleton pattern to ensure we don't duplicate resources
 window.PopupSingleton = window.PopupSingleton || (function () {
+
     // Track initialization state
     let isInitialized = false;
 
@@ -71,7 +72,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
         },
         {
             name: "nortonEnabled",
-            title: "Norton SafeWeb",
+            title: "Norton Safe Web",
             labelElementId: "nortonStatus",
             switchElementId: "nortonSwitch",
             messageType: Messages.MessageType.NORTON_TOGGLED,
@@ -277,7 +278,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
     };
 
     /**
-     * Reset to initial state to prevent memory leaks
+     * Reset to initial state to prevent memory leaks.
      */
     const reset = function () {
         // Remove click handlers from all switches
@@ -294,7 +295,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
     };
 
     /**
-     * Initialize the popup or refresh if already initialized
+     * Initialize the popup or refresh if already initialized.
      */
     const initialize = function () {
         // If already initialized, reset first
@@ -393,5 +394,11 @@ window.PopupSingleton = window.PopupSingleton || (function () {
 
 // Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-    window.PopupSingleton.initialize();
+    Settings.get(settings => {
+        if (settings.hideProtectionOptions) {
+            window.close();
+        } else {
+            window.PopupSingleton.initialize();
+        }
+    });
 });

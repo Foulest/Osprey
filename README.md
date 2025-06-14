@@ -31,8 +31,6 @@ possible. Check out some of our partners below:
 
 ## Detections
 
-> **Note:** 'Restricted' refers to adult content blocked by optional filters.
-
 Osprey blocks websites that are classified as:
 
 - [Malicious](https://us.norton.com/blog/malware/what-are-malicious-websites)
@@ -43,7 +41,7 @@ Osprey blocks websites that are classified as:
 - [Malvertising](https://malwarebytes.com/malvertising)
 - [Compromised](https://malwarebytes.com/glossary/compromised)
 - [Untrusted](https://mcafee.com/blogs/internet-security/how-to-tell-whether-a-website-is-safe-or-unsafe)
-- [Restricted](https://library.fiveable.me/key-terms/mass-media-society/adult-content)
+- [Adult Content](https://library.fiveable.me/key-terms/mass-media-society/adult-content)
 
 ## Warning
 
@@ -74,7 +72,7 @@ The following providers are **enabled** by default:
 - [Bitdefender TrafficLight](https://www.bitdefender.com/en-us/consumer/trafficlight)
 - [G DATA WebProtection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
 - [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
-- [Norton SafeWeb](https://safeweb.norton.com)
+- [Norton Safe Web](https://safeweb.norton.com)
 - [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
 - [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
 - [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/#two-flavors-1-1-1-2-no-malware-1-1-1-3-no-malware-or-adult-content)

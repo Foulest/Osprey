@@ -30,6 +30,11 @@
       "description": "If set to true, the protection options will be locked.",
       "type": "boolean"
     },
+    "HideProtectionOptions": {
+      "title": "Hide Protection Options",
+      "description": "If set to true, the protection options will be hidden.",
+      "type": "boolean"
+    },
     "DisableClearAllowedSites": {
       "title": "Disable Clear Allowed Sites",
       "description": "If set to true, the clear allowed sites button will be disabled.",
@@ -81,16 +86,6 @@
     "GDATAEnabled": {
       "title": "G DATA Enabled",
       "description": "If set to true, G DATA will be enabled.",
-      "type": "boolean"
-    },
-    "SmartScreenEnabled": {
-      "title": "SmartScreen Enabled",
-      "description": "If set to true, SmartScreen will be enabled.",
-      "type": "boolean"
-    },
-    "NortonEnabled": {
-      "title": "Norton Enabled",
-      "description": "If set to true, Norton will be enabled.",
       "type": "boolean"
     },
     "CERTEEEnabled": {
@@ -151,6 +146,16 @@
     "DNS4EUFamilyEnabled": {
       "title": "DNS4EU Family Enabled",
       "description": "If set to true, DNS4EU Family will be enabled.",
+      "type": "boolean"
+    },
+    "SmartScreenEnabled": {
+      "title": "SmartScreen Enabled",
+      "description": "If set to true, SmartScreen will be enabled.",
+      "type": "boolean"
+    },
+    "NortonEnabled": {
+      "title": "Norton Enabled",
+      "description": "If set to true, Norton will be enabled.",
       "type": "boolean"
     },
     "OpenDNSSecurityEnabled": {

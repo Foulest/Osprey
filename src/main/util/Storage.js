@@ -5,6 +5,7 @@ const Storage = {
 
     /**
      * Retrieves data from the browser's local storage.
+     *
      * @param {string} key - The key to retrieve from local storage.
      * @param {Function} callback - The function to call with the retrieved value.
      */
@@ -14,6 +15,7 @@ const Storage = {
 
         /**
          * Internal function to handle the retrieval process from local storage.
+         *
          * @param {object} storage - The storage object (browserAPI.storage.local).
          * @param {string} key - The key to retrieve from the storage.
          * @param {Function} callback - The function to call with the retrieved value.
@@ -32,6 +34,7 @@ const Storage = {
 
     /**
      * Saves data to the browser's local storage.
+     *
      * @param {string} key - The key to save to local storage.
      * @param {any} value - The value to store.
      * @param {Function} [callback] - Optional callback to call after saving.
@@ -42,6 +45,7 @@ const Storage = {
 
         /**
          * Internal function to handle the saving process to local storage.
+         *
          * @param {object} storage - The storage object (browserAPI.storage.local).
          * @param {string} key - The key to save the value under.
          * @param {any} value - The value to store.
@@ -59,6 +63,7 @@ const Storage = {
 
     /**
      * Retrieves data from the browser's session storage.
+     *
      * @param {string} key - The key to retrieve from session storage.
      * @param {Function} callback - The function to call with the retrieved value.
      */
@@ -68,6 +73,7 @@ const Storage = {
 
         /**
          * Internal function to handle the retrieval process from session storage.
+         *
          * @param {object} storage - The storage object (browserAPI.storage.session).
          * @param {string} key - The key to retrieve from the storage.
          * @param {Function} callback - The function to call with the retrieved value.
@@ -86,6 +92,7 @@ const Storage = {
 
     /**
      * Saves data to the browser's session storage.
+     *
      * @param {string} key - The key to save to session storage.
      * @param {any} value - The value to store.
      * @param {Function} [callback] - Optional callback to call after saving.
@@ -96,6 +103,7 @@ const Storage = {
 
         /**
          * Internal function to handle the saving process to session storage.
+         *
          * @param {object} storage - The storage object (browserAPI.storage.session).
          * @param {string} key - The key to save the value under.
          * @param {any} value - The value to store.

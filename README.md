@@ -39,7 +39,6 @@ Osprey blocks websites that are classified as:
 - [PUAs](https://us.norton.com/blog/malware/what-are-puas-potentially-unwanted-applications)
 - [Cryptojacking](https://kaspersky.com/resource-center/definitions/what-is-cryptojacking)
 - [Malvertising](https://malwarebytes.com/malvertising)
-- [Compromised](https://malwarebytes.com/glossary/compromised)
 - [Untrusted](https://mcafee.com/blogs/internet-security/how-to-tell-whether-a-website-is-safe-or-unsafe)
 - [Adult Content](https://library.fiveable.me/key-terms/mass-media-society/adult-content)
 

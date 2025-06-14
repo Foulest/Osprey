@@ -47,7 +47,7 @@ Osprey blocks websites that are classified as:
 
 If the website is malicious, Osprey will block the page and display a warning:
 
-![Osprey Warning](https://i.imgur.com/FAx4lb9.png)
+![Osprey Warning](https://i.imgur.com/Q1OOyI2.png)
 
 From this page, you can report the website as safe, temporarily allow the website, go back to safety, and continue
 anyway. By default, Osprey creates a browser notification for blocked pages that
@@ -59,8 +59,8 @@ entirely using [the system policies](https://github.com/Foulest/Osprey/wiki/Sett
 
 You can configure the extension's protection options in the settings:
 
-![Osprey Settings (Page 1)](https://i.imgur.com/g5vsAcf.png)
-![Osprey Settings (Page 2)](https://i.imgur.com/iJFKzBV.png)
+![Osprey Settings (Page 1)](https://i.imgur.com/3wDoCmj.png)
+![Osprey Settings (Page 2)](https://i.imgur.com/xsGJga0.png)
 
 ## Protection Providers
 
@@ -123,7 +123,7 @@ proxy service if you're concerned about IP-related privacy. There are also exten
 you're so inclined.
 
 As for why Osprey needs to check complete URLs instead of just the domain, many phishing attacks use legitimate
-companies to host their phishing campaigns, such as Jotform. If Osprey only checked a website's domain name, it wouldn't
+companies such as Jotform to host their phishing campaigns. If Osprey only checked a website's domain name, it wouldn't
 detect those threats. Osprey only sends your hostname to its various DNS API providers, so if you're highly concerned
 about URL page privacy, the DNS APIs are there for you.
 

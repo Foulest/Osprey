@@ -50,9 +50,13 @@ window.WarningSingleton = window.WarningSingleton || (function () {
         reportedByText = domElements.reportedBy.innerText;
 
         // Listens for PONG messages to update the reported by count
-        browserAPI.runtime.onMessage.addListener((message) => {
-            if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PONG && message.count > 1) {
-                domElements.reportedBy.innerText = reportedByText + " (and " + message.count + " others)";
+        browserAPI.runtime.onMessage.addListener(message => {
+            if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PONG && message.count > 0) {
+                domElements.reportedBy.innerText = `${reportedByText} (and ${message.count} others)`;
+
+                // Make the innerText hoverable and set the hover text
+                const wrappedTitle = wrapSystemNamesText(`Also reported by: ${message.systems.join(', ')}`);
+                domElements.reportedBy.title = `${wrappedTitle}`;
             }
         });
 
@@ -84,7 +88,8 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                         + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.CONTROL_D_SECURITY:
-                    // TODO: Needs verification of response from support team.
+                    // Verified working as of: 06/13/2025
+                    // Response time: 1-2 days
                     return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C"
                         + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
                         + "%0A%0AProduct%3A%20Control%20D%20P1%20DNS"
@@ -93,7 +98,8 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                         + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.CONTROL_D_FAMILY:
-                    // TODO: Needs verification of response from support team.
+                    // Verified working as of: 06/13/2025
+                    // Response time: 1-2 days
                     return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C"
                         + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
                         + "%0A%0AProduct%3A%20Control%20D%20Family%20DNS"
@@ -110,9 +116,6 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                         + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
                         + "%0ADetected%20as%3A%20" + encodedResult
                         + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
-
-                case ProtectionResult.ResultOrigin.BITDEFENDER:
-                    return new URL("https://www.bitdefender.com/consumer/support/answer/29358/#scroll-to-heading-2");
 
                 case ProtectionResult.ResultOrigin.G_DATA:
                     // Old URL: "https://submit.gdatasoftware.com/privacy"
@@ -229,7 +232,8 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                         + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.SWITCH_CH:
-                    // TODO: Needs verification of response from support team.
+                    // Support team failed to respond to multiple emails within 7 days.
+                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:info@switch.ch?subject=False%20Positive&body=Hello%2C"
                         + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
                         + "%0A%0AProduct%3A%20Switch.ch%20DNS"
@@ -319,6 +323,38 @@ window.WarningSingleton = window.WarningSingleton || (function () {
             }
         });
     };
+
+    /**
+     * Wraps system names text to fit within a specified maximum line length.
+     *
+     * @param text - The text to wrap, typically a comma-separated list of system names.
+     * @param maxLineLength - The maximum length of each line before wrapping occurs.
+     * @returns {string} - The wrapped text, with each line not exceeding the specified maximum length.
+     */
+    function wrapSystemNamesText(text, maxLineLength = 100) {
+        const parts = text.split(', ');
+        const lines = [];
+        let currentLine = '';
+
+        for (const part of parts) {
+            const nextSegment = currentLine ? `${currentLine}, ${part}` : part;
+
+            if (nextSegment.length <= maxLineLength) {
+                currentLine = nextSegment;
+            } else {
+                if (currentLine) {
+                    lines.push(currentLine);
+                }
+
+                currentLine = part;
+            }
+        }
+
+        if (currentLine) {
+            lines.push(currentLine);
+        }
+        return lines.join('\n');
+    }
 
     // Public API
     return {

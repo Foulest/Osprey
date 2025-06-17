@@ -19,7 +19,6 @@ class CacheManager {
                 "precisionSec",
 
                 // Non-Partnered Providers
-                "bitdefender",
                 "certEE",
                 "ciraSecurity", "ciraFamily",
                 "cleanBrowsingSecurity", "cleanBrowsingFamily", "cleanBrowsingAdult",
@@ -194,7 +193,7 @@ class CacheManager {
         const cleanGroup = (group, onDirty) => {
             Object.values(group).forEach(map => {
                 for (const [key, value] of map.entries()) {
-                    const expTime = (value && typeof value === 'object' && 'exp' in value) ? value.exp : value;
+                    const expTime = value && typeof value === 'object' && 'exp' in value ? value.exp : value;
 
                     if (expTime < now) {
                         map.delete(key);

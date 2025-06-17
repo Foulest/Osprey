@@ -15,7 +15,6 @@ const Settings = (function () {
         precisionSecEnabled: true,
 
         // Non-Partnered Providers
-        bitdefenderEnabled: true,
         gDataEnabled: true,
         certEEEnabled: true,
         ciraSecurityEnabled: false,
@@ -31,10 +30,10 @@ const Settings = (function () {
         dns4EUFamilyEnabled: false,
         smartScreenEnabled: true,
         nortonEnabled: true,
-        openDNSSecurityEnabled: false,
+        openDNSSecurityEnabled: true,
         openDNSFamilyShieldEnabled: false,
         quad9Enabled: true,
-        switchCHEnabled: true,
+        switchCHEnabled: false,
 
         // General Settings
         contextMenuEnabled: true,

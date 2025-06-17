@@ -78,11 +78,6 @@
       "description": "If set to true, PrecisionSec will be enabled.",
       "type": "boolean"
     },
-    "BitdefenderEnabled": {
-      "title": "Bitdefender Enabled",
-      "description": "If set to true, Bitdefender will be enabled.",
-      "type": "boolean"
-    },
     "GDATAEnabled": {
       "title": "G DATA Enabled",
       "description": "If set to true, G DATA will be enabled.",

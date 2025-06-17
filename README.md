@@ -35,10 +35,6 @@ Osprey blocks websites that are classified as:
 
 - [Malicious](https://us.norton.com/blog/malware/what-are-malicious-websites)
 - [Phishing](https://f-secure.com/us-en/articles/what-is-phishing)
-- [Fraud](https://usa.kaspersky.com/resource-center/preemptive-safety/scam-websites)
-- [PUAs](https://us.norton.com/blog/malware/what-are-puas-potentially-unwanted-applications)
-- [Cryptojacking](https://kaspersky.com/resource-center/definitions/what-is-cryptojacking)
-- [Malvertising](https://malwarebytes.com/malvertising)
 - [Untrusted](https://mcafee.com/blogs/internet-security/how-to-tell-whether-a-website-is-safe-or-unsafe)
 - [Adult Content](https://library.fiveable.me/key-terms/mass-media-society/adult-content)
 
@@ -58,8 +54,8 @@ entirely using [the system policies](https://github.com/Foulest/Osprey/wiki/Sett
 
 You can configure the extension's protection options in the settings:
 
-![Osprey Settings (Page 1)](https://i.imgur.com/3wDoCmj.png)
-![Osprey Settings (Page 2)](https://i.imgur.com/xsGJga0.png)
+![Osprey Settings (Page 1)](https://i.imgur.com/CfpJjkF.png)
+![Osprey Settings (Page 2)](https://i.imgur.com/yMlOHkV.png)
 
 ## Protection Providers
 
@@ -68,7 +64,6 @@ The following providers are **enabled** by default:
 - **[AdGuard Security DNS](https://www.adguard-dns.io/en/public-dns.html)**
 - **[Control D Security DNS](https://www.controld.com/free-dns)**
 - **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
-- [Bitdefender TrafficLight](https://www.bitdefender.com/en-us/consumer/trafficlight)
 - [G DATA WebProtection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
 - [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
 - [Norton Safe Web](https://safeweb.norton.com)
@@ -76,6 +71,7 @@ The following providers are **enabled** by default:
 - [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
 - [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/#two-flavors-1-1-1-2-no-malware-1-1-1-3-no-malware-or-adult-content)
 - [DNS4EU Security DNS](https://www.joindns4.eu/for-public)
+- [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
 - [Quad9 Security DNS](https://www.quad9.net)
 - [Switch.ch Security DNS](https://www.switch.ch/en/dns-firewall)
 
@@ -91,7 +87,6 @@ The following providers are **disabled** by default:
 - [DNS0.eu Security DNS](https://www.dns0.eu/zero)
 - [DNS0.eu Kids DNS](https://www.dns0.eu/kids)
 - [DNS4EU Family DNS](https://www.joindns4.eu/for-public)
-- [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
 - [OpenDNS Family Shield DNS](https://www.opendns.com/home-internet-security)
 
 Providers disabled by default are either due to:

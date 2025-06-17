@@ -33,7 +33,7 @@ const UrlHelpers = {
      * @param {object} protectionResult - The result object containing details about the threat.
      * @returns {string} - The full URL for the block page.
      */
-    getBlockPageUrl: (protectionResult) => {
+    getBlockPageUrl: protectionResult => {
         // Browser API compatibility between Chrome and Firefox
         const browserAPI = typeof browser === 'undefined' ? chrome : browser;
 

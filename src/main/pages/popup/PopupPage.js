@@ -50,13 +50,6 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             messageType: Messages.MessageType.PRECISIONSEC_TOGGLED,
         },
         {
-            name: "bitdefenderEnabled",
-            title: "Bitdefender TrafficLight",
-            labelElementId: "bitdefenderStatus",
-            switchElementId: "bitdefenderSwitch",
-            messageType: Messages.MessageType.BITDEFENDER_TOGGLED,
-        },
-        {
             name: "gDataEnabled",
             title: "G DATA WebProtection",
             labelElementId: "gDataStatus",

@@ -20,7 +20,6 @@ const Messages = {
         PRECISIONSEC_TOGGLED: "precisionSecToggled",
 
         // Non-Partnered Providers
-        BITDEFENDER_TOGGLED: "bitdefenderToggled",
         G_DATA_TOGGLED: "gDataToggled",
         CERT_EE_TOGGLED: "certEEToggled",
         CIRA_SECURITY_TOGGLED: "ciraSecurityToggled",

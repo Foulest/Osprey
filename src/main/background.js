@@ -7,7 +7,8 @@
     const contextMenuAPI = isFirefox ? browserAPI.menus : browserAPI.contextMenus;
     let supportsManagedPolicies = true;
 
-    const resultCounts = new Map();  // tabId → count
+    const resultCounts = new Map();
+    const resultSystemNames = new Map();
 
     // Import necessary scripts for functionality
     try {
@@ -42,7 +43,6 @@
             // Retrieve settings to check if protection is enabled.
             if (!settings.adGuardSecurityEnabled
                 && !settings.adGuardFamilyEnabled
-                && !settings.bitdefenderEnabled
                 && !settings.certEEEnabled
                 && !settings.ciraFamilyEnabled
                 && !settings.ciraSecurityEnabled
@@ -144,14 +144,21 @@
             // Cancels all pending requests for the main frame navigation.
             if (frameId === 0) {
                 BrowserProtection.abandonPendingRequests(tabId, "Cancelled by main frame navigation.");
+
+                // Remove all cached keys for the tab.
                 BrowserProtection.cacheManager.removeKeysByTabId(tabId);
+                resultCounts.delete(tabId);
+                resultSystemNames.delete(tabId);
             }
 
             // Set the hostname back to the URL object.
             urlObject.hostname = hostname;
 
             let blocked = false;
+            let firstSystemName = "";
+
             resultCounts.set(tabId, 0);
+            resultSystemNames.set(tabId, []);
 
             console.info(`Checking URL: ${currentUrl}`);
 
@@ -226,7 +233,18 @@
                     }
 
                     blocked = true;
+                    firstSystemName = firstSystemName === "" ? systemName : firstSystemName;
+
+                    // Iterate through the results and update the counts.
                     resultCounts.set(tabId, (resultCounts.get(tabId) || 0) + 1);
+                    const fullCount = resultCounts.get(tabId) || 0;
+
+                    // Track the system name that flagged the URL
+                    const existingSystems = resultSystemNames.get(tabId) || [];
+                    if (!existingSystems.includes(systemName) && systemName !== firstSystemName) {
+                        existingSystems.push(systemName);
+                        resultSystemNames.set(tabId, existingSystems);
+                    }
 
                     setTimeout(() => {
                         // Set the action text to the result count.
@@ -247,11 +265,19 @@
                             tabId: tabId
                         });
 
-                        // Send a PONG message to the content script to update the blocked counter.
-                        browserAPI.tabs.sendMessage(tabId, {
-                            messageType: Messages.MessageType.BLOCKED_COUNTER_PONG,
-                            count: resultCounts.get(tabId)
-                        }).catch(() => {});
+                        // If the page URL is the block page, send (count - 1)
+                        browserAPI.tabs.get(tabId, tab => {
+                            const isBlockPage = tab.url?.includes("/WarningPage.html");
+                            const adjustedCount = isBlockPage && fullCount > 0 ? fullCount - 1 : fullCount;
+
+                            // Send a PONG message to the content script to update the blocked counter.
+                            browserAPI.tabs.sendMessage(tabId, {
+                                messageType: Messages.MessageType.BLOCKED_COUNTER_PONG,
+                                count: adjustedCount,
+                                systems: resultSystemNames.get(tabId) || []
+                            }).catch(() => {
+                            });
+                        });
                     }, 150);
                 }
             });
@@ -261,8 +287,19 @@
     // Listens for PING messages from content scripts to get the blocked counter.
     browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id != null) {
-            const count = resultCounts.get(sender.tab.id) || 0;
-            sendResponse({count});
+            const tabId = sender.tab.id;
+            const fullCount = resultCounts.get(tabId) || 0;
+
+            // If the page URL is the block page, send (count - 1)
+            browserAPI.tabs.get(tabId, tab => {
+                const isBlockPage = tab.url?.includes("/WarningPage.html");
+                const adjustedCount = isBlockPage && fullCount > 0 ? fullCount - 1 : fullCount;
+
+                sendResponse({
+                    count: adjustedCount,
+                    systems: resultSystemNames.get(tabId) || []
+                });
+            });
         }
     });
 
@@ -285,7 +322,6 @@
         'PrecisionSecEnabled',
 
         // Non-Partnered Providers
-        'BitdefenderEnabled',
         'GDATAEnabled',
         'CERTEEEnabled',
         'CIRASecurityEnabled',
@@ -419,12 +455,6 @@
                 console.debug("PrecisionSec is managed by system policy.");
             }
 
-            // Check and set the Bitdefender settings using the policy.
-            if (policies.BitdefenderEnabled !== undefined) {
-                settings.bitdefenderEnabled = policies.BitdefenderEnabled;
-                console.debug("Bitdefender is managed by system policy.");
-            }
-
             // Check and set the G DATA settings using the policy.
             if (policies.GDATAEnabled !== undefined) {
                 settings.gDataEnabled = policies.GDATAEnabled;
@@ -551,6 +581,19 @@
         createContextMenu();
     });
 
+    browserAPI.tabs.onRemoved.addListener((tabId, removeInfo) => {
+        console.debug(`Tab removed: ${tabId} (windowId: ${removeInfo.windowId}) (isWindowClosing: ${removeInfo.isWindowClosing})`);
+
+        // Remove all cached keys for the tab.
+        BrowserProtection.cacheManager.removeKeysByTabId(tabId);
+        resultCounts.delete(tabId);
+        resultSystemNames.delete(tabId);
+    });
+
+    browserAPI.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
+        console.debug(`Tab replaced: ${removedTabId} with ${addedTabId}`);
+    });
+
     // Listener for onBeforeNavigate events.
     browserAPI.webNavigation.onBeforeNavigate.addListener(navigationDetails => {
         console.debug(`[onBeforeNavigate] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
@@ -658,14 +701,6 @@
                         break;
 
                     case "6":
-                        console.debug(`Added Bitdefender URL to allowed cache: ` + message.blockedUrl);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "bitdefender");
-
-                        console.debug(`Removed Bitdefender URL from blocked cache: ` + message.blockedUrl);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "bitdefender");
-                        break;
-
-                    case "7":
                         console.debug(`Added G DATA URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "gData");
 
@@ -673,7 +708,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "gData");
                         break;
 
-                    case "8":
+                    case "7":
                         console.debug(`Added CERT-EE URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "certEE");
 
@@ -681,7 +716,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "certEE");
                         break;
 
-                    case "9":
+                    case "8":
                         console.debug(`Added CIRA Security URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "ciraSecurity");
 
@@ -689,7 +724,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "ciraSecurity");
                         break;
 
-                    case "10":
+                    case "9":
                         console.debug(`Added CIRA Family URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "ciraFamily");
 
@@ -697,7 +732,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "ciraFamily");
                         break;
 
-                    case "11":
+                    case "10":
                         console.debug(`Added CleanBrowsing Security URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cleanBrowsingSecurity");
 
@@ -705,7 +740,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cleanBrowsingSecurity");
                         break;
 
-                    case "12":
+                    case "11":
                         console.debug(`Added CleanBrowsing Family URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cleanBrowsingFamily");
 
@@ -713,7 +748,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cleanBrowsingFamily");
                         break;
 
-                    case "13":
+                    case "12":
                         console.debug(`Added CleanBrowsing Adult URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cleanBrowsingAdult");
 
@@ -721,7 +756,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cleanBrowsingAdult");
                         break;
 
-                    case "14":
+                    case "13":
                         console.debug(`Added Cloudflare Security URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cloudflareSecurity");
 
@@ -729,7 +764,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cloudflareSecurity");
                         break;
 
-                    case "15":
+                    case "14":
                         console.debug(`Added Cloudflare Family URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cloudflareFamily");
 
@@ -737,7 +772,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cloudflareFamily");
                         break;
 
-                    case "16":
+                    case "15":
                         console.debug(`Added DNS0.eu Security URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns0Security");
 
@@ -745,7 +780,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns0Security");
                         break;
 
-                    case "17":
+                    case "16":
                         console.debug(`Added DNS0.eu Kids URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns0Kids");
 
@@ -753,7 +788,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns0Kids");
                         break;
 
-                    case "18":
+                    case "17":
                         console.debug(`Added DNS4EU Security URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns4EUSecurity");
 
@@ -761,7 +796,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns4EUSecurity");
                         break;
 
-                    case "19":
+                    case "18":
                         console.debug(`Added DNS4EU Family URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns4EUFamily");
 
@@ -769,7 +804,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns4EUFamily");
                         break;
 
-                    case "20":
+                    case "19":
                         console.debug(`Added SmartScreen URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "smartScreen");
 
@@ -777,7 +812,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "smartScreen");
                         break;
 
-                    case "21":
+                    case "20":
                         console.debug(`Added Norton URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "norton");
 
@@ -785,7 +820,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "norton");
                         break;
 
-                    case "22":
+                    case "21":
                         console.debug(`Added OpenDNS Security URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "openDNSSecurity");
 
@@ -793,7 +828,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "openDNSSecurity");
                         break;
 
-                    case "23":
+                    case "22":
                         console.debug(`Added OpenDNS Family Shield URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "openDNSFamilyShield");
 
@@ -801,7 +836,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "openDNSFamilyShield");
                         break;
 
-                    case "24":
+                    case "23":
                         console.debug(`Added Quad9 URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "quad9");
 
@@ -809,7 +844,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "quad9");
                         break;
 
-                    case "25":
+                    case "24":
                         console.debug(`Added Switch.ch URL to allowed cache: ` + message.blockedUrl);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "switchCH");
 
@@ -898,7 +933,6 @@
 
             case Messages.MessageType.ADGUARD_FAMILY_TOGGLED:
             case Messages.MessageType.ADGUARD_SECURITY_TOGGLED:
-            case Messages.MessageType.BITDEFENDER_TOGGLED:
             case Messages.MessageType.CERT_EE_TOGGLED:
             case Messages.MessageType.CIRA_FAMILY_TOGGLED:
             case Messages.MessageType.CIRA_SECURITY_TOGGLED:

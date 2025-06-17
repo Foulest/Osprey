@@ -29,15 +29,6 @@ possible. Check out some of our partners below:
 
 [![PrecisionSec](https://i.imgur.com/cwJWCog.png)](https://precisionsec.com/?utm_source=osprey)
 
-## Detections
-
-Osprey blocks websites that are classified as:
-
-- [Malicious](https://us.norton.com/blog/malware/what-are-malicious-websites)
-- [Phishing](https://f-secure.com/us-en/articles/what-is-phishing)
-- [Untrusted](https://mcafee.com/blogs/internet-security/how-to-tell-whether-a-website-is-safe-or-unsafe)
-- [Adult Content](https://library.fiveable.me/key-terms/mass-media-society/adult-content)
-
 ## Warning
 
 If the website is malicious, Osprey will block the page and display a warning:
@@ -56,6 +47,15 @@ You can configure the extension's protection options in the settings:
 
 ![Osprey Settings (Page 1)](https://i.imgur.com/CfpJjkF.png)
 ![Osprey Settings (Page 2)](https://i.imgur.com/yMlOHkV.png)
+
+## Detections
+
+Osprey blocks websites that are classified as:
+
+- [Malicious](https://us.norton.com/blog/malware/what-are-malicious-websites)
+- [Phishing](https://f-secure.com/us-en/articles/what-is-phishing)
+- [Untrusted](https://mcafee.com/blogs/internet-security/how-to-tell-whether-a-website-is-safe-or-unsafe)
+- [Adult Content](https://library.fiveable.me/key-terms/mass-media-society/adult-content)
 
 ## Protection Providers
 

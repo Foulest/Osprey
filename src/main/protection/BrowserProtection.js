@@ -3,7 +3,26 @@
 // Main object for managing browser protection functionality
 const BrowserProtection = function () {
 
+    // Map to store AbortControllers for each tab
     let tabAbortControllers = new Map();
+
+    // API keys for various protection services
+    let alphaMountainKey;
+    let precisionSecKey;
+    let gDataKey;
+    let smartScreenKey;
+
+    /**
+     * Initializes the API keys for various protection services.
+     *
+     * The key values aren't meant to be secretive, but this might stop secret sniffing bots.
+     */
+    const initializeKeys = function () {
+        alphaMountainKey = atob("NjkyZDE1MzItZTRmYy00MjFmLWJkMzYtZGFmMGNjYzZlMTFi");
+        precisionSecKey = atob("MGI1Yjc2MjgtMzgyYi0xMWYwLWE1OWMtYjNiNTIyN2IxMDc2");
+        gDataKey = atob("MS4xNC4wIDI1LjUuMTcuMzM1IDEyOS4wLjAuMA==");
+        smartScreenKey = atob("MzgxZGRkMWUtZTYwMC00MmRlLTk0ZWQtOGMzNGJmNzNmMTZk");
+    };
 
     /**
      * Closes all open connections for a specific tab.
@@ -39,6 +58,8 @@ const BrowserProtection = function () {
     };
 
     return {
+        initializeKeys: initializeKeys,
+
         /**
          * Abandons all pending requests for a specific tab.
          *
@@ -262,6 +283,117 @@ const BrowserProtection = function () {
             };
 
             /**
+             * Checks the URL with alphaMountain's API.
+             */
+            const checkUrlWithAlphaMountain = async function (settings) {
+                // Check if the provider is enabled.
+                if (!settings.alphaMountainEnabled) {
+                    return;
+                }
+
+                // Check if the URL is in the allowed cache.
+                if (isUrlInAllowedCache(urlObject, urlHostname, "alphaMountain")) {
+                    console.debug(`[alphaMountain] URL is already allowed: ${url}`);
+                    callback(new ProtectionResult(url, ProtectionResult.ResultType.KNOWN_SAFE, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                    return;
+                }
+
+                // Check if the URL is in the processing cache.
+                if (isUrlInProcessingCache(urlObject, urlHostname, "alphaMountain")) {
+                    console.debug(`[alphaMountain] URL is already processing: ${url}`);
+                    callback(new ProtectionResult(url, ProtectionResult.ResultType.WAITING, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                    return;
+                }
+
+                // Add the URL to the processing cache to prevent duplicate requests.
+                BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "alphaMountain", tabId);
+
+                const apiUrl = `https://api.alphamountain.ai/category/uri`;
+                const payload = {
+                    uri: url,
+                    license: alphaMountainKey,
+                    type: "partner.info",
+                    version: 1
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(payload),
+                        signal
+                    });
+
+                    // Return early if the response is not OK
+                    if (!response.ok) {
+                        console.warn(`[alphaMountain] Returned early: ${response.status}`);
+                        callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                        return;
+                    }
+
+                    const data = await response.json();
+
+                    // Get the categories from the response
+                    const categories = data.category.categories;
+
+                    // Check if the categories array is empty
+                    if (!categories || categories.length === 0) {
+                        console.warn(`[alphaMountain] No categories found for URL ${url}`);
+                        callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                        return;
+                    }
+
+                    // Untrusted Categories
+                    const untrustedCategories = [
+                        11, // Child Sexual Abuse Material (CSAM)
+                        15, // Drugs/Controlled Substances
+                        63, // Scam/Illegal/Unethical
+                        70, // Spam
+                    ];
+
+                    // Malicious Categories
+                    const maliciousCategories = [
+                        39, // Malicious
+                        55, // Potentially Unwanted Applications (PUA)
+                    ];
+
+                    // Phishing Categories
+                    const phishingCategories = [
+                        51, // Phishing
+                    ];
+
+                    // Check if the URL falls into any of the untrusted categories
+                    if (categories.some(category => untrustedCategories.includes(category))) {
+                        console.debug(`[alphaMountain] URL is categorized as Untrusted: ${url}`);
+                        callback(new ProtectionResult(url, ProtectionResult.ResultType.UNTRUSTED, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                        return;
+                    }
+
+                    // Check if the URL falls into any of the malicious categories
+                    if (categories.some(category => maliciousCategories.includes(category))) {
+                        console.debug(`[alphaMountain] URL is categorized as Malicious: ${url}`);
+                        callback(new ProtectionResult(url, ProtectionResult.ResultType.MALICIOUS, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                        return;
+                    }
+
+                    // Check if the URL falls into any of the phishing categories
+                    if (categories.some(category => phishingCategories.includes(category))) {
+                        console.debug(`[alphaMountain] URL is categorized as Phishing: ${url}`);
+                        callback(new ProtectionResult(url, ProtectionResult.ResultType.PHISHING, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                        return;
+                    }
+
+                    // If the URL does not fall into any of the categories, it is considered safe
+                    callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                } catch (error) {
+                    console.debug(`[alphaMountain] Failed to check URL: ${error}`);
+                    callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                }
+            };
+
+            /**
              * Checks the URL with Control D's DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
@@ -367,7 +499,7 @@ const BrowserProtection = function () {
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.KNOWN_SAFE, ProtectionResult.ResultOrigin.CONTROL_D_FAMILY), (new Date()).getTime() - startTime);
                     return;
                 }
-                
+
                 // Check if the URL is in the blocked cache.
                 if (isUrlInBlockedCache(urlObject, urlHostname, "controlDFamily")) {
                     console.debug(`[Control D Family] URL is already blocked: ${url}`);
@@ -456,7 +588,7 @@ const BrowserProtection = function () {
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.KNOWN_SAFE, ProtectionResult.ResultOrigin.PRECISIONSEC), (new Date()).getTime() - startTime);
                     return;
                 }
-                
+
                 // Check if the URL is in the blocked cache.
                 if (isUrlInBlockedCache(urlObject, urlHostname, "precisionSec")) {
                     console.debug(`[PrecisionSec] URL is already blocked: ${url}`);
@@ -481,7 +613,7 @@ const BrowserProtection = function () {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
-                            "API-Key": "0b5b7628-382b-11f0-a59c-b3b5227b1076",
+                            "API-Key": precisionSecKey,
                         },
                         signal
                     });
@@ -538,7 +670,7 @@ const BrowserProtection = function () {
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.KNOWN_SAFE, ProtectionResult.ResultOrigin.G_DATA), (new Date()).getTime() - startTime);
                     return;
                 }
-                
+
                 // Check if the URL is in the blocked cache.
                 if (isUrlInBlockedCache(urlObject, urlHostname, "gData")) {
                     console.debug(`[G DATA] URL is already blocked: ${url}`);
@@ -564,7 +696,7 @@ const BrowserProtection = function () {
                 const payload = {
                     "REVOKEID": 0,
                     "CLIENT": "EXED",
-                    "CLV": "1.14.0 25.5.17.335 129.0.0.0",
+                    "CLV": gDataKey,
                     "URLS": [url]
                 };
 
@@ -670,7 +802,7 @@ const BrowserProtection = function () {
                 // Generate the hash and authorization header
                 const {hash, key} = SmartScreenUtil.hash(requestData);
                 const authHeader = `SmartScreenHash ${btoa(JSON.stringify({
-                    authId: "381ddd1e-e600-42de-94ed-8c34bf73f16d",
+                    authId: smartScreenKey,
                     hash,
                     key
                 }))}`;
@@ -2391,6 +2523,7 @@ const BrowserProtection = function () {
                 // Official Partners
                 checkUrlWithAdGuardSecurity(settings);
                 checkUrlWithAdGuardFamily(settings);
+                checkUrlWithAlphaMountain(settings);
                 checkUrlWithControlDSecurity(settings);
                 checkUrlWithControlDFamily(settings);
                 checkUrlWithPrecisionSec(settings);

@@ -29,6 +29,13 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             messageType: Messages.MessageType.ADGUARD_FAMILY_TOGGLED,
         },
         {
+            name: "alphaMountainEnabled",
+            title: "alphaMountain Web Protection",
+            labelElementId: "alphaMountainStatus",
+            switchElementId: "alphaMountainSwitch",
+            messageType: Messages.MessageType.ALPHAMOUNTAIN_TOGGLED,
+        },
+        {
             name: "controlDSecurityEnabled",
             title: "Control D Security DNS",
             labelElementId: "controlDSecurityStatus",
@@ -51,7 +58,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
         },
         {
             name: "gDataEnabled",
-            title: "G DATA WebProtection",
+            title: "G DATA Web Protection",
             labelElementId: "gDataStatus",
             switchElementId: "gDataSwitch",
             messageType: Messages.MessageType.G_DATA_TOGGLED,

@@ -16,7 +16,7 @@
 
 ###
 
-![Osprey Banner](https://i.imgur.com/0Ccn9WW.png)
+![Osprey Banner](https://i.imgur.com/2G7nwOA.png)
 
 ## Official Partners
 
@@ -24,6 +24,8 @@ Osprey has **officially partnered** with industry-leading security companies to 
 possible. Check out some of our partners below:
 
 [![AdGuard DNS](https://i.imgur.com/gDKTUbm.png)](https://adguard-dns.io?aid=135732)
+
+[![alphaMountain](https://i.imgur.com/BGs1BtC.png)](https://www.alphamountain.ai/?utm_source=osprey)
 
 [![Control D](https://i.imgur.com/9xC1OAK.png)](https://controld.com/?utm_source=osprey)
 
@@ -61,10 +63,11 @@ Osprey blocks websites that are classified as:
 
 The following providers are **enabled** by default:
 
-- **[AdGuard Security DNS](https://www.adguard-dns.io/en/public-dns.html)**
-- **[Control D Security DNS](https://www.controld.com/free-dns)**
+- **[AdGuard Security DNS](https://adguard-dns.io?aid=135732)**
+- **[alphaMountain Web Protection](https://www.alphamountain.ai/?utm_source=osprey)**
+- **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
 - **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
-- [G DATA WebProtection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
+- [G DATA Web Protection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
 - [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
 - [Norton Safe Web](https://safeweb.norton.com)
 - [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
@@ -77,8 +80,8 @@ The following providers are **enabled** by default:
 
 The following providers are **disabled** by default:
 
-- **[AdGuard Family DNS](https://www.adguard-dns.io/en/public-dns.html)**
-- **[Control D Family DNS](https://www.controld.com/free-dns)**
+- **[AdGuard Family DNS](https://adguard-dns.io?aid=135732)**
+- **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
 - [CIRA Security DNS](https://www.cira.ca/en/canadian-shield)
 - [CIRA Family DNS](https://www.cira.ca/en/canadian-shield)
 - [CleanBrowsing Family DNS](https://www.cleanbrowsing.org/filters/#step1)

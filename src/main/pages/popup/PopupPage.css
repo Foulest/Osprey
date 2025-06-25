@@ -191,6 +191,14 @@ section {
 /* --------------------------------------------------
    Other Labels
 -------------------------------------------------- */
+.star-symbol {
+    position: relative;
+    bottom: 2px;
+    margin-right: 1px;
+    text-decoration: none;
+    color: gold;
+}
+
 .other-label {
     position: relative;
     bottom: 2px;

@@ -10,6 +10,7 @@ const Settings = (function () {
         // Official Partners
         adGuardSecurityEnabled: true,
         adGuardFamilyEnabled: false,
+        alphaMountainEnabled: true,
         controlDSecurityEnabled: true,
         controlDFamilyEnabled: false,
         precisionSecEnabled: true,
@@ -105,6 +106,18 @@ const Settings = (function () {
 
                 // Save the merged settings back to local storage
                 Storage.setToLocalStore(settingsKey, mergedSettings, callback);
+            });
+        },
+
+        /**
+         * Restore the default settings.
+         *
+         * @param callback - Callback function that will be called after restoring the settings.
+         */
+        restoreDefaultSettings: function (callback) {
+            Storage.getFromLocalStore(settingsKey, function () {
+                // Save the default settings back to local storage
+                Storage.setToLocalStore(settingsKey, defaultSettings, callback);
             });
         }
     };

@@ -87,6 +87,9 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                         + "%0ADetected%20as%3A%20" + encodedResult
                         + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
+                case ProtectionResult.ResultOrigin.ALPHAMOUNTAIN:
+                    return new URL("https://alphamountain.freshdesk.com/support/tickets/new");
+
                 case ProtectionResult.ResultOrigin.CONTROL_D_SECURITY:
                     // Verified working as of: 06/13/2025
                     // Response time: 1-2 days
@@ -122,7 +125,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                     // TODO: Needs verification of response from support team.
                     return new URL("mailto:support-us@gdata-software.com?subject=False%20Positive&body=Hello%2C"
                         + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."
-                        + "%0A%0AProduct%3A%20G%20DATA%20WebProtection"
+                        + "%0A%0AProduct%3A%20G%20DATA%20Web%20Protection"
                         + "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29"
                         + "%0ADetected%20as%3A%20" + encodedResult
                         + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
@@ -139,6 +142,8 @@ window.WarningSingleton = window.WarningSingleton || (function () {
 
                 case ProtectionResult.ResultOrigin.CIRA_SECURITY:
                 case ProtectionResult.ResultOrigin.CIRA_FAMILY:
+                    // Their support team failed to respond to multiple emails within 7 days.
+                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("https://www.cira.ca/en/canadian-shield/support");
 
                 case ProtectionResult.ResultOrigin.CLEANBROWSING_SECURITY:
@@ -173,10 +178,14 @@ window.WarningSingleton = window.WarningSingleton || (function () {
 
                 case ProtectionResult.ResultOrigin.CLOUDFLARE_SECURITY:
                 case ProtectionResult.ResultOrigin.CLOUDFLARE_FAMILY:
+                    // Verified working as of: 06/21/2025
+                    // Response time: N/A
                     return new URL("https://radar.cloudflare.com/domains/feedback/" + encodedBlockedUrl);
 
                 case ProtectionResult.ResultOrigin.DNS0_SECURITY:
                 case ProtectionResult.ResultOrigin.DNS0_KIDS:
+                    // Verified working as of: 06/21/2025
+                    // Response time: N/A
                     return new URL("https://www.dns0.eu/report");
 
                 case ProtectionResult.ResultOrigin.DNS4EU_SECURITY:
@@ -198,9 +207,13 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                         + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.SMARTSCREEN:
+                    // Verified working as of: 06/21/2025
+                    // Response time: N/A
                     return new URL("https://feedback.smartscreen.microsoft.com/feedback.aspx?t=16&url=" + blockedUrl);
 
                 case ProtectionResult.ResultOrigin.NORTON:
+                    // Verified working as of: 06/21/2025
+                    // Response time: 2-3 days
                     return new URL("https://safeweb.norton.com/report?url=" + encodedBlockedUrl);
 
                 case ProtectionResult.ResultOrigin.OPENDNS_SECURITY:
@@ -232,7 +245,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                         + "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.SWITCH_CH:
-                    // Support team failed to respond to multiple emails within 7 days.
+                    // Their support team failed to respond to multiple emails within 7 days.
                     // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:info@switch.ch?subject=False%20Positive&body=Hello%2C"
                         + "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive."

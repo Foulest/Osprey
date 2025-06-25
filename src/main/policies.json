@@ -40,6 +40,11 @@
       "description": "If set to true, the clear allowed sites button will be disabled.",
       "type": "boolean"
     },
+    "DisableRestoreDefaultSettings": {
+      "title": "Disable Restore Default Settings",
+      "description": "If set to true, the restore default settings button will be disabled.",
+      "type": "boolean"
+    },
     "IgnoreFrameNavigation": {
       "title": "Ignore Frame Navigation",
       "description": "If set to true, frame navigation will be ignored.",
@@ -61,6 +66,11 @@
     "AdGuardFamilyEnabled": {
       "title": "AdGuard Family Enabled",
       "description": "If set to true, AdGuard Family will be enabled.",
+      "type": "boolean"
+    },
+    "AlphaMountainEnabled": {
+      "title": "alphaMountain Enabled",
+      "description": "If set to true, alphaMountain will be enabled.",
       "type": "boolean"
     },
     "ControlDSecurityEnabled": {

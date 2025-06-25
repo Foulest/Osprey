@@ -15,6 +15,7 @@ class CacheManager {
             const providers = [
                 // Official Partners
                 "adGuardSecurity", "adGuardFamily",
+                "alphaMountain",
                 "controlDSecurity", "controlDFamily",
                 "precisionSec",
 

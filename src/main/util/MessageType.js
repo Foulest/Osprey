@@ -15,6 +15,7 @@ const Messages = {
         // Official Partners
         ADGUARD_SECURITY_TOGGLED: "adGuardSecurityToggled",
         ADGUARD_FAMILY_TOGGLED: "adGuardFamilyToggled",
+        ALPHAMOUNTAIN_TOGGLED: "alphaMountainToggled",
         CONTROL_D_SECURITY_TOGGLED: "controlDSecurityToggled",
         CONTROL_D_FAMILY_TOGGLED: "controlDFamilyToggled",
         PRECISIONSEC_TOGGLED: "precisionSecToggled",

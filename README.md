@@ -47,8 +47,8 @@ entirely using [the system policies](https://github.com/Foulest/Osprey/wiki/Sett
 
 You can configure the extension's protection options in the settings:
 
-![Osprey Settings (Page 1)](https://i.imgur.com/CfpJjkF.png)
-![Osprey Settings (Page 2)](https://i.imgur.com/yMlOHkV.png)
+![Osprey Settings (Page 1)](https://i.imgur.com/f0uJbHL.png)
+![Osprey Settings (Page 2)](https://i.imgur.com/7PQGT2s.png)
 
 ## Detections
 

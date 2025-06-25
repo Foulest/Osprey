@@ -349,11 +349,12 @@ window.WarningSingleton = window.WarningSingleton || (function () {
         const lines = [];
         let currentLine = '';
 
-        for (const part of parts) {
-            const nextSegment = currentLine ? `${currentLine}, ${part}` : part;
+        for (let i = 0; i < parts.length; i++) {
+            const part = parts[i];
+            const segment = currentLine ? `, ${part}` : part;
 
-            if (nextSegment.length <= maxLineLength) {
-                currentLine = nextSegment;
+            if ((currentLine + segment).length <= maxLineLength) {
+                currentLine += segment;
             } else {
                 if (currentLine) {
                     lines.push(currentLine);

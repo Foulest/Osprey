@@ -341,20 +341,21 @@ window.WarningSingleton = window.WarningSingleton || (function () {
      * Wraps system names text to fit within a specified maximum line length.
      *
      * @param text - The text to wrap, typically a comma-separated list of system names.
-     * @param maxLineLength - The maximum length of each line before wrapping occurs.
      * @returns {string} - The wrapped text, with each line not exceeding the specified maximum length.
      */
-    function wrapSystemNamesText(text, maxLineLength = 100) {
+    function wrapSystemNamesText(text) {
         const parts = text.split(', ');
         const lines = [];
         let currentLine = '';
 
-        for (let i = 0; i < parts.length; i++) {
-            const part = parts[i];
-            const segment = currentLine ? `, ${part}` : part;
+        const isFirefox = typeof browser !== 'undefined';
+        let maxLineLength = isFirefox ? 110 : 100;
 
-            if ((currentLine + segment).length <= maxLineLength) {
-                currentLine += segment;
+        for (const part of parts) {
+            const nextSegment = currentLine ? `${currentLine}, ${part}` : part;
+
+            if (nextSegment.length <= maxLineLength) {
+                currentLine = nextSegment;
             } else {
                 if (currentLine) {
                     lines.push(currentLine);

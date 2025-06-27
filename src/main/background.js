@@ -290,6 +290,13 @@
     browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id != null) {
             const tabId = sender.tab.id;
+
+            // Potentially fixes a strange undefined error.
+            if (resultSystemNames.get(tabId) === undefined) {
+                console.warn(`Result system names is undefined for tab ID ${tabId}`);
+                return;
+            }
+
             const fullCount = resultSystemNames.get(tabId).length + 1 || 0;
 
             // If the page URL is the block page, send (count - 1)

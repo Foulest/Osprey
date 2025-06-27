@@ -341,7 +341,7 @@ const BrowserProtection = function () {
                     // Check if the categories array is empty
                     if (!categories || categories.length === 0) {
                         console.warn(`[alphaMountain] No categories found for URL ${url}`);
-                        callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                        callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
                         return;
                     }
 
@@ -351,6 +351,7 @@ const BrowserProtection = function () {
                         15, // Drugs/Controlled Substances
                         63, // Scam/Illegal/Unethical
                         70, // Spam
+                        72, // Suspicious
                     ];
 
                     // Malicious Categories
@@ -386,6 +387,8 @@ const BrowserProtection = function () {
                     }
 
                     // If the URL does not fall into any of the categories, it is considered safe
+                    console.debug(`[alphaMountain] Added URL to allowed cache: ` + url);
+                    BrowserProtection.cacheManager.addUrlToAllowedCache(urlObject, "alphaMountain");
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
                 } catch (error) {
                     console.debug(`[alphaMountain] Failed to check URL: ${error}`);

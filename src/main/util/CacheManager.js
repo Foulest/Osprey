@@ -796,6 +796,11 @@ class CacheManager {
     removeKeysByTabId(tabId) {
         let removedCount = 0;
 
+        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
+            console.warn('processingCaches is not defined or not an object');
+            return;
+        }
+
         Object.keys(this.processingCaches).forEach(name => {
             const map = this.processingCaches[name];
 

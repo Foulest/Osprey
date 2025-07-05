@@ -17,6 +17,7 @@
  */
 "use strict";
 
+// noinspection JSDeprecatedSymbols
 (() => {
     // Browser API compatibility between Chrome and Firefox
     const isFirefox = typeof browser !== 'undefined';
@@ -626,7 +627,7 @@
     });
 
     // Listens for PING messages from content scripts to get the blocked counter.
-    browserAPI.runtime.onMessage.addEventListener((message, sender, sendResponse) => {
+    browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id !== null) {
             const tabId = sender.tab.id;
 
@@ -652,7 +653,7 @@
     });
 
     // Listener for onRemoved events.
-    browserAPI.tabs.onRemoved.addEventListener((tabId, removeInfo) => {
+    browserAPI.tabs.onRemoved.addListener((tabId, removeInfo) => {
         console.debug(`Tab removed: ${tabId} (windowId: ${removeInfo.windowId}) (isWindowClosing: ${removeInfo.isWindowClosing})`);
 
         // Removes all cached keys for the tab
@@ -664,18 +665,18 @@
     });
 
     // Listener for onReplaced events.
-    browserAPI.tabs.onReplaced.addEventListener((addedTabId, removedTabId) => {
+    browserAPI.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
         console.debug(`Tab replaced: ${removedTabId} with ${addedTabId}`);
     });
 
     // Listener for onBeforeNavigate events.
-    browserAPI.webNavigation.onBeforeNavigate.addEventListener(navigationDetails => {
+    browserAPI.webNavigation.onBeforeNavigate.addListener(navigationDetails => {
         console.debug(`[onBeforeNavigate] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
         handleNavigation(navigationDetails);
     });
 
     // Listener for onCommitted events.
-    browserAPI.webNavigation.onCommitted.addEventListener(navigationDetails => {
+    browserAPI.webNavigation.onCommitted.addListener(navigationDetails => {
         if (navigationDetails.transitionQualifiers.includes("server_redirect")) {
             console.debug(`[server_redirect] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
             handleNavigation(navigationDetails);
@@ -686,25 +687,25 @@
     });
 
     // Listener for onHistoryStateUpdated events.
-    browserAPI.webNavigation.onHistoryStateUpdated.addEventListener(navigationDetails => {
+    browserAPI.webNavigation.onHistoryStateUpdated.addListener(navigationDetails => {
         console.debug(`[onHistoryStateUpdated] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
         handleNavigation(navigationDetails);
     });
 
     // Listener for onReferenceFragmentUpdated events.
-    browserAPI.webNavigation.onReferenceFragmentUpdated.addEventListener(navigationDetails => {
+    browserAPI.webNavigation.onReferenceFragmentUpdated.addListener(navigationDetails => {
         console.debug(`[onReferenceFragmentUpdated] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
         handleNavigation(navigationDetails);
     });
 
     // Listener for onTabReplaced events.
-    browserAPI.webNavigation.onTabReplaced.addEventListener(navigationDetails => {
+    browserAPI.webNavigation.onTabReplaced.addListener(navigationDetails => {
         console.debug(`[onTabReplaced] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
         handleNavigation(navigationDetails);
     });
 
     // Listener for incoming messages.
-    browserAPI.runtime.onMessage.addEventListener((message, sender) => {
+    browserAPI.runtime.onMessage.addListener((message, sender) => {
         // Checks if the message exists and has a valid type
         if (!(message && message.messageType)) {
             return;
@@ -1104,7 +1105,7 @@
     });
 
     // Listener for context menu creation.
-    contextMenuAPI.onClicked.addEventListener(info => {
+    contextMenuAPI.onClicked.addListener(info => {
         switch (info.menuItemId) {
             case "toggleNotifications":
                 Settings.set({notificationsEnabled: info.checked});

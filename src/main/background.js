@@ -135,6 +135,9 @@
                 return;
             }
 
+            // Removes the blob: prefix from the URL.
+            currentUrl = currentUrl.replace(/^blob:http/, 'http');
+
             // Removes trailing slashes from the URL.
             currentUrl = currentUrl.replace(/\/+$/, '');
 
@@ -672,6 +675,12 @@
     // Listener for onBeforeNavigate events.
     browserAPI.webNavigation.onBeforeNavigate.addListener(navigationDetails => {
         console.debug(`[onBeforeNavigate] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
+        handleNavigation(navigationDetails);
+    });
+
+    // Listener for onCreatedNavigationTarget events.
+    browserAPI.webNavigation.onCreatedNavigationTarget.addListener(navigationDetails => {
+        console.debug(`[onCreatedNavigationTarget] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
         handleNavigation(navigationDetails);
     });
 

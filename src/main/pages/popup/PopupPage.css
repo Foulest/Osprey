@@ -109,13 +109,6 @@ section {
     margin: 5px 5px 15px 5px;
 }
 
-.status-other {
-    vertical-align: middle;
-    display: inline-block;
-    font-size: 14px;
-    margin: 5px 5px 16px 5px;
-}
-
 /* --------------------------------------------------
    Switch Styles
 -------------------------------------------------- */
@@ -213,7 +206,7 @@ section {
     bottom: 2px;
     margin-right: 1px;
     text-decoration: none;
-    color: gold;
+    color: rgb(255, 215, 0);
 }
 
 .other-label {

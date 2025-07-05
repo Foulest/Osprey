@@ -1,5 +1,14 @@
 {
-  "esversion": 9,
+  "esversion": 11,
+  "enforceall": true,
+  "es3": false,
+  "es5": false,
+
+  "-W016": false,
+  "-W030": false,
+  "-W062": false,
   "-W097": false,
-  "-W117": false
+  "-W117": false,
+  "-W127": false,
+  "-W140": false
 }

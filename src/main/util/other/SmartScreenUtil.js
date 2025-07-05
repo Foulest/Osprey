@@ -45,7 +45,7 @@ const SmartScreenUtil = function () {
      * @returns {number} The rotated value.
      */
     const rotateBits = function (value, shift) {
-        return value << shift | value >>> 32 - shift
+        return value << shift | value >>> 32 - shift;
     };
 
     /**
@@ -121,7 +121,7 @@ const SmartScreenUtil = function () {
             c += C;
             d += D;
         }
-        return [a, b, c, d]
+        return [a, b, c, d];
     };
 
     /**
@@ -140,7 +140,7 @@ const SmartScreenUtil = function () {
             resultString += String.fromCharCode(value >>> 16 & 255);
             resultString += String.fromCharCode(value >>> 24 & 255);
         }
-        return resultString
+        return resultString;
     };
 
     /**
@@ -150,7 +150,7 @@ const SmartScreenUtil = function () {
      * @returns {*} - The integer with its bits reversed.
      */
     const reverseBits = function (value) {
-        return (value >>> 16) + (value << 16)
+        return (value >>> 16) + (value << 16);
     };
 
     /**
@@ -286,18 +286,18 @@ const SmartScreenUtil = function () {
                     output[0] = hashState.t;
                     output[1] = hashState.sum;
                     return true;
-                })(outputData, hashOutput, additionalOutput)
-                && (intermediateOutput[0] = finalOutput[0] ^ additionalOutput[0],
+                })(outputData, hashOutput, additionalOutput) &&
+                (intermediateOutput[0] = finalOutput[0] ^ additionalOutput[0],
                     intermediateOutput[1] = finalOutput[1] ^ additionalOutput[1]);
             }
 
             return {
                 key: btoa(intArrayToString(hashOutput)),
                 hash: btoa(intArrayToString(intermediateOutput))
-            }
+            };
         },
 
         // Method to perform MD5 hashing
         md5: computeHash
-    }
+    };
 }();

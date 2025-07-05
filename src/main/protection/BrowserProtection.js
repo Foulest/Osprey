@@ -186,9 +186,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // AdGuard's way of blocking the domain.
                         if (filteringDataString.includes("0,0,1,0,1,192,12,0,1,0,1,0,0,14,16,0,4,94,140,14,3")) {
@@ -276,9 +276,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // AdGuard's way of blocking the domain.
                         if (filteringDataString.includes("0,0,1,0,1,192,12,0,1,0,1,0,0,14,16,0,4,94,140,14,3")) {
@@ -478,9 +478,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // ControlD's way of blocking the domain.
                         if (filteringDataString.endsWith("0,4,0,0,0,0")) {
@@ -567,9 +567,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // ControlD's way of blocking the domain.
                         if (filteringDataString.endsWith("0,4,0,0,0,0")) {
@@ -755,9 +755,9 @@ const BrowserProtection = function () {
                     }
 
                     // Safe/Allowed
-                    if (data.includes("\"TRUSTED\"")
-                        || data.includes("\"WHITELIST\"")
-                        || data.includes("\"URLS\":[{}]}")) {
+                    if (data.includes("\"TRUSTED\"") ||
+                        data.includes("\"WHITELIST\"") ||
+                        data.includes("\"URLS\":[{}]}")) {
                         console.debug(`[G DATA] Added URL to allowed cache: ${url}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(urlObject, "gData");
                         callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, ProtectionResult.ResultOrigin.G_DATA), (new Date()).getTime() - startTime);
@@ -948,10 +948,10 @@ const BrowserProtection = function () {
                     }
 
                     // Safe/Trusted
-                    if (data.includes('r="g"')
-                        || data.includes('r="r"')
-                        || data.includes('r="w"')
-                        || data.includes('r="u"')) {
+                    if (data.includes('r="g"') ||
+                        data.includes('r="r"') ||
+                        data.includes('r="w"') ||
+                        data.includes('r="u"')) {
                         console.debug(`[Norton] Added URL to allowed cache: ${url}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(urlObject, "norton");
                         callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, ProtectionResult.ResultOrigin.NORTON), (new Date()).getTime() - startTime);
@@ -1037,9 +1037,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // CERT-EE's way of blocking the domain.
                         if (filteringDataString.endsWith("180,0,0,9,58,128")) {
@@ -1130,9 +1130,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // CIRA's way of blocking the domain.
                         if (filteringDataString.includes("0,1,0,1,0,0,0,0,0,4")) {
@@ -1223,9 +1223,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // CIRA's way of blocking the domain.
                         if (filteringDataString.includes("0,1,0,1,0,0,0,0,0,4")) {
@@ -1315,9 +1315,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // CleanBrowsing's way of blocking the domain.
                         if (filteringData[3] === 131) {
@@ -1407,9 +1407,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // CleanBrowsing's way of blocking the domain.
                         if (filteringData[3] === 131) {
@@ -1499,9 +1499,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // CleanBrowsing's way of blocking the domain.
                         if (filteringData[3] === 131) {
@@ -1591,13 +1591,13 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // Cloudflare's way of blocking the domain.
-                        if (filteringDataString.includes("EDE(16): Censored")
-                            || filteringDataString.includes("\"TTL\":60,\"data\":\"0.0.0.0\"")) {
+                        if (filteringDataString.includes("EDE(16): Censored") ||
+                            filteringDataString.includes("\"TTL\":60,\"data\":\"0.0.0.0\"")) {
                             console.debug(`[Cloudflare Security] Added URL to blocked cache: ${url}`);
                             BrowserProtection.cacheManager.addUrlToBlockedCache(urlObject, "cloudflareSecurity", ProtectionResult.ResultType.MALICIOUS);
                             callback(new ProtectionResult(url, ProtectionResult.ResultType.MALICIOUS, ProtectionResult.ResultOrigin.CLOUDFLARE_SECURITY), (new Date()).getTime() - startTime);
@@ -1684,13 +1684,13 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // Cloudflare's way of blocking the domain.
-                        if (filteringDataString.includes("EDE(16): Censored")
-                            || filteringDataString.includes("\"TTL\":60,\"data\":\"0.0.0.0\"")) {
+                        if (filteringDataString.includes("EDE(16): Censored") ||
+                            filteringDataString.includes("\"TTL\":60,\"data\":\"0.0.0.0\"")) {
                             console.debug(`[Cloudflare Family] Added URL to blocked cache: ${url}`);
                             BrowserProtection.cacheManager.addUrlToBlockedCache(urlObject, "cloudflareFamily", ProtectionResult.ResultType.ADULT_CONTENT);
                             callback(new ProtectionResult(url, ProtectionResult.ResultType.ADULT_CONTENT, ProtectionResult.ResultOrigin.CLOUDFLARE_FAMILY), (new Date()).getTime() - startTime);
@@ -1776,9 +1776,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // DNS0's way of blocking the domain.
                         if (filteringData.Status === 3) {
@@ -1867,9 +1867,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // DNS0's way of blocking the domain.
                         if (filteringData.Status === 3) {
@@ -1960,9 +1960,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // DNS4EU's way of blocking the domain.
                         if (filteringDataString.endsWith("0,1,0,0,0,1,0,4,51,15,69,11")) {
@@ -2053,9 +2053,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // DNS4EU's way of blocking the domain.
                         if (filteringDataString.endsWith("0,1,0,0,0,1,0,4,51,15,69,11")) {
@@ -2146,9 +2146,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // OpenDNS's way of blocking the domain.
                         if (filteringDataString.includes("0,1,0,1,0,0,0,0,0,4")) {
@@ -2239,9 +2239,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // OpenDNS's way of blocking the domain.
                         if (filteringDataString.includes("0,1,0,1,0,0,0,0,0,4")) {
@@ -2331,9 +2331,9 @@ const BrowserProtection = function () {
                     const nonFilteringData = await nonFilteringResponse.json();
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // Quad9's way of blocking the domain.
                         if (filteringData[3] === 3) {
@@ -2427,13 +2427,13 @@ const BrowserProtection = function () {
                     const maliciousResultRPZ = "0,0,2,88,0,0,1,44,0,9,58,128,0,0,1,44";
 
                     // If the non-filtering domain returns NOERROR...
-                    if (nonFilteringData.Status === 0
-                        && nonFilteringData.Answer
-                        && nonFilteringData.Answer.length > 0) {
+                    if (nonFilteringData.Status === 0 &&
+                        nonFilteringData.Answer &&
+                        nonFilteringData.Answer.length > 0) {
 
                         // Switch.ch's way of blocking the domain.
-                        if (filteringDataString.endsWith(maliciousResultSURBL)
-                            || filteringDataString.endsWith(maliciousResultRPZ)) {
+                        if (filteringDataString.endsWith(maliciousResultSURBL) ||
+                            filteringDataString.endsWith(maliciousResultRPZ)) {
                             console.debug(`[Switch.ch] Added URL to blocked cache: ${url}`);
                             BrowserProtection.cacheManager.addUrlToBlockedCache(urlObject, "switchCH", ProtectionResult.ResultType.MALICIOUS);
                             callback(new ProtectionResult(url, ProtectionResult.ResultType.MALICIOUS, ProtectionResult.ResultOrigin.SWITCH_CH), (new Date()).getTime() - startTime);
@@ -2507,8 +2507,8 @@ const BrowserProtection = function () {
              * @returns {boolean} - True if the URL is in the allowed cache, false otherwise.
              */
             const isUrlInAllowedCache = function (urlObject, hostname, provider) {
-                return BrowserProtection.cacheManager.isUrlInAllowedCache(urlObject, provider)
-                    || BrowserProtection.cacheManager.isStringInAllowedCache(`${hostname} (allowed)`, provider);
+                return BrowserProtection.cacheManager.isUrlInAllowedCache(urlObject, provider) ||
+                    BrowserProtection.cacheManager.isStringInAllowedCache(`${hostname} (allowed)`, provider);
             };
 
             /**
@@ -2520,8 +2520,8 @@ const BrowserProtection = function () {
              * @returns {boolean} - True if the URL is in the blocked cache, false otherwise.
              */
             const isUrlInBlockedCache = function (urlObject, hostname, provider) {
-                return BrowserProtection.cacheManager.isUrlInBlockedCache(urlObject, provider)
-                    || BrowserProtection.cacheManager.isStringInBlockedCache(`${hostname} (blocked)`, provider);
+                return BrowserProtection.cacheManager.isUrlInBlockedCache(urlObject, provider) ||
+                    BrowserProtection.cacheManager.isStringInBlockedCache(`${hostname} (blocked)`, provider);
             };
 
             /**
@@ -2533,8 +2533,8 @@ const BrowserProtection = function () {
              * @returns {boolean} - True if the URL is in the processing cache, false otherwise.
              */
             const isUrlInProcessingCache = function (urlObject, hostname, provider) {
-                return BrowserProtection.cacheManager.isUrlInProcessingCache(urlObject, provider)
-                    || BrowserProtection.cacheManager.isStringInProcessingCache(hostname, provider);
+                return BrowserProtection.cacheManager.isUrlInProcessingCache(urlObject, provider) ||
+                    BrowserProtection.cacheManager.isStringInProcessingCache(hostname, provider);
             };
 
             // Call all the check functions asynchronously

@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-(() => {
-    "use strict";
+"use strict";
 
+(() => {
     // Browser API compatibility between Chrome and Firefox
     const isFirefox = typeof browser !== 'undefined';
     const browserAPI = isFirefox ? browser : chrome;
@@ -87,32 +87,31 @@
     const handleNavigation = navigationDetails => {
         Settings.get(settings => {
             // Retrieves settings to check if protection is enabled.
-            if (!settings.adGuardSecurityEnabled
-                && !settings.adGuardFamilyEnabled
-                && !settings.alphaMountainEnabled
-                && !settings.certEEEnabled
-                && !settings.ciraFamilyEnabled
-                && !settings.ciraSecurityEnabled
-                && !settings.cleanBrowsingAdultEnabled
-                && !settings.cleanBrowsingFamilyEnabled
-                && !settings.cleanBrowsingSecurityEnabled
-                && !settings.cloudflareFamilyEnabled
-                && !settings.cloudflareSecurityEnabled
-                && !settings.controlDFamilyEnabled
-                && !settings.controlDSecurityEnabled
-                && !settings.dns0KidsEnabled
-                && !settings.dns0SecurityEnabled
-                && !settings.dns4EUFamilyEnabled
-                && !settings.dns4EUSecurityEnabled
-                && !settings.gDataEnabled
-                && !settings.nortonEnabled
-                && !settings.openDNSFamilyShieldEnabled
-                && !settings.openDNSSecurityEnabled
-                && !settings.precisionSecEnabled
-                && !settings.quad9Enabled
-                && !settings.smartScreenEnabled
-                && !settings.switchCHEnabled
-            ) {
+            if (!settings.adGuardSecurityEnabled &&
+                !settings.adGuardFamilyEnabled &&
+                !settings.alphaMountainEnabled &&
+                !settings.certEEEnabled &&
+                !settings.ciraFamilyEnabled &&
+                !settings.ciraSecurityEnabled &&
+                !settings.cleanBrowsingAdultEnabled &&
+                !settings.cleanBrowsingFamilyEnabled &&
+                !settings.cleanBrowsingSecurityEnabled &&
+                !settings.cloudflareFamilyEnabled &&
+                !settings.cloudflareSecurityEnabled &&
+                !settings.controlDFamilyEnabled &&
+                !settings.controlDSecurityEnabled &&
+                !settings.dns0KidsEnabled &&
+                !settings.dns0SecurityEnabled &&
+                !settings.dns4EUFamilyEnabled &&
+                !settings.dns4EUSecurityEnabled &&
+                !settings.gDataEnabled &&
+                !settings.nortonEnabled &&
+                !settings.openDNSFamilyShieldEnabled &&
+                !settings.openDNSSecurityEnabled &&
+                !settings.precisionSecEnabled &&
+                !settings.quad9Enabled &&
+                !settings.smartScreenEnabled &&
+                !settings.switchCHEnabled) {
                 console.debug("Protection is disabled; bailing out early.");
                 return;
             }
@@ -226,10 +225,10 @@
 
                 console.info(`[${systemName}] Result for ${currentUrl}: ${resultType} (${duration}ms)`);
 
-                if (resultType !== ProtectionResult.ResultType.FAILED
-                    && resultType !== ProtectionResult.ResultType.WAITING
-                    && resultType !== ProtectionResult.ResultType.KNOWN_SAFE
-                    && resultType !== ProtectionResult.ResultType.ALLOWED) {
+                if (resultType !== ProtectionResult.ResultType.FAILED &&
+                    resultType !== ProtectionResult.ResultType.WAITING &&
+                    resultType !== ProtectionResult.ResultType.KNOWN_SAFE &&
+                    resultType !== ProtectionResult.ResultType.ALLOWED) {
 
                     if (!blocked) {
                         browserAPI.tabs.get(tabId, tab => {
@@ -242,9 +241,9 @@
 
                             // Checks if the tab is at an extension page
                             if (!(currentUrl !== pendingUrl && frameId === 0)) {
-                                if (pendingUrl.startsWith("chrome-extension:")
-                                    || pendingUrl.startsWith("moz-extension:")
-                                    || pendingUrl.startsWith("extension:")) {
+                                if (pendingUrl.startsWith("chrome-extension:") ||
+                                    pendingUrl.startsWith("moz-extension:") ||
+                                    pendingUrl.startsWith("extension:")) {
                                     console.debug(`[${systemName}] The tab is at an extension page; bailing out. ${pendingUrl} ${frameId}`);
                                     return;
                                 }
@@ -309,7 +308,7 @@
 
                         // Sets the action background color to red.
                         browserAPI.action.setBadgeBackgroundColor({
-                            color: "#ff4b4b",
+                            color: "rgb(255,75,75)",
                             tabId: tabId
                         });
 
@@ -339,7 +338,7 @@
 
     // Listens for PING messages from content scripts to get the blocked counter.
     browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id != null) {
+        if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id !== null) {
             const tabId = sender.tab.id;
 
             // Potentially fixes a strange undefined error.
@@ -1296,11 +1295,11 @@
      * @returns {boolean|boolean|boolean} - If the IP address is private/locally hosted.
      */
     function isPrivateIP(ip) {
-        return ip.startsWith("127.")
-            || ip.startsWith("10.")
-            || /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(ip)
-            || ip.startsWith("192.168.")
-            || ip.startsWith("0.0.0.0");
+        return ip.startsWith("127.") ||
+            ip.startsWith("10.") ||
+            ip.match(/^172\.(1[6-9]|2[0-9]|3[0-1])\./) ||
+            ip.startsWith("192.168.") ||
+            ip.startsWith("0.0.0.0");
     }
 
     /**
@@ -1314,9 +1313,9 @@
         if (/^\d+$/.test(hostname)) {
             const n = parseInt(hostname, 10);
             return [
-                (n >>> 24) & 255,
-                (n >>> 16) & 255,
-                (n >>> 8) & 255,
+                n >>> 24 & 255,
+                n >>> 16 & 255,
+                n >>> 8 & 255,
                 n & 255
             ].join(".");
         }
@@ -1327,9 +1326,9 @@
         if (parts.length === 4) {
             try {
                 const nums = parts.map(p => {
-                    if (/^0x/i.test(p)) {
+                    if (p.match(/^0x/i)) {
                         return parseInt(p, 16); // hex
-                    } else if (/^0[0-7]*$/.test(p)) {
+                    } else if (p.match(/^0[0-7]*$/)) {
                         return parseInt(p, 8); // octal (starts with 0, only digits 0–7)
                     } else {
                         return parseInt(p, 10); // decimal
@@ -1355,10 +1354,9 @@
      * @returns {boolean|boolean} - If a hostname is locally hosted.
      */
     function isLocalHostname(hostname) {
-        return (hostname === "localhost"
-            || hostname.endsWith(".localhost")
-            || hostname.endsWith(".local")
-        );
+        return hostname === "localhost" ||
+            hostname.endsWith(".localhost") ||
+            hostname.endsWith(".local");
     }
 
     /**

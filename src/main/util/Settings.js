@@ -71,7 +71,7 @@ const Settings = (function () {
      * @param {Object} source - The source object to compare with.
      * @returns {boolean} - Returns true if any values were updated, false otherwise.
      */
-    const updateIfChanged = function (target, source) {
+    function updateIfChanged(target, source) {
         // Checks if the target is valid
         if (!target || typeof target !== 'object') {
             throw new Error('Target must be an object');
@@ -102,7 +102,7 @@ const Settings = (function () {
 
         // Returns whether any changes were made
         return hasChanges;
-    };
+    }
 
     return {
         /**

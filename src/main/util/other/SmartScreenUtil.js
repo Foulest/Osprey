@@ -18,7 +18,7 @@
 "use strict";
 
 // Utility module for SmartScreen hashing operations.
-const SmartScreenUtil = function () {
+const SmartScreenUtil = (() => {
 
     const hashConstants = [
         7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 5, 9, 14, 20, 5, 9,
@@ -44,9 +44,9 @@ const SmartScreenUtil = function () {
      * @param {number} shift - The number of bits to shift.
      * @returns {number} The rotated value.
      */
-    const rotateBits = function (value, shift) {
+    function rotateBits(value, shift) {
         return value << shift | value >>> 32 - shift;
-    };
+    }
 
     /**
      * Computes the MD5 hash of the input string.
@@ -54,7 +54,7 @@ const SmartScreenUtil = function () {
      * @param input - The input string to hash.
      * @returns {[number,number,number,number]} - The MD5 hash as an array of four integers.
      */
-    const computeHash = function (input) {
+    function computeHash(input) {
         let hashValue;
         let intermediateValue;
         let paddedInput = input;
@@ -122,7 +122,7 @@ const SmartScreenUtil = function () {
             d += D;
         }
         return [a, b, c, d];
-    };
+    }
 
     /**
      * Converts an array of integers to a string representation.
@@ -130,7 +130,7 @@ const SmartScreenUtil = function () {
      * @param array - The array of integers to convert.
      * @returns {string} - The string representation of the array.
      */
-    const intArrayToString = function (array) {
+    function intArrayToString(array) {
         let resultString = "";
 
         for (let index = 0, length = array.length; index < length; index++) {
@@ -141,7 +141,7 @@ const SmartScreenUtil = function () {
             resultString += String.fromCharCode(value >>> 24 & 255);
         }
         return resultString;
-    };
+    }
 
     /**
      * Reverses the bits of a 32-bit integer.
@@ -149,9 +149,9 @@ const SmartScreenUtil = function () {
      * @param value - The 32-bit integer to reverse.
      * @returns {*} - The integer with its bits reversed.
      */
-    const reverseBits = function (value) {
+    function reverseBits(value) {
         return (value >>> 16) + (value << 16);
-    };
+    }
 
     /**
      * Performs a hash operation on the state using the provided multipliers.
@@ -163,13 +163,13 @@ const SmartScreenUtil = function () {
      * @param mult4 - The fourth multiplier for the hash operation.
      * @param mult5 - The fifth multiplier for the hash operation.
      */
-    const hashOperation = function (state, mult1, mult2, mult3, mult4, mult5) {
+    function hashOperation(state, mult1, mult2, mult3, mult4, mult5) {
         state.t += state.buffer.getWord(state.index++);
         state.t = Math.imul(state.t, mult1) + Math.imul(reverseBits(state.t), mult2);
         state.t = Math.imul(reverseBits(state.t), mult3) + Math.imul(state.t, mult4);
         state.t += Math.imul(reverseBits(state.t), mult5);
         state.sum += state.t;
-    };
+    }
 
     /**
      * Performs an extended hash operation on the state using the provided multipliers.
@@ -182,7 +182,7 @@ const SmartScreenUtil = function () {
      * @param mult5 - The fifth multiplier for the hash operation.
      * @param mult6 - The sixth multiplier for the hash operation.
      */
-    const hashOperationExtended = function (state, mult1, mult2, mult3, mult4, mult5, mult6) {
+    function hashOperationExtended(state, mult1, mult2, mult3, mult4, mult5, mult6) {
         state.t += state.buffer.getWord(state.index++);
         state.t = Math.imul(state.t, mult1);
         state.u = reverseBits(state.t);
@@ -192,7 +192,7 @@ const SmartScreenUtil = function () {
         state.t = Math.imul(reverseBits(state.t), mult5);
         state.t += Math.imul(state.u, mult6);
         state.sum += state.t;
-    };
+    }
 
     // Returns the public API of the SmartScreenUtil module
     return {
@@ -206,7 +206,7 @@ const SmartScreenUtil = function () {
             const hashOutput = computeHash(input);
 
             const outputData = {
-                length: input.length / 4 & -2, getWord: function (index) {
+                length: input.length / 4 & -2, getWord(index) {
                     const wordIndex = 4 * index;
                     return input.charCodeAt(wordIndex)
                         | input.charCodeAt(wordIndex + 1) << 8
@@ -225,7 +225,7 @@ const SmartScreenUtil = function () {
              * @param {Array} hashArray - The array containing hash constants.
              * @param {Array} output - The output array to store the hash result.
              */
-            if (function (inputBuffer, hashArray, output) {
+            if (((inputBuffer, hashArray, output) => {
                 let hashState = {
                     buffer: inputBuffer,
                     index: 0,
@@ -250,7 +250,7 @@ const SmartScreenUtil = function () {
                 output[0] = hashState.t;
                 output[1] = hashState.sum;
                 return true;
-            }(outputData, hashOutput, finalOutput)) {
+            })(outputData, hashOutput, finalOutput)) {
                 const additionalOutput = [0, 0];
 
                 /**
@@ -260,7 +260,7 @@ const SmartScreenUtil = function () {
                  * @param {Array} hashArray - The array containing hash constants.
                  * @param {Array} output - The output array to store the hash result.
                  */
-                (function (inputBuffer, hashArray, output) {
+                ((inputBuffer, hashArray, output) => {
                     let hashState = {
                         buffer: inputBuffer,
                         index: 0,
@@ -300,4 +300,4 @@ const SmartScreenUtil = function () {
         // Method to perform MD5 hashing
         md5: computeHash
     };
-}();
+})();

@@ -25,7 +25,7 @@ const Storage = {
      *
      * @returns {boolean}
      */
-    isAvailable: function() {
+    isAvailable() {
         const browserAPI = typeof browser === 'undefined' ? chrome : browser;
         return !!(browserAPI && browserAPI.storage && browserAPI.storage.local && browserAPI.storage.session);
     },
@@ -36,7 +36,7 @@ const Storage = {
      * @param {string} key - The key to retrieve from local storage.
      * @param {Function} callback - The function to call with the retrieved value.
      */
-    getFromLocalStore: function (key, callback) {
+    getFromLocalStore(key, callback) {
         // Checks if the storage API is available
         if (!this.isAvailable()) {
             console.error('Storage API not available');
@@ -70,7 +70,7 @@ const Storage = {
      * @param {any} value - The value to store.
      * @param {Function} [callback] - Optional callback to call after saving.
      */
-    setToLocalStore: function (key, value, callback) {
+    setToLocalStore(key, value, callback) {
         // Checks if the storage API is available
         if (!this.isAvailable()) {
             console.error('Storage API not available');
@@ -87,13 +87,14 @@ const Storage = {
         const browserAPI = typeof browser === 'undefined' ? chrome : browser;
 
         // The final callback variable
-        const finalCallback = typeof callback === 'function' ? callback : () => {};
+        const finalCallback = typeof callback === 'function' ? callback : () => {
+        };
 
         // Creates an object to hold the key-value pair
         let data = {};
         data[key] = value;
 
-        browserAPI.storage.local.set(data, function() {
+        browserAPI.storage.local.set(data, function () {
             // Handles errors in the storage process
             if (browserAPI.runtime.lastError) {
                 console.error('Storage error:', browserAPI.runtime.lastError);
@@ -110,7 +111,7 @@ const Storage = {
      * @param {string} key - The key to retrieve from session storage.
      * @param {Function} callback - The function to call with the retrieved value.
      */
-    getFromSessionStore: function (key, callback) {
+    getFromSessionStore(key, callback) {
         // Checks if the storage API is available
         if (!this.isAvailable()) {
             console.error('Storage API not available');
@@ -144,7 +145,7 @@ const Storage = {
      * @param {any} value - The value to store.
      * @param {Function} [callback] - Optional callback to call after saving.
      */
-    setToSessionStore: function (key, value, callback) {
+    setToSessionStore(key, value, callback) {
         // Checks if the storage API is available
         if (!this.isAvailable()) {
             console.error('Storage API not available');
@@ -161,13 +162,14 @@ const Storage = {
         const browserAPI = typeof browser === 'undefined' ? chrome : browser;
 
         // The final callback variable
-        const finalCallback = typeof callback === 'function' ? callback : () => {};
+        const finalCallback = typeof callback === 'function' ? callback : () => {
+        };
 
         // Creates an object to hold the key-value pair
         let data = {};
         data[key] = value;
 
-        browserAPI.storage.session.set(data, function() {
+        browserAPI.storage.session.set(data, function () {
             // Handles errors in the storage process
             if (browserAPI.runtime.lastError) {
                 console.error('Storage error:', browserAPI.runtime.lastError);

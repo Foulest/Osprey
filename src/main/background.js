@@ -83,8 +83,12 @@
     // List of valid protocols to check for
     const validProtocols = ['http:', 'https:'];
 
-    // Function to handle navigation checks.
-    const handleNavigation = navigationDetails => {
+    /**
+     * Function to handle navigation checks.
+     *
+     * @param navigationDetails - The navigation details to handle.
+     */
+    function handleNavigation(navigationDetails) {
         Settings.get(settings => {
             // Retrieves settings to check if protection is enabled.
             if (!settings.adGuardSecurityEnabled &&
@@ -334,33 +338,7 @@
                 }
             });
         });
-    };
-
-    // Listens for PING messages from content scripts to get the blocked counter.
-    browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id !== null) {
-            const tabId = sender.tab.id;
-
-            // Potentially fixes a strange undefined error.
-            if (resultSystemNames.get(tabId) === undefined) {
-                console.warn(`Result system names is undefined for tab ID ${tabId}`);
-                return;
-            }
-
-            const fullCount = resultSystemNames.get(tabId).length + 1 || 0;
-
-            // If the page URL is the block page, sends (count - 1)
-            browserAPI.tabs.get(tabId, tab => {
-                const isBlockPage = tab.url?.includes("/WarningPage.html");
-                const adjustedCount = isBlockPage && fullCount > 0 ? fullCount - 1 : fullCount;
-
-                sendResponse({
-                    count: adjustedCount,
-                    systems: resultSystemNames.get(tabId) || []
-                });
-            });
-        }
-    });
+    }
 
     // Gather all policy keys needed for managed policies
     const policyKeys = [
@@ -647,8 +625,34 @@
         createContextMenu();
     });
 
+    // Listens for PING messages from content scripts to get the blocked counter.
+    browserAPI.runtime.onMessage.addEventListener((message, sender, sendResponse) => {
+        if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id !== null) {
+            const tabId = sender.tab.id;
+
+            // Potentially fixes a strange undefined error.
+            if (resultSystemNames.get(tabId) === undefined) {
+                console.warn(`Result system names is undefined for tab ID ${tabId}`);
+                return;
+            }
+
+            const fullCount = resultSystemNames.get(tabId).length + 1 || 0;
+
+            // If the page URL is the block page, sends (count - 1)
+            browserAPI.tabs.get(tabId, tab => {
+                const isBlockPage = tab.url?.includes("/WarningPage.html");
+                const adjustedCount = isBlockPage && fullCount > 0 ? fullCount - 1 : fullCount;
+
+                sendResponse({
+                    count: adjustedCount,
+                    systems: resultSystemNames.get(tabId) || []
+                });
+            });
+        }
+    });
+
     // Listener for onRemoved events.
-    browserAPI.tabs.onRemoved.addListener((tabId, removeInfo) => {
+    browserAPI.tabs.onRemoved.addEventListener((tabId, removeInfo) => {
         console.debug(`Tab removed: ${tabId} (windowId: ${removeInfo.windowId}) (isWindowClosing: ${removeInfo.isWindowClosing})`);
 
         // Removes all cached keys for the tab
@@ -660,18 +664,18 @@
     });
 
     // Listener for onReplaced events.
-    browserAPI.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
+    browserAPI.tabs.onReplaced.addEventListener((addedTabId, removedTabId) => {
         console.debug(`Tab replaced: ${removedTabId} with ${addedTabId}`);
     });
 
     // Listener for onBeforeNavigate events.
-    browserAPI.webNavigation.onBeforeNavigate.addListener(navigationDetails => {
+    browserAPI.webNavigation.onBeforeNavigate.addEventListener(navigationDetails => {
         console.debug(`[onBeforeNavigate] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
         handleNavigation(navigationDetails);
     });
 
     // Listener for onCommitted events.
-    browserAPI.webNavigation.onCommitted.addListener(navigationDetails => {
+    browserAPI.webNavigation.onCommitted.addEventListener(navigationDetails => {
         if (navigationDetails.transitionQualifiers.includes("server_redirect")) {
             console.debug(`[server_redirect] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
             handleNavigation(navigationDetails);
@@ -682,25 +686,25 @@
     });
 
     // Listener for onHistoryStateUpdated events.
-    browserAPI.webNavigation.onHistoryStateUpdated.addListener(navigationDetails => {
+    browserAPI.webNavigation.onHistoryStateUpdated.addEventListener(navigationDetails => {
         console.debug(`[onHistoryStateUpdated] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
         handleNavigation(navigationDetails);
     });
 
     // Listener for onReferenceFragmentUpdated events.
-    browserAPI.webNavigation.onReferenceFragmentUpdated.addListener(navigationDetails => {
+    browserAPI.webNavigation.onReferenceFragmentUpdated.addEventListener(navigationDetails => {
         console.debug(`[onReferenceFragmentUpdated] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
         handleNavigation(navigationDetails);
     });
 
     // Listener for onTabReplaced events.
-    browserAPI.webNavigation.onTabReplaced.addListener(navigationDetails => {
+    browserAPI.webNavigation.onTabReplaced.addEventListener(navigationDetails => {
         console.debug(`[onTabReplaced] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
         handleNavigation(navigationDetails);
     });
 
     // Listener for incoming messages.
-    browserAPI.runtime.onMessage.addListener((message, sender) => {
+    browserAPI.runtime.onMessage.addEventListener((message, sender) => {
         // Checks if the message exists and has a valid type
         if (!(message && message.messageType)) {
             return;
@@ -968,13 +972,12 @@
                 break;
             }
 
-            case Messages.MessageType.CONTINUE_TO_SAFETY: {
+            case Messages.MessageType.CONTINUE_TO_SAFETY:
                 // Redirects to the new tab page
                 setTimeout(() => {
                     sendToNewTabPage(sender.tab.id);
                 }, 200);
                 break;
-            }
 
             case Messages.MessageType.REPORT_SITE: {
                 // Ignores blank report URLs
@@ -1101,7 +1104,7 @@
     });
 
     // Listener for context menu creation.
-    contextMenuAPI.onClicked.addListener(info => {
+    contextMenuAPI.onClicked.addEventListener(info => {
         switch (info.menuItemId) {
             case "toggleNotifications":
                 Settings.set({notificationsEnabled: info.checked});
@@ -1140,6 +1143,7 @@
                 Settings.restoreDefaultSettings();
                 console.debug("Restored default settings.");
 
+                // Builds the browser notification to send the user
                 const notificationOptions = {
                     type: "basic",
                     iconUrl: "assets/icons/icon128.png",

@@ -1,7 +1,7 @@
 "use strict";
 
 // Use a global singleton pattern to ensure we don't duplicate resources
-window.PopupSingleton = window.PopupSingleton || (function () {
+window.PopupSingleton = window.PopupSingleton || (() => {
 
     // Tracks initialization state
     let isInitialized = false;
@@ -197,7 +197,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
      * @param {Object} system - The system object
      * @returns {Object} Object containing the label and switch elements
      */
-    const getSystemElements = function (system) {
+    function getSystemElements(system) {
         if (!domElements[system.name]) {
             domElements[system.name] = {
                 label: document.getElementById(system.labelElementId),
@@ -205,18 +205,18 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             };
         }
         return domElements[system.name];
-    };
+    }
 
     /**
      * Batches updates UI elements for better performance.
      *
      * @param {Array} updates - Array of update operations to perform
      */
-    const batchDomUpdates = function (updates) {
+    function batchDomUpdates(updates) {
         window.requestAnimationFrame(() => {
             updates.forEach(update => update());
         });
-    };
+    }
 
     /**
      * Updates the UI for a specific security system using batched DOM operations.
@@ -224,7 +224,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
      * @param {Object} system - The system object being updated.
      * @param {boolean} isOn - Whether the protection is enabled for the system.
      */
-    const updateProtectionStatusUI = function (system, isOn) {
+    function updateProtectionStatusUI(system, isOn) {
         const updates = [];
 
         // Gets cached DOM elements or fetches them if not cached
@@ -253,14 +253,14 @@ window.PopupSingleton = window.PopupSingleton || (function () {
         });
 
         batchDomUpdates(updates);
-    };
+    }
 
     /**
      * Toggles the state of a security system and updates its UI.
      *
      * @param {Object} system - The system object being toggled.
      */
-    const toggleProtection = function (system) {
+    function toggleProtection(system) {
         Settings.get(settings => {
             const currentState = settings[system.name];
             const newState = !currentState;
@@ -275,12 +275,12 @@ window.PopupSingleton = window.PopupSingleton || (function () {
                 });
             });
         });
-    };
+    }
 
     /**
      * Resets to initial state to prevent memory leaks.
      */
-    const reset = function () {
+    function reset() {
         // Removes click handlers from all switches
         securitySystems.forEach(system => {
             const elements = domElements[system.name];
@@ -292,12 +292,12 @@ window.PopupSingleton = window.PopupSingleton || (function () {
 
         // Keeps the DOM elements cache, but resets initialized status
         isInitialized = false;
-    };
+    }
 
     /**
      * Initializes the popup or refresh if already initialized.
      */
-    const initialize = function () {
+    function initialize() {
         // If already initialized, reset first
         if (isInitialized) {
             reset();
@@ -387,12 +387,11 @@ window.PopupSingleton = window.PopupSingleton || (function () {
 
         // Initializes the page display
         updatePageDisplay();
-    };
+    }
 
     // Returns the public API
     return {
-        initialize,
-        reset
+        initialize
     };
 })();
 

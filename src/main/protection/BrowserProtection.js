@@ -18,7 +18,7 @@
 "use strict";
 
 // Main object for managing browser protection functionality
-const BrowserProtection = function () {
+const BrowserProtection = (() => {
 
     // Map to store AbortControllers for each tab
     let tabAbortControllers = new Map();
@@ -34,12 +34,12 @@ const BrowserProtection = function () {
      *
      * The key values aren't meant to be secretive, but this might stop secret sniffing bots.
      */
-    const initializeKeys = function () {
+    function initializeKeys() {
         alphaMountainKey = atob("YTRhNDVkYzMtNjFmMC00OGIzLTlmMjUtNjQxMzgxYjgwNWQ3");
         precisionSecKey = atob("MGI1Yjc2MjgtMzgyYi0xMWYwLWE1OWMtYjNiNTIyN2IxMDc2");
         gDataKey = atob("MS4xNC4wIDI1LjUuMTcuMzM1IDEyOS4wLjAuMA==");
         smartScreenKey = atob("MzgxZGRkMWUtZTYwMC00MmRlLTk0ZWQtOGMzNGJmNzNmMTZk");
-    };
+    }
 
     /**
      * Closes all open connections for a specific tab.
@@ -47,17 +47,17 @@ const BrowserProtection = function () {
      * @param {number} tabId - The ID of the tab for which to close connections.
      * @param {string} reason - The reason for closing the connections.
      */
-    const closeOpenConnections = function (tabId, reason) {
+    function closeOpenConnections(tabId, reason) {
         if (tabAbortControllers.has(tabId)) {
             tabAbortControllers.get(tabId).abort(reason); // Abort all pending requests for the tab
             tabAbortControllers.set(tabId, new AbortController()); // Create a new controller for future requests
         }
-    };
+    }
 
     /**
      * Cleans up controllers for tabs that no longer exist.
      */
-    const cleanupTabControllers = function () {
+    function cleanupTabControllers() {
         // Browser API compatibility between Chrome and Firefox
         const browserAPI = typeof browser === 'undefined' ? chrome : browser;
 
@@ -72,10 +72,10 @@ const BrowserProtection = function () {
                 }
             }
         });
-    };
+    }
 
     return {
-        initializeKeys: initializeKeys,
+        initializeKeys,
 
         /**
          * Abandons all pending requests for a specific tab.
@@ -124,7 +124,7 @@ const BrowserProtection = function () {
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithAdGuardSecurity = async function (settings) {
+            async function checkUrlWithAdGuardSecurity(settings) {
                 // Checks if the provider is enabled
                 if (!settings.adGuardSecurityEnabled) {
                     return;
@@ -207,14 +207,14 @@ const BrowserProtection = function () {
                     console.debug(`[AdGuard Security] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.ADGUARD_SECURITY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with AdGuard's Family DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithAdGuardFamily = async function (settings) {
+            async function checkUrlWithAdGuardFamily(settings) {
                 // Checks if the provider is enabled
                 if (!settings.adGuardFamilyEnabled) {
                     return;
@@ -297,12 +297,12 @@ const BrowserProtection = function () {
                     console.debug(`[AdGuard Family] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.ADGUARD_FAMILY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with alphaMountain's API.
              */
-            const checkUrlWithAlphaMountain = async function (settings) {
+            async function checkUrlWithAlphaMountain(settings) {
                 // Checks if the provider is enabled
                 if (!settings.alphaMountainEnabled) {
                     return;
@@ -410,14 +410,14 @@ const BrowserProtection = function () {
                     console.debug(`[alphaMountain] Failed to check URL: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with Control D's DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithControlDSecurity = async function (settings) {
+            async function checkUrlWithControlDSecurity(settings) {
                 // Checks if the provider is enabled
                 if (!settings.controlDSecurityEnabled) {
                     return;
@@ -499,14 +499,14 @@ const BrowserProtection = function () {
                     console.debug(`[Control D Security] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.CONTROL_D_SECURITY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with Control D's Family DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithControlDFamily = async function (settings) {
+            async function checkUrlWithControlDFamily(settings) {
                 // Checks if the provider is enabled
                 if (!settings.controlDFamilyEnabled) {
                     return;
@@ -588,14 +588,14 @@ const BrowserProtection = function () {
                     console.debug(`[Control D Family] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.CONTROL_D_FAMILY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with PrecisionSec's API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithPrecisionSec = async function (settings) {
+            async function checkUrlWithPrecisionSec(settings) {
                 // Checks if the provider is enabled
                 if (!settings.precisionSecEnabled) {
                     return;
@@ -670,14 +670,14 @@ const BrowserProtection = function () {
                     console.debug(`[PrecisionSec] Failed to check URL: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.PRECISIONSEC), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with G DATA's API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithGDATA = async function (settings) {
+            async function checkUrlWithGDATA(settings) {
                 // Checks if the provider is enabled
                 if (!settings.gDataEnabled) {
                     return;
@@ -771,14 +771,14 @@ const BrowserProtection = function () {
                     console.debug(`[G DATA] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.G_DATA), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with SmartScreen's API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithSmartScreen = async function (settings) {
+            async function checkUrlWithSmartScreen(settings) {
                 // Checks if the provider is enabled
                 if (!settings.smartScreenEnabled) {
                     return;
@@ -882,14 +882,14 @@ const BrowserProtection = function () {
                     console.debug(`[SmartScreen] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.SMARTSCREEN), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with Norton's API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithNorton = async function (settings) {
+            async function checkUrlWithNorton(settings) {
                 // Checks if the provider is enabled
                 if (!settings.nortonEnabled) {
                     return;
@@ -965,14 +965,14 @@ const BrowserProtection = function () {
                     console.debug(`[Norton] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.NORTON), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with CERT-EE's DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithCERTEE = async function (settings) {
+            async function checkUrlWithCERTEE(settings) {
                 // Checks if the provider is enabled
                 if (!settings.certEEEnabled) {
                     return;
@@ -1058,14 +1058,14 @@ const BrowserProtection = function () {
                     console.debug(`[CERT-EE] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.CERT_EE), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with CIRA's Security DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithCIRASecurity = async function (settings) {
+            async function checkUrlWithCIRASecurity(settings) {
                 // Checks if the provider is enabled
                 if (!settings.ciraSecurityEnabled) {
                     return;
@@ -1151,14 +1151,14 @@ const BrowserProtection = function () {
                     console.debug(`[CIRA Security] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.CIRA_SECURITY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with CIRA's Family DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithCIRAFamily = async function (settings) {
+            async function checkUrlWithCIRAFamily(settings) {
                 // Checks if the provider is enabled
                 if (!settings.ciraFamilyEnabled) {
                     return;
@@ -1244,14 +1244,14 @@ const BrowserProtection = function () {
                     console.debug(`[CIRA Family] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.CIRA_FAMILY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with CleanBrowsing's Security DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithCleanBrowsingSecurity = async function (settings) {
+            async function checkUrlWithCleanBrowsingSecurity(settings) {
                 // Checks if the provider is enabled
                 if (!settings.cleanBrowsingSecurityEnabled) {
                     return;
@@ -1336,14 +1336,14 @@ const BrowserProtection = function () {
                     console.debug(`[CleanBrowsing Security] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.CLEANBROWSING_SECURITY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with CleanBrowsing's Family DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithCleanBrowsingFamily = async function (settings) {
+            async function checkUrlWithCleanBrowsingFamily(settings) {
                 // Checks if the provider is enabled
                 if (!settings.cleanBrowsingFamilyEnabled) {
                     return;
@@ -1428,14 +1428,14 @@ const BrowserProtection = function () {
                     console.debug(`[CleanBrowsing Family] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.CLEANBROWSING_FAMILY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with CleanBrowsing's Adult DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithCleanBrowsingAdult = async function (settings) {
+            async function checkUrlWithCleanBrowsingAdult(settings) {
                 // Checks if the provider is enabled
                 if (!settings.cleanBrowsingAdultEnabled) {
                     return;
@@ -1520,14 +1520,14 @@ const BrowserProtection = function () {
                     console.debug(`[CleanBrowsing Adult] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.CLEANBROWSING_ADULT), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with Cloudflare's Security DNS APIs.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithCloudflareSecurity = async function (settings) {
+            async function checkUrlWithCloudflareSecurity(settings) {
                 // Checks if the provider is enabled
                 if (!settings.cloudflareSecurityEnabled) {
                     return;
@@ -1613,14 +1613,14 @@ const BrowserProtection = function () {
                     console.debug(`[Cloudflare Security] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.CLOUDFLARE_SECURITY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with Cloudflare's Family DNS APIs.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithCloudflareFamily = async function (settings) {
+            async function checkUrlWithCloudflareFamily(settings) {
                 // Checks if the provider is enabled
                 if (!settings.cloudflareFamilyEnabled) {
                     return;
@@ -1706,14 +1706,14 @@ const BrowserProtection = function () {
                     console.debug(`[Cloudflare Family] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.CLOUDFLARE_FAMILY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with DNS0's Security DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithDNS0Security = async function (settings) {
+            async function checkUrlWithDNS0Security(settings) {
                 // Checks if the provider is enabled
                 if (!settings.dns0SecurityEnabled) {
                     return;
@@ -1797,14 +1797,14 @@ const BrowserProtection = function () {
                     console.debug(`[DNS0.eu Security] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.DNS0_SECURITY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with DNS0's Kids DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithDNS0Kids = async function (settings) {
+            async function checkUrlWithDNS0Kids(settings) {
                 // Checks if the provider is enabled
                 if (!settings.dns0KidsEnabled) {
                     return;
@@ -1888,14 +1888,14 @@ const BrowserProtection = function () {
                     console.debug(`[DNS0.eu Kids] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.DNS0_KIDS), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with DNS4EU's Security DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithDNS4EUSecurity = async function (settings) {
+            async function checkUrlWithDNS4EUSecurity(settings) {
                 // Checks if the provider is enabled
                 if (!settings.dns4EUSecurityEnabled) {
                     return;
@@ -1981,14 +1981,14 @@ const BrowserProtection = function () {
                     console.debug(`[DNS4EU Security] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.DNS4EU_SECURITY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with DNS4EU's Family DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithDNS4EUFamily = async function (settings) {
+            async function checkUrlWithDNS4EUFamily(settings) {
                 // Checks if the provider is enabled
                 if (!settings.dns4EUFamilyEnabled) {
                     return;
@@ -2074,14 +2074,14 @@ const BrowserProtection = function () {
                     console.debug(`[DNS4EU Family] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.DNS4EU_FAMILY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with OpenDNS's Security DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithOpenDNSSecurity = async function (settings) {
+            async function checkUrlWithOpenDNSSecurity(settings) {
                 // Checks if the provider is enabled
                 if (!settings.openDNSSecurityEnabled) {
                     return;
@@ -2167,14 +2167,14 @@ const BrowserProtection = function () {
                     console.debug(`[OpenDNS Security] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.OPENDNS_SECURITY), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with OpenDNS's Family Shield DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithOpenDNSFamilyShield = async function (settings) {
+            async function checkUrlWithOpenDNSFamilyShield(settings) {
                 // Checks if the provider is enabled
                 if (!settings.openDNSFamilyShieldEnabled) {
                     return;
@@ -2260,14 +2260,14 @@ const BrowserProtection = function () {
                     console.debug(`[OpenDNS Family Shield] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.OPENDNS_FAMILY_SHIELD), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with Quad9's DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithQuad9 = async function (settings) {
+            async function checkUrlWithQuad9(settings) {
                 // Checks if the provider is enabled
                 if (!settings.quad9Enabled) {
                     return;
@@ -2352,14 +2352,14 @@ const BrowserProtection = function () {
                     console.debug(`[Quad9] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.QUAD9), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Checks the URL with Switch.ch's DNS API.
              *
              * @param {Object} settings - The settings object containing user preferences.
              */
-            const checkUrlWithSwitchCH = async function (settings) {
+            async function checkUrlWithSwitchCH(settings) {
                 // Checks if the provider is enabled
                 if (!settings.switchCHEnabled) {
                     return;
@@ -2449,7 +2449,7 @@ const BrowserProtection = function () {
                     console.debug(`[Switch.ch] Failed to check URL ${url}: ${error}`);
                     callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, ProtectionResult.ResultOrigin.SWITCH_CH), (new Date()).getTime() - startTime);
                 }
-            };
+            }
 
             /**
              * Encodes a DNS query for the given domain and type.
@@ -2506,10 +2506,10 @@ const BrowserProtection = function () {
              * @param provider - The provider to check the allowed cache against.
              * @returns {boolean} - True if the URL is in the allowed cache, false otherwise.
              */
-            const isUrlInAllowedCache = function (urlObject, hostname, provider) {
+            function isUrlInAllowedCache(urlObject, hostname, provider) {
                 return BrowserProtection.cacheManager.isUrlInAllowedCache(urlObject, provider) ||
                     BrowserProtection.cacheManager.isStringInAllowedCache(`${hostname} (allowed)`, provider);
-            };
+            }
 
             /**
              * Checks if the URL is in the blocked caches.
@@ -2519,10 +2519,10 @@ const BrowserProtection = function () {
              * @param provider - The provider to check the blocked cache against.
              * @returns {boolean} - True if the URL is in the blocked cache, false otherwise.
              */
-            const isUrlInBlockedCache = function (urlObject, hostname, provider) {
+            function isUrlInBlockedCache(urlObject, hostname, provider) {
                 return BrowserProtection.cacheManager.isUrlInBlockedCache(urlObject, provider) ||
                     BrowserProtection.cacheManager.isStringInBlockedCache(`${hostname} (blocked)`, provider);
-            };
+            }
 
             /**
              * Checks if the URL is in the processing caches.
@@ -2532,10 +2532,10 @@ const BrowserProtection = function () {
              * @param provider - The provider to check the processing cache against.
              * @returns {boolean} - True if the URL is in the processing cache, false otherwise.
              */
-            const isUrlInProcessingCache = function (urlObject, hostname, provider) {
+            function isUrlInProcessingCache(urlObject, hostname, provider) {
                 return BrowserProtection.cacheManager.isUrlInProcessingCache(urlObject, provider) ||
                     BrowserProtection.cacheManager.isStringInProcessingCache(hostname, provider);
-            };
+            }
 
             // Call all the check functions asynchronously
             Settings.get(settings => {
@@ -2573,7 +2573,7 @@ const BrowserProtection = function () {
             cleanupTabControllers();
         }
     };
-}();
+})();
 
 // Initializes the cache manager
 BrowserProtection.cacheManager = new CacheManager();

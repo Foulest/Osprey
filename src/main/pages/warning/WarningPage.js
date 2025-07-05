@@ -20,7 +20,7 @@
 let reportedByText;
 
 // Use a global singleton pattern to ensure we don't duplicate resources
-window.WarningSingleton = window.WarningSingleton || (function () {
+window.WarningSingleton = window.WarningSingleton || (() => {
 
     // Browser API compatibility between Chrome and Firefox
     const browserAPI = typeof browser === 'undefined' ? chrome : browser;
@@ -28,7 +28,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
     /**
      * Initialize the popup or refresh if already initialized.
      */
-    const initialize = function () {
+    function initialize() {
         // Extracts the threat code from the current page URL
         const pageUrl = window.document.URL;
         const result = UrlHelpers.extractResult(pageUrl);
@@ -81,8 +81,12 @@ window.WarningSingleton = window.WarningSingleton || (function () {
         browserAPI.runtime.sendMessage({messageType: Messages.MessageType.BLOCKED_COUNTER_PING}).catch(() => {
         });
 
-        // Creates a function to get the report URL lazily when needed
-        const getReportUrl = () => {
+        /**
+         * Gets the report URL lazily when needed.
+         *
+         * @returns {URL|null} - The report URL.
+         */
+        function getReportUrl() {
             switch (originInt) {
                 case ProtectionResult.ResultOrigin.ADGUARD_SECURITY:
                     // Verified working as of: 05/25/2025
@@ -274,7 +278,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                 default:
                     return null;
             }
-        };
+        }
 
         /**
          * Sends a message to the background script with the specified message type and additional data.
@@ -283,7 +287,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
          * @param additionalData - Additional data to include in the message.
          * @returns {Promise<void>} - A promise that resolves when the message is sent.
          */
-        const sendMessage = async (messageType, additionalData = {}) => {
+        async function sendMessage(messageType, additionalData = {}) {
             try {
                 // Creates the message object and converts URL objects to strings
                 const message = {
@@ -304,7 +308,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
             } catch (error) {
                 console.error(`Error sending message ${messageType}:`, error);
             }
-        };
+        }
 
         // Extracts the blocked URL from the current page URL
         const continueUrl = UrlHelpers.extractContinueUrl(pageUrl);
@@ -358,7 +362,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                 document.getElementById("reportBreakpoint").style.display = "";
             }
         });
-    };
+    }
 
     /**
      * Wraps system names text to fit within a specified maximum line length.

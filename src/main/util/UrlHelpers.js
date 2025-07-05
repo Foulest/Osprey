@@ -26,7 +26,7 @@ const UrlHelpers = {
      * @param {string} url - The URL containing the blocked site information.
      * @returns {string|null} - The blocked URL, or null if not found.
      */
-    extractBlockedUrl: url => {
+    extractBlockedUrl(url) {
         try {
             return new URL(url).searchParams.get("url");
         } catch (error) {
@@ -41,7 +41,7 @@ const UrlHelpers = {
      * @param {string} url - The URL containing the continue URL parameter.
      * @returns {string|null} - The continue URL, or null if not found.
      */
-    extractContinueUrl: url => {
+    extractContinueUrl(url) {
         try {
             return new URL(url).searchParams.get("curl");
         } catch (error) {
@@ -56,7 +56,7 @@ const UrlHelpers = {
      * @param url - The URL containing the origin information
      * @returns {string} - The origin of the protection result
      */
-    extractOrigin: url => {
+    extractOrigin(url) {
         try {
             return new URL(url).searchParams.get("or");
         } catch (error) {
@@ -71,7 +71,7 @@ const UrlHelpers = {
      * @param {string} url - The URL containing the result.
      * @returns {string|null} - The result from the URL, or null if not found.
      */
-    extractResult: url => {
+    extractResult(url) {
         try {
             return new URL(url).searchParams.get("rs");
         } catch (error) {
@@ -87,7 +87,7 @@ const UrlHelpers = {
      * @param {object} continueURL - The URL to continue to if the user clicks a continue button.
      * @returns {string} - The full URL for the block page.
      */
-    getBlockPageUrl: (protectionResult, continueURL) => {
+    getBlockPageUrl(protectionResult, continueURL) {
         // Checks if the protection result is valid
         if (!protectionResult || typeof protectionResult !== 'object') {
             throw new Error('Invalid protection result');
@@ -129,7 +129,7 @@ const UrlHelpers = {
      * @param {string} hostname - The hostname to normalize.
      * @returns {string} - The normalized hostname.
      */
-    normalizeHostname: hostname => {
+    normalizeHostname(hostname) {
         // Ensures the hostname is a string before proceeding
         if (typeof hostname !== 'string') {
             return '';

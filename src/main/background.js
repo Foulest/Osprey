@@ -1297,7 +1297,7 @@
     function isPrivateIP(ip) {
         return ip.startsWith("127.") ||
             ip.startsWith("10.") ||
-            ip.match(/^172\.(1[6-9]|2[0-9]|3[0-1])\./) ||
+            /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(ip) ||
             ip.startsWith("192.168.") ||
             ip.startsWith("0.0.0.0");
     }
@@ -1326,9 +1326,9 @@
         if (parts.length === 4) {
             try {
                 const nums = parts.map(p => {
-                    if (p.match(/^0x/i)) {
+                    if (/^0x/i.test(p)) {
                         return parseInt(p, 16); // hex
-                    } else if (p.match(/^0[0-7]*$/)) {
+                    } else if (/^0[0-7]*$/.test(p)) {
                         return parseInt(p, 8); // octal (starts with 0, only digits 0–7)
                     } else {
                         return parseInt(p, 10); // decimal

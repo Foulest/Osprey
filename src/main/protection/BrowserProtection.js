@@ -383,21 +383,24 @@ const BrowserProtection = (() => {
 
                     // Check if the URL falls into any of the untrusted categories
                     if (categories.some(category => untrustedCategories.includes(category))) {
-                        console.debug(`[alphaMountain] URL is categorized as Untrusted: ${url}`);
+                        console.debug(`[alphaMountain] Added URL to blocked cache: ${url}`);
+                        BrowserProtection.cacheManager.addUrlToBlockedCache(urlObject, "alphaMountain", ProtectionResult.ResultType.UNTRUSTED);
                         callback(new ProtectionResult(url, ProtectionResult.ResultType.UNTRUSTED, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
                         return;
                     }
 
                     // Check if the URL falls into any of the malicious categories
                     if (categories.some(category => maliciousCategories.includes(category))) {
-                        console.debug(`[alphaMountain] URL is categorized as Malicious: ${url}`);
+                        console.debug(`[alphaMountain] Added URL to blocked cache: ${url}`);
+                        BrowserProtection.cacheManager.addUrlToBlockedCache(urlObject, "alphaMountain", ProtectionResult.ResultType.MALICIOUS);
                         callback(new ProtectionResult(url, ProtectionResult.ResultType.MALICIOUS, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
                         return;
                     }
 
                     // Check if the URL falls into any of the phishing categories
                     if (categories.some(category => phishingCategories.includes(category))) {
-                        console.debug(`[alphaMountain] URL is categorized as Phishing: ${url}`);
+                        console.debug(`[alphaMountain] Added URL to blocked cache: ${url}`);
+                        BrowserProtection.cacheManager.addUrlToBlockedCache(urlObject, "alphaMountain", ProtectionResult.ResultType.PHISHING);
                         callback(new ProtectionResult(url, ProtectionResult.ResultType.PHISHING, ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
                         return;
                     }

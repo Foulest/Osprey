@@ -679,15 +679,20 @@
     });
 
     // Listener for onBeforeNavigate events.
-    browserAPI.webNavigation.onBeforeNavigate.addListener(navigationDetails => {
-        console.debug(`[onBeforeNavigate] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
-        handleNavigation(navigationDetails);
+    browserAPI.webNavigation.onBeforeNavigate.addListener(callback => {
+        console.debug(`[onBeforeNavigate] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
+        handleNavigation(callback);
     });
 
-    // Listener for onCreatedNavigationTarget events.
-    browserAPI.webNavigation.onCreatedNavigationTarget.addListener(navigationDetails => {
-        console.debug(`[onCreatedNavigationTarget] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
-        handleNavigation(navigationDetails);
+    // Listener for onCommitted events.
+    browserAPI.webNavigation.onCommitted.addListener(callback => {
+        if (callback.transitionQualifiers.includes("server_redirect")) {
+            console.debug(`[server_redirect] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId}) (type: ${callback.transitionType})`);
+            handleNavigation(callback);
+        } else if (callback.transitionQualifiers.includes("client_redirect")) {
+            console.debug(`[client_redirect] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId}) (type: ${callback.transitionType})`);
+            handleNavigation(callback);
+        }
     });
 
     // Listener for onCommitted events.
@@ -702,21 +707,21 @@
     });
 
     // Listener for onHistoryStateUpdated events.
-    browserAPI.webNavigation.onHistoryStateUpdated.addListener(navigationDetails => {
-        console.debug(`[onHistoryStateUpdated] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
-        handleNavigation(navigationDetails);
+    browserAPI.webNavigation.onHistoryStateUpdated.addListener(callback => {
+        console.debug(`[onHistoryStateUpdated] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
+        handleNavigation(callback);
     });
 
     // Listener for onReferenceFragmentUpdated events.
-    browserAPI.webNavigation.onReferenceFragmentUpdated.addListener(navigationDetails => {
-        console.debug(`[onReferenceFragmentUpdated] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
-        handleNavigation(navigationDetails);
+    browserAPI.webNavigation.onReferenceFragmentUpdated.addListener(callback => {
+        console.debug(`[onReferenceFragmentUpdated] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
+        handleNavigation(callback);
     });
 
     // Listener for onTabReplaced events.
-    browserAPI.webNavigation.onTabReplaced.addListener(navigationDetails => {
-        console.debug(`[onTabReplaced] ${navigationDetails.url} (frameId: ${navigationDetails.frameId}) (tabId: ${navigationDetails.tabId})`);
-        handleNavigation(navigationDetails);
+    browserAPI.webNavigation.onTabReplaced.addListener(callback => {
+        console.debug(`[onTabReplaced] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
+        handleNavigation(callback);
     });
 
     // Listener for incoming messages.

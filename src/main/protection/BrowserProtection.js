@@ -366,6 +366,7 @@ const BrowserProtection = (() => {
                     const untrustedCategories = [
                         11, // Child Sexual Abuse Material (CSAM)
                         15, // Drugs/Controlled Substances
+                        55, // Potentially Unwanted Applications (PUA)
                         70, // Spam
                         72, // Suspicious
                     ];
@@ -373,7 +374,6 @@ const BrowserProtection = (() => {
                     // Malicious Categories
                     const maliciousCategories = [
                         39, // Malicious
-                        55, // Potentially Unwanted Applications (PUA)
                     ];
 
                     // Phishing Categories

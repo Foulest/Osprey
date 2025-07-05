@@ -1141,6 +1141,7 @@
             }
 
             case "restoreDefaultSettings": {
+                // Restores default settings
                 Settings.restoreDefaultSettings();
                 console.debug("Restored default settings.");
 
@@ -1160,6 +1161,12 @@
                 browserAPI.notifications.create(notificationId, notificationOptions, id => {
                     console.debug(`Notification created with ID: ${id}`);
                 });
+
+                // Re-creates the context menu
+                setTimeout(() => {
+                    createContextMenu();
+                    console.debug("Re-created context menu.");
+                }, 100);
                 break;
             }
 

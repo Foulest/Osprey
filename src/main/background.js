@@ -1109,12 +1109,12 @@
         switch (info.menuItemId) {
             case "toggleNotifications":
                 Settings.set({notificationsEnabled: info.checked});
-                console.debug(`Notifications: ${info.checked}`);
+                console.debug(`Enable notifications: ${info.checked}`);
                 break;
 
             case "toggleFrameNavigation":
                 Settings.set({ignoreFrameNavigation: info.checked});
-                console.debug(`Ignoring frame navigation: ${info.checked}`);
+                console.debug(`Ignore frame navigation: ${info.checked}`);
                 break;
 
             case "clearAllowedSites": {

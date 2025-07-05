@@ -1,3 +1,20 @@
+/*
+ * Osprey - a browser extension that protects you from malicious websites.
+ * Copyright (C) 2025 Foulest (https://github.com/Foulest)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
 "use strict";
 
 // Manages user preferences and configurations.
@@ -55,19 +72,36 @@ const Settings = (function () {
      * @returns {boolean} - Returns true if any values were updated, false otherwise.
      */
     const updateIfChanged = function (target, source) {
+        // Checks if the target is valid
+        if (!target || typeof target !== 'object') {
+            throw new Error('Target must be an object');
+        }
+
+        // Checks if the source is valid
+        if (!source || typeof source !== 'object') {
+            return false;
+        }
+
         let hasChanges = false;
 
-        if (source) {
-            // Iterate through the source object properties
-            for (let key in source) {
-                // If the values differ, update the target and mark changes
-                if (source[key] !== target[key]) {
-                    target[key] = source[key];
-                    hasChanges = true;
+        try {
+            // Iterates through the source object properties
+            // If the values differ, update the target and mark changes
+            for (const key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                    if (source[key] !== target[key]) {
+                        target[key] = source[key];
+                        hasChanges = true;
+                    }
                 }
             }
+        } catch (error) {
+            console.error('Error updating settings:', error);
+            throw error;
         }
-        return hasChanges; // Return whether any changes were made
+
+        // Returns whether any changes were made
+        return hasChanges;
     };
 
     return {
@@ -78,13 +112,13 @@ const Settings = (function () {
          */
         get: function (callback) {
             Storage.getFromLocalStore(settingsKey, function (storedSettings) {
-                // Clone the default settings object
+                // Clones the default settings object
                 let mergedSettings = JSON.parse(JSON.stringify(defaultSettings));
 
-                // Merge any stored settings into the cloned default settings
+                // Merges any stored settings into the cloned default settings
                 updateIfChanged(mergedSettings, storedSettings);
 
-                // Invoke the callback with the merged settings
+                // Invokes the callback with the merged settings
                 callback && callback(mergedSettings);
             });
         },
@@ -97,14 +131,14 @@ const Settings = (function () {
          */
         set: function (newSettings, callback) {
             Storage.getFromLocalStore(settingsKey, function (storedSettings) {
-                // Clone the default settings object
+                // Clones the default settings object
                 let mergedSettings = JSON.parse(JSON.stringify(defaultSettings));
 
-                // Merge stored settings and new settings into the cloned default settings
+                // Merges stored settings and new settings into the cloned default settings
                 storedSettings && updateIfChanged(mergedSettings, storedSettings);
                 updateIfChanged(mergedSettings, newSettings);
 
-                // Save the merged settings back to local storage
+                // Saves the merged settings back to local storage
                 Storage.setToLocalStore(settingsKey, mergedSettings, callback);
             });
         },
@@ -115,8 +149,8 @@ const Settings = (function () {
          * @param callback - Callback function that will be called after restoring the settings.
          */
         restoreDefaultSettings: function (callback) {
+            // Saves the default settings back to local storage
             Storage.getFromLocalStore(settingsKey, function () {
-                // Save the default settings back to local storage
                 Storage.setToLocalStore(settingsKey, defaultSettings, callback);
             });
         }

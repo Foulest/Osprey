@@ -1,3 +1,20 @@
+/*
+ * Osprey - a browser extension that protects you from malicious websites.
+ * Copyright (C) 2025 Foulest (https://github.com/Foulest)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
 "use strict";
 
 // Utility module for SmartScreen hashing operations.
@@ -43,13 +60,13 @@ const SmartScreenUtil = function () {
         let paddedInput = input;
         let inputLength = 8 * paddedInput.length;
 
-        // Append 1 bit and necessary padding
+        // Appends 1 bit and necessary padding
         paddedInput += String.fromCharCode(128);
         while ((paddedInput.length + 8) % 64) {
             paddedInput += String.fromCharCode(0);
         }
 
-        // Append the length of the input
+        // Appends the length of the input
         for (let index = 0; index < 8; index++) {
             paddedInput += index < 4 ? String.fromCharCode(inputLength >>> 8 * index & 255) : String.fromCharCode(0);
         }
@@ -64,13 +81,13 @@ const SmartScreenUtil = function () {
                 | paddedInput.charCodeAt(wordIndex + 3) << 24;
         };
 
-        // Initialize hash variables
+        // Initializes the hash variables
         let a = 1732584193;
         let b = 4023233417;
         let c = 2562383102;
         let d = 271733878;
 
-        // Process each block of the padded input
+        // Processes each block of the padded input
         for (let blockIndex = 0; blockIndex < numberOfWords; blockIndex += 16) {
             let A = a;
             let B = b;
@@ -177,7 +194,7 @@ const SmartScreenUtil = function () {
         state.sum += state.t;
     };
 
-    // Return the public API of the SmartScreenUtil module
+    // Returns the public API of the SmartScreenUtil module
     return {
         /**
          * Generates a hash for the given input string.
@@ -219,12 +236,12 @@ const SmartScreenUtil = function () {
                 let firstMultiplier = 1 | hashArray[0];
                 let secondMultiplier = 1 | hashArray[1];
 
-                // Ensure the input buffer is valid
+                // Ensures the input buffer is valid
                 if (inputBuffer.length < 2 || 1 & inputBuffer.length) {
                     return false;
                 }
 
-                // Process the buffer until all words are consumed
+                // Processes the buffer until all words are consumed
                 while (hashState.buffer.length - hashState.index > 1) {
                     hashOperation(hashState, firstMultiplier, 4010109435, 1755016095, 240755605, 3287280279);
                     hashOperation(hashState, secondMultiplier, 3273069531, 3721207567, 984919853, 901586633);
@@ -255,12 +272,12 @@ const SmartScreenUtil = function () {
                     let firstMultiplier = 1 | hashArray[0];
                     let secondMultiplier = 1 | hashArray[1];
 
-                    // Ensure the input buffer is valid
+                    // Ensures the input buffer is valid
                     if (inputBuffer.length < 2 || 1 & inputBuffer.length) {
                         return false;
                     }
 
-                    // Process the buffer until all words are consumed
+                    // Processes the buffer until all words are consumed
                     while (hashState.buffer.length - hashState.index > 1) {
                         hashOperationExtended(hashState, firstMultiplier, 3482890513, 2265471903, 315537773, 629022083, 0);
                         hashOperationExtended(hashState, secondMultiplier, 2725517045, 3548616447, 2090019721, 3215236969, 0);

@@ -3,7 +3,7 @@
 // Use a global singleton pattern to ensure we don't duplicate resources
 window.PopupSingleton = window.PopupSingleton || (function () {
 
-    // Track initialization state
+    // Tracks initialization state
     let isInitialized = false;
 
     // Cache for DOM elements
@@ -192,7 +192,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
     ];
 
     /**
-     * Get DOM elements for a system, caching them for future use
+     * Gets DOM elements for a system, caching them for future use.
      *
      * @param {Object} system - The system object
      * @returns {Object} Object containing the label and switch elements
@@ -208,7 +208,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
     };
 
     /**
-     * Batch updates UI elements for better performance
+     * Batches updates UI elements for better performance.
      *
      * @param {Array} updates - Array of update operations to perform
      */
@@ -227,7 +227,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
     const updateProtectionStatusUI = function (system, isOn) {
         const updates = [];
 
-        // Get cached DOM elements or fetch them if not cached
+        // Gets cached DOM elements or fetches them if not cached
         const elements = getSystemElements(system);
 
         updates.push(() => {
@@ -278,10 +278,10 @@ window.PopupSingleton = window.PopupSingleton || (function () {
     };
 
     /**
-     * Reset to initial state to prevent memory leaks.
+     * Resets to initial state to prevent memory leaks.
      */
     const reset = function () {
-        // Remove click handlers from all switches
+        // Removes click handlers from all switches
         securitySystems.forEach(system => {
             const elements = domElements[system.name];
 
@@ -290,12 +290,12 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             }
         });
 
-        // Keep the DOM elements cache but reset initialization
+        // Keeps the DOM elements cache, but resets initialized status
         isInitialized = false;
     };
 
     /**
-     * Initialize the popup or refresh if already initialized.
+     * Initializes the popup or refresh if already initialized.
      */
     const initialize = function () {
         // If already initialized, reset first
@@ -303,10 +303,10 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             reset();
         }
 
-        // Mark as initialized
+        // Marks initialized as true
         isInitialized = true;
 
-        // Set up switch elements and click handlers
+        // Sets up switch elements and click handlers
         securitySystems.forEach(system => {
             const elements = getSystemElements(system);
 
@@ -323,7 +323,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             }
         });
 
-        // Load and apply settings
+        // Loads and applies settings
         Settings.get(settings => {
             securitySystems.forEach(system => {
                 const isEnabled = settings[system.name];
@@ -331,8 +331,9 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             });
         });
 
-        // Update version display
         const versionElement = document.getElementById("version");
+
+        // Updates the version display
         if (versionElement) {
             const manifest = browserAPI.runtime.getManifest();
             const version = manifest.version;
@@ -350,25 +351,28 @@ window.PopupSingleton = window.PopupSingleton || (function () {
         const totalPages = 4;
 
         function updatePageDisplay() {
-            // Hide all pages
-            page1.classList.remove("active");
-            page2.classList.remove("active");
-            page3.classList.remove("active");
-            page4.classList.remove("active");
-
-            // Show current page
-            if (currentPage === 1) {
-                page1.classList.add("active");
-            } else if (currentPage === 2) {
-                page2.classList.add("active");
-            } else if (currentPage === 3) {
-                page3.classList.add("active");
-            } else if (currentPage === 4) {
-                page4.classList.add("active");
+            // Checks for invalid current page numbers
+            if (currentPage < 1 || currentPage > totalPages) {
+                currentPage = 1;
             }
 
-            // Update page indicator
-            pageIndicator.textContent = `${currentPage}/${totalPages}`;
+            const pages = [page1, page2, page3, page4];
+
+            // Checks for valid HTML page elements
+            if (!pages.every(page => page instanceof HTMLElement)) {
+                console.error('Missing page elements');
+                return;
+            }
+
+            // Toggles the active status
+            pages.forEach((page, index) => {
+                page.classList.toggle('active', index + 1 === currentPage);
+            });
+
+            // Updates the page indicator
+            if (pageIndicator) {
+                pageIndicator.textContent = `${currentPage}/${totalPages}`;
+            }
         }
 
         prevPage.addEventListener("click", function () {
@@ -381,18 +385,18 @@ window.PopupSingleton = window.PopupSingleton || (function () {
             updatePageDisplay();
         });
 
-        // Initialize display
+        // Initializes the page display
         updatePageDisplay();
     };
 
-    // Public API
+    // Returns the public API
     return {
         initialize,
         reset
     };
 })();
 
-// Initialize when DOM is ready
+// Initializes when the DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
     Settings.get(settings => {
         if (settings.hideProtectionOptions) {

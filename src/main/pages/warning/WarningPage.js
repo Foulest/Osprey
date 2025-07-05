@@ -1,3 +1,20 @@
+/*
+ * Osprey - a browser extension that protects you from malicious websites.
+ * Copyright (C) 2025 Foulest (https://github.com/Foulest)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
 "use strict";
 
 let reportedByText;
@@ -12,11 +29,11 @@ window.WarningSingleton = window.WarningSingleton || (function () {
      * Initialize the popup or refresh if already initialized.
      */
     const initialize = function () {
-        // Extract the threat code from the current page URL
+        // Extracts the threat code from the current page URL
         const pageUrl = window.document.URL;
         const result = UrlHelpers.extractResult(pageUrl);
 
-        // Set the reason text based on the result
+        // Sets the reason text based on the result
         if (!result) {
             console.warn("No result found in the URL.");
             return;
@@ -30,22 +47,22 @@ window.WarningSingleton = window.WarningSingleton || (function () {
 
         domElements.reason.innerText = result;
 
-        // Extract the blocked URL from the current page URL
+        // Extracts the blocked URL from the current page URL
         const blockedUrl = UrlHelpers.extractBlockedUrl(pageUrl);
 
-        // Encode the URLs for safe use in other contexts
+        // Encodes the URLs for safe use in other contexts
         const encodedBlockedUrl = encodeURIComponent(blockedUrl);
         const encodedResult = encodeURIComponent(result);
 
-        // Set the URL text to the current page URL
+        // Sets the URL text to the current page URL
         domElements.url.innerText = blockedUrl;
 
-        // Get origin information
+        // Gets the origin information
         const origin = UrlHelpers.extractOrigin(pageUrl);
         const originInt = parseInt(origin);
         const systemName = ProtectionResult.ResultOriginNames[originInt];
 
-        // Set reported by text
+        // Sets the reported by text
         domElements.reportedBy.innerText = systemName || "Unknown";
         reportedByText = domElements.reportedBy.innerText;
 
@@ -64,7 +81,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
         browserAPI.runtime.sendMessage({messageType: Messages.MessageType.BLOCKED_COUNTER_PING}).catch(() => {
         });
 
-        // Create a function to get the report URL lazily when needed
+        // Creates a function to get the report URL lazily when needed
         const getReportUrl = () => {
             switch (originInt) {
                 case ProtectionResult.ResultOrigin.ADGUARD_SECURITY:
@@ -268,7 +285,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
          */
         const sendMessage = async (messageType, additionalData = {}) => {
             try {
-                // Convert URL objects to strings before sending
+                // Creates the message object and converts URL objects to strings
                 const message = {
                     messageType,
                     blockedUrl: blockedUrl instanceof URL ? blockedUrl.toString() : blockedUrl,
@@ -276,7 +293,7 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                     ...additionalData
                 };
 
-                // Also check any properties in additionalData that might be URL objects
+                // Converts URL objects to strings in additionalData
                 for (const key in message) {
                     if (message[key] instanceof URL) {
                         message[key] = message[key].toString();
@@ -289,7 +306,10 @@ window.WarningSingleton = window.WarningSingleton || (function () {
             }
         };
 
-        // Add event listener to "Report this website as safe" button
+        // Extracts the blocked URL from the current page URL
+        const continueUrl = UrlHelpers.extractContinueUrl(pageUrl);
+
+        // Adds event listener to "Report this website as safe" button
         Settings.get(settings => {
             domElements.reportSite.addEventListener("click", async () => {
                 if (!settings.hideReportButton) {
@@ -299,37 +319,40 @@ window.WarningSingleton = window.WarningSingleton || (function () {
                 }
             });
 
-            // Add event listener to "Temporarily allow this website" button
+            // Adds event listener to "Temporarily allow this website" button
             domElements.allowSite.addEventListener("click", async () => {
                 if (!settings.hideContinueButtons) {
                     await sendMessage(Messages.MessageType.ALLOW_SITE, {
-                        blockedUrl: blockedUrl
+                        blockedUrl: blockedUrl,
+                        continueUrl: continueUrl
                     });
                 }
             });
 
-            // Add event listener to "Back to safety" button
+            // Adds event listener to "Back to safety" button
             domElements.homepageButton.addEventListener("click", async () => {
                 await sendMessage(Messages.MessageType.CONTINUE_TO_SAFETY, {
                     blockedUrl: blockedUrl
                 });
             });
 
-            // Add event listener to "Continue anyway" button
+            // Adds event listener to "Continue anyway" button
             domElements.continueButton.addEventListener("click", async () => {
                 if (!settings.hideContinueButtons) {
                     await sendMessage(Messages.MessageType.CONTINUE_TO_SITE, {
-                        blockedUrl: blockedUrl
+                        blockedUrl: blockedUrl,
+                        continueUrl: continueUrl
                     });
                 }
             });
 
-            // Checks for overrides to any HTML elements from settings
+            // Handles the hide continue buttons policy
             if (!settings.hideContinueButtons) {
                 document.getElementById("allowSite").style.display = "";
                 document.getElementById("continueButton").style.display = "";
             }
 
+            // Handles the hide report button policy
             if (!settings.hideReportButton) {
                 document.getElementById("reportSite").style.display = "";
                 document.getElementById("reportBreakpoint").style.display = "";
@@ -371,13 +394,13 @@ window.WarningSingleton = window.WarningSingleton || (function () {
         return lines.join('\n');
     }
 
-    // Public API
+    // Returns the public API
     return {
         initialize
     };
 })();
 
+// Initializes when the DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-    // Initialize the singleton instance
     window.WarningSingleton.initialize();
 });

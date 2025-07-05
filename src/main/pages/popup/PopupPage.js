@@ -319,7 +319,7 @@ window.PopupSingleton = window.PopupSingleton || (function () {
                             toggleProtection(system);
                         }
                     });
-                }
+                };
             }
         });
 

@@ -743,7 +743,15 @@
                     return;
                 }
 
-                let blockedUrlObject = new URL(message.blockedUrl);
+                // Parses the blocked URL object
+                let blockedUrlObject;
+                try {
+                    blockedUrlObject = new URL(message.blockedUrl);
+                } catch (error) {
+                    console.warn(`Invalid blocked URL format: ${message.blockedUrl}; sending to new tab page: ${error}`);
+                    sendToNewTabPage(sender.tab.id);
+                    return;
+                }
 
                 // Redirects to the new tab page if the blocked URL is not a valid HTTP(S) URL
                 if (!validProtocols.includes(blockedUrlObject.protocol.toLowerCase())) {
@@ -752,12 +760,12 @@
                     return;
                 }
 
-                // Parses the URL object
+                // Parses the continue URL object
                 let continueUrlObject;
                 try {
                     continueUrlObject = new URL(message.continueUrl);
                 } catch (error) {
-                    console.warn(`Invalid URL format: ${message.continueUrl}; sending to new tab page: ${error}`);
+                    console.warn(`Invalid continue URL format: ${message.continueUrl}; sending to new tab page: ${error}`);
                     sendToNewTabPage(sender.tab.id);
                     return;
                 }
@@ -1039,8 +1047,24 @@
                     break;
                 }
 
-                let blockedUrl = new URL(message.blockedUrl);
-                const hostnameString = `${blockedUrl.hostname} (allowed)`;
+                // Parses the blocked URL object
+                let blockedUrlObject;
+                try {
+                    blockedUrlObject = new URL(message.blockedUrl);
+                } catch (error) {
+                    console.warn(`Invalid blocked URL format: ${message.blockedUrl}; sending to new tab page: ${error}`);
+                    sendToNewTabPage(sender.tab.id);
+                    return;
+                }
+
+                // Redirects to the new tab page if the blocked URL is not a valid HTTP(S) URL
+                if (!validProtocols.includes(blockedUrlObject.protocol.toLowerCase())) {
+                    console.debug(`Invalid protocol in blocked URL: ${message.blockedUrl}; sending to new tab page.`);
+                    sendToNewTabPage(sender.tab.id);
+                    return;
+                }
+
+                const hostnameString = `${blockedUrlObject.hostname} (allowed)`;
 
                 // Adds the hostname to every allowed cache
                 console.debug(`Adding hostname to every allowed cache: ${hostnameString}`);
@@ -1050,14 +1074,15 @@
                 console.debug(`Removing hostname from every blocked cache: ${hostnameString}`);
                 BrowserProtection.cacheManager.removeStringFromBlockedCache(hostnameString, "all");
 
-                // Redirects to the new tab page if the blocked URL is not a valid HTTP(S) URL
-                if (!validProtocols.includes(blockedUrl.protocol.toLowerCase())) {
-                    console.debug(`Invalid protocol in blocked URL: ${message.blockedUrl}; sending to new tab page.`);
+                // Parses the continue URL object
+                let continueUrlObject;
+                try {
+                    continueUrlObject = new URL(message.continueUrl);
+                } catch (error) {
+                    console.warn(`Invalid continue URL format: ${message.continueUrl}; sending to new tab page: ${error}`);
                     sendToNewTabPage(sender.tab.id);
                     return;
                 }
-
-                let continueUrlObject = new URL(message.continueUrl);
 
                 // Redirects to the new tab page if the continue URL is not a valid HTTP(S) URL
                 if (!validProtocols.includes(continueUrlObject.protocol.toLowerCase())) {

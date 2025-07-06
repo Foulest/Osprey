@@ -879,33 +879,33 @@
 
     // Listener for onCreatedNavigationTarget events.
     browserAPI.webNavigation.onCreatedNavigationTarget.addListener(callback => {
-        // Checks for DOM-related phishing attacks that modify blank pages
-        if (callback.url === "about:blank") {
-            // Kill the connection by closing the tab
-            browserAPI.tabs.remove(callback.tabId, () => {
-                console.debug(`Closed about:blank tab ${callback.tabId} ${callback.frameId}`);
-            });
-
-            // Builds the browser notification to send the user
-            const notificationOptions = {
-                type: "basic",
-                iconUrl: "assets/icons/icon128.png",
-                title: "DOM Phishing Attack Blocked",
-                message: "An about:blank DOM phishing attack has been blocked.",
-                priority: 2,
-            };
-
-            const randomNumber = Math.floor(Math.random() * 100000000);
-            const notificationId = `about-blank-blocked-${randomNumber}`;
-
-            // Creates and displays a browser notification
-            browserAPI.notifications.create(notificationId, notificationOptions, id => {
-                console.debug(`Notification created with ID: ${id}`);
-            });
-        } else {
+        // // Checks for DOM-related phishing attacks that modify blank pages
+        // if (callback.url === "about:blank") {
+        //     // Kill the connection by closing the tab
+        //     browserAPI.tabs.remove(callback.tabId, () => {
+        //         console.debug(`Closed about:blank tab ${callback.tabId} ${callback.frameId}`);
+        //     });
+        //
+        //     // Builds the browser notification to send the user
+        //     const notificationOptions = {
+        //         type: "basic",
+        //         iconUrl: "assets/icons/icon128.png",
+        //         title: "DOM Phishing Attack Blocked",
+        //         message: "An about:blank DOM phishing attack has been blocked.",
+        //         priority: 2,
+        //     };
+        //
+        //     const randomNumber = Math.floor(Math.random() * 100000000);
+        //     const notificationId = `about-blank-blocked-${randomNumber}`;
+        //
+        //     // Creates and displays a browser notification
+        //     browserAPI.notifications.create(notificationId, notificationOptions, id => {
+        //         console.debug(`Notification created with ID: ${id}`);
+        //     });
+        // } else {
             console.debug(`[onCreatedNavigationTarget] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
             handleNavigation(callback);
-        }
+        // }
     });
 
     // Listener for onHistoryStateUpdated events.

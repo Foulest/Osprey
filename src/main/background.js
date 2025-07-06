@@ -344,6 +344,177 @@
         });
     }
 
+    // /**
+    //  * Function to handle downloads.
+    //  *
+    //  * @param callback - The navigation details to handle.
+    //  */
+    // function handleDownloads(callback) {
+    //     Settings.get(settings => {
+    //         // Retrieves settings to check if protection is enabled.
+    //         if (!settings.adGuardSecurityEnabled &&
+    //             !settings.adGuardFamilyEnabled &&
+    //             !settings.alphaMountainEnabled &&
+    //             !settings.certEEEnabled &&
+    //             !settings.ciraFamilyEnabled &&
+    //             !settings.ciraSecurityEnabled &&
+    //             !settings.cleanBrowsingAdultEnabled &&
+    //             !settings.cleanBrowsingFamilyEnabled &&
+    //             !settings.cleanBrowsingSecurityEnabled &&
+    //             !settings.cloudflareFamilyEnabled &&
+    //             !settings.cloudflareSecurityEnabled &&
+    //             !settings.controlDFamilyEnabled &&
+    //             !settings.controlDSecurityEnabled &&
+    //             !settings.dns0KidsEnabled &&
+    //             !settings.dns0SecurityEnabled &&
+    //             !settings.dns4EUFamilyEnabled &&
+    //             !settings.dns4EUSecurityEnabled &&
+    //             !settings.gDataEnabled &&
+    //             !settings.nortonEnabled &&
+    //             !settings.openDNSFamilyShieldEnabled &&
+    //             !settings.openDNSSecurityEnabled &&
+    //             !settings.precisionSecEnabled &&
+    //             !settings.quad9Enabled &&
+    //             !settings.smartScreenEnabled &&
+    //             !settings.switchCHEnabled) {
+    //             console.debug("Protection is disabled; bailing out early.");
+    //             return;
+    //         }
+    //
+    //         //         // Debug message
+    //         //         console.debug(`[onDownloadCreated] ${callback.byExtensionId}, ${callback.byExtensionName}, ${callback.bytesReceived},
+    //         //         ${callback.canResume}, ${callback.danger}, ${callback.endTime}, ${callback.error}, ${callback.estimatedEndTime},
+    //         //         ${callback.exists}, ${callback.fileSize}, ${callback.filename}, ${callback.finalUrl}, ${callback.id},
+    //         //         ${callback.incognito}, ${callback.mime}, ${callback.paused}, ${callback.referrer}, ${callback.startTime},
+    //         //         ${callback.state}, ${callback.totalBytes}, ${callback.url}`);
+    //
+    //         let {url: currentUrl} = callback;
+    //
+    //         // Checks if the URL is missing or incomplete.
+    //         if (!currentUrl || !currentUrl.includes('://')) {
+    //             console.debug(`Incomplete or missing URL: ${currentUrl}; bailing out.`);
+    //             return;
+    //         }
+    //
+    //         // Removes the blob: prefix from the URL.
+    //         currentUrl = currentUrl.replace(/^blob:http/, 'http');
+    //
+    //         // Removes trailing slashes from the URL.
+    //         currentUrl = currentUrl.replace(/\/+$/, '');
+    //
+    //         // Removes www. from the start of the URL.
+    //         currentUrl = currentUrl.replace(/https?:\/\/www\./, 'https://');
+    //
+    //         // Removes query parameters, fragments (#) and & tags from the URL.
+    //         currentUrl = currentUrl.replace(/[?#&].*$/, '');
+    //
+    //         // Sanitizes and encodes the URL to handle spaces and special characters.
+    //         try {
+    //             currentUrl = encodeURI(currentUrl);
+    //         } catch (error) {
+    //             console.warn(`Failed to encode URL: ${currentUrl}; bailing out: ${error}`);
+    //             return;
+    //         }
+    //
+    //         // Parses the URL object.
+    //         let urlObject;
+    //         try {
+    //             urlObject = new URL(currentUrl);
+    //         } catch (error) {
+    //             console.warn(`Invalid URL format: ${currentUrl}; bailing out: ${error}`);
+    //             return;
+    //         }
+    //
+    //         const protocol = urlObject.protocol;
+    //         let hostname = urlObject.hostname;
+    //
+    //         // Checks for incomplete URLs missing the scheme.
+    //         if (!protocol || currentUrl.startsWith('//')) {
+    //             console.warn(`URL is missing a scheme: ${currentUrl}; bailing out.`);
+    //             return;
+    //         }
+    //
+    //         // Checks for valid protocols.
+    //         if (!validProtocols.includes(protocol.toLowerCase())) {
+    //             console.debug(`Invalid protocol: ${protocol}; bailing out.`);
+    //             return;
+    //         }
+    //
+    //         // Checks for missing hostname.
+    //         if (!hostname) {
+    //             console.warn(`Missing hostname in URL: ${currentUrl}; bailing out.`);
+    //             return;
+    //         }
+    //
+    //         // Checks for missing the suffix.
+    //         if (hostname.endsWith('.')) {
+    //             console.warn(`Missing suffix in URL: ${currentUrl}; bailing out.`);
+    //             return;
+    //         }
+    //
+    //         // Excludes internal network addresses, loopback, or reserved domains.
+    //         if (isInternalAddress(hostname)) {
+    //             console.warn(`Local/internal network URL detected: ${currentUrl}; bailing out.`);
+    //             return;
+    //         }
+    //
+    //         // Sets the hostname back to the URL object.
+    //         urlObject.hostname = hostname;
+    //
+    //         let blocked = false;
+    //
+    //         console.info(`Checking download URL: ${currentUrl}`);
+    //
+    //         // Checks if the URL is malicious.
+    //         BrowserProtection.checkIfUrlIsMalicious(-1, currentUrl, (result, duration) => {
+    //             const cacheName = ProtectionResult.CacheOriginNames[result.origin];
+    //             const systemName = ProtectionResult.ShortOriginNames[result.origin];
+    //             const resultType = result.result;
+    //
+    //             // Removes the URL from the system's processing cache on every callback.
+    //             // Doesn't remove it if the result is still waiting for a response.
+    //             if (resultType !== ProtectionResult.ResultType.WAITING) {
+    //                 BrowserProtection.cacheManager.removeUrlFromProcessingCache(urlObject, cacheName);
+    //             }
+    //
+    //             console.info(`[${systemName}] Result for ${currentUrl}: ${resultType} (${duration}ms)`);
+    //
+    //             if (resultType !== ProtectionResult.ResultType.FAILED &&
+    //                 resultType !== ProtectionResult.ResultType.WAITING &&
+    //                 resultType !== ProtectionResult.ResultType.KNOWN_SAFE &&
+    //                 resultType !== ProtectionResult.ResultType.ALLOWED) {
+    //
+    //                 if (!blocked) {
+    //                     // Marks the download as dangerous.
+    //                     browserAPI.downloads.acceptDanger(callback.id);
+    //
+    //                     // Builds the warning notification options
+    //                     if (settings.notificationsEnabled) {
+    //                         const notificationOptions = {
+    //                             type: "basic",
+    //                             iconUrl: "assets/icons/icon128.png",
+    //                             title: "Unsafe Download Blocked",
+    //                             message: `File Name: ${callback.filename}\nReason: ${resultType}\nReported by: ${systemName}`,
+    //                             priority: 2,
+    //                         };
+    //
+    //                         // Creates a unique notification ID based on a random number
+    //                         const randomNumber = Math.floor(Math.random() * 100000000);
+    //                         const notificationId = `warning-${randomNumber}`;
+    //
+    //                         // Displays the warning notification
+    //                         browserAPI.notifications.create(notificationId, notificationOptions, notificationId => {
+    //                             console.debug(`Notification created with ID: ${notificationId}`);
+    //                         });
+    //                     }
+    //                 }
+    //
+    //                 blocked = true;
+    //             }
+    //         });
+    //     });
+    // }
+
     // Gather all policy keys needed for managed policies
     const policyKeys = [
         'DisableContextMenu',
@@ -655,6 +826,17 @@
         }
     });
 
+    // browserAPI.downloads.onCreated.addListener(callback => {
+    //     // Debug message
+    //     console.debug(`[onDownloadCreated] ${callback.byExtensionId}, ${callback.byExtensionName}, ${callback.bytesReceived},
+    //     ${callback.canResume}, ${callback.danger}, ${callback.endTime}, ${callback.error}, ${callback.estimatedEndTime},
+    //     ${callback.exists}, ${callback.fileSize}, ${callback.filename}, ${callback.finalUrl}, ${callback.id},
+    //     ${callback.incognito}, ${callback.mime}, ${callback.paused}, ${callback.referrer}, ${callback.startTime},
+    //     ${callback.state}, ${callback.totalBytes}, ${callback.url}`);
+    //
+    //     handleDownloads(callback);
+    // });
+
     // Listener for onRemoved events.
     browserAPI.tabs.onRemoved.addListener((tabId, removeInfo) => {
         console.debug(`Tab removed: ${tabId} (windowId: ${removeInfo.windowId}) (isWindowClosing: ${removeInfo.isWindowClosing})`);
@@ -673,7 +855,7 @@
             changeInfo.tabId = tabId;
             changeInfo.frameId = 0;
 
-            console.debug(`[onUpdated] ${tabId} updated URL to ${changeInfo.url})`);
+            console.debug(`[onTabUpdated] ${tabId} updated URL to ${changeInfo.url})`);
             handleNavigation(changeInfo);
         }
     });

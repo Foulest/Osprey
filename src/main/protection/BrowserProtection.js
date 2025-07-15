@@ -315,6 +315,13 @@ const BrowserProtection = (() => {
                     return;
                 }
 
+                // Checks if the URL is in the blocked cache
+                if (isUrlInBlockedCache(urlObject, urlHostname, "alphaMountain")) {
+                    console.debug(`[alphaMountain] URL is already blocked: ${url}`);
+                    callback(new ProtectionResult(url, BrowserProtection.cacheManager.getBlockedResultType(url, "alphaMountain"), ProtectionResult.ResultOrigin.ALPHAMOUNTAIN), (new Date()).getTime() - startTime);
+                    return;
+                }
+
                 // Checks if the URL is in the processing cache
                 if (isUrlInProcessingCache(urlObject, urlHostname, "alphaMountain")) {
                     console.debug(`[alphaMountain] URL is already processing: ${url}`);

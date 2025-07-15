@@ -127,7 +127,7 @@ companies such as Jotform to host their phishing campaigns. If Osprey only check
 detect those threats. Osprey only sends your hostname to its various DNS API providers, so if you're highly concerned
 about URL page privacy, the DNS APIs are there for you.
 
-## Installation
+## Manual Install
 
 > **Note:** You need to have a GitHub account to download artifacts.
 

@@ -47,7 +47,7 @@ const Settings = (function () {
         dns4EUSecurityEnabled: true,
         dns4EUFamilyEnabled: false,
         smartScreenEnabled: true,
-        nortonEnabled: true,
+        nortonEnabled: false,
         openDNSSecurityEnabled: true,
         openDNSFamilyShieldEnabled: false,
         quad9Enabled: true,

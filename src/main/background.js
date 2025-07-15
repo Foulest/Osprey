@@ -1283,10 +1283,6 @@
                 console.debug(`Adding hostname to every allowed cache: ${hostnameString}`);
                 BrowserProtection.cacheManager.addStringToAllowedCache(hostnameString, "all");
 
-                // Removes the hostname from every blocked cache
-                console.debug(`Removing hostname from every blocked cache: ${hostnameString}`);
-                BrowserProtection.cacheManager.removeStringFromBlockedCache(hostnameString, "all");
-
                 // Parses the continue URL object
                 let continueUrlObject;
                 try {

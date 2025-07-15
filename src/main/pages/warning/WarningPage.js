@@ -323,7 +323,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                 }
             });
 
-            // Adds event listener to "Temporarily allow this website" button
+            // Adds event listener to "Always ignore this website" button
             domElements.allowSite.addEventListener("click", async () => {
                 if (!settings.hideContinueButtons) {
                     await sendMessage(Messages.MessageType.ALLOW_SITE, {

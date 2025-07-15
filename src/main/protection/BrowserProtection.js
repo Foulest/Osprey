@@ -2523,8 +2523,7 @@ const BrowserProtection = (() => {
              * @returns {boolean} - True if the URL is in the blocked cache, false otherwise.
              */
             function isUrlInBlockedCache(urlObject, hostname, provider) {
-                return BrowserProtection.cacheManager.isUrlInBlockedCache(urlObject, provider) ||
-                    BrowserProtection.cacheManager.isStringInBlockedCache(`${hostname} (blocked)`, provider);
+                return BrowserProtection.cacheManager.isUrlInBlockedCache(urlObject, provider);
             }
 
             /**
@@ -2536,8 +2535,7 @@ const BrowserProtection = (() => {
              * @returns {boolean} - True if the URL is in the processing cache, false otherwise.
              */
             function isUrlInProcessingCache(urlObject, hostname, provider) {
-                return BrowserProtection.cacheManager.isUrlInProcessingCache(urlObject, provider) ||
-                    BrowserProtection.cacheManager.isStringInProcessingCache(hostname, provider);
+                return BrowserProtection.cacheManager.isUrlInProcessingCache(urlObject, provider);
             }
 
             // Call all the check functions asynchronously

@@ -252,7 +252,8 @@ class CacheManager {
                     const expTime = value && typeof value === 'object' && 'exp' in value ? value.exp : value;
 
                     // Removes expired keys from the map
-                    if (expTime < now) {
+                    // Ignores keys with expiration time of 0 (indicating no expiration)
+                    if (expTime !== 0 && expTime < now) {
                         map.delete(key);
                         removed++;
                     }
@@ -343,14 +344,7 @@ class CacheManager {
             }
 
             if (map.has(str)) {
-                const exp = map.get(str);
-
-                if (exp > Date.now()) {
-                    return true;
-                }
-
-                map.delete(str);
-                this.updateLocalStorage(true);
+                return true;
             }
         } catch (error) {
             console.error(error);
@@ -405,7 +399,7 @@ class CacheManager {
         }
 
         try {
-            const expTime = Date.now() + this.expirationTime * 1000;
+            const expTime = 0;
 
             if (this.cleanExpiredEntries() === 0) {
                 this.updateLocalStorage(true);
@@ -418,64 +412,6 @@ class CacheManager {
             } else {
                 console.warn(`Cache "${name}" not found`);
             }
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    /**
-     * Remove a URL from the allowed cache for a specific provider.
-     *
-     * @param url {string|URL} - The URL to remove, can be a string or a URL object.
-     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
-     */
-    removeUrlFromAllowedCache(url, name) {
-        // Returns if the allowed cache is not defined.
-        if (!this.allowedCaches || typeof this.allowedCaches !== 'object') {
-            console.warn('allowedCache is not defined or not an object');
-            return;
-        }
-
-        try {
-            const key = this.normalizeUrl(url);
-
-            if (name === "all") {
-                Object.values(this.allowedCaches).forEach(m => m.delete(key));
-            } else if (this.allowedCaches[name]) {
-                this.allowedCaches[name].delete(key);
-            } else {
-                console.warn(`Cache "${name}" not found`);
-            }
-
-            this.updateLocalStorage(true);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    /**
-     * Remove a string key from the allowed cache for a specific provider.
-     *
-     * @param str {string} - The string to remove.
-     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
-     */
-    removeStringFromAllowedCache(str, name) {
-        // Returns if the allowed cache is not defined.
-        if (!this.allowedCaches || typeof this.allowedCaches !== 'object') {
-            console.warn('allowedCache is not defined or not an object');
-            return;
-        }
-
-        try {
-            if (name === "all") {
-                Object.values(this.allowedCaches).forEach(m => m.delete(str));
-            } else if (this.allowedCaches[name]) {
-                this.allowedCaches[name].delete(str);
-            } else {
-                console.warn(`Cache "${name}" not found`);
-            }
-
-            this.updateLocalStorage(true);
         } catch (error) {
             console.error(error);
         }
@@ -518,41 +454,6 @@ class CacheManager {
     }
 
     /**
-     * Checks if a string is in the blocked cache for a specific provider.
-     *
-     * @param str {string} - The string to check.
-     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
-     * @returns {boolean} - Returns true if the string is in the allowed cache and not expired, false otherwise.
-     */
-    isStringInBlockedCache(str, name) {
-        // Returns if the blocked cache is not defined.
-        if (!this.blockedCaches || typeof this.blockedCaches !== 'object') {
-            console.warn('blockedCache is not defined or not an object');
-            return false;
-        }
-
-        try {
-            const map = this.blockedCaches[name];
-
-            if (!map || !map.has(str)) {
-                return false;
-            }
-
-            const entry = map.get(str);
-
-            if (entry.exp > Date.now()) {
-                return true;
-            }
-
-            map.delete(str);
-            this.updateLocalStorage(false);
-        } catch (error) {
-            console.error(error);
-        }
-        return false;
-    }
-
-    /**
      * Add a URL to the blocked cache for a specific provider.
      *
      * @param url {string|URL} - The URL to add, can be a string or a URL object.
@@ -587,43 +488,6 @@ class CacheManager {
             }
         } catch (error) {
             console.error(error);
-        }
-    }
-
-    /**
-     * Add a string key to the blocked cache for a specific provider.
-     *
-     * @param str {string} - The string to add.
-     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
-     * @param resultType {string} - The resultType of the string (e.g., "malicious", "phishing").
-     */
-    addStringToBlockedCache(str, name, resultType) {
-        // Returns if the blocked cache is not defined.
-        if (!this.blockedCaches || typeof this.blockedCaches !== 'object') {
-            console.warn('blockedCache is not defined or not an object');
-            return;
-        }
-
-        try {
-            const expTime = Date.now() + this.expirationTime * 1000;
-
-            if (this.cleanExpiredEntries() === 0) {
-                this.updateLocalStorage(false);
-            }
-
-            const cache = this.blockedCaches[name];
-
-            if (name === "all") {
-                Object.values(this.blockedCaches).forEach(m =>
-                    m.set(str, {exp: expTime, resultType: resultType})
-                );
-            } else if (cache) {
-                cache.set(str, {exp: expTime, resultType: resultType});
-            } else {
-                console.warn(`Cache "${name}" not found`);
-            }
-        } catch (e) {
-            console.error(e);
         }
     }
 
@@ -694,34 +558,6 @@ class CacheManager {
     }
 
     /**
-     * Remove a string key from the blocked cache for a specific provider.
-     *
-     * @param str {string} - The string to remove.
-     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
-     */
-    removeStringFromBlockedCache(str, name) {
-        // Returns if the blocked cache is not defined.
-        if (!this.blockedCaches || typeof this.blockedCaches !== 'object') {
-            console.warn('blockedCache is not defined or not an object');
-            return;
-        }
-
-        try {
-            if (name === "all") {
-                Object.values(this.blockedCaches).forEach(m => m.delete(str));
-            } else if (this.blockedCaches[name]) {
-                this.blockedCaches[name].delete(str);
-            } else {
-                console.warn(`Cache "${name}" not found`);
-            }
-
-            this.updateLocalStorage(false);
-        } catch (e) {
-            console.error(e);
-        }
-    }
-
-    /**
      * Checks if a URL is in the processing cache for a specific provider.
      *
      * @param url {string|URL} - The URL to check, can be a string or a URL object.
@@ -751,43 +587,6 @@ class CacheManager {
                 }
 
                 map.delete(key);
-                this.updateSessionStorage(true);
-            }
-        } catch (e) {
-            console.error(e);
-        }
-        return false;
-    }
-
-    /**
-     * Checks if a string is in the processing cache for a specific provider.
-     *
-     * @param str {string} - The string to check.
-     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
-     * @returns {boolean} - Returns true if the string is in the processing cache and not expired, false otherwise.
-     */
-    isStringInProcessingCache(str, name) {
-        // Checks if the processing cache is valid
-        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
-            console.warn('processingCaches is not defined or not an object');
-            return false;
-        }
-
-        try {
-            const map = this.processingCaches[name];
-
-            if (!map) {
-                return false;
-            }
-
-            if (map.has(str)) {
-                const entry = map.get(str);
-
-                if (entry.exp > Date.now()) {
-                    return true;
-                }
-
-                map.delete(str);
                 this.updateSessionStorage(true);
             }
         } catch (e) {
@@ -833,41 +632,6 @@ class CacheManager {
     }
 
     /**
-     * Add a string key to the processing cache, associating it with a specific tabId.
-     *
-     * @param {string} str - The string to add.
-     * @param {string} name - The name of the provider (e.g., "precisionSec", "smartScreen").
-     * @param {number} tabId - The ID of the tab associated with this string.
-     */
-    addStringToProcessingCache(str, name, tabId) {
-        // Checks if the processing cache is valid
-        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
-            console.warn('processingCaches is not defined or not an object');
-            return;
-        }
-
-        try {
-            const expTime = Date.now() + this.expirationTime * 1000;
-
-            if (this.cleanExpiredEntries() === 0) {
-                this.updateSessionStorage(true);
-            }
-
-            const entry = {exp: expTime, tabId: tabId};
-
-            if (name === "all") {
-                Object.values(this.processingCaches).forEach(m => m.set(str, entry));
-            } else if (this.processingCaches[name]) {
-                this.processingCaches[name].set(str, entry);
-            } else {
-                console.warn(`Processing cache "${name}" not found`);
-            }
-        } catch (e) {
-            console.error(e);
-        }
-    }
-
-    /**
      * Remove a URL from the processing cache for a specific provider.
      *
      * @param url {string|URL} - The URL to remove, can be a string or a URL object.
@@ -894,34 +658,6 @@ class CacheManager {
             this.updateSessionStorage(true);
         } catch (e) {
             console.error(e);
-        }
-    }
-
-    /**
-     * Remove a string key from the processing cache for a specific provider.
-     *
-     * @param str {string} - The string to remove.
-     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
-     */
-    removeStringFromProcessingCache(str, name) {
-        // Checks if the processing cache is valid
-        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
-            console.warn('processingCaches is not defined or not an object');
-            return;
-        }
-
-        try {
-            if (name === "all") {
-                Object.values(this.processingCaches).forEach(m => m.delete(str));
-            } else if (this.processingCaches[name]) {
-                this.processingCaches[name].delete(str);
-            } else {
-                console.warn(`Processing cache "${name}" not found`);
-            }
-
-            this.updateSessionStorage(true);
-        } catch (error) {
-            console.error(error);
         }
     }
 

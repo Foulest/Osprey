@@ -8,14 +8,16 @@
 
 **Osprey** is a browser extension that protects you from malicious websites.
 
-[Google Chrome](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd)
-• [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/osprey-browser-protectio/nopglhplnghfhpniofkcopmhbjdonlgn)
-• [Firefox](https://addons.mozilla.org/en-US/firefox/addon/osprey-browser-protection)
-• [Privacy Policy](https://github.com/Foulest/Osprey/blob/main/.github/PRIVACY.md)
+[Privacy Policy](https://github.com/Foulest/Osprey/blob/main/.github/PRIVACY.md)
 • [Wiki (FAQs)](https://github.com/Foulest/Osprey/wiki)
-
-[MalwareTips](https://malwaretips.com/threads/osprey-browser-protection-discussion-and-updates.135565)
+• [MalwareTips](https://malwaretips.com/threads/osprey-browser-protection-discussion-and-updates.135565)
 • [Wilders Security](https://www.wilderssecurity.com/threads/osprey-browser-protection.456729)
+
+###
+
+[![Google Chrome](https://i.imgur.com/R9AN3cA.png)](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd)
+[![Microsoft Edge](https://i.imgur.com/oVmDDtj.png)](https://microsoftedge.microsoft.com/addons/detail/osprey-browser-protectio/nopglhplnghfhpniofkcopmhbjdonlgn)
+[![Firefox](https://i.imgur.com/uXgho1n.png)](https://addons.mozilla.org/en-US/firefox/addon/osprey-browser-protection)
 
 ###
 

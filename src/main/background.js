@@ -1362,6 +1362,7 @@
 
             case "clearAllowedSites": {
                 BrowserProtection.cacheManager.clearAllowedCache();
+                BrowserProtection.cacheManager.clearBlockedCache();
                 console.debug("Cleared all allowed site caches.");
 
                 // Builds the browser notification to send the user

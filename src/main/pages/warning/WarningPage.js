@@ -239,7 +239,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
                 case ProtectionResult.ResultOrigin.OPENDNS_SECURITY:
                     // TODO: Needs verification of response from support team.
-                    return new URL("mailto:support@opendns.com?subject=False%20Positive&body=Hello%2C" +
+                    return new URL("mailto:umbrella-support@cisco.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20OpenDNS%20Home%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
@@ -248,7 +248,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
                 case ProtectionResult.ResultOrigin.OPENDNS_FAMILY_SHIELD:
                     // TODO: Needs verification of response from support team.
-                    return new URL("mailto:support@opendns.com?subject=False%20Positive&body=Hello%2C" +
+                    return new URL("mailto:umbrella-support@cisco.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20OpenDNS%20Family%20Shield%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +

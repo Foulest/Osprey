@@ -80,7 +80,6 @@ The following providers are **enabled** by default:
 - [DNS4EU Security DNS](https://www.joindns4.eu/for-public)
 - [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
 - [Quad9 Security DNS](https://www.quad9.net)
-- [Switch.ch Security DNS](https://www.switch.ch/en/dns-firewall)
 
 The following providers are **disabled** by default:
 
@@ -96,6 +95,7 @@ The following providers are **disabled** by default:
 - [DNS4EU Family DNS](https://www.joindns4.eu/for-public)
 - [Norton Safe Web](https://safeweb.norton.com)
 - [OpenDNS Family Shield DNS](https://www.opendns.com/home-internet-security)
+- [Switch.ch Security DNS](https://www.switch.ch/en/dns-firewall)
 
 Providers disabled by default are either due to:
 

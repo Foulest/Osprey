@@ -317,7 +317,7 @@ class CacheManager {
                 this.updateLocalStorage(true);
             }
         } catch (error) {
-            console.error(error);
+            console.error(`Error checking allowed cache for ${url}:`, error);
         }
         return false;
     }
@@ -347,7 +347,7 @@ class CacheManager {
                 return true;
             }
         } catch (error) {
-            console.error(error);
+            console.error(`Error checking allowed cache for string "${str}":`, error);
         }
         return false;
     }
@@ -381,7 +381,7 @@ class CacheManager {
                 console.warn(`Cache "${name}" not found`);
             }
         } catch (error) {
-            console.error(error);
+            console.error(`Error adding URL to allowed cache for ${url}:`, error);
         }
     }
 
@@ -413,7 +413,7 @@ class CacheManager {
                 console.warn(`Cache "${name}" not found`);
             }
         } catch (error) {
-            console.error(error);
+            console.error(`Error adding string to allowed cache for "${str}":`, error);
         }
     }
 
@@ -448,7 +448,7 @@ class CacheManager {
             map.delete(key);
             this.updateLocalStorage(false);
         } catch (error) {
-            console.error(error);
+            console.error(`Error checking blocked cache for ${url}:`, error);
         }
         return false;
     }
@@ -487,7 +487,7 @@ class CacheManager {
                 console.warn(`Cache "${name}" not found`);
             }
         } catch (error) {
-            console.error(error);
+            console.error(`Error adding URL to blocked cache for ${url}:`, error);
         }
     }
 
@@ -521,8 +521,8 @@ class CacheManager {
                 cache.delete(key);
                 this.updateLocalStorage(false);
             }
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(`Error getting blocked result type for ${url}:`, error);
         }
         return null;
     }
@@ -552,8 +552,8 @@ class CacheManager {
             }
 
             this.updateLocalStorage(false);
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(`Error removing URL from blocked cache for ${url}:`, error);
         }
     }
 
@@ -589,8 +589,8 @@ class CacheManager {
                 map.delete(key);
                 this.updateSessionStorage(true);
             }
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(`Error checking processing cache for ${url}:`, error);
         }
         return false;
     }
@@ -626,8 +626,8 @@ class CacheManager {
             } else {
                 console.warn(`Processing cache "${name}" not found`);
             }
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(`Error adding URL to processing cache for ${url}:`, error);
         }
     }
 
@@ -656,8 +656,8 @@ class CacheManager {
             }
 
             this.updateSessionStorage(true);
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(`Error removing URL from processing cache for ${url}:`, error);
         }
     }
 

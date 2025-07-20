@@ -289,6 +289,8 @@ window.PopupSingleton = window.PopupSingleton || (() => {
                     messageType: system.messageType,
                     title: system.title,
                     toggleState: newState,
+                }).catch(error => {
+                    console.error(`Failed to send message for ${system.name}:`, error);
                 });
             });
         });

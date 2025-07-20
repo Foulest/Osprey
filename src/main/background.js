@@ -910,8 +910,8 @@
         //         console.debug(`Notification created with ID: ${id}`);
         //     });
         // } else {
-            console.debug(`[onCreatedNavigationTarget] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
-            handleNavigation(callback);
+        console.debug(`[onCreatedNavigationTarget] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
+        handleNavigation(callback);
         // }
     });
 

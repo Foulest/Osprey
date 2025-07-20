@@ -78,7 +78,9 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         });
 
         // Sends a PING message to get the count of reported sites
-        browserAPI.runtime.sendMessage({messageType: Messages.MessageType.BLOCKED_COUNTER_PING}).catch(() => {
+        browserAPI.runtime.sendMessage({
+            messageType: Messages.MessageType.BLOCKED_COUNTER_PING
+        }).catch(() => {
         });
 
         /**

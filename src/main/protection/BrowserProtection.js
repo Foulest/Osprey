@@ -858,12 +858,14 @@ const BrowserProtection = (() => {
                     const {responseCategory} = data;
 
                     switch (responseCategory) {
+                        case "TechScam":
                         case "Phishing":
                             console.debug(`[SmartScreen] Added URL to blocked cache: ${url}`);
                             BrowserProtection.cacheManager.addUrlToBlockedCache(urlObject, "smartScreen", ProtectionResult.ResultType.PHISHING);
                             callback(new ProtectionResult(url, ProtectionResult.ResultType.PHISHING, ProtectionResult.ResultOrigin.SMARTSCREEN), (new Date()).getTime() - startTime);
                             break;
 
+                        case "Exploit":
                         case "Malicious":
                             console.debug(`[SmartScreen] Added URL to blocked cache: ${url}`);
                             BrowserProtection.cacheManager.addUrlToBlockedCache(urlObject, "smartScreen", ProtectionResult.ResultType.MALICIOUS);

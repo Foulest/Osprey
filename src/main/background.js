@@ -336,6 +336,7 @@
                                 messageType: Messages.MessageType.BLOCKED_COUNTER_PONG,
                                 count: adjustedCount,
                                 systems: resultSystemNames.get(tabId) || []
+                            }).catch(() => {
                             });
                         });
                     }, 150);

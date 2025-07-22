@@ -162,6 +162,12 @@ For other installations, you can install the extension manually:
 
 Osprey should now be installed in your browser.
 
+## Become a Partner
+
+Want to become an Official Partner? It's completely free!
+
+Get in touch with me at my [developer email found here](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd#:~:text=English-,Developer,-Website).
+
 ## Getting Help
 
 For support or queries, please open an issue in the [Issues section](https://github.com/Foulest/Osprey/issues).

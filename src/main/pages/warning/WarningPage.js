@@ -111,6 +111,8 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.ALPHAMOUNTAIN:
+                    // Verified working as of: 07/21/2025
+                    // Response time: 2-3 days
                     return new URL("https://alphamountain.freshdesk.com/support/tickets/new");
 
                 case ProtectionResult.ResultOrigin.CONTROL_D_SECURITY:
@@ -207,8 +209,8 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
                 case ProtectionResult.ResultOrigin.DNS0_SECURITY:
                 case ProtectionResult.ResultOrigin.DNS0_KIDS:
-                    // Verified working as of: 06/21/2025
-                    // Response time: N/A
+                    // This provider's support team failed to respond to multiple emails within 7 days.
+                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("https://www.dns0.eu/report");
 
                 case ProtectionResult.ResultOrigin.DNS4EU_SECURITY:
@@ -240,7 +242,8 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                     return new URL("https://safeweb.norton.com/report?url=" + encodedBlockedUrl);
 
                 case ProtectionResult.ResultOrigin.OPENDNS_SECURITY:
-                    // TODO: Needs verification of response from support team.
+                    // This provider's support team failed to respond to multiple emails within 7 days.
+                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:umbrella-support@cisco.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20OpenDNS%20Home%20DNS" +
@@ -249,7 +252,8 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.OPENDNS_FAMILY_SHIELD:
-                    // TODO: Needs verification of response from support team.
+                    // This provider's support team failed to respond to multiple emails within 7 days.
+                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:umbrella-support@cisco.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20OpenDNS%20Family%20Shield%20DNS" +
@@ -268,7 +272,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.SWITCH_CH:
-                    // Their support team failed to respond to multiple emails within 7 days.
+                    // This provider's support team failed to respond to multiple emails within 7 days.
                     // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:info@switch.ch?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +

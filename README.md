@@ -78,7 +78,6 @@ The following providers are **enabled** by default:
 - [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
 - [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/#two-flavors-1-1-1-2-no-malware-1-1-1-3-no-malware-or-adult-content)
 - [DNS4EU Security DNS](https://www.joindns4.eu/for-public)
-- [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
 - [Quad9 Security DNS](https://www.quad9.net)
 
 The following providers are **disabled** by default:
@@ -94,6 +93,7 @@ The following providers are **disabled** by default:
 - [DNS0.eu Kids DNS](https://www.dns0.eu/kids)
 - [DNS4EU Family DNS](https://www.joindns4.eu/for-public)
 - [Norton Safe Web](https://safeweb.norton.com)
+- [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
 - [OpenDNS Family Shield DNS](https://www.opendns.com/home-internet-security)
 - [Switch.ch Security DNS](https://www.switch.ch/en/dns-firewall)
 

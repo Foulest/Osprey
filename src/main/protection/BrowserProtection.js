@@ -717,7 +717,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "gData", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const apiUrl = "https://dlarray-bp-europ-secsrv069.gdatasecurity.de/url/v3";
 
@@ -818,7 +823,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "smartScreen", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 // Prepare request data
                 const requestData = JSON.stringify({
@@ -931,7 +941,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "norton", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const apiUrl = `https://ratings-wrs.norton.com/brief?url=${encodeURIComponent(url)}`;
 
@@ -1014,7 +1029,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "certEE", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://dns.cert.ee/dns-query?dns=${encodedQuery}`;
@@ -1107,7 +1127,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "ciraSecurity", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://protected.canadianshield.cira.ca/dns-query?dns=${encodedQuery}`;
@@ -1200,7 +1225,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "ciraFamily", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://family.canadianshield.cira.ca/dns-query?dns=${encodedQuery}`;
@@ -1293,7 +1323,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "cleanBrowsingSecurity", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://doh.cleanbrowsing.org/doh/security-filter/dns-query?dns=${encodedQuery}`;
@@ -1385,7 +1420,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "cleanBrowsingFamily", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://doh.cleanbrowsing.org/doh/family-filter/dns-query?dns=${encodedQuery}`;
@@ -1477,7 +1517,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "cleanBrowsingAdult", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://doh.cleanbrowsing.org/doh/adult-filter/dns-query?dns=${encodedQuery}`;
@@ -1569,7 +1614,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "cloudflareSecurity", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const filteringURL = `https://security.cloudflare-dns.com/dns-query?name=${encodeURIComponent(urlHostname)}`;
 
@@ -1662,7 +1712,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "cloudflareFamily", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const filteringURL = `https://family.cloudflare-dns.com/dns-query?name=${encodeURIComponent(urlHostname)}`;
 
@@ -1755,7 +1810,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "dns0Security", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const filteringURL = `https://zero.dns0.eu/dns-query?name=${encodeURIComponent(urlHostname)}`;
 
@@ -1846,7 +1906,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "dns0Kids", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const filteringURL = `https://kids.dns0.eu/dns-query?name=${encodeURIComponent(urlHostname)}`;
 
@@ -1937,7 +2002,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "dns4EUSecurity", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://protective.joindns4.eu/dns-query?dns=${encodedQuery}`;
@@ -2030,7 +2100,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "dns4EUFamily", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://child.joindns4.eu/dns-query?dns=${encodedQuery}`;
@@ -2123,7 +2198,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "openDNSSecurity", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://doh.opendns.com/dns-query?dns=${encodedQuery}`;
@@ -2216,7 +2296,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "openDNSFamilyShield", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://doh.familyshield.opendns.com/dns-query?dns=${encodedQuery}`;
@@ -2309,7 +2394,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "quad9", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://dns.quad9.net/dns-query?dns=${encodedQuery}`;
@@ -2401,7 +2491,12 @@ const BrowserProtection = (() => {
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "switchCH", tabId);
 
                 // Adds a small delay to prevent overwhelming the API
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Ignored if all official partners are disabled
+                if (settings.adGuardSecurityEnabled || settings.adGuardFamilyEnabled ||
+                    settings.alphaMountainEnabled || settings.controlDSecurityEnabled ||
+                    settings.controlDFamilyEnabled || settings.precisionSecEnabled) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
 
                 const encodedQuery = encodeDnsQuery(encodeURIComponent(urlHostname));
                 const filteringURL = `https://dns.switch.ch/dns-query?dns=${encodedQuery}`;

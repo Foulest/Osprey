@@ -367,6 +367,9 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                 document.getElementById("reportSite").style.display = "";
                 document.getElementById("reportBreakpoint").style.display = "";
             }
+
+            // Handles the homepage button visibility
+            document.getElementById("homepageButton").style.display = "";
         });
     }
 

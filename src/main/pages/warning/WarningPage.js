@@ -91,8 +91,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         function getReportUrl() {
             switch (originInt) {
                 case ProtectionResult.ResultOrigin.ADGUARD_SECURITY:
-                    // Verified working as of: 05/25/2025
-                    // Response time: 1-2 days
                     return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20AdGuard%20DNS" +
@@ -101,8 +99,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.ADGUARD_FAMILY:
-                    // Verified working as of: 05/25/2025
-                    // Response time: 1-2 days
                     return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20AdGuard%20Family%20DNS" +
@@ -111,13 +107,11 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.ALPHAMOUNTAIN:
-                    // Verified working as of: 07/21/2025
-                    // Response time: 2-3 days
                     return new URL("https://alphamountain.freshdesk.com/support/tickets/new");
 
                 case ProtectionResult.ResultOrigin.CONTROL_D_SECURITY:
-                    // Verified working as of: 06/13/2025
-                    // Response time: 1-2 days
+                    // This provider's support team failed to respond to multiple tickets within 7 days.
+                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20Control%20D%20P1%20DNS" +
@@ -126,8 +120,8 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.CONTROL_D_FAMILY:
-                    // Verified working as of: 06/13/2025
-                    // Response time: 1-2 days
+                    // This provider's support team failed to respond to multiple tickets within 7 days.
+                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20Control%20D%20Family%20DNS" +
@@ -136,8 +130,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.PRECISIONSEC:
-                    // Verified working as of: 05/28/2025
-                    // Response time: 1-2 days
                     return new URL("mailto:info@precisionsec.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20PrecisionSec%20Web%20Protection" +
@@ -156,8 +148,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.CERT_EE:
-                    // Verified working as of: 05/06/2025
-                    // Response time: 2-3 days
                     return new URL("mailto:ria@ria.ee?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20CERT-EE%20DNS" +
@@ -172,8 +162,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                     return new URL("https://www.cira.ca/en/canadian-shield/support");
 
                 case ProtectionResult.ResultOrigin.CLEANBROWSING_SECURITY:
-                    // Verified working as of: 05/12/2025
-                    // Response time: 1-2 days
                     return new URL("mailto:support@cleanbrowsing.org?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20CleanBrowsing%20Security%20Filter" +
@@ -182,8 +170,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.CLEANBROWSING_FAMILY:
-                    // Verified working as of: 05/12/2025
-                    // Response time: 1-2 days
                     return new URL("mailto:support@cleanbrowsing.org?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20CleanBrowsing%20Family%20Filter" +
@@ -192,8 +178,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.CLEANBROWSING_ADULT:
-                    // Verified working as of: 05/12/2025
-                    // Response time: 1-2 days
                     return new URL("mailto:support@cleanbrowsing.org?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20CleanBrowsing%20Adult%20Filter" +
@@ -203,13 +187,11 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
                 case ProtectionResult.ResultOrigin.CLOUDFLARE_SECURITY:
                 case ProtectionResult.ResultOrigin.CLOUDFLARE_FAMILY:
-                    // Verified working as of: 06/21/2025
-                    // Response time: N/A
                     return new URL("https://radar.cloudflare.com/domains/feedback/" + encodedBlockedUrl);
 
                 case ProtectionResult.ResultOrigin.DNS0_SECURITY:
                 case ProtectionResult.ResultOrigin.DNS0_KIDS:
-                    // This provider's support team failed to respond to multiple emails within 7 days.
+                    // This provider's support team failed to respond to multiple tickets within 7 days.
                     // Due to this, the provider will be disabled by default in the extension.
                     return new URL("https://www.dns0.eu/report");
 
@@ -232,17 +214,13 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.SMARTSCREEN:
-                    // Verified working as of: 06/21/2025
-                    // Response time: N/A
                     return new URL("https://feedback.smartscreen.microsoft.com/feedback.aspx?t=16&url=" + blockedUrl);
 
                 case ProtectionResult.ResultOrigin.NORTON:
-                    // Verified working as of: 06/21/2025
-                    // Response time: 2-3 days
                     return new URL("https://safeweb.norton.com/report?url=" + encodedBlockedUrl);
 
                 case ProtectionResult.ResultOrigin.OPENDNS_SECURITY:
-                    // This provider's support team failed to respond to multiple emails within 7 days.
+                    // This provider's support team failed to respond to multiple tickets within 7 days.
                     // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:umbrella-support@cisco.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
@@ -252,7 +230,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.OPENDNS_FAMILY_SHIELD:
-                    // This provider's support team failed to respond to multiple emails within 7 days.
+                    // This provider's support team failed to respond to multiple tickets within 7 days.
                     // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:umbrella-support@cisco.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
@@ -272,7 +250,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.SWITCH_CH:
-                    // This provider's support team failed to respond to multiple emails within 7 days.
+                    // This provider's support team failed to respond to multiple tickets within 7 days.
                     // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:info@switch.ch?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +

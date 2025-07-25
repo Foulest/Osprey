@@ -456,7 +456,7 @@ const BrowserProtection = (() => {
                 // Adds the URL to the processing cache to prevent duplicate requests
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "controlDSecurity", tabId);
 
-                const filteringURL = `https://freedns.controld.com/p1?name=${encodeURIComponent(urlHostname)}`;
+                const filteringURL = `https://freedns.controld.com/no-malware-typo?name=${encodeURIComponent(urlHostname)}`;
 
                 try {
                     const filteringResponse = await fetch(filteringURL, {
@@ -545,7 +545,7 @@ const BrowserProtection = (() => {
                 // Adds the URL to the processing cache to prevent duplicate requests
                 BrowserProtection.cacheManager.addUrlToProcessingCache(urlObject, "controlDFamily", tabId);
 
-                const filteringURL = `https://freedns.controld.com/family?name=${encodeURIComponent(urlHostname)}`;
+                const filteringURL = `https://freedns.controld.com/no-drugs-porn-gambling-malware-typo?name=${encodeURIComponent(urlHostname)}`;
 
                 try {
                     const filteringResponse = await fetch(filteringURL, {

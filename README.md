@@ -80,22 +80,27 @@ The following providers are **enabled** by default:
 
 The following providers are **disabled** by default:
 
-- **[AdGuard Family DNS](https://adguard-dns.io?aid=135732)**
+#### Security Filters
+
 - **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
-- **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
 - [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
 - [CIRA Security DNS](https://www.cira.ca/en/canadian-shield)
+- [DNS0.eu Security DNS](https://www.dns0.eu/zero)
+- [Norton Safe Web](https://safeweb.norton.com)
+- [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
+- [Switch.ch Security DNS](https://www.switch.ch/en/dns-firewall)
+
+#### Adult Content Filters
+
+- **[AdGuard Family DNS](https://adguard-dns.io?aid=135732)**
+- **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
 - [CIRA Family DNS](https://www.cira.ca/en/canadian-shield)
 - [CleanBrowsing Family DNS](https://www.cleanbrowsing.org/filters/#step1)
 - [CleanBrowsing Adult DNS](https://www.cleanbrowsing.org/filters/#step2)
 - [Cloudflare Family DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families)
-- [DNS0.eu Security DNS](https://www.dns0.eu/zero)
 - [DNS0.eu Kids DNS](https://www.dns0.eu/kids)
 - [DNS4EU Family DNS](https://www.joindns4.eu/for-public)
-- [Norton Safe Web](https://safeweb.norton.com)
-- [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
 - [OpenDNS Family Shield DNS](https://www.opendns.com/home-internet-security)
-- [Switch.ch Security DNS](https://www.switch.ch/en/dns-firewall)
 
 Providers disabled by default are either due to:
 
@@ -166,7 +171,8 @@ Osprey should now be installed in your browser.
 
 Want to become an Official Partner? It's completely free!
 
-Get in touch with me at my [developer email found here](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd#:~:text=English-,Developer,-Website).
+Get in touch with me at
+my [developer email found here](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd#:~:text=English-,Developer,-Website).
 
 ## Getting Help
 

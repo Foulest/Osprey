@@ -28,7 +28,7 @@ const Settings = (function () {
         adGuardSecurityEnabled: true,
         adGuardFamilyEnabled: false,
         alphaMountainEnabled: true,
-        controlDSecurityEnabled: true,
+        controlDSecurityEnabled: false,
         controlDFamilyEnabled: false,
         precisionSecEnabled: true,
 

@@ -70,7 +70,6 @@ The following providers are **enabled** by default:
 
 - **[AdGuard Security DNS](https://adguard-dns.io?aid=135732)**
 - **[alphaMountain Web Protection](https://www.alphamountain.ai/?utm_source=osprey)**
-- **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
 - **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
 - [G DATA Web Protection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
 - [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
@@ -83,6 +82,7 @@ The following providers are **enabled** by default:
 The following providers are **disabled** by default:
 
 - **[AdGuard Family DNS](https://adguard-dns.io?aid=135732)**
+- **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
 - **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
 - [CIRA Security DNS](https://www.cira.ca/en/canadian-shield)
 - [CIRA Family DNS](https://www.cira.ca/en/canadian-shield)

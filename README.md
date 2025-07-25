@@ -68,39 +68,39 @@ Osprey blocks websites that are classified as:
 
 The following providers are **enabled** by default:
 
-- **[AdGuard Security DNS](https://adguard-dns.io?aid=135732)**
-- **[alphaMountain Web Protection](https://www.alphamountain.ai/?utm_source=osprey)**
-- **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
-- [G DATA Web Protection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
-- [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
-- [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
-- [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/#two-flavors-1-1-1-2-no-malware-1-1-1-3-no-malware-or-adult-content)
-- [DNS4EU Security DNS](https://www.joindns4.eu/for-public)
-- [Quad9 Security DNS](https://www.quad9.net)
+- [x] **[AdGuard Security DNS](https://adguard-dns.io?aid=135732)**
+- [x] **[alphaMountain Web Protection](https://www.alphamountain.ai/?utm_source=osprey)**
+- [x] **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
+- [x] [G DATA Web Protection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
+- [x] [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
+- [x] [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
+- [x] [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/#two-flavors-1-1-1-2-no-malware-1-1-1-3-no-malware-or-adult-content)
+- [x] [DNS4EU Security DNS](https://www.joindns4.eu/for-public)
+- [x] [Quad9 Security DNS](https://www.quad9.net)
 
 The following providers are **disabled** by default:
 
 #### Security Filters
 
-- **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
-- [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
-- [CIRA Security DNS](https://www.cira.ca/en/canadian-shield)
-- [DNS0.eu Security DNS](https://www.dns0.eu/zero)
-- [Norton Safe Web](https://safeweb.norton.com)
-- [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
-- [Switch.ch Security DNS](https://www.switch.ch/en/dns-firewall)
+- [ ] **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
+- [ ] [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
+- [ ] [CIRA Security DNS](https://www.cira.ca/en/canadian-shield)
+- [ ] [DNS0.eu Security DNS](https://www.dns0.eu/zero)
+- [ ] [Norton Safe Web](https://safeweb.norton.com)
+- [ ] [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
+- [ ] [Switch.ch Security DNS](https://www.switch.ch/en/dns-firewall)
 
 #### Adult Content Filters
 
-- **[AdGuard Family DNS](https://adguard-dns.io?aid=135732)**
-- **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
-- [CIRA Family DNS](https://www.cira.ca/en/canadian-shield)
-- [CleanBrowsing Family DNS](https://www.cleanbrowsing.org/filters/#step1)
-- [CleanBrowsing Adult DNS](https://www.cleanbrowsing.org/filters/#step2)
-- [Cloudflare Family DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families)
-- [DNS0.eu Kids DNS](https://www.dns0.eu/kids)
-- [DNS4EU Family DNS](https://www.joindns4.eu/for-public)
-- [OpenDNS Family Shield DNS](https://www.opendns.com/home-internet-security)
+- [ ] **[AdGuard Family DNS](https://adguard-dns.io?aid=135732)**
+- [ ] **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
+- [ ] [CIRA Family DNS](https://www.cira.ca/en/canadian-shield)
+- [ ] [CleanBrowsing Family DNS](https://www.cleanbrowsing.org/filters/#step1)
+- [ ] [CleanBrowsing Adult DNS](https://www.cleanbrowsing.org/filters/#step2)
+- [ ] [Cloudflare Family DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families)
+- [ ] [DNS0.eu Kids DNS](https://www.dns0.eu/kids)
+- [ ] [DNS4EU Family DNS](https://www.joindns4.eu/for-public)
+- [ ] [OpenDNS Family Shield DNS](https://www.opendns.com/home-internet-security)
 
 Providers disabled by default are either due to:
 

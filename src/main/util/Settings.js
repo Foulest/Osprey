@@ -34,7 +34,7 @@ const Settings = (function () {
 
         // Non-Partnered Providers
         gDataEnabled: true,
-        certEEEnabled: true,
+        certEEEnabled: false,
         ciraSecurityEnabled: false,
         ciraFamilyEnabled: false,
         cleanBrowsingSecurityEnabled: true,

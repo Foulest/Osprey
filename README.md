@@ -73,7 +73,6 @@ The following providers are **enabled** by default:
 - **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
 - [G DATA Web Protection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
 - [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
-- [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
 - [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
 - [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/#two-flavors-1-1-1-2-no-malware-1-1-1-3-no-malware-or-adult-content)
 - [DNS4EU Security DNS](https://www.joindns4.eu/for-public)
@@ -84,6 +83,7 @@ The following providers are **disabled** by default:
 - **[AdGuard Family DNS](https://adguard-dns.io?aid=135732)**
 - **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
 - **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
+- [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
 - [CIRA Security DNS](https://www.cira.ca/en/canadian-shield)
 - [CIRA Family DNS](https://www.cira.ca/en/canadian-shield)
 - [CleanBrowsing Family DNS](https://www.cleanbrowsing.org/filters/#step1)

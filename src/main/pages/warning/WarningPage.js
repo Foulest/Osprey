@@ -148,6 +148,8 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.CERT_EE:
+                    // Their support team failed to respond to multiple emails within 7 days.
+                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:ria@ria.ee?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20CERT-EE%20DNS" +

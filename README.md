@@ -28,7 +28,7 @@
 Osprey has **officially partnered** with industry-leading security companies to provide you with the best protection
 possible. Check out some of our partners below:
 
-<div style="text-align: center;">
+<div align="center">
   <a href="https://adguard-dns.io?aid=135732">
     <img src="https://i.imgur.com/gDKTUbm.png" alt="AdGuard DNS" style="border: 10px solid transparent;" />
   </a>

@@ -30,17 +30,16 @@ possible. Check out some of our partners below:
 
 <div align="center">
   <a href="https://adguard-dns.io?aid=135732" style="display: inline-block;">
-    <img src="https://i.imgur.com/gDKTUbm.png" alt="AdGuard DNS" style="border: 10px solid transparent;" />
-  </a><a href="https://www.alphamountain.ai/?utm_source=osprey" style="display: inline-block;">
-    <img src="https://i.imgur.com/BGs1BtC.png" alt="alphaMountain" style="border: 10px solid transparent;" />
+    <img src="https://i.imgur.com/gDKTUbm.png" alt="AdGuard DNS" border="10"/>
   </a>
-</div>
-
-<div align="center">
+  <a href="https://www.alphamountain.ai/?utm_source=osprey" style="display: inline-block;">
+    <img src="https://i.imgur.com/BGs1BtC.png" alt="alphaMountain" border="10"/>
+  </a>
   <a href="https://controld.com/?utm_source=osprey" style="display: inline-block;">
-    <img src="https://i.imgur.com/9xC1OAK.png" alt="Control D" style="border: 10px solid transparent;" />
-  </a><a href="https://precisionsec.com/?utm_source=osprey" style="display: inline-block;">
-    <img src="https://i.imgur.com/cwJWCog.png" alt="PrecisionSec" style="border: 10px solid transparent;" />
+    <img src="https://i.imgur.com/9xC1OAK.png" alt="Control D" border="10"/>
+  </a>
+  <a href="https://precisionsec.com/?utm_source=osprey" style="display: inline-block;">
+    <img src="https://i.imgur.com/cwJWCog.png" alt="PrecisionSec" border="10"/>
   </a>
 </div>
 

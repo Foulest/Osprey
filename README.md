@@ -28,20 +28,12 @@
 Osprey has **officially partnered** with industry-leading security companies to provide you with the best protection
 possible. Check out some of our partners below:
 
-<div align="center">
-  <a href="https://adguard-dns.io?aid=135732" style="display: inline-block;">
-    <img src="https://i.imgur.com/gDKTUbm.png" alt="AdGuard DNS" border="10"/>
-  </a>
-  <a href="https://www.alphamountain.ai/?utm_source=osprey" style="display: inline-block;">
-    <img src="https://i.imgur.com/BGs1BtC.png" alt="alphaMountain" border="10"/>
-  </a>
-  <a href="https://controld.com/?utm_source=osprey" style="display: inline-block;">
-    <img src="https://i.imgur.com/9xC1OAK.png" alt="Control D" border="10"/>
-  </a>
-  <a href="https://precisionsec.com/?utm_source=osprey" style="display: inline-block;">
-    <img src="https://i.imgur.com/cwJWCog.png" alt="PrecisionSec" border="10"/>
-  </a>
-</div>
+<p align="center">
+  <a href="https://adguard-dns.io?aid=135732"><img src="https://i.imgur.com/4AXgbsC.png" alt="AdGuard DNS"></a>
+  <a href="https://www.alphamountain.ai/?utm_source=osprey"><img src="https://i.imgur.com/EbcGHb2.png" alt="alphaMountain"></a>
+  <a href="https://controld.com/?utm_source=osprey"><img src="https://i.imgur.com/xh7qTT8.png" alt="Control D"></a>
+  <a href="https://precisionsec.com/?utm_source=osprey"><img src="https://i.imgur.com/gf9ahFa.png" alt="PrecisionSec"></a>
+</p>
 
 ## Warning
 

@@ -29,16 +29,13 @@ Osprey has **officially partnered** with industry-leading security companies to 
 possible. Check out some of our partners below:
 
 <div align="center">
-  <a href="https://adguard-dns.io?aid=135732">
+  <a href="https://adguard-dns.io?aid=135732" style="display: inline-block;">
     <img src="https://i.imgur.com/gDKTUbm.png" alt="AdGuard DNS" style="border: 10px solid transparent;" />
-  </a>
-  <a href="https://www.alphamountain.ai/?utm_source=osprey">
+  </a><a href="https://www.alphamountain.ai/?utm_source=osprey" style="display: inline-block;">
     <img src="https://i.imgur.com/BGs1BtC.png" alt="alphaMountain" style="border: 10px solid transparent;" />
-  </a>
-  <a href="https://controld.com/?utm_source=osprey">
+  </a><a href="https://controld.com/?utm_source=osprey" style="display: inline-block;">
     <img src="https://i.imgur.com/9xC1OAK.png" alt="Control D" style="border: 10px solid transparent;" />
-  </a>
-  <a href="https://precisionsec.com/?utm_source=osprey">
+  </a><a href="https://precisionsec.com/?utm_source=osprey" style="display: inline-block;">
     <img src="https://i.imgur.com/cwJWCog.png" alt="PrecisionSec" style="border: 10px solid transparent;" />
   </a>
 </div>

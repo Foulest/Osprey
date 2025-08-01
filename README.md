@@ -58,6 +58,8 @@ You can configure the extension's protection options in the settings:
 ![Osprey Settings (Page 1)](https://i.imgur.com/f0uJbHL.png)
 ![Osprey Settings (Page 2)](https://i.imgur.com/7PQGT2s.png)
 
+If you're unsure about the functions of each protection provider, **it's best to keep the default settings.**
+
 ## Detections
 
 Osprey blocks websites that are classified as:

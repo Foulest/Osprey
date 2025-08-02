@@ -41,22 +41,16 @@ const Messages = {
         // Non-Partnered Providers
         G_DATA_TOGGLED: "gDataToggled",
         CERT_EE_TOGGLED: "certEEToggled",
-        CIRA_SECURITY_TOGGLED: "ciraSecurityToggled",
-        CIRA_FAMILY_TOGGLED: "ciraFamilyToggled",
         CLEANBROWSING_SECURITY_TOGGLED: "cleanBrowsingSecurityToggled",
         CLEANBROWSING_FAMILY_TOGGLED: "cleanBrowsingFamilyToggled",
-        CLEANBROWSING_ADULT_TOGGLED: "cleanBrowsingAdultToggled",
         CLOUDFLARE_SECURITY_TOGGLED: "cloudflareSecurityToggled",
         CLOUDFLARE_FAMILY_TOGGLED: "cloudflareFamilyToggled",
         DNS0_SECURITY_TOGGLED: "dns0SecurityToggled",
-        DNS0_KIDS_TOGGLED: "dns0KidsToggled",
+        DNS0_FAMILY_TOGGLED: "dns0FamilyToggled",
         DNS4EU_SECURITY_TOGGLED: "dns4EUSecurityToggled",
         DNS4EU_FAMILY_TOGGLED: "dns4EUFamilyToggled",
         SMARTSCREEN_TOGGLED: "smartScreenToggled",
         NORTON_TOGGLED: "nortonToggled",
-        OPENDNS_SECURITY_TOGGLED: "openDNSSecurityToggled",
-        OPENDNS_FAMILY_SHIELD_TOGGLED: "openDNSFamilyShieldToggled",
         QUAD9_TOGGLED: "quad9Toggled",
-        SWITCH_CH_TOGGLED: "switchCHToggled",
     }
 };

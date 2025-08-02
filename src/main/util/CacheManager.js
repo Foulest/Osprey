@@ -40,17 +40,14 @@ class CacheManager {
 
                 // Non-Partnered Providers
                 "certEE",
-                "ciraSecurity", "ciraFamily",
-                "cleanBrowsingSecurity", "cleanBrowsingFamily", "cleanBrowsingAdult",
+                "cleanBrowsingSecurity", "cleanBrowsingFamily",
                 "cloudflareSecurity", "cloudflareFamily",
-                "dns0Security", "dns0Kids",
+                "dns0Security", "dns0Family",
                 "dns4EUSecurity", "dns4EUFamily",
                 "gData",
                 "smartScreen",
                 "norton",
-                "openDNSSecurity", "openDNSFamilyShield",
                 "quad9",
-                "switchCH"
             ];
 
             this.allowedCaches = {};

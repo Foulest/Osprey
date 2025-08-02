@@ -140,6 +140,7 @@ section {
     text-decoration: none;
 }
 
+#privacyPolicy:hover,
 #github:hover {
     text-decoration: underline;
 }

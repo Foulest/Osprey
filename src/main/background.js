@@ -96,27 +96,21 @@
                 !settings.adGuardFamilyEnabled &&
                 !settings.alphaMountainEnabled &&
                 !settings.certEEEnabled &&
-                !settings.ciraFamilyEnabled &&
-                !settings.ciraSecurityEnabled &&
-                !settings.cleanBrowsingAdultEnabled &&
                 !settings.cleanBrowsingFamilyEnabled &&
                 !settings.cleanBrowsingSecurityEnabled &&
                 !settings.cloudflareFamilyEnabled &&
                 !settings.cloudflareSecurityEnabled &&
                 !settings.controlDFamilyEnabled &&
                 !settings.controlDSecurityEnabled &&
-                !settings.dns0KidsEnabled &&
+                !settings.dns0FamilyEnabled &&
                 !settings.dns0SecurityEnabled &&
                 !settings.dns4EUFamilyEnabled &&
                 !settings.dns4EUSecurityEnabled &&
                 !settings.gDataEnabled &&
                 !settings.nortonEnabled &&
-                !settings.openDNSFamilyShieldEnabled &&
-                !settings.openDNSSecurityEnabled &&
                 !settings.precisionSecEnabled &&
                 !settings.quad9Enabled &&
-                !settings.smartScreenEnabled &&
-                !settings.switchCHEnabled) {
+                !settings.smartScreenEnabled) {
                 console.debug("Protection is disabled; bailing out early.");
                 return;
             }
@@ -373,23 +367,17 @@
         // Non-Partnered Providers
         'GDATAEnabled',
         'CERTEEEnabled',
-        'CIRASecurityEnabled',
-        'CIRAFamilyEnabled',
         'CleanBrowsingSecurityEnabled',
         'CleanBrowsingFamilyEnabled',
-        'CleanBrowsingAdultEnabled',
         'CloudflareSecurityEnabled',
         'CloudflareFamilyEnabled',
         'DNS0SecurityEnabled',
-        'DNS0KidsEnabled',
+        'DNS0FamilyEnabled',
         'DNS4EUSecurityEnabled',
         'DNS4EUFamilyEnabled',
         'SmartScreenEnabled',
         'NortonEnabled',
-        'OpenDNSSecurityEnabled',
-        'OpenDNSFamilyShieldEnabled',
         'Quad9Enabled',
-        'SwitchCHEnabled',
     ];
 
     // Creates the context menu and sets managed policies
@@ -522,18 +510,6 @@
                 console.debug("CERT-EE is managed by system policy.");
             }
 
-            // Checks and sets the CIRA Security settings using the policy
-            if (policies.CIRASecurityEnabled !== undefined) {
-                settings.ciraSecurityEnabled = policies.CIRASecurityEnabled;
-                console.debug("CIRA Security is managed by system policy.");
-            }
-
-            // Checks and sets the CIRA Family settings using the policy
-            if (policies.CIRAFamilyEnabled !== undefined) {
-                settings.ciraFamilyEnabled = policies.CIRAFamilyEnabled;
-                console.debug("CIRA Family is managed by system policy.");
-            }
-
             // Checks and sets the CleanBrowsing Security settings using the policy
             if (policies.CleanBrowsingSecurityEnabled !== undefined) {
                 settings.cleanBrowsingSecurityEnabled = policies.CleanBrowsingSecurityEnabled;
@@ -544,12 +520,6 @@
             if (policies.CleanBrowsingFamilyEnabled !== undefined) {
                 settings.cleanBrowsingFamilyEnabled = policies.CleanBrowsingFamilyEnabled;
                 console.debug("CleanBrowsing Family is managed by system policy.");
-            }
-
-            // Checks and sets the CleanBrowsing Adult settings using the policy
-            if (policies.CleanBrowsingAdultEnabled !== undefined) {
-                settings.cleanBrowsingAdultEnabled = policies.CleanBrowsingAdultEnabled;
-                console.debug("CleanBrowsing Adult is managed by system policy.");
             }
 
             // Checks and sets the Cloudflare Security settings using the policy
@@ -570,10 +540,10 @@
                 console.debug("DNS0.eu Security is managed by system policy.");
             }
 
-            // Checks and sets the DNS0.eu Kids settings using the policy
-            if (policies.DNS0KidsEnabled !== undefined) {
-                settings.dns0KidsEnabled = policies.DNS0KidsEnabled;
-                console.debug("DNS0.eu Kids is managed by system policy.");
+            // Checks and sets the DNS0.eu Family settings using the policy
+            if (policies.DNS0FamilyEnabled !== undefined) {
+                settings.dns0FamilyEnabled = policies.DNS0FamilyEnabled;
+                console.debug("DNS0.eu Family is managed by system policy.");
             }
 
             // Checks and sets the DNS4EU Security settings using the policy
@@ -600,28 +570,10 @@
                 console.debug("Norton is managed by system policy.");
             }
 
-            // Checks and sets the OpenDNS Security settings using the policy
-            if (policies.OpenDNSSecurityEnabled !== undefined) {
-                settings.openDNSSecurityEnabled = policies.OpenDNSSecurityEnabled;
-                console.debug("OpenDNS Security is managed by system policy.");
-            }
-
-            // Checks and sets the OpenDNS Family Shield settings using the policy
-            if (policies.OpenDNSFamilyShieldEnabled !== undefined) {
-                settings.openDNSFamilyShieldEnabled = policies.OpenDNSFamilyShieldEnabled;
-                console.debug("OpenDNS Family Shield is managed by system policy.");
-            }
-
             // Checks and sets the Quad9 settings using the policy
             if (policies.Quad9Enabled !== undefined) {
                 settings.quad9Enabled = policies.Quad9Enabled;
                 console.debug("Quad9 is managed by system policy.");
-            }
-
-            // Checks and sets the Switch.ch settings using the policy
-            if (policies.SwitchCHEnabled !== undefined) {
-                settings.switchCHEnabled = policies.SwitchCHEnabled;
-                console.debug("Switch.ch is managed by system policy.");
             }
 
             // Finally, if there are any updates, update the stored settings in one go.
@@ -641,9 +593,9 @@
         if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id !== null) {
             const tabId = sender.tab.id;
 
-            // Potentially fixes a strange undefined error.
+            // Ignores tabs that have already been cleaned up
             if (resultSystemNames.get(tabId) === undefined) {
-                console.warn(`Result system names is undefined for tab ID ${tabId}`);
+                console.debug(`Result system names is undefined for tab ID ${tabId}`);
                 return;
             }
 
@@ -856,22 +808,6 @@
                         break;
 
                     case "9":
-                        console.debug(`Added CIRA Security URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "ciraSecurity");
-
-                        console.debug(`Removed CIRA Security URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "ciraSecurity");
-                        break;
-
-                    case "10":
-                        console.debug(`Added CIRA Family URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "ciraFamily");
-
-                        console.debug(`Removed CIRA Family URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "ciraFamily");
-                        break;
-
-                    case "11":
                         console.debug(`Added CleanBrowsing Security URL to allowed cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cleanBrowsingSecurity");
 
@@ -879,7 +815,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cleanBrowsingSecurity");
                         break;
 
-                    case "12":
+                    case "10":
                         console.debug(`Added CleanBrowsing Family URL to allowed cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cleanBrowsingFamily");
 
@@ -887,15 +823,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cleanBrowsingFamily");
                         break;
 
-                    case "13":
-                        console.debug(`Added CleanBrowsing Adult URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cleanBrowsingAdult");
-
-                        console.debug(`Removed CleanBrowsing Adult URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cleanBrowsingAdult");
-                        break;
-
-                    case "14":
+                    case "11":
                         console.debug(`Added Cloudflare Security URL to allowed cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cloudflareSecurity");
 
@@ -903,7 +831,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cloudflareSecurity");
                         break;
 
-                    case "15":
+                    case "12":
                         console.debug(`Added Cloudflare Family URL to allowed cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cloudflareFamily");
 
@@ -911,7 +839,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cloudflareFamily");
                         break;
 
-                    case "16":
+                    case "13":
                         console.debug(`Added DNS0.eu Security URL to allowed cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns0Security");
 
@@ -919,15 +847,15 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns0Security");
                         break;
 
-                    case "17":
-                        console.debug(`Added DNS0.eu Kids URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns0Kids");
+                    case "14":
+                        console.debug(`Added DNS0.eu Family URL to allowed cache: ${message.blockedUrl}`);
+                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns0Family");
 
-                        console.debug(`Removed DNS0.eu Kids URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns0Kids");
+                        console.debug(`Removed DNS0.eu Family URL from blocked cache: ${message.blockedUrl}`);
+                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns0Family");
                         break;
 
-                    case "18":
+                    case "15":
                         console.debug(`Added DNS4EU Security URL to allowed cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns4EUSecurity");
 
@@ -935,7 +863,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns4EUSecurity");
                         break;
 
-                    case "19":
+                    case "16":
                         console.debug(`Added DNS4EU Family URL to allowed cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns4EUFamily");
 
@@ -943,7 +871,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns4EUFamily");
                         break;
 
-                    case "20":
+                    case "17":
                         console.debug(`Added SmartScreen URL to allowed cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "smartScreen");
 
@@ -951,7 +879,7 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "smartScreen");
                         break;
 
-                    case "21":
+                    case "18":
                         console.debug(`Added Norton URL to allowed cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "norton");
 
@@ -959,36 +887,12 @@
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "norton");
                         break;
 
-                    case "22":
-                        console.debug(`Added OpenDNS Security URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "openDNSSecurity");
-
-                        console.debug(`Removed OpenDNS Security URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "openDNSSecurity");
-                        break;
-
-                    case "23":
-                        console.debug(`Added OpenDNS Family Shield URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "openDNSFamilyShield");
-
-                        console.debug(`Removed OpenDNS Family Shield URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "openDNSFamilyShield");
-                        break;
-
-                    case "24":
+                    case "19":
                         console.debug(`Added Quad9 URL to allowed cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "quad9");
 
                         console.debug(`Removed Quad9 URL from blocked cache: ${message.blockedUrl}`);
                         BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "quad9");
-                        break;
-
-                    case "25":
-                        console.debug(`Added Switch.ch URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "switchCH");
-
-                        console.debug(`Removed Switch.ch URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "switchCH");
                         break;
 
                     default:
@@ -1111,27 +1015,21 @@
             case Messages.MessageType.ADGUARD_SECURITY_TOGGLED:
             case Messages.MessageType.ALPHAMOUNTAIN_TOGGLED:
             case Messages.MessageType.CERT_EE_TOGGLED:
-            case Messages.MessageType.CIRA_FAMILY_TOGGLED:
-            case Messages.MessageType.CIRA_SECURITY_TOGGLED:
-            case Messages.MessageType.CLEANBROWSING_ADULT_TOGGLED:
             case Messages.MessageType.CLEANBROWSING_FAMILY_TOGGLED:
             case Messages.MessageType.CLEANBROWSING_SECURITY_TOGGLED:
             case Messages.MessageType.CLOUDFLARE_FAMILY_TOGGLED:
             case Messages.MessageType.CLOUDFLARE_SECURITY_TOGGLED:
             case Messages.MessageType.CONTROL_D_FAMILY_TOGGLED:
             case Messages.MessageType.CONTROL_D_SECURITY_TOGGLED:
-            case Messages.MessageType.DNS0_KIDS_TOGGLED:
+            case Messages.MessageType.DNS0_FAMILY_TOGGLED:
             case Messages.MessageType.DNS0_SECURITY_TOGGLED:
             case Messages.MessageType.DNS4EU_FAMILY_TOGGLED:
             case Messages.MessageType.DNS4EU_SECURITY_TOGGLED:
             case Messages.MessageType.G_DATA_TOGGLED:
             case Messages.MessageType.NORTON_TOGGLED:
-            case Messages.MessageType.OPENDNS_FAMILY_SHIELD_TOGGLED:
-            case Messages.MessageType.OPENDNS_SECURITY_TOGGLED:
             case Messages.MessageType.PRECISIONSEC_TOGGLED:
             case Messages.MessageType.QUAD9_TOGGLED:
             case Messages.MessageType.SMARTSCREEN_TOGGLED:
-            case Messages.MessageType.SWITCH_CH_TOGGLED:
                 console.info(`${message.title} has been ${message.toggleState ? "enabled" : "disabled"}.`);
                 break;
 

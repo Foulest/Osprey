@@ -43,7 +43,7 @@ possible. Check out some of our partners below:
 
 If the website is malicious, Osprey will block the page and display a warning:
 
-![Osprey Warning](https://i.imgur.com/SW7oyIX.png)
+![Osprey Warning](https://i.imgur.com/ZmVOFfU.png)
 
 From this page, you can report the website as safe, always ignore the website, go back to safety, and continue
 anyway. By default, Osprey creates a browser notification for blocked pages that
@@ -55,10 +55,8 @@ entirely using [the system policies](https://github.com/Foulest/Osprey/wiki/Sett
 
 You can configure the extension's protection options in the settings:
 
-![Osprey Settings (Page 1)](https://i.imgur.com/f0uJbHL.png)
-![Osprey Settings (Page 2)](https://i.imgur.com/7PQGT2s.png)
-
-If you're unsure about the functions of each protection provider, **it's best to keep the default settings.**
+![Osprey Settings (Page 1)](https://i.imgur.com/U0J4XHH.png)
+![Osprey Settings (Page 2)](https://i.imgur.com/5ncLhCN.png)
 
 ## Detections
 
@@ -89,23 +87,17 @@ The following providers are **disabled** by default:
 
 - [ ] **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
 - [ ] [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
-- [ ] [CIRA Security DNS](https://www.cira.ca/en/canadian-shield)
 - [ ] [DNS0.eu Security DNS](https://www.dns0.eu/zero)
 - [ ] [Norton Safe Web](https://safeweb.norton.com)
-- [ ] [OpenDNS Security DNS](https://www.opendns.com/home-internet-security)
-- [ ] [Switch.ch Security DNS](https://www.switch.ch/en/dns-firewall)
 
 #### Adult Content Filters
 
 - [ ] **[AdGuard Family DNS](https://adguard-dns.io?aid=135732)**
 - [ ] **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
-- [ ] [CIRA Family DNS](https://www.cira.ca/en/canadian-shield)
-- [ ] [CleanBrowsing Family DNS](https://www.cleanbrowsing.org/filters/#step1)
-- [ ] [CleanBrowsing Adult DNS](https://www.cleanbrowsing.org/filters/#step2)
+- [ ] [CleanBrowsing Family DNS](https://www.cleanbrowsing.org/filters/#step2)
 - [ ] [Cloudflare Family DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families)
-- [ ] [DNS0.eu Kids DNS](https://www.dns0.eu/kids)
+- [ ] [DNS0.eu Family DNS](https://www.dns0.eu/kids)
 - [ ] [DNS4EU Family DNS](https://www.joindns4.eu/for-public)
-- [ ] [OpenDNS Family Shield DNS](https://www.opendns.com/home-internet-security)
 
 Providers disabled by default are either due to:
 
@@ -172,12 +164,17 @@ For other installations, you can install the extension manually:
 
 Osprey should now be installed in your browser.
 
-## Become a Partner
+## Disclaimer
 
-Want to become an Official Partner? It's completely free!
+Osprey: Browser Protection uses the names of third-party DNS and security providers solely for descriptive and
+interoperability purposes. All trademarks, logos, and brand names are the property of their respective owners.
 
-Get in touch with me at
-my [developer email found here](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd#:~:text=English-,Developer,-Website).
+Osprey is not affiliated with or endorsed by any of the third-party providers listed in the extension, unless stated
+otherwise. Use of their services is subject to their respective terms of use and privacy policies.
+
+If you represent a listed provider and have questions, feedback, or concerns regarding attribution or inclusion, please
+contact the developer via the
+[Chrome Web Store contact link](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd#:~:text=English-,Developer,-Website).
 
 ## Getting Help
 

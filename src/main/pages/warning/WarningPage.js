@@ -96,7 +96,9 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AProduct%3A%20AdGuard%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.ADGUARD_FAMILY:
                     return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C" +
@@ -104,30 +106,32 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AProduct%3A%20AdGuard%20Family%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.ALPHAMOUNTAIN:
                     return new URL("https://alphamountain.freshdesk.com/support/tickets/new");
 
                 case ProtectionResult.ResultOrigin.CONTROL_D_SECURITY:
-                    // This provider's support team failed to respond to multiple tickets within 7 days.
-                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20Control%20D%20P1%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.CONTROL_D_FAMILY:
-                    // This provider's support team failed to respond to multiple tickets within 7 days.
-                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20Control%20D%20Family%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.PRECISIONSEC:
                     return new URL("mailto:info@precisionsec.com?subject=False%20Positive&body=Hello%2C" +
@@ -135,7 +139,9 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AProduct%3A%20PrecisionSec%20Web%20Protection" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.G_DATA:
                     // Old URL: "https://submit.gdatasoftware.com/privacy"
@@ -145,23 +151,19 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AProduct%3A%20G%20DATA%20Web%20Protection" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.CERT_EE:
-                    // Their support team failed to respond to multiple emails within 7 days.
-                    // Due to this, the provider will be disabled by default in the extension.
                     return new URL("mailto:ria@ria.ee?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20CERT-EE%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
-
-                case ProtectionResult.ResultOrigin.CIRA_SECURITY:
-                case ProtectionResult.ResultOrigin.CIRA_FAMILY:
-                    // Their support team failed to respond to multiple emails within 7 days.
-                    // Due to this, the provider will be disabled by default in the extension.
-                    return new URL("https://www.cira.ca/en/canadian-shield/support");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.CLEANBROWSING_SECURITY:
                     return new URL("mailto:support@cleanbrowsing.org?subject=False%20Positive&body=Hello%2C" +
@@ -169,32 +171,26 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AProduct%3A%20CleanBrowsing%20Security%20Filter" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.CLEANBROWSING_FAMILY:
-                    return new URL("mailto:support@cleanbrowsing.org?subject=False%20Positive&body=Hello%2C" +
-                        "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
-                        "%0A%0AProduct%3A%20CleanBrowsing%20Family%20Filter" +
-                        "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
-
-                case ProtectionResult.ResultOrigin.CLEANBROWSING_ADULT:
                     return new URL("mailto:support@cleanbrowsing.org?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20CleanBrowsing%20Adult%20Filter" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.CLOUDFLARE_SECURITY:
                 case ProtectionResult.ResultOrigin.CLOUDFLARE_FAMILY:
                     return new URL("https://radar.cloudflare.com/domains/feedback/" + encodedBlockedUrl);
 
                 case ProtectionResult.ResultOrigin.DNS0_SECURITY:
-                case ProtectionResult.ResultOrigin.DNS0_KIDS:
-                    // This provider's support team failed to respond to multiple tickets within 7 days.
-                    // Due to this, the provider will be disabled by default in the extension.
+                case ProtectionResult.ResultOrigin.DNS0_FAMILY:
                     return new URL("https://www.dns0.eu/report");
 
                 case ProtectionResult.ResultOrigin.DNS4EU_SECURITY:
@@ -204,7 +200,9 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AProduct%3A%20DNS4EU%20Protective%20Resolution%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.DNS4EU_FAMILY:
                     // TODO: Needs verification of response from support team.
@@ -213,33 +211,15 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AProduct%3A%20DNS4EU%20Protective%20Resolution%20with%20Child%20Protection%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 case ProtectionResult.ResultOrigin.SMARTSCREEN:
                     return new URL("https://feedback.smartscreen.microsoft.com/feedback.aspx?t=16&url=" + blockedUrl);
 
                 case ProtectionResult.ResultOrigin.NORTON:
                     return new URL("https://safeweb.norton.com/report?url=" + encodedBlockedUrl);
-
-                case ProtectionResult.ResultOrigin.OPENDNS_SECURITY:
-                    // This provider's support team failed to respond to multiple tickets within 7 days.
-                    // Due to this, the provider will be disabled by default in the extension.
-                    return new URL("mailto:umbrella-support@cisco.com?subject=False%20Positive&body=Hello%2C" +
-                        "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
-                        "%0A%0AProduct%3A%20OpenDNS%20Home%20DNS" +
-                        "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
-
-                case ProtectionResult.ResultOrigin.OPENDNS_FAMILY_SHIELD:
-                    // This provider's support team failed to respond to multiple tickets within 7 days.
-                    // Due to this, the provider will be disabled by default in the extension.
-                    return new URL("mailto:umbrella-support@cisco.com?subject=False%20Positive&body=Hello%2C" +
-                        "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
-                        "%0A%0AProduct%3A%20OpenDNS%20Family%20Shield%20DNS" +
-                        "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
 
                 case ProtectionResult.ResultOrigin.QUAD9:
                     // Old URL: "https://quad9.net/support/contact"
@@ -249,17 +229,9 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AProduct%3A%20Quad9%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
-
-                case ProtectionResult.ResultOrigin.SWITCH_CH:
-                    // This provider's support team failed to respond to multiple tickets within 7 days.
-                    // Due to this, the provider will be disabled by default in the extension.
-                    return new URL("mailto:info@switch.ch?subject=False%20Positive&body=Hello%2C" +
-                        "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
-                        "%0A%0AProduct%3A%20Switch.ch%20DNS" +
-                        "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate.%0A%0AThanks.");
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.foulest.net");
 
                 default:
                     return null;

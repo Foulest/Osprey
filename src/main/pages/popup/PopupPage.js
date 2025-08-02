@@ -102,20 +102,6 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             messageType: Messages.MessageType.CERT_EE_TOGGLED,
         },
         {
-            name: "ciraSecurityEnabled",
-            title: "CIRA Security DNS",
-            labelElementId: "ciraSecurityStatus",
-            switchElementId: "ciraSecuritySwitch",
-            messageType: Messages.MessageType.CIRA_SECURITY_TOGGLED,
-        },
-        {
-            name: "ciraFamilyEnabled",
-            title: "CIRA Family DNS",
-            labelElementId: "ciraFamilyStatus",
-            switchElementId: "ciraFamilySwitch",
-            messageType: Messages.MessageType.CIRA_FAMILY_TOGGLED,
-        },
-        {
             name: "cleanBrowsingSecurityEnabled",
             title: "CleanBrowsing Security DNS",
             labelElementId: "cleanBrowsingSecurityStatus",
@@ -128,13 +114,6 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             labelElementId: "cleanBrowsingFamilyStatus",
             switchElementId: "cleanBrowsingFamilySwitch",
             messageType: Messages.MessageType.CLEANBROWSING_FAMILY_TOGGLED,
-        },
-        {
-            name: "cleanBrowsingAdultEnabled",
-            title: "CleanBrowsing Adult DNS",
-            labelElementId: "cleanBrowsingAdultStatus",
-            switchElementId: "cleanBrowsingAdultSwitch",
-            messageType: Messages.MessageType.CLEANBROWSING_ADULT_TOGGLED,
         },
         {
             name: "cloudflareSecurityEnabled",
@@ -158,11 +137,11 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             messageType: Messages.MessageType.DNS0_SECURITY_TOGGLED,
         },
         {
-            name: "dns0KidsEnabled",
-            title: "DNS0.eu Kids DNS",
-            labelElementId: "dns0KidsStatus",
-            switchElementId: "dns0KidsSwitch",
-            messageType: Messages.MessageType.DNS0_KIDS_TOGGLED,
+            name: "dns0FamilyEnabled",
+            title: "DNS0.eu Family DNS",
+            labelElementId: "dns0FamilyStatus",
+            switchElementId: "dns0FamilySwitch",
+            messageType: Messages.MessageType.DNS0_FAMILY_TOGGLED,
         },
         {
             name: "dns4EUSecurityEnabled",
@@ -179,33 +158,12 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             messageType: Messages.MessageType.DNS4EU_FAMILY_TOGGLED,
         },
         {
-            name: "openDNSSecurityEnabled",
-            title: "OpenDNS Security DNS",
-            labelElementId: "openDNSSecurityStatus",
-            switchElementId: "openDNSSecuritySwitch",
-            messageType: Messages.MessageType.OPENDNS_SECURITY_TOGGLED,
-        },
-        {
-            name: "openDNSFamilyShieldEnabled",
-            title: "OpenDNS Family Shield DNS",
-            labelElementId: "openDNSFamilyShieldStatus",
-            switchElementId: "openDNSFamilyShieldSwitch",
-            messageType: Messages.MessageType.OPENDNS_FAMILY_SHIELD_TOGGLED,
-        },
-        {
             name: "quad9Enabled",
             title: "Quad9 Security DNS",
             labelElementId: "quad9Status",
             switchElementId: "quad9Switch",
             messageType: Messages.MessageType.QUAD9_TOGGLED,
-        },
-        {
-            name: "switchCHEnabled",
-            title: "Switch.ch Security DNS",
-            labelElementId: "switchCHStatus",
-            switchElementId: "switchCHSwitch",
-            messageType: Messages.MessageType.SWITCH_CH_TOGGLED,
-        },
+        }
     ];
 
     /**
@@ -362,12 +320,11 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         const page1 = document.getElementById("page1");
         const page2 = document.getElementById("page2");
         const page3 = document.getElementById("page3");
-        const page4 = document.getElementById("page4");
         const prevPage = document.getElementById("prevPage");
         const nextPage = document.getElementById("nextPage");
         const pageIndicator = document.getElementById("pageIndicator");
         let currentPage = 1;
-        const totalPages = 4;
+        const totalPages = 3;
 
         function updatePageDisplay() {
             // Checks for invalid current page numbers
@@ -375,7 +332,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
                 currentPage = 1;
             }
 
-            const pages = [page1, page2, page3, page4];
+            const pages = [page1, page2, page3];
 
             // Checks for valid HTML page elements
             if (!pages.every(page => page instanceof HTMLElement)) {

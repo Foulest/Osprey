@@ -78,9 +78,9 @@ The following providers are **enabled** by default:
 - [x] **[AdGuard Security DNS](https://adguard-dns.io?aid=135732)**
 - [x] **[alphaMountain Web Protection](https://www.alphamountain.ai/?utm_source=osprey)**
 - [x] **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
-- [x] [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
 - [x] [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
 - [x] [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/#two-flavors-1-1-1-2-no-malware-1-1-1-3-no-malware-or-adult-content)
+- [x] [DNS0.eu Security DNS](https://www.dns0.eu/zero)
 - [x] [DNS4EU Security DNS](https://www.joindns4.eu/for-public)
 - [x] [Quad9 Security DNS](https://www.quad9.net)
 
@@ -89,9 +89,9 @@ The following providers are **disabled** by default:
 #### Security Filters
 
 - [ ] **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
+- [ ] [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
 - [ ] [G DATA Web Protection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
 - [ ] [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
-- [ ] [DNS0.eu Security DNS](https://www.dns0.eu/zero)
 - [ ] [Norton Safe Web](https://safeweb.norton.com)
 
 #### Adult Content Filters

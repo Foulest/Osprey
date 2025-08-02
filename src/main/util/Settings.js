@@ -39,11 +39,11 @@ const Settings = (function () {
         cleanBrowsingFamilyEnabled: false,
         cloudflareSecurityEnabled: true,
         cloudflareFamilyEnabled: false,
-        dns0SecurityEnabled: false,
+        dns0SecurityEnabled: true,
         dns0FamilyEnabled: false,
         dns4EUSecurityEnabled: true,
         dns4EUFamilyEnabled: false,
-        smartScreenEnabled: true,
+        smartScreenEnabled: false,
         nortonEnabled: false,
         quad9Enabled: true,
 

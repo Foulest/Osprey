@@ -60,6 +60,8 @@ You can configure the extension's protection options in the settings:
 
 If you're unsure about the functions of each protection provider, **it's best to keep the default settings.**
 
+You can restore them by right-clicking the extension icon and selecting `Restore default settings`.
+
 ## Detections
 
 Osprey blocks websites that are classified as:

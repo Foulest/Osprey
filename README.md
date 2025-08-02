@@ -78,7 +78,6 @@ The following providers are **enabled** by default:
 - [x] **[AdGuard Security DNS](https://adguard-dns.io?aid=135732)**
 - [x] **[alphaMountain Web Protection](https://www.alphamountain.ai/?utm_source=osprey)**
 - [x] **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
-- [x] [G DATA Web Protection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
 - [x] [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
 - [x] [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
 - [x] [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/#two-flavors-1-1-1-2-no-malware-1-1-1-3-no-malware-or-adult-content)
@@ -90,6 +89,7 @@ The following providers are **disabled** by default:
 #### Security Filters
 
 - [ ] **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
+- [ ] [G DATA Web Protection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
 - [ ] [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
 - [ ] [DNS0.eu Security DNS](https://www.dns0.eu/zero)
 - [ ] [Norton Safe Web](https://safeweb.norton.com)
@@ -108,6 +108,7 @@ Providers disabled by default are either due to:
 - Frequent reports of false positives
 - Failure to respond to false positive reports
 - Being an optional adult content filter
+- Being a paid service that requires a license or API key
 
 If a provider gives you false positives, report the links to them directly and disable them in the Protection Options
 panel if needed. Osprey is designed to be customizable, so you can enable or disable any of the providers at any time.

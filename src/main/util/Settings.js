@@ -33,7 +33,7 @@ const Settings = (function () {
         precisionSecEnabled: true,
 
         // Non-Partnered Providers
-        gDataEnabled: true,
+        gDataEnabled: false,
         certEEEnabled: false,
         cleanBrowsingSecurityEnabled: true,
         cleanBrowsingFamilyEnabled: false,

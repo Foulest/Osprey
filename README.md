@@ -67,7 +67,7 @@ You can restore them by right-clicking the extension icon and selecting `Restore
 Osprey blocks websites that are classified as:
 
 - [Malicious](https://us.norton.com/blog/malware/what-are-malicious-websites)
-- [Phishing](https://f-secure.com/us-en/articles/what-is-phishing)
+- [Phishing](https://us.norton.com/blog/online-scams/what-is-phishing)
 - [Untrusted](https://mcafee.com/blogs/internet-security/how-to-tell-whether-a-website-is-safe-or-unsafe)
 - [Adult Content](https://library.fiveable.me/key-terms/mass-media-society/adult-content)
 

@@ -141,8 +141,8 @@ you're so inclined.
 
 As for why Osprey needs to check complete URLs instead of just the domain, many phishing attacks use legitimate
 companies such as Jotform to host their phishing campaigns. If Osprey only checked a website's domain name, it wouldn't
-detect those threats. Osprey only sends your hostname to its various DNS API providers, so if you're highly concerned
-about URL page privacy, the DNS APIs are there for you.
+detect those threats. Osprey only sends your hostname to its various DNS providers, so if you're highly concerned
+about URL page privacy, DNS providers like Quad9 are there for you.
 
 ## Manual Install
 

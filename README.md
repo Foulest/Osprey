@@ -39,6 +39,14 @@ possible. Check out some of our partners below:
 
 ###
 
+## Our Mission
+
+Our mission is simple: become the most trusted, transparent, and effective browser protection extension for home users and businesses by empowering open-source intelligence to combat malware, phishing, and scams across the globe with our partners. The best protection is free protection, and building a privacy-first, open-source tool that IT teams, security researchers, and end-users can trust to secure their browsing, wherever they go, is the best way to provide it.
+
+Osprey is committed to being non-profit, non-commercial, and open-source, **forever**, with no plans to monetize the project in any way. Unlike [other free browser extensions](https://www.ftc.gov/news-events/news/press-releases/2024/02/ftc-order-will-ban-avast-selling-browsing-data-advertising-purposes-require-it-pay-165-million-over), Osprey doesn't collect, profile, and sell your browsing data behind your back. We're fully GDPR-compliant and committed to being as transparent as possible. We don't use centralized servers or user accounts to protect your devices. Osprey runs locally on your device, offline or online, with zero telemetry or back-end analytics. Check out our [Privacy Policy here](https://github.com/Foulest/Osprey/blob/main/.github/PRIVACY.md) for more info.
+
+The more protection providers join the project, the better the Osprey threat intelligence platform becomes. If you're interested in improving global threat intelligence and want to join the project, feel free to get in contact with me by [using my developer email found here.](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd#:~:text=English-,Developer,-Website)
+
 ## Warning
 
 If the website is malicious, Osprey will block the page and display a warning:
@@ -113,14 +121,6 @@ Providers disabled by default are either due to:
 If a provider gives you false positives, report the links to them directly and disable them in the Protection Options
 panel if needed. Osprey is designed to be customizable, so you can enable or disable any of the providers at any time.
 Osprey does not have control over the providers' databases or how they classify URLs.
-
-## Our Mission
-
-Our mission is simple: become the most trusted, transparent, and effective browser protection extension for home users and businesses by empowering open-source intelligence to combat malware, phishing, and scams across the globe with our partners. The best protection is free protection, and building a privacy-first, open-source tool that IT teams, security researchers, and end-users can trust to secure their browsing, wherever they go, is the best way to provide it.
-
-Osprey is committed to being non-profit, non-commercial, and open-source, **forever**, with no plans to monetize the project in any way. Unlike [other free browser extensions](https://www.ftc.gov/news-events/news/press-releases/2024/02/ftc-order-will-ban-avast-selling-browsing-data-advertising-purposes-require-it-pay-165-million-over), Osprey doesn't collect, profile, and sell your browsing data behind your back. We're fully GDPR-compliant and committed to being as transparent as possible. We don't use centralized servers or user accounts to protect your devices. Osprey runs locally on your device, offline or online, with zero telemetry or back-end analytics. Check out our [Privacy Policy here](https://github.com/Foulest/Osprey/blob/main/.github/PRIVACY.md) for more info.
-
-The more protection providers join the project, the better the Osprey threat intelligence platform becomes. If you're interested in improving global threat intelligence and want to join the project, feel free to get in contact with me by [using my developer email found here.](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd#:~:text=English-,Developer,-Website)
 
 ## Privacy
 

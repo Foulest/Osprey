@@ -234,7 +234,8 @@
 
                     if (!blocked) {
                         browserAPI.tabs.get(tabId, tab => {
-                            if (!tab) {
+                            // Check if the tab or tab.url is undefined
+                            if (!tab || tab.url === undefined) {
                                 console.debug(`tabs.get(${tabId}) failed '${browserAPI.runtime.lastError?.message}'; bailing out.`);
                                 return;
                             }
@@ -603,6 +604,12 @@
 
             // If the page URL is the block page, sends (count - 1)
             browserAPI.tabs.get(tabId, tab => {
+                // Check if the tab or tab.url is undefined
+                if (!tab || tab.url === undefined) {
+                    console.debug(`tabs.get(${tabId}) failed '${browserAPI.runtime.lastError?.message}'; bailing out.`);
+                    return;
+                }
+
                 const isBlockPage = tab.url?.includes("/WarningPage.html");
                 const adjustedCount = isBlockPage && fullCount > 0 ? fullCount - 1 : fullCount;
 

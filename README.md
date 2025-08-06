@@ -31,7 +31,7 @@ possible. Check out some of our partners below:
 ###
 
 <p align="center">
-  <a href="https://adguard-dns.io?aid=135732"><img src="https://i.imgur.com/4AXgbsC.png" alt="AdGuard DNS"></a>
+  <a href="https://adguard-dns.io/?utm_source=osprey"><img src="https://i.imgur.com/4AXgbsC.png" alt="AdGuard DNS"></a>
   <a href="https://www.alphamountain.ai/?utm_source=osprey"><img src="https://i.imgur.com/EbcGHb2.png" alt="alphaMountain"></a>
   <a href="https://controld.com/?utm_source=osprey"><img src="https://i.imgur.com/xh7qTT8.png" alt="Control D"></a>
   <a href="https://precisionsec.com/?utm_source=osprey"><img src="https://i.imgur.com/gf9ahFa.png" alt="PrecisionSec"></a>
@@ -75,7 +75,7 @@ Osprey blocks websites that are classified as:
 
 The following providers are **enabled** by default:
 
-- [x] **[AdGuard Security DNS](https://adguard-dns.io?aid=135732)**
+- [x] **[AdGuard Security DNS](https://adguard-dns.io/?utm_source=osprey)**
 - [x] **[alphaMountain Web Protection](https://www.alphamountain.ai/?utm_source=osprey)**
 - [x] **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
 - [x] [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
@@ -96,7 +96,7 @@ The following providers are **disabled** by default:
 
 #### Adult Content Filters
 
-- [ ] **[AdGuard Family DNS](https://adguard-dns.io?aid=135732)**
+- [ ] **[AdGuard Family DNS](https://adguard-dns.io/?utm_source=osprey)**
 - [ ] **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
 - [ ] [CleanBrowsing Family DNS](https://www.cleanbrowsing.org/filters/#step2)
 - [ ] [Cloudflare Family DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families)

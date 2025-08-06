@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Effective Date:** 08/01/2025
+**Effective Date:** 08/06/2025
 
 **By installing or using Osprey, you agree to the terms of this Privacy Policy.**
 
@@ -55,11 +55,6 @@ new Privacy Policy on this page with a new effective date. We encourage you to r
 for any updates.
 
 **By continuing to use Osprey after any changes are posted, you agree to the updated Privacy Policy.**
-
-## Affiliate Disclosure
-
-Osprey may contain affiliate links to products or services. If you click on an affiliate link and make a purchase, we
-may receive a commission at no additional cost to you. This helps support the development of Osprey.
 
 ## Getting Help
 

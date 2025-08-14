@@ -18,109 +18,113 @@
 "use strict";
 
 // Manages the cache for the allowed protection providers.
-class CacheManager {
-    constructor(allowedKey = 'allowedCache',
-                blockedKey = 'blockedCache',
-                processingKey = 'processingCache',
-                debounceDelay = 5000) {
-        Settings.get(settings => {
-            this.expirationTime = settings.cacheExpirationSeconds;
-            this.allowedKey = allowedKey;
-            this.blockedKey = blockedKey;
-            this.processingKey = processingKey;
-            this.debounceDelay = debounceDelay;
-            this.timeoutId = null;
+const CacheManager = (() => {
 
-            const providers = [
-                // Official Partners
-                "adGuardSecurity", "adGuardFamily",
-                "alphaMountain",
-                "controlDSecurity", "controlDFamily",
-                "precisionSec",
+    // Key names for the caches in local and session storage
+    let allowedKey = "allowedCache";
+    let blockedKey = "blockedCache";
+    let processingKey = "processingCache";
 
-                // Non-Partnered Providers
-                "certEE",
-                "cleanBrowsingSecurity", "cleanBrowsingFamily",
-                "cloudflareSecurity", "cloudflareFamily",
-                "dns0Security", "dns0Family",
-                "dns4EUSecurity", "dns4EUFamily",
-                "gData",
-                "smartScreen",
-                "norton",
-                "quad9",
-            ];
+    // Caches for allowed, blocked, and processing entries
+    let allowedCaches = {};
+    let blockedCaches = {};
+    let processingCaches = {};
 
-            this.allowedCaches = {};
-            this.blockedCaches = {};
-            this.processingCaches = {};
+    // Timeout ID for debounced updates
+    let timeoutId = null;
 
-            // Initialize caches for each provider
-            providers.forEach(name => {
-                this.allowedCaches[name] = new Map();
-                this.blockedCaches[name] = new Map();
-                this.processingCaches[name] = new Map();
-            });
+    // Debounce delay for local and session storage updates
+    let debounceDelay = 5000;
 
-            // Load allowed caches (without tabId) from local storage
-            Storage.getFromLocalStore(this.allowedKey, storedAllowed => {
-                if (!storedAllowed) {
-                    return;
+    // Expiration time for cache entries in milliseconds
+    let expirationTime;
+
+    // Sets the expiration time for cache entries based on user settings
+    Settings.get(settings => {
+        expirationTime = settings.cacheExpirationSeconds;
+    });
+
+    const providers = [
+        // Global
+        "global",
+
+        // Official Partners
+        "adGuardSecurity", "adGuardFamily",
+        "alphaMountain",
+        "controlDSecurity", "controlDFamily",
+        "precisionSec",
+
+        // Non-Partnered Providers
+        "certEE",
+        "cleanBrowsingSecurity", "cleanBrowsingFamily",
+        "cloudflareSecurity", "cloudflareFamily",
+        "dns0Security", "dns0Family",
+        "dns4EUSecurity", "dns4EUFamily",
+        "gData",
+        "smartScreen",
+        "norton",
+        "quad9",
+    ];
+
+    // Initialize caches for each provider
+    providers.forEach(name => {
+        allowedCaches[name] = new Map();
+        blockedCaches[name] = new Map();
+        processingCaches[name] = new Map();
+    });
+
+    // Load allowed caches (without tabId) from local storage
+    StorageUtil.getFromLocalStore(allowedKey, storedAllowed => {
+        if (storedAllowed) {
+            Object.keys(allowedCaches).forEach(name => {
+                if (storedAllowed[name]) {
+                    allowedCaches[name] = new Map(Object.entries(storedAllowed[name]));
                 }
-
-                Object.keys(this.allowedCaches).forEach(name => {
-                    if (storedAllowed[name]) {
-                        this.allowedCaches[name] = new Map(Object.entries(storedAllowed[name]));
-                    }
-                });
             });
+        }
+    });
 
-            // Load blocked caches (without tabId) from local storage
-            Storage.getFromLocalStore(this.blockedKey, storedBlocked => {
-                if (!storedBlocked) {
-                    return;
+    // Load blocked caches (without tabId) from local storage
+    StorageUtil.getFromLocalStore(blockedKey, storedBlocked => {
+        if (storedBlocked) {
+            Object.keys(blockedCaches).forEach(name => {
+                if (storedBlocked[name]) {
+                    blockedCaches[name] = new Map(
+                        Object.entries(storedBlocked[name]).map(([url, entry]) => [
+                            url,
+                            {exp: entry.exp, resultType: entry.resultType}
+                        ])
+                    );
                 }
-
-                Object.keys(this.blockedCaches).forEach(name => {
-                    if (storedBlocked[name]) {
-                        this.blockedCaches[name] = new Map(
-                            Object.entries(storedBlocked[name]).map(([url, entry]) => [
-                                url,
-                                {exp: entry.exp, resultType: entry.resultType}
-                            ])
-                        );
-                    }
-                });
             });
+        }
+    });
 
-            // Load processing caches (with tabId) from session storage
-            Storage.getFromSessionStore(this.processingKey, storedProcessing => {
-                if (!storedProcessing) {
-                    return;
+    // Load processing caches (with tabId) from session storage
+    StorageUtil.getFromSessionStore(processingKey, storedProcessing => {
+        if (storedProcessing) {
+            Object.keys(processingCaches).forEach(name => {
+                if (storedProcessing[name]) {
+                    processingCaches[name] = new Map(Object.entries(storedProcessing[name]));
                 }
-
-                Object.keys(this.processingCaches).forEach(name => {
-                    if (storedProcessing[name]) {
-                        this.processingCaches[name] = new Map(Object.entries(storedProcessing[name]));
-                    }
-                });
             });
-        });
-    }
+        }
+    });
 
     /**
      * Update the caches that use localStorage (allowed and blocked caches).
      *
      * @param debounced - If true, updates will be debounced to avoid frequent writes.
      */
-    updateLocalStorage(debounced) {
+    function updateLocalStorage(debounced) {
         // Checks if the allowed caches are valid
-        if (!this.allowedCaches || typeof this.allowedCaches !== 'object') {
+        if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
             return;
         }
 
         // Checks if the blocked caches are valid
-        if (!this.blockedCaches || typeof this.blockedCaches !== 'object') {
+        if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
             return;
         }
@@ -129,29 +133,29 @@ class CacheManager {
             const allowedOut = {};
             const blockedOut = {};
 
-            Object.keys(this.allowedCaches).forEach(name => {
-                allowedOut[name] = Object.fromEntries(this.allowedCaches[name]);
+            Object.keys(allowedCaches).forEach(name => {
+                allowedOut[name] = Object.fromEntries(allowedCaches[name]);
             });
 
-            Object.keys(this.blockedCaches).forEach(name => {
+            Object.keys(blockedCaches).forEach(name => {
                 blockedOut[name] = Object.fromEntries(
-                    Array.from(this.blockedCaches[name], ([url, entry]) => [
+                    Array.from(blockedCaches[name], ([url, entry]) => [
                         url,
                         {exp: entry.exp, resultType: entry.resultType}
                     ])
                 );
             });
 
-            Storage.setToLocalStore(this.allowedKey, allowedOut);
-            Storage.setToLocalStore(this.blockedKey, blockedOut);
+            StorageUtil.setToLocalStore(allowedKey, allowedOut);
+            StorageUtil.setToLocalStore(blockedKey, blockedOut);
         };
 
         if (debounced) {
-            if (!this.timeoutId) {
-                this.timeoutId = setTimeout(() => {
-                    this.timeoutId = null;
+            if (!timeoutId) {
+                timeoutId = setTimeout(() => {
+                    timeoutId = null;
                     write();
-                }, this.debounceDelay);
+                }, debounceDelay);
             }
         } else {
             write();
@@ -163,9 +167,9 @@ class CacheManager {
      *
      * @param debounced - If true, updates will be debounced to avoid frequent writes.
      */
-    updateSessionStorage(debounced) {
+    function updateSessionStorage(debounced) {
         // Checks if the processing cache is valid
-        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
+        if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCache is not defined or not an object');
             return;
         }
@@ -173,19 +177,19 @@ class CacheManager {
         const write = () => {
             const out = {};
 
-            Object.keys(this.processingCaches).forEach(name => {
-                out[name] = Object.fromEntries(this.processingCaches[name]);
+            Object.keys(processingCaches).forEach(name => {
+                out[name] = Object.fromEntries(processingCaches[name]);
             });
 
-            Storage.setToSessionStore(this.processingKey, out);
+            StorageUtil.setToSessionStore(processingKey, out);
         };
 
         if (debounced) {
-            if (!this.timeoutId) {
-                this.timeoutId = setTimeout(() => {
-                    this.timeoutId = null;
+            if (!timeoutId) {
+                timeoutId = setTimeout(() => {
+                    timeoutId = null;
                     write();
-                }, this.debounceDelay);
+                }, debounceDelay);
             }
         } else {
             write();
@@ -193,53 +197,11 @@ class CacheManager {
     }
 
     /**
-     * Clears all allowed caches.
-     */
-    clearAllowedCache() {
-        // Returns if the allowed cache is not defined.
-        if (!this.allowedCaches || typeof this.allowedCaches !== 'object') {
-            console.warn('allowedCache is not defined or not an object');
-            return;
-        }
-
-        Object.values(this.allowedCaches).forEach(m => m.clear());
-        this.updateLocalStorage(false);
-    }
-
-    /**
-     * Clears all blocked caches.
-     */
-    clearBlockedCache() {
-        // Returns if the blocked cache is not defined.
-        if (!this.blockedCaches || typeof this.blockedCaches !== 'object') {
-            console.warn('blockedCache is not defined or not an object');
-            return;
-        }
-
-        Object.values(this.blockedCaches).forEach(m => m.clear());
-        this.updateLocalStorage(false);
-    }
-
-    /**
-     * Clears all processing caches.
-     */
-    clearProcessingCache() {
-        // Checks if the processing cache is valid
-        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
-            console.warn('processingCache is not defined or not an object');
-            return;
-        }
-
-        Object.values(this.processingCaches).forEach(m => m.clear());
-        this.updateSessionStorage(false);
-    }
-
-    /**
      * Cleans up expired entries from all caches.
      *
      * @returns {number} - The number of expired entries removed from all caches.
      */
-    cleanExpiredEntries() {
+    function cleanExpiredEntries() {
         const now = Date.now();
         let removed = 0;
 
@@ -263,9 +225,9 @@ class CacheManager {
             }
         };
 
-        cleanGroup(this.allowedCaches, () => this.updateLocalStorage(true));
-        cleanGroup(this.blockedCaches, () => this.updateLocalStorage(true));
-        cleanGroup(this.processingCaches, () => this.updateSessionStorage(true));
+        cleanGroup(allowedCaches, () => updateLocalStorage(true));
+        cleanGroup(blockedCaches, () => updateLocalStorage(true));
+        cleanGroup(processingCaches, () => updateSessionStorage(true));
         return removed;
     }
 
@@ -275,10 +237,69 @@ class CacheManager {
      * @param url {string|URL} - The URL to normalize, can be a string or a URL object.
      * @returns {string|string} - The normalized URL as a string.
      */
-    normalizeUrl(url) {
+    function normalizeUrl(url) {
         const u = typeof url === "string" ? new URL(url) : url;
         let norm = UrlHelpers.normalizeHostname(u.hostname + u.pathname);
         return norm.endsWith("/") ? norm.slice(0, -1) : norm;
+    }
+
+    /**
+     * Retrieves the allowed cache for a specific provider.
+     *
+     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
+     * @returns {*|null} - Returns the allowed cache map for the provider, or null if not found.
+     */
+    function getAllowedCache(name) {
+        // Returns if the allowed cache is not defined.
+        if (!allowedCaches || typeof allowedCaches !== 'object') {
+            console.warn('allowedCache is not defined or not an object');
+            return null;
+        }
+
+        // Returns the specific cache for the given name
+        return allowedCaches[name] || null;
+    }
+
+    /**
+     * Clears all allowed caches.
+     */
+    function clearAllowedCache() {
+        // Returns if the allowed cache is not defined.
+        if (!allowedCaches || typeof allowedCaches !== 'object') {
+            console.warn('allowedCache is not defined or not an object');
+            return;
+        }
+
+        Object.values(allowedCaches).forEach(m => m.clear());
+        updateLocalStorage(false);
+    }
+
+    /**
+     * Clears all blocked caches.
+     */
+    function clearBlockedCache() {
+        // Returns if the blocked cache is not defined.
+        if (!blockedCaches || typeof blockedCaches !== 'object') {
+            console.warn('blockedCache is not defined or not an object');
+            return;
+        }
+
+        Object.values(blockedCaches).forEach(m => m.clear());
+        updateLocalStorage(false);
+    }
+
+    /**
+     * Clears all processing caches.
+     */
+    function clearProcessingCache() {
+        // Checks if the processing cache is valid
+        if (!processingCaches || typeof processingCaches !== 'object') {
+            console.warn('processingCache is not defined or not an object');
+            return;
+        }
+
+        Object.values(processingCaches).forEach(m => m.clear());
+        updateSessionStorage(false);
     }
 
     /**
@@ -288,16 +309,16 @@ class CacheManager {
      * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
      * @returns {boolean} - Returns true if the URL is in the allowed cache and not expired, false otherwise.
      */
-    isUrlInAllowedCache(url, name) {
+    function isUrlInAllowedCache(url, name) {
         // Returns if the allowed cache is not defined.
-        if (!this.allowedCaches || typeof this.allowedCaches !== 'object') {
+        if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
             return false;
         }
 
         try {
-            const key = this.normalizeUrl(url);
-            const map = this.allowedCaches[name];
+            const key = normalizeUrl(url);
+            const map = allowedCaches[name];
 
             if (!map) {
                 return false;
@@ -311,7 +332,9 @@ class CacheManager {
                 }
 
                 map.delete(key);
-                this.updateLocalStorage(true);
+
+                cleanExpiredEntries();
+                updateLocalStorage(false);
             }
         } catch (error) {
             console.error(`Error checking allowed cache for ${url}:`, error);
@@ -326,15 +349,15 @@ class CacheManager {
      * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
      * @returns {boolean} - Returns true if the string is in the allowed cache and not expired, false otherwise.
      */
-    isStringInAllowedCache(str, name) {
+    function isStringInAllowedCache(str, name) {
         // Returns if the allowed cache is not defined.
-        if (!this.allowedCaches || typeof this.allowedCaches !== 'object') {
+        if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
             return false;
         }
 
         try {
-            const map = this.allowedCaches[name];
+            const map = allowedCaches[name];
 
             if (!map) {
                 return false;
@@ -350,33 +373,72 @@ class CacheManager {
     }
 
     /**
+     * Checks if a string is in the allowed cache for a specific provider.
+     *
+     * @param str {string} - The string to check against the map's patterns.
+     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
+     * @returns {boolean} - Returns true if the string is in the allowed cache and not expired, false otherwise.
+     */
+    function isPatternInAllowedCache(str, name) {
+        // Returns if the allowed cache is not defined.
+        if (!allowedCaches || typeof allowedCaches !== 'object') {
+            console.warn('allowedCache is not defined or not an object');
+            return false;
+        }
+
+        try {
+            const map = allowedCaches[name];
+
+            if (!map) {
+                return false;
+            }
+
+            // Checks if any key in the map (patterns, like *.example.com) matches the string
+            for (const pattern of map.keys()) {
+                // Uses a simple pattern matching logic
+                if (pattern.startsWith("*.")) {
+                    const domain = pattern.slice(2);
+
+                    if (str.endsWith(domain)) {
+                        return true;
+                    }
+                } else if (str === pattern) {
+                    return true;
+                }
+            }
+        } catch (error) {
+            console.error(`Error checking allowed cache for string "${str}":`, error);
+        }
+        return false;
+    }
+
+    /**
      * Add a URL to the allowed cache for a specific provider.
      *
      * @param url {string|URL} - The URL to add, can be a string or a URL object.
      * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
      */
-    addUrlToAllowedCache(url, name) {
+    function addUrlToAllowedCache(url, name) {
         // Returns if the allowed cache is not defined.
-        if (!this.allowedCaches || typeof this.allowedCaches !== 'object') {
+        if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
             return;
         }
 
         try {
-            const key = this.normalizeUrl(url);
-            const expTime = Date.now() + this.expirationTime * 1000;
-
-            if (this.cleanExpiredEntries() === 0) {
-                this.updateLocalStorage(true);
-            }
+            const key = normalizeUrl(url);
+            const expTime = Date.now() + expirationTime * 1000;
 
             if (name === "all") {
-                Object.values(this.allowedCaches).forEach(m => m.set(key, expTime));
-            } else if (this.allowedCaches[name]) {
-                this.allowedCaches[name].set(key, expTime);
+                Object.values(allowedCaches).forEach(m => m.set(key, expTime));
+            } else if (allowedCaches[name]) {
+                allowedCaches[name].set(key, expTime);
             } else {
                 console.warn(`Cache "${name}" not found`);
             }
+
+            cleanExpiredEntries();
+            updateLocalStorage(false);
         } catch (error) {
             console.error(`Error adding URL to allowed cache for ${url}:`, error);
         }
@@ -388,9 +450,9 @@ class CacheManager {
      * @param str {string} - The string to add.
      * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
      */
-    addStringToAllowedCache(str, name) {
+    function addStringToAllowedCache(str, name) {
         // Returns if the allowed cache is not defined.
-        if (!this.allowedCaches || typeof this.allowedCaches !== 'object') {
+        if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
             return;
         }
@@ -398,17 +460,16 @@ class CacheManager {
         try {
             const expTime = 0;
 
-            if (this.cleanExpiredEntries() === 0) {
-                this.updateLocalStorage(true);
-            }
-
             if (name === "all") {
-                Object.values(this.allowedCaches).forEach(m => m.set(str, expTime));
-            } else if (this.allowedCaches[name]) {
-                this.allowedCaches[name].set(str, expTime);
+                Object.values(allowedCaches).forEach(m => m.set(str, expTime));
+            } else if (allowedCaches[name]) {
+                allowedCaches[name].set(str, expTime);
             } else {
                 console.warn(`Cache "${name}" not found`);
             }
+
+            cleanExpiredEntries();
+            updateLocalStorage(false);
         } catch (error) {
             console.error(`Error adding string to allowed cache for "${str}":`, error);
         }
@@ -421,16 +482,16 @@ class CacheManager {
      * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
      * @returns {boolean} - Returns true if the URL is in the allowed cache and not expired, false otherwise.
      */
-    isUrlInBlockedCache(url, name) {
+    function isUrlInBlockedCache(url, name) {
         // Returns if the blocked cache is not defined.
-        if (!this.blockedCaches || typeof this.blockedCaches !== 'object') {
+        if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
             return false;
         }
 
         try {
-            const key = this.normalizeUrl(url);
-            const map = this.blockedCaches[name];
+            const key = normalizeUrl(url);
+            const map = blockedCaches[name];
 
             if (!map || !map.has(key)) {
                 return false;
@@ -443,7 +504,7 @@ class CacheManager {
             }
 
             map.delete(key);
-            this.updateLocalStorage(false);
+            updateLocalStorage(false);
         } catch (error) {
             console.error(`Error checking blocked cache for ${url}:`, error);
         }
@@ -457,25 +518,20 @@ class CacheManager {
      * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
      * @param resultType {string} - The resultType of the URL (e.g., "malicious", "phishing").
      */
-    addUrlToBlockedCache(url, name, resultType) {
+    function addUrlToBlockedCache(url, name, resultType) {
         // Returns if the blocked cache is not defined.
-        if (!this.blockedCaches || typeof this.blockedCaches !== 'object') {
+        if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
             return;
         }
 
         try {
-            const key = this.normalizeUrl(url);
-            const expTime = Date.now() + this.expirationTime * 1000;
-
-            if (this.cleanExpiredEntries() === 0) {
-                this.updateLocalStorage(false);
-            }
-
-            const cache = this.blockedCaches[name];
+            const key = normalizeUrl(url);
+            const expTime = Date.now() + expirationTime * 1000;
+            const cache = blockedCaches[name];
 
             if (name === "all") {
-                Object.values(this.blockedCaches).forEach(m =>
+                Object.values(blockedCaches).forEach(m =>
                     m.set(key, {exp: expTime, resultType: resultType})
                 );
             } else if (cache) {
@@ -483,6 +539,9 @@ class CacheManager {
             } else {
                 console.warn(`Cache "${name}" not found`);
             }
+
+            cleanExpiredEntries();
+            updateLocalStorage(false);
         } catch (error) {
             console.error(`Error adding URL to blocked cache for ${url}:`, error);
         }
@@ -495,16 +554,16 @@ class CacheManager {
      * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
      * @returns {*|null} - Returns the result type (e.g., "Malicious", "Phishing") if found and not expired, null otherwise.
      */
-    getBlockedResultType(url, name) {
+    function getBlockedResultType(url, name) {
         // Returns if the blocked cache is not defined.
-        if (!this.blockedCaches || typeof this.blockedCaches !== 'object') {
+        if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
             return;
         }
 
         try {
-            const key = this.normalizeUrl(url);
-            const cache = this.blockedCaches[name];
+            const key = normalizeUrl(url);
+            const cache = blockedCaches[name];
 
             if (!cache || !cache.has(key)) {
                 return null;
@@ -516,7 +575,7 @@ class CacheManager {
                 return entry.resultType;
             } else {
                 cache.delete(key);
-                this.updateLocalStorage(false);
+                updateLocalStorage(false);
             }
         } catch (error) {
             console.error(`Error getting blocked result type for ${url}:`, error);
@@ -530,25 +589,26 @@ class CacheManager {
      * @param url {string|URL} - The URL to remove, can be a string or a URL object.
      * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
      */
-    removeUrlFromBlockedCache(url, name) {
+    function removeUrlFromBlockedCache(url, name) {
         // Returns if the blocked cache is not defined.
-        if (!this.blockedCaches || typeof this.blockedCaches !== 'object') {
+        if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
             return;
         }
 
         try {
-            const key = this.normalizeUrl(url);
+            const key = normalizeUrl(url);
 
             if (name === "all") {
-                Object.values(this.blockedCaches).forEach(m => m.delete(key));
-            } else if (this.blockedCaches[name]) {
-                this.blockedCaches[name].delete(key);
+                Object.values(blockedCaches).forEach(m => m.delete(key));
+            } else if (blockedCaches[name]) {
+                blockedCaches[name].delete(key);
             } else {
                 console.warn(`Cache "${name}" not found`);
             }
 
-            this.updateLocalStorage(false);
+            cleanExpiredEntries();
+            updateLocalStorage(false);
         } catch (error) {
             console.error(`Error removing URL from blocked cache for ${url}:`, error);
         }
@@ -561,16 +621,16 @@ class CacheManager {
      * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
      * @returns {boolean} - Returns true if the URL is in the processing cache and not expired, false otherwise.
      */
-    isUrlInProcessingCache(url, name) {
+    function isUrlInProcessingCache(url, name) {
         // Checks if the processing cache is valid
-        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
+        if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
             return false;
         }
 
         try {
-            const key = this.normalizeUrl(url);
-            const map = this.processingCaches[name];
+            const key = normalizeUrl(url);
+            const map = processingCaches[name];
 
             if (!map) {
                 return false;
@@ -584,7 +644,9 @@ class CacheManager {
                 }
 
                 map.delete(key);
-                this.updateSessionStorage(true);
+
+                cleanExpiredEntries();
+                updateLocalStorage(false);
             }
         } catch (error) {
             console.error(`Error checking processing cache for ${url}:`, error);
@@ -599,30 +661,28 @@ class CacheManager {
      * @param {string} name - The name of the provider (e.g., "precisionSec", "smartScreen").
      * @param {number} tabId - The ID of the tab associated with this URL.
      */
-    addUrlToProcessingCache(url, name, tabId) {
+    function addUrlToProcessingCache(url, name, tabId) {
         // Checks if the processing cache is valid
-        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
+        if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
             return;
         }
 
         try {
-            const key = this.normalizeUrl(url);
-            const expTime = Date.now() + this.expirationTime * 1000;
-
-            if (this.cleanExpiredEntries() === 0) {
-                this.updateSessionStorage(true);
-            }
-
+            const key = normalizeUrl(url);
+            const expTime = Date.now() + expirationTime * 1000;
             const entry = {exp: expTime, tabId: tabId};
 
             if (name === "all") {
-                Object.values(this.processingCaches).forEach(m => m.set(key, entry));
-            } else if (this.processingCaches[name]) {
-                this.processingCaches[name].set(key, entry);
+                Object.values(processingCaches).forEach(m => m.set(key, entry));
+            } else if (processingCaches[name]) {
+                processingCaches[name].set(key, entry);
             } else {
                 console.warn(`Processing cache "${name}" not found`);
             }
+
+            cleanExpiredEntries();
+            updateLocalStorage(false);
         } catch (error) {
             console.error(`Error adding URL to processing cache for ${url}:`, error);
         }
@@ -634,25 +694,26 @@ class CacheManager {
      * @param url {string|URL} - The URL to remove, can be a string or a URL object.
      * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
      */
-    removeUrlFromProcessingCache(url, name) {
+    function removeUrlFromProcessingCache(url, name) {
         // Checks if the processing cache is valid
-        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
+        if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
             return;
         }
 
         try {
-            const key = this.normalizeUrl(url);
+            const key = normalizeUrl(url);
 
             if (name === "all") {
-                Object.values(this.processingCaches).forEach(m => m.delete(key));
-            } else if (this.processingCaches[name]) {
-                this.processingCaches[name].delete(key);
+                Object.values(processingCaches).forEach(m => m.delete(key));
+            } else if (processingCaches[name]) {
+                processingCaches[name].delete(key);
             } else {
                 console.warn(`Processing cache "${name}" not found`);
             }
 
-            this.updateSessionStorage(true);
+            cleanExpiredEntries();
+            updateLocalStorage(false);
         } catch (error) {
             console.error(`Error removing URL from processing cache for ${url}:`, error);
         }
@@ -666,15 +727,15 @@ class CacheManager {
      * @param {number} tabId - The ID of the tab to filter by.
      * @returns {string[]} - An array of keys (normalized URLs or strings) that match the criteria.
      */
-    getKeysByTabId(name, tabId) {
+    function getKeysByTabId(name, tabId) {
         // Checks if the processing cache is valid
-        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
+        if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
             return null;
         }
 
         const results = [];
-        const map = this.processingCaches[name];
+        const map = processingCaches[name];
 
         // Checks if the map is valid
         if (!map) {
@@ -694,7 +755,8 @@ class CacheManager {
             }
         }
 
-        this.updateSessionStorage(true);
+        cleanExpiredEntries();
+        updateLocalStorage(false);
         return results;
     }
 
@@ -703,17 +765,17 @@ class CacheManager {
      *
      * @param tabId - The ID of the tab whose entries should be removed.
      */
-    removeKeysByTabId(tabId) {
+    function removeKeysByTabId(tabId) {
         // Checks if the processing cache is valid
-        if (!this.processingCaches || typeof this.processingCaches !== 'object') {
+        if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
             return;
         }
 
         let removedCount = 0;
 
-        Object.keys(this.processingCaches).forEach(name => {
-            const map = this.processingCaches[name];
+        Object.keys(processingCaches).forEach(name => {
+            const map = processingCaches[name];
 
             // Checks if the cache is valid
             if (!map) {
@@ -731,7 +793,28 @@ class CacheManager {
         // Persist the changes to session storage
         if (removedCount > 0) {
             console.debug(`Removed ${removedCount} entries from processing cache for tab ID ${tabId}`);
-            this.updateSessionStorage(false);
+            updateSessionStorage(false);
         }
     }
-}
+
+    return {
+        getAllowedCache,
+        clearAllowedCache,
+        clearBlockedCache,
+        clearProcessingCache,
+        isUrlInAllowedCache,
+        isStringInAllowedCache,
+        isPatternInAllowedCache,
+        addUrlToAllowedCache,
+        addStringToAllowedCache,
+        isUrlInBlockedCache,
+        addUrlToBlockedCache,
+        getBlockedResultType,
+        removeUrlFromBlockedCache,
+        isUrlInProcessingCache,
+        addUrlToProcessingCache,
+        removeUrlFromProcessingCache,
+        getKeysByTabId,
+        removeKeysByTabId,
+    };
+})();

@@ -20,149 +20,168 @@
 // Use a global singleton pattern to ensure we don't duplicate resources
 window.PopupSingleton = window.PopupSingleton || (() => {
 
+    // Browser API compatibility between Chrome and Firefox
+    const browserAPI = typeof browser === 'undefined' ? chrome : browser;
+
     // Tracks initialization state
     let isInitialized = false;
 
     // Cache for DOM elements
     const domElements = {};
 
-    // Browser API compatibility between Chrome and Firefox
-    const browserAPI = typeof browser === 'undefined' ? chrome : browser;
-
     // Security systems configuration - only defined once
     const securitySystems = [
         {
+            origin: ProtectionResult.Origin.ADGUARD_SECURITY,
             name: "adGuardSecurityEnabled",
-            title: "AdGuard Security DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "adGuardSecurityStatus",
             switchElementId: "adGuardSecuritySwitch",
-            messageType: Messages.MessageType.ADGUARD_SECURITY_TOGGLED,
+            messageType: Messages.ADGUARD_SECURITY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.ADGUARD_FAMILY,
             name: "adGuardFamilyEnabled",
-            title: "AdGuard Family DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "adGuardFamilyStatus",
             switchElementId: "adGuardFamilySwitch",
-            messageType: Messages.MessageType.ADGUARD_FAMILY_TOGGLED,
+            messageType: Messages.ADGUARD_FAMILY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.ALPHAMOUNTAIN,
             name: "alphaMountainEnabled",
-            title: "alphaMountain Web Protection",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "alphaMountainStatus",
             switchElementId: "alphaMountainSwitch",
-            messageType: Messages.MessageType.ALPHAMOUNTAIN_TOGGLED,
+            messageType: Messages.ALPHAMOUNTAIN_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.CONTROL_D_SECURITY,
             name: "controlDSecurityEnabled",
-            title: "Control D Security DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "controlDSecurityStatus",
             switchElementId: "controlDSecuritySwitch",
-            messageType: Messages.MessageType.CONTROL_D_SECURITY_TOGGLED,
+            messageType: Messages.CONTROL_D_SECURITY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.CONTROL_D_FAMILY,
             name: "controlDFamilyEnabled",
-            title: "Control D Family DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "controlDFamilyStatus",
             switchElementId: "controlDFamilySwitch",
-            messageType: Messages.MessageType.CONTROL_D_FAMILY_TOGGLED,
+            messageType: Messages.CONTROL_D_FAMILY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.PRECISIONSEC,
             name: "precisionSecEnabled",
-            title: "PrecisionSec Web Protection",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "precisionSecStatus",
             switchElementId: "precisionSecSwitch",
-            messageType: Messages.MessageType.PRECISIONSEC_TOGGLED,
+            messageType: Messages.PRECISIONSEC_TOGGLED,
         },
         {
-            name: "gDataEnabled",
-            title: "G DATA Web Protection",
-            labelElementId: "gDataStatus",
-            switchElementId: "gDataSwitch",
-            messageType: Messages.MessageType.G_DATA_TOGGLED,
-        },
-        {
-            name: "smartScreenEnabled",
-            title: "Microsoft SmartScreen",
-            labelElementId: "smartScreenStatus",
-            switchElementId: "smartScreenSwitch",
-            messageType: Messages.MessageType.SMARTSCREEN_TOGGLED,
-        },
-        {
-            name: "nortonEnabled",
-            title: "Norton Safe Web",
-            labelElementId: "nortonStatus",
-            switchElementId: "nortonSwitch",
-            messageType: Messages.MessageType.NORTON_TOGGLED,
-        },
-        {
+            origin: ProtectionResult.Origin.CERT_EE,
             name: "certEEEnabled",
-            title: "CERT-EE Security DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "certEEStatus",
             switchElementId: "certEESwitch",
-            messageType: Messages.MessageType.CERT_EE_TOGGLED,
+            messageType: Messages.CERT_EE_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.CLEANBROWSING_SECURITY,
             name: "cleanBrowsingSecurityEnabled",
-            title: "CleanBrowsing Security DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "cleanBrowsingSecurityStatus",
             switchElementId: "cleanBrowsingSecuritySwitch",
-            messageType: Messages.MessageType.CLEANBROWSING_SECURITY_TOGGLED,
+            messageType: Messages.CLEANBROWSING_SECURITY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.CLEANBROWSING_FAMILY,
             name: "cleanBrowsingFamilyEnabled",
-            title: "CleanBrowsing Family DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "cleanBrowsingFamilyStatus",
             switchElementId: "cleanBrowsingFamilySwitch",
-            messageType: Messages.MessageType.CLEANBROWSING_FAMILY_TOGGLED,
+            messageType: Messages.CLEANBROWSING_FAMILY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.CLOUDFLARE_SECURITY,
             name: "cloudflareSecurityEnabled",
-            title: "Cloudflare Security DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "cloudflareSecurityStatus",
             switchElementId: "cloudflareSecuritySwitch",
-            messageType: Messages.MessageType.CLOUDFLARE_SECURITY_TOGGLED,
+            messageType: Messages.CLOUDFLARE_SECURITY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.CLOUDFLARE_FAMILY,
             name: "cloudflareFamilyEnabled",
-            title: "Cloudflare Family DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "cloudflareFamilyStatus",
             switchElementId: "cloudflareFamilySwitch",
-            messageType: Messages.MessageType.CLOUDFLARE_FAMILY_TOGGLED,
+            messageType: Messages.CLOUDFLARE_FAMILY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.DNS0_SECURITY,
             name: "dns0SecurityEnabled",
-            title: "DNS0.eu Security DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "dns0SecurityStatus",
             switchElementId: "dns0SecuritySwitch",
-            messageType: Messages.MessageType.DNS0_SECURITY_TOGGLED,
+            messageType: Messages.DNS0_SECURITY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.DNS0_FAMILY,
             name: "dns0FamilyEnabled",
-            title: "DNS0.eu Family DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "dns0FamilyStatus",
             switchElementId: "dns0FamilySwitch",
-            messageType: Messages.MessageType.DNS0_FAMILY_TOGGLED,
+            messageType: Messages.DNS0_FAMILY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.DNS4EU_SECURITY,
             name: "dns4EUSecurityEnabled",
-            title: "DNS4EU Security DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "dns4EUSecurityStatus",
             switchElementId: "dns4EUSecuritySwitch",
-            messageType: Messages.MessageType.DNS4EU_SECURITY_TOGGLED,
+            messageType: Messages.DNS4EU_SECURITY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.DNS4EU_FAMILY,
             name: "dns4EUFamilyEnabled",
-            title: "DNS4EU Family DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "dns4EUFamilyStatus",
             switchElementId: "dns4EUFamilySwitch",
-            messageType: Messages.MessageType.DNS4EU_FAMILY_TOGGLED,
+            messageType: Messages.DNS4EU_FAMILY_TOGGLED,
         },
         {
+            origin: ProtectionResult.Origin.G_DATA,
+            name: "gDataEnabled",
+            title: ProtectionResult.FullName[origin],
+            labelElementId: "gDataStatus",
+            switchElementId: "gDataSwitch",
+            messageType: Messages.G_DATA_TOGGLED,
+        },
+        {
+            origin: ProtectionResult.Origin.SMARTSCREEN,
+            name: "smartScreenEnabled",
+            title: ProtectionResult.FullName[origin],
+            labelElementId: "smartScreenStatus",
+            switchElementId: "smartScreenSwitch",
+            messageType: Messages.SMARTSCREEN_TOGGLED,
+        },
+        {
+            origin: ProtectionResult.Origin.NORTON,
+            name: "nortonEnabled",
+            title: ProtectionResult.FullName[origin],
+            labelElementId: "nortonStatus",
+            switchElementId: "nortonSwitch",
+            messageType: Messages.NORTON_TOGGLED,
+        },
+        {
+            origin: ProtectionResult.Origin.QUAD9,
             name: "quad9Enabled",
-            title: "Quad9 Security DNS",
+            title: ProtectionResult.FullName[origin],
             labelElementId: "quad9Status",
             switchElementId: "quad9Switch",
-            messageType: Messages.MessageType.QUAD9_TOGGLED,
+            messageType: Messages.QUAD9_TOGGLED,
         }
     ];
 
@@ -180,17 +199,6 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             };
         }
         return domElements[system.name];
-    }
-
-    /**
-     * Batches updates UI elements for better performance.
-     *
-     * @param {Array} updates - Array of update operations to perform
-     */
-    function batchDomUpdates(updates) {
-        window.requestAnimationFrame(() => {
-            updates.forEach(update => update());
-        });
     }
 
     /**
@@ -227,7 +235,10 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             }
         });
 
-        batchDomUpdates(updates);
+        // Batches the DOM updates for performance
+        window.requestAnimationFrame(() => {
+            updates.forEach(update => update());
+        });
     }
 
     /**
@@ -245,7 +256,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
 
                 browserAPI.runtime.sendMessage({
                     messageType: system.messageType,
-                    title: system.title,
+                    title: ProtectionResult.FullName[origin],
                     toggleState: newState,
                 }).catch(error => {
                     console.error(`Failed to send message for ${system.name}:`, error);
@@ -317,27 +328,25 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             versionElement.textContent += version;
         }
 
-        const page1 = document.getElementById("page1");
-        const page2 = document.getElementById("page2");
-        const page3 = document.getElementById("page3");
+        // Get all elements with the class 'page'
+        const pages = document.querySelectorAll('.page');
         const prevPage = document.getElementById("prevPage");
         const nextPage = document.getElementById("nextPage");
         const pageIndicator = document.getElementById("pageIndicator");
+
         let currentPage = 1;
-        const totalPages = 3;
+        const totalPages = pages.length;
+
+        // Checks if there are no pages
+        if (totalPages === 0) {
+            console.error('No pages found. Please ensure there are elements with the class "page".');
+            return;
+        }
 
         function updatePageDisplay() {
             // Checks for invalid current page numbers
             if (currentPage < 1 || currentPage > totalPages) {
                 currentPage = 1;
-            }
-
-            const pages = [page1, page2, page3];
-
-            // Checks for valid HTML page elements
-            if (!pages.every(page => page instanceof HTMLElement)) {
-                console.error('Missing page elements');
-                return;
             }
 
             // Toggles the active status
@@ -365,7 +374,6 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         updatePageDisplay();
     }
 
-    // Returns the public API
     return {
         initialize
     };

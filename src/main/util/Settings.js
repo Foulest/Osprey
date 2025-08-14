@@ -18,7 +18,7 @@
 "use strict";
 
 // Manages user preferences and configurations.
-const Settings = (function () {
+const Settings = (() => {
 
     // Key for storing settings in local storage
     const settingsKey = "Settings";
@@ -98,55 +98,76 @@ const Settings = (function () {
         return hasChanges;
     }
 
+    /**
+     * Retrieves settings from local storage and merges them with default settings.
+     *
+     * @param {Function} callback - The function to call with the retrieved settings.
+     */
+    function get(callback) {
+        StorageUtil.getFromLocalStore(settingsKey, function (storedSettings) {
+            // Clones the default settings object
+            let mergedSettings = JSON.parse(JSON.stringify(defaultSettings));
+
+            // Merges any stored settings into the cloned default settings
+            updateIfChanged(mergedSettings, storedSettings);
+
+            // Invokes the callback with the merged settings
+            callback && callback(mergedSettings);
+        });
+    }
+
+    /**
+     * Saves settings to local storage, merging them with any previously stored settings.
+     *
+     * @param {Object} newSettings - The new settings to save.
+     * @param {Function} [callback] - Optional callback to call after settings are saved.
+     */
+    function set(newSettings, callback) {
+        StorageUtil.getFromLocalStore(settingsKey, function (storedSettings) {
+            // Clones the default settings object
+            let mergedSettings = JSON.parse(JSON.stringify(defaultSettings));
+
+            // Merges stored settings and new settings into the cloned default settings
+            storedSettings && updateIfChanged(mergedSettings, storedSettings);
+            updateIfChanged(mergedSettings, newSettings);
+
+            // Saves the merged settings back to local storage
+            StorageUtil.setToLocalStore(settingsKey, mergedSettings, callback);
+        });
+    }
+
+    /**
+     * Restore the default settings.
+     *
+     * @param callback - Callback function that will be called after restoring the settings.
+     */
+    function restoreDefaultSettings(callback) {
+        // Saves the default settings back to local storage
+        StorageUtil.getFromLocalStore(settingsKey, function () {
+            StorageUtil.setToLocalStore(settingsKey, defaultSettings, callback);
+        });
+    }
+
+    /**
+     * Checks if all partner settings are disabled.
+     *
+     * @param settings - The settings object to check.
+     * @returns {boolean} - Returns true if all partner settings are disabled, false otherwise.
+     */
+    function allPartnersDisabled(settings) {
+        // Checks if all partner settings are disabled
+        return !settings.adGuardSecurityEnabled &&
+            !settings.adGuardFamilyEnabled &&
+            !settings.alphaMountainEnabled &&
+            !settings.controlDSecurityEnabled &&
+            !settings.controlDFamilyEnabled &&
+            !settings.precisionSecEnabled;
+    }
+
     return {
-        /**
-         * Retrieves settings from local storage and merges them with default settings.
-         *
-         * @param {Function} callback - The function to call with the retrieved settings.
-         */
-        get: function (callback) {
-            Storage.getFromLocalStore(settingsKey, function (storedSettings) {
-                // Clones the default settings object
-                let mergedSettings = JSON.parse(JSON.stringify(defaultSettings));
-
-                // Merges any stored settings into the cloned default settings
-                updateIfChanged(mergedSettings, storedSettings);
-
-                // Invokes the callback with the merged settings
-                callback && callback(mergedSettings);
-            });
-        },
-
-        /**
-         * Saves settings to local storage, merging them with any previously stored settings.
-         *
-         * @param {Object} newSettings - The new settings to save.
-         * @param {Function} [callback] - Optional callback to call after settings are saved.
-         */
-        set: function (newSettings, callback) {
-            Storage.getFromLocalStore(settingsKey, function (storedSettings) {
-                // Clones the default settings object
-                let mergedSettings = JSON.parse(JSON.stringify(defaultSettings));
-
-                // Merges stored settings and new settings into the cloned default settings
-                storedSettings && updateIfChanged(mergedSettings, storedSettings);
-                updateIfChanged(mergedSettings, newSettings);
-
-                // Saves the merged settings back to local storage
-                Storage.setToLocalStore(settingsKey, mergedSettings, callback);
-            });
-        },
-
-        /**
-         * Restore the default settings.
-         *
-         * @param callback - Callback function that will be called after restoring the settings.
-         */
-        restoreDefaultSettings: function (callback) {
-            // Saves the default settings back to local storage
-            Storage.getFromLocalStore(settingsKey, function () {
-                Storage.setToLocalStore(settingsKey, defaultSettings, callback);
-            });
-        }
+        get,
+        set,
+        restoreDefaultSettings,
+        allPartnersDisabled
     };
 })();

@@ -59,10 +59,10 @@
         // This will work in Chrome service workers but throw in Firefox
         importScripts(
             // Util
+            "util/StorageUtil.js",
             "util/Settings.js",
             "util/UrlHelpers.js",
             "util/CacheManager.js",
-            "util/Storage.js",
             "util/MessageType.js",
 
             // Other
@@ -77,9 +77,6 @@
         console.debug("Running in Firefox or another environment without importScripts");
         console.debug(`Error: ${error}`);
     }
-
-    // Initializes the BrowserProtection module's API keys
-    BrowserProtection.initializeKeys();
 
     // List of valid protocols to check for
     const validProtocols = ['http:', 'https:'];
@@ -129,32 +126,44 @@
                 return;
             }
 
-            // Removes the blob: prefix from the URL.
-            currentUrl = currentUrl.replace(/^blob:http/, 'http');
-
-            // Removes trailing slashes from the URL.
-            currentUrl = currentUrl.replace(/\/+$/, '');
-
-            // Removes www. from the start of the URL.
-            currentUrl = currentUrl.replace(/https?:\/\/www\./, 'https://');
-
-            // Removes query parameters, fragments (#) and & tags from the URL.
-            currentUrl = currentUrl.replace(/[?#&].*$/, '');
-
-            // Sanitizes and encodes the URL to handle spaces and special characters.
-            try {
-                currentUrl = encodeURI(currentUrl);
-            } catch (error) {
-                console.warn(`Failed to encode URL: ${currentUrl}; bailing out: ${error}`);
-                return;
-            }
-
             // Parses the URL object.
             let urlObject;
             try {
                 urlObject = new URL(currentUrl);
             } catch (error) {
                 console.warn(`Invalid URL format: ${currentUrl}; bailing out: ${error}`);
+                return;
+            }
+
+            // Removes the blob: prefix from the URL.
+            // Example: turns blob:http://example.com into http://example.com
+            currentUrl = currentUrl.replace(/^blob:http/, 'http');
+
+            // Removes www. from the start of the URL.
+            // Example: turns https://www.example.com into https://example.com
+            currentUrl = currentUrl.replace(/https?:\/\/www\./, 'https://');
+
+            // Removes query parameters, fragments (#) and & tags from the URL.
+            // Example: turns https://example.com?param=value#fragment into https://example.com
+            currentUrl = currentUrl.replace(/[?#&].*$/, '');
+
+            // Removes user and pass parameters from the start of the URL.
+            // Example: turns https://user:pass@example.com into https://example.com
+            currentUrl = currentUrl.replace(/https?:\/\/[^/]+@/, 'https://');
+
+            // Removes port numbers from the URL, even if at a page.
+            // Example: turns https://example.com:8080/test.php into https://example.com/test.php
+            currentUrl = currentUrl.replace(/:(\d+)(\/|$)/, '$2');
+
+            // Removes trailing slashes from the URL.
+            // Example: turns https://example.com/ into https://example.com
+            currentUrl = currentUrl.replace(/\/+$/, '');
+
+            // Sanitizes and encodes the URL to handle spaces and special characters.
+            try {
+                currentUrl = encodeURI(currentUrl);
+            } catch (error) {
+                console.warn(`Failed to encode URL: ${currentUrl}; bailing out: ${error}`);
                 return;
             }
 
@@ -180,14 +189,32 @@
             }
 
             // Checks for missing the suffix.
-            if (hostname.endsWith('.')) {
+            if (!hostname.includes('.') || hostname.endsWith('.')) {
                 console.warn(`Missing suffix in URL: ${currentUrl}; bailing out.`);
                 return;
             }
 
+            // Checks for unusually long hostnames.
+            if (hostname.length > 253) {
+                console.warn(`Hostname is too long: ${hostname}; bailing out.`);
+                return;
+            }
+
+            // Checks for invalid characters in the hostname.
+            if (!/^[a-zA-Z0-9.-]+$/.test(hostname)) {
+                console.warn(`Hostname contains invalid characters: ${hostname}; bailing out.`);
+                return;
+            }
+
             // Excludes internal network addresses, loopback, or reserved domains.
-            if (isInternalAddress(hostname)) {
-                console.warn(`Local/internal network URL detected: ${currentUrl}; bailing out.`);
+            if (UrlHelpers.isInternalAddress(hostname)) {
+                console.debug(`Local/internal network URL detected: ${currentUrl}; bailing out.`);
+                return;
+            }
+
+            // Checks if the hostname is in the global allowed cache.
+            if (CacheManager.isPatternInAllowedCache(urlObject.hostname, "global")) {
+                console.debug(`URL is in the global allowed cache: ${currentUrl}; bailing out.`);
                 return;
             }
 
@@ -196,7 +223,7 @@
                 BrowserProtection.abandonPendingRequests(tabId, "Cancelled by main frame navigation.");
 
                 // Remove all cached keys for the tab.
-                BrowserProtection.cacheManager.removeKeysByTabId(tabId);
+                CacheManager.removeKeysByTabId(tabId);
                 resultSystemNames.delete(tabId);
 
                 // Reset the frame zero URLs for the tab.
@@ -211,18 +238,20 @@
             let firstSystemName = "";
             resultSystemNames.set(tabId, []);
 
+            const startTime = Date.now();
             console.info(`Checking URL: ${currentUrl}`);
 
             // Checks if the URL is malicious.
-            BrowserProtection.checkIfUrlIsMalicious(tabId, currentUrl, (result, duration) => {
-                const cacheName = ProtectionResult.CacheOriginNames[result.origin];
-                const systemName = ProtectionResult.ShortOriginNames[result.origin];
-                const resultType = result.result;
+            BrowserProtection.checkIfUrlIsMalicious(tabId, currentUrl, (result) => {
+                const duration = Date.now() - startTime;
+                const cacheName = ProtectionResult.CacheName[result.origin];
+                const systemName = ProtectionResult.ShortName[result.origin];
+                const resultType = result.resultType;
 
                 // Removes the URL from the system's processing cache on every callback.
                 // Doesn't remove it if the result is still waiting for a response.
                 if (resultType !== ProtectionResult.ResultType.WAITING) {
-                    BrowserProtection.cacheManager.removeUrlFromProcessingCache(urlObject, cacheName);
+                    CacheManager.removeUrlFromProcessingCache(urlObject, cacheName);
                 }
 
                 console.info(`[${systemName}] Result for ${currentUrl}: ${resultType} (${duration}ms)`);
@@ -289,6 +318,7 @@
                         });
                     }
 
+                    // TODO: Migrate this logic to work on refresh
                     blocked = true;
                     firstSystemName = firstSystemName === "" ? systemName : firstSystemName;
 
@@ -334,7 +364,7 @@
 
                             // Sends a PONG message to the content script to update the blocked counter.
                             browserAPI.tabs.sendMessage(tabId, {
-                                messageType: Messages.MessageType.BLOCKED_COUNTER_PONG,
+                                messageType: Messages.BLOCKED_COUNTER_PONG,
                                 count: adjustedCount,
                                 systems: resultSystemNames.get(tabId) || []
                             }).catch(() => {
@@ -591,7 +621,7 @@
 
     // Listens for PING messages from content scripts to get the blocked counter.
     browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        if (message.messageType === Messages.MessageType.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id !== null) {
+        if (message.messageType === Messages.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id !== null) {
             const tabId = sender.tab.id;
 
             // Ignores tabs that have already been cleaned up
@@ -626,7 +656,7 @@
         console.debug(`Tab removed: ${tabId} (windowId: ${removeInfo.windowId}) (isWindowClosing: ${removeInfo.isWindowClosing})`);
 
         // Removes all cached keys for the tab
-        BrowserProtection.cacheManager.removeKeysByTabId(tabId);
+        CacheManager.removeKeysByTabId(tabId);
 
         // Removes the tab from local maps
         resultSystemNames.delete(tabId);
@@ -692,26 +722,28 @@
             return;
         }
 
+        const tabId = sender.tab ? sender.tab.id : null;
+
         switch (message.messageType) {
-            case Messages.MessageType.CONTINUE_TO_SITE: {
+            case Messages.CONTINUE_TO_SITE: {
                 // Checks if the message has a blocked URL
                 if (!message.blockedUrl) {
                     console.debug(`No blocked URL was found; sending to new tab page.`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
                 // Checks if the message has a continue URL
                 if (!message.continueUrl) {
                     console.debug(`No continue URL was found; sending to new tab page.`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
                 // Checks if the message has an origin
                 if (!message.origin) {
                     console.debug(`No origin was found; sending to new tab page.`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
@@ -721,14 +753,14 @@
                     blockedUrlObject = new URL(message.blockedUrl);
                 } catch (error) {
                     console.warn(`Invalid blocked URL format: ${message.blockedUrl}; sending to new tab page: ${error}`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
                 // Redirects to the new tab page if the blocked URL is not a valid HTTP(S) URL
                 if (!validProtocols.includes(blockedUrlObject.protocol.toLowerCase())) {
                     console.debug(`Invalid protocol in blocked URL: ${message.blockedUrl}; sending to new tab page.`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
@@ -738,190 +770,47 @@
                     continueUrlObject = new URL(message.continueUrl);
                 } catch (error) {
                     console.warn(`Invalid continue URL format: ${message.continueUrl}; sending to new tab page: ${error}`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
                 // Redirects to the new tab page if the continue URL is not a valid HTTP(S) URL
                 if (!validProtocols.includes(continueUrlObject.protocol.toLowerCase())) {
                     console.debug(`Invalid protocol in continue URL: ${message.continueUrl}; sending to new tab page.`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
-                switch (message.origin) {
-                    case "1":
-                        console.debug(`Added AdGuard Security URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "adGuardSecurity");
+                const origin = message.origin;
 
-                        console.debug(`Removed AdGuard Security URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "adGuardSecurity");
-                        break;
+                if (origin === 0) {
+                    console.warn(`Unknown origin: ${message.origin}`);
+                } else {
+                    const shortName = ProtectionResult.ShortName[origin];
+                    const cacheName = ProtectionResult.CacheName[origin];
 
-                    case "2":
-                        console.debug(`Added AdGuard Family URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "adGuardFamily");
+                    console.debug(`Added ${shortName} URL to allowed cache: ${message.blockedUrl}`);
+                    CacheManager.addUrlToAllowedCache(message.blockedUrl, cacheName);
 
-                        console.debug(`Removed AdGuard Family URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "adGuardFamily");
-                        break;
-
-                    case "3":
-                        console.debug(`Added alphaMountain URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "alphaMountain");
-
-                        console.debug(`Removed alphaMountain URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "alphaMountain");
-                        break;
-
-                    case "4":
-                        console.debug(`Added Control D Security URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "controlDSecurity");
-
-                        console.debug(`Removed Control D Security URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "controlDSecurity");
-                        break;
-
-                    case "5":
-                        console.debug(`Added Control D Family URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "controlDFamily");
-
-                        console.debug(`Removed Control D Family URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "controlDFamily");
-                        break;
-
-                    case "6":
-                        console.debug(`Added PrecisionSec URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "precisionSec");
-
-                        console.debug(`Removed PrecisionSec URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "precisionSec");
-                        break;
-
-                    case "7":
-                        console.debug(`Added G DATA URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "gData");
-
-                        console.debug(`Removed G DATA URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "gData");
-                        break;
-
-                    case "8":
-                        console.debug(`Added CERT-EE URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "certEE");
-
-                        console.debug(`Removed CERT-EE URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "certEE");
-                        break;
-
-                    case "9":
-                        console.debug(`Added CleanBrowsing Security URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cleanBrowsingSecurity");
-
-                        console.debug(`Removed CleanBrowsing Security URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cleanBrowsingSecurity");
-                        break;
-
-                    case "10":
-                        console.debug(`Added CleanBrowsing Family URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cleanBrowsingFamily");
-
-                        console.debug(`Removed CleanBrowsing Family URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cleanBrowsingFamily");
-                        break;
-
-                    case "11":
-                        console.debug(`Added Cloudflare Security URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cloudflareSecurity");
-
-                        console.debug(`Removed Cloudflare Security URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cloudflareSecurity");
-                        break;
-
-                    case "12":
-                        console.debug(`Added Cloudflare Family URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "cloudflareFamily");
-
-                        console.debug(`Removed Cloudflare Family URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "cloudflareFamily");
-                        break;
-
-                    case "13":
-                        console.debug(`Added DNS0.eu Security URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns0Security");
-
-                        console.debug(`Removed DNS0.eu Security URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns0Security");
-                        break;
-
-                    case "14":
-                        console.debug(`Added DNS0.eu Family URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns0Family");
-
-                        console.debug(`Removed DNS0.eu Family URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns0Family");
-                        break;
-
-                    case "15":
-                        console.debug(`Added DNS4EU Security URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns4EUSecurity");
-
-                        console.debug(`Removed DNS4EU Security URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns4EUSecurity");
-                        break;
-
-                    case "16":
-                        console.debug(`Added DNS4EU Family URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "dns4EUFamily");
-
-                        console.debug(`Removed DNS4EU Family URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "dns4EUFamily");
-                        break;
-
-                    case "17":
-                        console.debug(`Added SmartScreen URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "smartScreen");
-
-                        console.debug(`Removed SmartScreen URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "smartScreen");
-                        break;
-
-                    case "18":
-                        console.debug(`Added Norton URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "norton");
-
-                        console.debug(`Removed Norton URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "norton");
-                        break;
-
-                    case "19":
-                        console.debug(`Added Quad9 URL to allowed cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.addUrlToAllowedCache(message.blockedUrl, "quad9");
-
-                        console.debug(`Removed Quad9 URL from blocked cache: ${message.blockedUrl}`);
-                        BrowserProtection.cacheManager.removeUrlFromBlockedCache(message.blockedUrl, "quad9");
-                        break;
-
-                    default:
-                        console.warn(`Unknown origin: ${message.origin}`);
-                        break;
+                    console.debug(`Removed ${shortName} URL from blocked cache: ${message.blockedUrl}`);
+                    CacheManager.removeUrlFromBlockedCache(message.blockedUrl, cacheName);
                 }
 
-                browserAPI.tabs.update(sender.tab.id, {url: message.continueUrl}).catch(error => {
+                browserAPI.tabs.update(tabId, {url: message.continueUrl}).catch(error => {
                     console.error(`Failed to update tab ${tabId}:`, error);
                     sendToNewTabPage(tabId);
                 });
                 break;
             }
 
-            case Messages.MessageType.CONTINUE_TO_SAFETY:
+            case Messages.CONTINUE_TO_SAFETY:
                 // Redirects to the new tab page
                 setTimeout(() => {
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                 }, 200);
                 break;
 
-            case Messages.MessageType.REPORT_SITE: {
+            case Messages.REPORT_SITE: {
                 // Ignores blank report URLs
                 if (message.reportUrl === null || message.reportUrl === "") {
                     console.debug(`Report URL is blank.`);
@@ -950,7 +839,7 @@
                 break;
             }
 
-            case Messages.MessageType.ALLOW_SITE: {
+            case Messages.ALLOW_SITE: {
                 // Ignores blank blocked URLs.
                 if (message.blockedUrl === null || message.blockedUrl === "") {
                     console.debug(`Blocked URL is blank.`);
@@ -960,14 +849,14 @@
                 // Checks if the message has a continue URL
                 if (!message.continueUrl) {
                     console.debug(`No continue URL was found; sending to new tab page.`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
                 // Checks if the message has an origin
                 if (!message.origin) {
                     console.debug(`No origin was found; sending to the new tab page.`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     break;
                 }
 
@@ -977,22 +866,22 @@
                     blockedUrlObject = new URL(message.blockedUrl);
                 } catch (error) {
                     console.warn(`Invalid blocked URL format: ${message.blockedUrl}; sending to new tab page: ${error}`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
                 // Redirects to the new tab page if the blocked URL is not a valid HTTP(S) URL
                 if (!validProtocols.includes(blockedUrlObject.protocol.toLowerCase())) {
                     console.debug(`Invalid protocol in blocked URL: ${message.blockedUrl}; sending to new tab page.`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
-                const hostnameString = `${blockedUrlObject.hostname} (allowed)`;
+                const hostnameString = `*.${blockedUrlObject.hostname}`;
 
-                // Adds the hostname to every allowed cache
-                console.debug(`Adding hostname to every allowed cache: ${hostnameString}`);
-                BrowserProtection.cacheManager.addStringToAllowedCache(hostnameString, "all");
+                // Adds the hostname to the global allowed cache
+                console.debug(`Adding hostname to the global allowed cache: ${hostnameString}`);
+                CacheManager.addStringToAllowedCache(hostnameString, "global");
 
                 // Parses the continue URL object
                 let continueUrlObject;
@@ -1000,48 +889,48 @@
                     continueUrlObject = new URL(message.continueUrl);
                 } catch (error) {
                     console.warn(`Invalid continue URL format: ${message.continueUrl}; sending to new tab page: ${error}`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
                 // Redirects to the new tab page if the continue URL is not a valid HTTP(S) URL
                 if (!validProtocols.includes(continueUrlObject.protocol.toLowerCase())) {
                     console.debug(`Invalid protocol in continue URL: ${message.continueUrl}; sending to new tab page.`);
-                    sendToNewTabPage(sender.tab.id);
+                    sendToNewTabPage(tabId);
                     return;
                 }
 
-                browserAPI.tabs.update(sender.tab.id, {url: message.continueUrl}).catch(error => {
+                browserAPI.tabs.update(tabId, {url: message.continueUrl}).catch(error => {
                     console.error(`Failed to update tab ${tabId}:`, error);
                     sendToNewTabPage(tabId);
                 });
                 break;
             }
 
-            case Messages.MessageType.ADGUARD_FAMILY_TOGGLED:
-            case Messages.MessageType.ADGUARD_SECURITY_TOGGLED:
-            case Messages.MessageType.ALPHAMOUNTAIN_TOGGLED:
-            case Messages.MessageType.CERT_EE_TOGGLED:
-            case Messages.MessageType.CLEANBROWSING_FAMILY_TOGGLED:
-            case Messages.MessageType.CLEANBROWSING_SECURITY_TOGGLED:
-            case Messages.MessageType.CLOUDFLARE_FAMILY_TOGGLED:
-            case Messages.MessageType.CLOUDFLARE_SECURITY_TOGGLED:
-            case Messages.MessageType.CONTROL_D_FAMILY_TOGGLED:
-            case Messages.MessageType.CONTROL_D_SECURITY_TOGGLED:
-            case Messages.MessageType.DNS0_FAMILY_TOGGLED:
-            case Messages.MessageType.DNS0_SECURITY_TOGGLED:
-            case Messages.MessageType.DNS4EU_FAMILY_TOGGLED:
-            case Messages.MessageType.DNS4EU_SECURITY_TOGGLED:
-            case Messages.MessageType.G_DATA_TOGGLED:
-            case Messages.MessageType.NORTON_TOGGLED:
-            case Messages.MessageType.PRECISIONSEC_TOGGLED:
-            case Messages.MessageType.QUAD9_TOGGLED:
-            case Messages.MessageType.SMARTSCREEN_TOGGLED:
+            case Messages.ADGUARD_FAMILY_TOGGLED:
+            case Messages.ADGUARD_SECURITY_TOGGLED:
+            case Messages.ALPHAMOUNTAIN_TOGGLED:
+            case Messages.CERT_EE_TOGGLED:
+            case Messages.CLEANBROWSING_FAMILY_TOGGLED:
+            case Messages.CLEANBROWSING_SECURITY_TOGGLED:
+            case Messages.CLOUDFLARE_FAMILY_TOGGLED:
+            case Messages.CLOUDFLARE_SECURITY_TOGGLED:
+            case Messages.CONTROL_D_FAMILY_TOGGLED:
+            case Messages.CONTROL_D_SECURITY_TOGGLED:
+            case Messages.DNS0_FAMILY_TOGGLED:
+            case Messages.DNS0_SECURITY_TOGGLED:
+            case Messages.DNS4EU_FAMILY_TOGGLED:
+            case Messages.DNS4EU_SECURITY_TOGGLED:
+            case Messages.G_DATA_TOGGLED:
+            case Messages.NORTON_TOGGLED:
+            case Messages.PRECISIONSEC_TOGGLED:
+            case Messages.QUAD9_TOGGLED:
+            case Messages.SMARTSCREEN_TOGGLED:
                 console.info(`${message.title} has been ${message.toggleState ? "enabled" : "disabled"}.`);
                 break;
 
-            case Messages.MessageType.BLOCKED_COUNTER_PING:
-            case Messages.MessageType.BLOCKED_COUNTER_PONG:
+            case Messages.BLOCKED_COUNTER_PING:
+            case Messages.BLOCKED_COUNTER_PONG:
                 // This message type is used for blocked counter pings and pongs.
                 break;
 
@@ -1066,9 +955,9 @@
                 break;
 
             case "clearAllowedSites": {
-                BrowserProtection.cacheManager.clearAllowedCache();
-                BrowserProtection.cacheManager.clearBlockedCache();
-                console.debug("Cleared all allowed site caches.");
+                CacheManager.clearAllowedCache();
+                CacheManager.clearBlockedCache();
+                console.debug("Cleared allowed and blocked site caches.");
 
                 // Builds the browser notification to send the user
                 const notificationOptions = {
@@ -1247,91 +1136,5 @@
         } else {
             browserAPI.tabs.update(tabId, {url: "about:newtab"});
         }
-    }
-
-    /**
-     * Checks if an IP address is private/locally hosted.
-     *
-     * @param ip - The IP address to check.
-     * @returns {boolean|boolean|boolean} - If the IP address is private/locally hosted.
-     */
-    function isPrivateIP(ip) {
-        return ip.startsWith("127.") ||
-            ip.startsWith("10.") ||
-            /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(ip) ||
-            ip.startsWith("192.168.") ||
-            ip.startsWith("0.0.0.0");
-    }
-
-    /**
-     * Normalizes an IP address.
-     *
-     * @param hostname - The IP/hostname to check.
-     * @returns {null|string} - The normalized IP address.
-     */
-    function normalizeIP(hostname) {
-        // Checks if the input is a decimal IP (e.g. "3232235777")
-        if (/^\d+$/.test(hostname)) {
-            const n = parseInt(hostname, 10);
-            return [
-                n >>> 24 & 255,
-                n >>> 16 & 255,
-                n >>> 8 & 255,
-                n & 255
-            ].join(".");
-        }
-
-        const parts = hostname.split(".");
-
-        // Dotted format - may include decimal, octal, or hex
-        if (parts.length === 4) {
-            try {
-                const nums = parts.map(p => {
-                    if (/^0x/i.test(p)) {
-                        return parseInt(p, 16); // hex
-                    } else if (/^0[0-7]*$/.test(p)) {
-                        return parseInt(p, 8); // octal (starts with 0, only digits 0–7)
-                    } else {
-                        return parseInt(p, 10); // decimal
-                    }
-                });
-
-                if (nums.every(n => n >= 0 && n <= 255)) {
-                    return nums.join('.');
-                }
-                return nums.join(".");
-            } catch (error) {
-                console.warn(`Error in checking for dotted quad in URL: ${error}`);
-                return null;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Checks if a hostname is locally hosted.
-     *
-     * @param hostname - The hostname to check.
-     * @returns {boolean|boolean} - If a hostname is locally hosted.
-     */
-    function isLocalHostname(hostname) {
-        return hostname === "localhost" ||
-            hostname.endsWith(".localhost") ||
-            hostname.endsWith(".local");
-    }
-
-    /**
-     * Checks if a hostname/IP address is locally hosted.
-     *
-     * @param hostname - The hostname to check.
-     * @returns {boolean} - If a hostname is locally hosted.
-     */
-    function isInternalAddress(hostname) {
-        if (isLocalHostname(hostname)) {
-            return true;
-        }
-
-        const ip = normalizeIP(hostname);
-        return ip ? isPrivateIP(ip) : false;
     }
 })();

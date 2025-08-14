@@ -194,43 +194,77 @@ const SmartScreenUtil = (() => {
         state.sum += state.t;
     }
 
-    // Returns the public API of the SmartScreenUtil module
-    return {
-        /**
-         * Generates a hash for the given input string.
-         *
-         * @param input - The input string to hash.
-         * @returns {{key: string, hash: string}} - An object containing the base64 encoded key and hash.
-         */
-        hash: function (input) {
-            const hashOutput = computeHash(input);
+    /**
+     * Generates a hash for the given input string.
+     *
+     * @param input - The input string to hash.
+     * @returns {{key: string, hash: string}} - An object containing the base64 encoded key and hash.
+     */
+    function hash(input) {
+        const hashOutput = computeHash(input);
 
-            const outputData = {
-                length: input.length / 4 & -2, getWord(index) {
-                    const wordIndex = 4 * index;
-                    return input.charCodeAt(wordIndex)
-                        | input.charCodeAt(wordIndex + 1) << 8
-                        | input.charCodeAt(wordIndex + 2) << 16
-                        | input.charCodeAt(wordIndex + 3) << 24;
-                }
+        const outputData = {
+            length: input.length / 4 & -2, getWord(index) {
+                const wordIndex = 4 * index;
+                return input.charCodeAt(wordIndex)
+                    | input.charCodeAt(wordIndex + 1) << 8
+                    | input.charCodeAt(wordIndex + 2) << 16
+                    | input.charCodeAt(wordIndex + 3) << 24;
+            }
+        };
+
+        const intermediateOutput = [0, 0];
+        const finalOutput = [0, 0];
+
+        /**
+         * Performs the first half of the hash calculation.
+         *
+         * @param {Object} inputBuffer - The input buffer containing the data to hash.
+         * @param {Array} hashArray - The array containing hash constants.
+         * @param {Array} output - The output array to store the hash result.
+         */
+        if (((inputBuffer, hashArray, output) => {
+            let hashState = {
+                buffer: inputBuffer,
+                index: 0,
+                sum: 0,
+                t: 0
             };
 
-            const intermediateOutput = [0, 0];
-            const finalOutput = [0, 0];
+            let firstMultiplier = 1 | hashArray[0];
+            let secondMultiplier = 1 | hashArray[1];
+
+            // Ensures the input buffer is valid
+            if (inputBuffer.length < 2 || 1 & inputBuffer.length) {
+                return false;
+            }
+
+            // Processes the buffer until all words are consumed
+            while (hashState.buffer.length - hashState.index > 1) {
+                hashOperation(hashState, firstMultiplier, 4010109435, 1755016095, 240755605, 3287280279);
+                hashOperation(hashState, secondMultiplier, 3273069531, 3721207567, 984919853, 901586633);
+            }
+
+            output[0] = hashState.t;
+            output[1] = hashState.sum;
+            return true;
+        })(outputData, hashOutput, finalOutput)) {
+            const additionalOutput = [0, 0];
 
             /**
-             * Performs the first half of the hash calculation.
+             * Performs the second half of the hash calculation.
              *
              * @param {Object} inputBuffer - The input buffer containing the data to hash.
              * @param {Array} hashArray - The array containing hash constants.
              * @param {Array} output - The output array to store the hash result.
              */
-            if (((inputBuffer, hashArray, output) => {
+            ((inputBuffer, hashArray, output) => {
                 let hashState = {
                     buffer: inputBuffer,
                     index: 0,
                     sum: 0,
-                    t: 0
+                    t: 0,
+                    u: 0
                 };
 
                 let firstMultiplier = 1 | hashArray[0];
@@ -243,61 +277,25 @@ const SmartScreenUtil = (() => {
 
                 // Processes the buffer until all words are consumed
                 while (hashState.buffer.length - hashState.index > 1) {
-                    hashOperation(hashState, firstMultiplier, 4010109435, 1755016095, 240755605, 3287280279);
-                    hashOperation(hashState, secondMultiplier, 3273069531, 3721207567, 984919853, 901586633);
+                    hashOperationExtended(hashState, firstMultiplier, 3482890513, 2265471903, 315537773, 629022083, 0);
+                    hashOperationExtended(hashState, secondMultiplier, 2725517045, 3548616447, 2090019721, 3215236969, 0);
                 }
 
                 output[0] = hashState.t;
                 output[1] = hashState.sum;
                 return true;
-            })(outputData, hashOutput, finalOutput)) {
-                const additionalOutput = [0, 0];
+            })(outputData, hashOutput, additionalOutput) &&
+            (intermediateOutput[0] = finalOutput[0] ^ additionalOutput[0],
+                intermediateOutput[1] = finalOutput[1] ^ additionalOutput[1]);
+        }
 
-                /**
-                 * Performs the second half of the hash calculation.
-                 *
-                 * @param {Object} inputBuffer - The input buffer containing the data to hash.
-                 * @param {Array} hashArray - The array containing hash constants.
-                 * @param {Array} output - The output array to store the hash result.
-                 */
-                ((inputBuffer, hashArray, output) => {
-                    let hashState = {
-                        buffer: inputBuffer,
-                        index: 0,
-                        sum: 0,
-                        t: 0,
-                        u: 0
-                    };
+        return {
+            key: btoa(intArrayToString(hashOutput)),
+            hash: btoa(intArrayToString(intermediateOutput))
+        };
+    }
 
-                    let firstMultiplier = 1 | hashArray[0];
-                    let secondMultiplier = 1 | hashArray[1];
-
-                    // Ensures the input buffer is valid
-                    if (inputBuffer.length < 2 || 1 & inputBuffer.length) {
-                        return false;
-                    }
-
-                    // Processes the buffer until all words are consumed
-                    while (hashState.buffer.length - hashState.index > 1) {
-                        hashOperationExtended(hashState, firstMultiplier, 3482890513, 2265471903, 315537773, 629022083, 0);
-                        hashOperationExtended(hashState, secondMultiplier, 2725517045, 3548616447, 2090019721, 3215236969, 0);
-                    }
-
-                    output[0] = hashState.t;
-                    output[1] = hashState.sum;
-                    return true;
-                })(outputData, hashOutput, additionalOutput) &&
-                (intermediateOutput[0] = finalOutput[0] ^ additionalOutput[0],
-                    intermediateOutput[1] = finalOutput[1] ^ additionalOutput[1]);
-            }
-
-            return {
-                key: btoa(intArrayToString(hashOutput)),
-                hash: btoa(intArrayToString(intermediateOutput))
-            };
-        },
-
-        // Method to perform MD5 hashing
-        md5: computeHash
+    return {
+        hash
     };
 })();

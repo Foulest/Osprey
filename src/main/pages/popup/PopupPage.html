@@ -22,8 +22,9 @@
     <meta charset="utf-8">
     <title>Osprey: Browser Protection</title>
     <link rel="stylesheet" href="PopupPage.css">
+    <script src="../../protection/ProtectionResult.js" type="text/javascript"></script>
     <script src="../../util/MessageType.js" type="text/javascript"></script>
-    <script src="../../util/Storage.js" type="text/javascript"></script>
+    <script src="../../util/StorageUtil.js" type="text/javascript"></script>
     <script src="../../util/Settings.js" type="text/javascript"></script>
     <script src="PopupPage.js" type="text/javascript"></script>
 </head>
@@ -115,32 +116,6 @@
             <span id="precisionSecStatus" class="status"></span>
         </div>
 
-        <!-- G DATA Web Protection -->
-        <img src="../../assets/images/gdata.png" width="16" height="16" title="G DATA Logo" alt="G DATA Logo">
-        <a class="other-label">G DATA Web Protection</a>
-        <div id="gDataDivSwitch">
-            <span id="gDataSwitch" class="switch on leftMargin"></span>
-            <span id="gDataStatus" class="status"></span>
-        </div>
-    </div>
-
-    <div id="page2" class="page">
-        <!-- Microsoft SmartScreen -->
-        <img src="../../assets/images/microsoft.png" width="16" height="16" title="Microsoft Logo" alt="Microsoft Logo">
-        <a class="other-label">Microsoft SmartScreen</a>
-        <div id="smartScreenDivSwitch">
-            <span id="smartScreenSwitch" class="switch on leftMargin"></span>
-            <span id="smartScreenStatus" class="status"></span>
-        </div>
-
-        <!-- Norton Safe Web -->
-        <img src="../../assets/images/norton.png" width="16" height="16" title="Norton Logo" alt="Norton Logo">
-        <a class="other-label">Norton Safe Web</a>
-        <div id="nortonDivSwitch">
-            <span id="nortonSwitch" class="switch on leftMargin"></span>
-            <span id="nortonStatus" class="status"></span>
-        </div>
-
         <!-- CERT-EE Security DNS -->
         <img src="../../assets/images/cert-ee.png" width="16" height="16" title="CERT-EE Logo" alt="CERT-EE Logo">
         <a class="other-label">CERT-EE Security DNS</a>
@@ -148,7 +123,9 @@
             <span id="certEESwitch" class="switch on leftMargin"></span>
             <span id="certEEStatus" class="status"></span>
         </div>
+    </div>
 
+    <div id="page2" class="page">
         <!-- CleanBrowsing Security DNS -->
         <img src="../../assets/images/cleanbrowsing.png" width="16" height="16" title="CleanBrowsing Logo"
              alt="CleanBrowsing Logo">
@@ -184,9 +161,7 @@
             <span id="cloudflareFamilySwitch" class="switch on leftMargin"></span>
             <span id="cloudflareFamilyStatus" class="status"></span>
         </div>
-    </div>
 
-    <div id="page3" class="page">
         <!-- DNS0.eu Security DNS -->
         <img src="../../assets/images/dns0.png" width="16" height="16" title="DNS0.eu Logo" alt="DNS0.eu Logo">
         <a class="other-label">DNS0.eu Security DNS</a>
@@ -210,13 +185,39 @@
             <span id="dns4EUSecuritySwitch" class="switch on leftMargin"></span>
             <span id="dns4EUSecurityStatus" class="status"></span>
         </div>
+    </div>
 
+    <div id="page3" class="page">
         <!-- DNS4EU Family DNS -->
         <img src="../../assets/images/dns4eu.png" width="16" height="16" title="DNS4EU Logo" alt="DNS4EU Logo">
         <a class="other-label">DNS4EU Family DNS</a>
         <div id="dns4EUFamilyDivSwitch">
             <span id="dns4EUFamilySwitch" class="switch on leftMargin"></span>
             <span id="dns4EUFamilyStatus" class="status"></span>
+        </div>
+
+        <!-- G DATA Web Protection -->
+        <img src="../../assets/images/gdata.png" width="16" height="16" title="G DATA Logo" alt="G DATA Logo">
+        <a class="other-label">G DATA Web Protection</a>
+        <div id="gDataDivSwitch">
+            <span id="gDataSwitch" class="switch on leftMargin"></span>
+            <span id="gDataStatus" class="status"></span>
+        </div>
+
+        <!-- Microsoft SmartScreen -->
+        <img src="../../assets/images/microsoft.png" width="16" height="16" title="Microsoft Logo" alt="Microsoft Logo">
+        <a class="other-label">Microsoft SmartScreen</a>
+        <div id="smartScreenDivSwitch">
+            <span id="smartScreenSwitch" class="switch on leftMargin"></span>
+            <span id="smartScreenStatus" class="status"></span>
+        </div>
+
+        <!-- Norton Safe Web -->
+        <img src="../../assets/images/norton.png" width="16" height="16" title="Norton Logo" alt="Norton Logo">
+        <a class="other-label">Norton Safe Web</a>
+        <div id="nortonDivSwitch">
+            <span id="nortonSwitch" class="switch on leftMargin"></span>
+            <span id="nortonStatus" class="status"></span>
         </div>
 
         <!-- Quad9 Security DNS -->

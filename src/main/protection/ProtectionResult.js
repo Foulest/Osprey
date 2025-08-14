@@ -28,7 +28,7 @@ class ProtectionResult {
      */
     constructor(urlChecked, resultType, resultOrigin) {
         this.url = urlChecked;
-        this.result = resultType;
+        this.resultType = resultType;
         this.origin = resultOrigin;
     }
 }
@@ -44,7 +44,7 @@ ProtectionResult.ResultType = {
     ADULT_CONTENT: "Adult Content",
 };
 
-ProtectionResult.ResultOrigin = {
+ProtectionResult.Origin = {
     UNKNOWN: 0,
 
     // Official Partners
@@ -56,22 +56,22 @@ ProtectionResult.ResultOrigin = {
     PRECISIONSEC: 6,
 
     // Non-Partnered Providers
-    G_DATA: 7,
-    CERT_EE: 8,
-    CLEANBROWSING_SECURITY: 9,
-    CLEANBROWSING_FAMILY: 10,
-    CLOUDFLARE_SECURITY: 11,
-    CLOUDFLARE_FAMILY: 12,
-    DNS0_SECURITY: 13,
-    DNS0_FAMILY: 14,
-    DNS4EU_SECURITY: 15,
-    DNS4EU_FAMILY: 16,
+    CERT_EE: 7,
+    CLEANBROWSING_SECURITY: 8,
+    CLEANBROWSING_FAMILY: 9,
+    CLOUDFLARE_SECURITY: 10,
+    CLOUDFLARE_FAMILY: 11,
+    DNS0_SECURITY: 12,
+    DNS0_FAMILY: 13,
+    DNS4EU_SECURITY: 14,
+    DNS4EU_FAMILY: 15,
+    G_DATA: 16,
     SMARTSCREEN: 17,
     NORTON: 18,
     QUAD9: 19,
 };
 
-ProtectionResult.ResultOriginNames = {
+ProtectionResult.FullName = {
     0: "Unknown",
 
     // Official Partners
@@ -83,22 +83,22 @@ ProtectionResult.ResultOriginNames = {
     6: "PrecisionSec Web Protection",
 
     // Non-Partnered Providers
-    7: "G DATA Web Protection",
-    8: "CERT-EE Security DNS",
-    9: "CleanBrowsing Security DNS",
-    10: "CleanBrowsing Family DNS",
-    11: "Cloudflare Security DNS",
-    12: "Cloudflare Family DNS",
-    13: "DNS0.eu Security DNS",
-    14: "DNS0.eu Family DNS",
-    15: "DNS4EU Security DNS",
-    16: "DNS4EU Family DNS",
+    7: "CERT-EE Security DNS",
+    8: "CleanBrowsing Security DNS",
+    9: "CleanBrowsing Family DNS",
+    10: "Cloudflare Security DNS",
+    11: "Cloudflare Family DNS",
+    12: "DNS0.eu Security DNS",
+    13: "DNS0.eu Family DNS",
+    14: "DNS4EU Security DNS",
+    15: "DNS4EU Family DNS",
+    16: "G DATA Web Protection",
     17: "Microsoft SmartScreen",
     18: "Norton Safe Web",
     19: "Quad9 Security DNS",
 };
 
-ProtectionResult.ShortOriginNames = {
+ProtectionResult.ShortName = {
     0: "Unknown",
 
     // Official Partners
@@ -110,22 +110,22 @@ ProtectionResult.ShortOriginNames = {
     6: "PrecisionSec",
 
     // Non-Partnered Providers
-    7: "G DATA",
-    8: "CERT-EE",
-    9: "CleanBrowsing Security",
-    10: "CleanBrowsing Family",
-    11: "Cloudflare Security",
-    12: "Cloudflare Family",
-    13: "DNS0.eu Security",
-    14: "DNS0.eu Family",
-    15: "DNS4EU Security",
-    16: "DNS4EU Family",
+    7: "CERT-EE",
+    8: "CleanBrowsing Security",
+    9: "CleanBrowsing Family",
+    10: "Cloudflare Security",
+    11: "Cloudflare Family",
+    12: "DNS0.eu Security",
+    13: "DNS0.eu Family",
+    14: "DNS4EU Security",
+    15: "DNS4EU Family",
+    16: "G DATA",
     17: "SmartScreen",
     18: "Norton",
     19: "Quad9",
 };
 
-ProtectionResult.CacheOriginNames = {
+ProtectionResult.CacheName = {
     0: "unknown",
 
     // Official Partners
@@ -137,16 +137,16 @@ ProtectionResult.CacheOriginNames = {
     6: "precisionSec",
 
     // Non-Partnered Providers
-    7: "gData",
-    8: "certEE",
-    9: "cleanBrowsingSecurity",
-    10: "cleanBrowsingFamily",
-    11: "cloudflareSecurity",
-    12: "cloudflareFamily",
-    13: "dns0Security",
-    14: "dns0Family",
-    15: "dns4EUSecurity",
-    16: "dns4EUFamily",
+    7: "certEE",
+    8: "cleanBrowsingSecurity",
+    9: "cleanBrowsingFamily",
+    10: "cloudflareSecurity",
+    11: "cloudflareFamily",
+    12: "dns0Security",
+    13: "dns0Family",
+    14: "dns4EUSecurity",
+    15: "dns4EUFamily",
+    16: "gData",
     17: "smartScreen",
     18: "norton",
     19: "quad9",

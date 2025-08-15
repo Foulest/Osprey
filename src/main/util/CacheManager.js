@@ -319,7 +319,6 @@ const CacheManager = (() => {
                 }
 
                 map.delete(key);
-
                 cleanExpiredEntries();
                 updateLocalStorage();
             }
@@ -491,6 +490,7 @@ const CacheManager = (() => {
             }
 
             map.delete(key);
+            cleanExpiredEntries();
             updateLocalStorage();
         } catch (error) {
             console.error(`Error checking blocked cache for ${url}:`, error);
@@ -562,6 +562,7 @@ const CacheManager = (() => {
                 return entry.resultType;
             } else {
                 cache.delete(key);
+                cleanExpiredEntries();
                 updateLocalStorage();
             }
         } catch (error) {
@@ -631,7 +632,6 @@ const CacheManager = (() => {
                 }
 
                 map.delete(key);
-
                 cleanExpiredEntries();
                 updateLocalStorage();
             }

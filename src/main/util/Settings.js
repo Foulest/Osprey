@@ -155,7 +155,6 @@ const Settings = (() => {
      * @returns {boolean} - Returns true if all partner settings are disabled, false otherwise.
      */
     function allPartnersDisabled(settings) {
-        // Checks if all partner settings are disabled
         return !settings.adGuardSecurityEnabled &&
             !settings.adGuardFamilyEnabled &&
             !settings.alphaMountainEnabled &&
@@ -164,10 +163,39 @@ const Settings = (() => {
             !settings.precisionSecEnabled;
     }
 
+    /**
+     * Checks if all security providers are disabled.
+     *
+     * @param settings - The settings object to check.
+     * @returns {boolean} - Returns true if all security providers are disabled, false otherwise.
+     */
+    function allProvidersDisabled(settings) {
+        return !settings.adGuardSecurityEnabled &&
+            !settings.adGuardFamilyEnabled &&
+            !settings.alphaMountainEnabled &&
+            !settings.controlDSecurityEnabled &&
+            !settings.controlDFamilyEnabled &&
+            !settings.precisionSecEnabled &&
+            !settings.gDataEnabled &&
+            !settings.certEEEnabled &&
+            !settings.cleanBrowsingSecurityEnabled &&
+            !settings.cleanBrowsingFamilyEnabled &&
+            !settings.cloudflareSecurityEnabled &&
+            !settings.cloudflareFamilyEnabled &&
+            !settings.dns0SecurityEnabled &&
+            !settings.dns0FamilyEnabled &&
+            !settings.dns4EUSecurityEnabled &&
+            !settings.dns4EUFamilyEnabled &&
+            !settings.smartScreenEnabled &&
+            !settings.nortonEnabled &&
+            !settings.quad9Enabled;
+    }
+
     return {
         get,
         set,
         restoreDefaultSettings,
-        allPartnersDisabled
+        allPartnersDisabled,
+        allProvidersDisabled
     };
 })();

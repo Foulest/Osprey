@@ -89,25 +89,7 @@
     function handleNavigation(navigationDetails) {
         Settings.get(settings => {
             // Retrieves settings to check if protection is enabled.
-            if (!settings.adGuardSecurityEnabled &&
-                !settings.adGuardFamilyEnabled &&
-                !settings.alphaMountainEnabled &&
-                !settings.certEEEnabled &&
-                !settings.cleanBrowsingFamilyEnabled &&
-                !settings.cleanBrowsingSecurityEnabled &&
-                !settings.cloudflareFamilyEnabled &&
-                !settings.cloudflareSecurityEnabled &&
-                !settings.controlDFamilyEnabled &&
-                !settings.controlDSecurityEnabled &&
-                !settings.dns0FamilyEnabled &&
-                !settings.dns0SecurityEnabled &&
-                !settings.dns4EUFamilyEnabled &&
-                !settings.dns4EUSecurityEnabled &&
-                !settings.gDataEnabled &&
-                !settings.nortonEnabled &&
-                !settings.precisionSecEnabled &&
-                !settings.quad9Enabled &&
-                !settings.smartScreenEnabled) {
+            if (Settings.allProvidersDisabled(settings)) {
                 console.debug("Protection is disabled; bailing out early.");
                 return;
             }

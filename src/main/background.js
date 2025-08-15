@@ -150,7 +150,7 @@
             }
 
             const protocol = urlObject.protocol;
-            let hostname = urlObject.hostname;
+            const hostname = urlObject.hostname;
 
             // Checks for incomplete URLs missing the scheme.
             if (!protocol || currentUrl.startsWith('//')) {
@@ -172,13 +172,7 @@
 
             // Checks for missing the suffix.
             if (!hostname.includes('.') || hostname.endsWith('.')) {
-                console.warn(`Missing suffix in URL: ${currentUrl}; bailing out.`);
-                return;
-            }
-
-            // Checks for unusually long hostnames.
-            if (hostname.length > 253) {
-                console.warn(`Hostname is too long: ${hostname}; bailing out.`);
+                console.debug(`Missing suffix in URL: ${currentUrl}; bailing out.`);
                 return;
             }
 
@@ -195,7 +189,7 @@
             }
 
             // Checks if the hostname is in the global allowed cache.
-            if (CacheManager.isPatternInAllowedCache(urlObject.hostname, "global")) {
+            if (CacheManager.isPatternInAllowedCache(hostname, "global")) {
                 console.debug(`URL is in the global allowed cache: ${currentUrl}; bailing out.`);
                 return;
             }
@@ -212,9 +206,6 @@
                 frameZeroURLs.delete(tabId);
                 frameZeroURLs.set(tabId, currentUrl);
             }
-
-            // Sets the hostname back to the URL object.
-            urlObject.hostname = hostname;
 
             let blocked = false;
             let firstSystemName = "";

@@ -31,10 +31,11 @@ const CacheManager = (() => {
     let processingCaches = {};
 
     // Timeout ID for debounced updates
-    let timeoutId = null;
+    let localStorageTimeoutID = null;
+    let sessionStorageTimeoutID = null;
 
     // Debounce delay for local and session storage updates
-    let debounceDelay = 5000;
+    let debounceDelay = 100;
 
     // Expiration time for cache entries in milliseconds
     let expirationTime;
@@ -113,10 +114,8 @@ const CacheManager = (() => {
 
     /**
      * Update the caches that use localStorage (allowed and blocked caches).
-     *
-     * @param debounced - If true, updates will be debounced to avoid frequent writes.
      */
-    function updateLocalStorage(debounced) {
+    function updateLocalStorage() {
         // Checks if the allowed caches are valid
         if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
@@ -150,24 +149,17 @@ const CacheManager = (() => {
             StorageUtil.setToLocalStore(blockedKey, blockedOut);
         };
 
-        if (debounced) {
-            if (!timeoutId) {
-                timeoutId = setTimeout(() => {
-                    timeoutId = null;
-                    write();
-                }, debounceDelay);
-            }
-        } else {
-            write();
+        // Debounce the write operation to avoid excessive writes
+        if (localStorageTimeoutID) {
+            clearTimeout(localStorageTimeoutID);
         }
+        localStorageTimeoutID = setTimeout(write, debounceDelay);
     }
 
     /**
      * Update the caches that use sessionStorage (processing caches).
-     *
-     * @param debounced - If true, updates will be debounced to avoid frequent writes.
      */
-    function updateSessionStorage(debounced) {
+    function updateSessionStorage() {
         // Checks if the processing cache is valid
         if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCache is not defined or not an object');
@@ -184,16 +176,11 @@ const CacheManager = (() => {
             StorageUtil.setToSessionStore(processingKey, out);
         };
 
-        if (debounced) {
-            if (!timeoutId) {
-                timeoutId = setTimeout(() => {
-                    timeoutId = null;
-                    write();
-                }, debounceDelay);
-            }
-        } else {
-            write();
+        // Debounce the write operation to avoid excessive writes
+        if (sessionStorageTimeoutID) {
+            clearTimeout(sessionStorageTimeoutID);
         }
+        sessionStorageTimeoutID = setTimeout(write, debounceDelay);
     }
 
     /**
@@ -225,9 +212,9 @@ const CacheManager = (() => {
             }
         };
 
-        cleanGroup(allowedCaches, () => updateLocalStorage(true));
-        cleanGroup(blockedCaches, () => updateLocalStorage(true));
-        cleanGroup(processingCaches, () => updateSessionStorage(true));
+        cleanGroup(allowedCaches, () => updateLocalStorage());
+        cleanGroup(blockedCaches, () => updateLocalStorage());
+        cleanGroup(processingCaches, () => updateSessionStorage());
         return removed;
     }
 
@@ -271,7 +258,7 @@ const CacheManager = (() => {
         }
 
         Object.values(allowedCaches).forEach(m => m.clear());
-        updateLocalStorage(false);
+        updateLocalStorage();
     }
 
     /**
@@ -285,7 +272,7 @@ const CacheManager = (() => {
         }
 
         Object.values(blockedCaches).forEach(m => m.clear());
-        updateLocalStorage(false);
+        updateLocalStorage();
     }
 
     /**
@@ -299,7 +286,7 @@ const CacheManager = (() => {
         }
 
         Object.values(processingCaches).forEach(m => m.clear());
-        updateSessionStorage(false);
+        updateSessionStorage();
     }
 
     /**
@@ -334,7 +321,7 @@ const CacheManager = (() => {
                 map.delete(key);
 
                 cleanExpiredEntries();
-                updateLocalStorage(false);
+                updateLocalStorage();
             }
         } catch (error) {
             console.error(`Error checking allowed cache for ${url}:`, error);
@@ -438,7 +425,7 @@ const CacheManager = (() => {
             }
 
             cleanExpiredEntries();
-            updateLocalStorage(false);
+            updateLocalStorage();
         } catch (error) {
             console.error(`Error adding URL to allowed cache for ${url}:`, error);
         }
@@ -448,7 +435,7 @@ const CacheManager = (() => {
      * Add a string key to the allowed cache for a specific provider.
      *
      * @param str {string} - The string to add.
-     * @param name {string} - The name of the provider (e.g., "precisionSec", "smartScreen").
+     * @param name {string} - The name of the cache (e.g., "precisionSec", "global").
      */
     function addStringToAllowedCache(str, name) {
         // Returns if the allowed cache is not defined.
@@ -469,7 +456,7 @@ const CacheManager = (() => {
             }
 
             cleanExpiredEntries();
-            updateLocalStorage(false);
+            updateLocalStorage();
         } catch (error) {
             console.error(`Error adding string to allowed cache for "${str}":`, error);
         }
@@ -504,7 +491,7 @@ const CacheManager = (() => {
             }
 
             map.delete(key);
-            updateLocalStorage(false);
+            updateLocalStorage();
         } catch (error) {
             console.error(`Error checking blocked cache for ${url}:`, error);
         }
@@ -541,7 +528,7 @@ const CacheManager = (() => {
             }
 
             cleanExpiredEntries();
-            updateLocalStorage(false);
+            updateLocalStorage();
         } catch (error) {
             console.error(`Error adding URL to blocked cache for ${url}:`, error);
         }
@@ -575,7 +562,7 @@ const CacheManager = (() => {
                 return entry.resultType;
             } else {
                 cache.delete(key);
-                updateLocalStorage(false);
+                updateLocalStorage();
             }
         } catch (error) {
             console.error(`Error getting blocked result type for ${url}:`, error);
@@ -608,7 +595,7 @@ const CacheManager = (() => {
             }
 
             cleanExpiredEntries();
-            updateLocalStorage(false);
+            updateLocalStorage();
         } catch (error) {
             console.error(`Error removing URL from blocked cache for ${url}:`, error);
         }
@@ -646,7 +633,7 @@ const CacheManager = (() => {
                 map.delete(key);
 
                 cleanExpiredEntries();
-                updateLocalStorage(false);
+                updateLocalStorage();
             }
         } catch (error) {
             console.error(`Error checking processing cache for ${url}:`, error);
@@ -682,7 +669,7 @@ const CacheManager = (() => {
             }
 
             cleanExpiredEntries();
-            updateLocalStorage(false);
+            updateLocalStorage();
         } catch (error) {
             console.error(`Error adding URL to processing cache for ${url}:`, error);
         }
@@ -713,7 +700,7 @@ const CacheManager = (() => {
             }
 
             cleanExpiredEntries();
-            updateLocalStorage(false);
+            updateLocalStorage();
         } catch (error) {
             console.error(`Error removing URL from processing cache for ${url}:`, error);
         }
@@ -756,7 +743,7 @@ const CacheManager = (() => {
         }
 
         cleanExpiredEntries();
-        updateLocalStorage(false);
+        updateLocalStorage();
         return results;
     }
 

@@ -134,7 +134,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.ADGUARD_FAMILY:
                     return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C" +
@@ -144,7 +144,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.ALPHAMOUNTAIN:
                     return new URL("https://alphamountain.freshdesk.com/support/tickets/new");
@@ -157,7 +157,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.CONTROL_D_FAMILY:
                     return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C" +
@@ -167,7 +167,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.PRECISIONSEC:
                     return new URL("mailto:info@precisionsec.com?subject=False%20Positive&body=Hello%2C" +
@@ -177,7 +177,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.CERT_EE:
                     return new URL("mailto:ria@ria.ee?subject=False%20Positive&body=Hello%2C" +
@@ -187,7 +187,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.CLEANBROWSING_SECURITY:
                     return new URL("mailto:support@cleanbrowsing.org?subject=False%20Positive&body=Hello%2C" +
@@ -197,7 +197,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.CLEANBROWSING_FAMILY:
                     return new URL("mailto:support@cleanbrowsing.org?subject=False%20Positive&body=Hello%2C" +
@@ -207,7 +207,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.CLOUDFLARE_SECURITY:
                 case ProtectionResult.Origin.CLOUDFLARE_FAMILY:
@@ -226,7 +226,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.DNS4EU_FAMILY:
                     // TODO: Needs verification of response from support team.
@@ -237,7 +237,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.G_DATA:
                     // Old URL: "https://submit.gdatasoftware.com/privacy"
@@ -249,7 +249,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.SMARTSCREEN:
                     return new URL("https://feedback.smartscreen.microsoft.com/feedback.aspx?t=16&url=" + blockedUrl);
@@ -267,7 +267,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.foulest.net");
+                        "%0AWebsite:%20https://osprey.ac");
 
                 default:
                     return null;

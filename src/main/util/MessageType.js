@@ -38,7 +38,6 @@ const Messages = {
     PRECISIONSEC_TOGGLED: "precisionSecToggled",
 
     // Non-Partnered Providers
-    G_DATA_TOGGLED: "gDataToggled",
     CERT_EE_TOGGLED: "certEEToggled",
     CLEANBROWSING_SECURITY_TOGGLED: "cleanBrowsingSecurityToggled",
     CLEANBROWSING_FAMILY_TOGGLED: "cleanBrowsingFamilyToggled",

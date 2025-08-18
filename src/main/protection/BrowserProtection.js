@@ -30,7 +30,6 @@ const BrowserProtection = (() => {
     // These aren't meant to be secret, but they are obfuscated to stop sniffers.
     let alphaMountainKey = atob("YTRhNDVkYzMtNjFmMC00OGIzLTlmMjUtNjQxMzgxYjgwNWQ3");
     let precisionSecKey = atob("MGI1Yjc2MjgtMzgyYi0xMWYwLWE1OWMtYjNiNTIyN2IxMDc2");
-    let gDataKey = atob("MS4xNC4wIDI1LjUuMTcuMzM1IDEyOS4wLjAuMA==");
     let smartScreenKey = atob("MzgxZGRkMWUtZTYwMC00MmRlLTk0ZWQtOGMzNGJmNzNmMTZk");
 
     // Map to store AbortControllers for each tab
@@ -1570,113 +1569,6 @@ const BrowserProtection = (() => {
         }
 
         /**
-         * Checks the URL with G DATA's API.
-         *
-         * @param {Object} settings - The settings object containing user preferences.
-         */
-        async function checkUrlWithGDATA(settings) {
-            // Checks if the provider is enabled
-            if (!settings.gDataEnabled) {
-                return;
-            }
-
-            const origin = ProtectionResult.Origin.G_DATA;
-            const shortName = ProtectionResult.ShortName[origin];
-            const cacheName = ProtectionResult.CacheName[origin];
-
-            // Checks if the URL is in the allowed cache
-            if (CacheManager.isUrlInAllowedCache(urlObject, cacheName)) {
-                console.debug(`[${shortName}] URL is already allowed: ${url}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.KNOWN_SAFE, origin));
-                return;
-            }
-
-            // Checks if the URL is in the blocked cache
-            if (CacheManager.isUrlInBlockedCache(urlObject, cacheName)) {
-                console.debug(`[${shortName}] URL is already blocked: ${url}`);
-                callback(new ProtectionResult(url, CacheManager.getBlockedResultType(url, cacheName), origin));
-                return;
-            }
-
-            // Checks if the URL is in the processing cache
-            if (CacheManager.isUrlInProcessingCache(urlObject, cacheName)) {
-                console.debug(`[${shortName}] URL is already processing: ${url}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.WAITING, origin));
-                return;
-            }
-
-            // Adds the URL to the processing cache to prevent duplicate requests
-            CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
-
-            // Adds a small delay for non-partnered providers
-            if (!Settings.allPartnersDisabled(settings)) {
-                await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
-            }
-
-            const apiUrl = "https://dlarray-bp-europ-secsrv069.gdatasecurity.de/url/v3";
-
-            const payload = {
-                "REVOKEID": 0,
-                "CLIENT": "EXED",
-                "CLV": gDataKey,
-                "URLS": [url]
-            };
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(payload),
-                    signal
-                });
-
-                // Return early if the response is not OK
-                if (!response.ok) {
-                    console.warn(`[${shortName}] Returned early: ${response.status}`);
-                    callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, origin));
-                    return;
-                }
-
-                const data = await response.text();
-
-                // Phishing
-                if (data.includes("\"PHISHING\"")) {
-                    console.debug(`[${shortName}] Added URL to blocked cache: ${url}`);
-                    CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.PHISHING);
-                    callback(new ProtectionResult(url, ProtectionResult.ResultType.PHISHING, origin));
-                    return;
-                }
-
-                // Malicious
-                if (data.includes("\"MALWARE\"")) {
-                    console.debug(`[${shortName}] Added URL to blocked cache: ${url}`);
-                    CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.MALICIOUS);
-                    callback(new ProtectionResult(url, ProtectionResult.ResultType.MALICIOUS, origin));
-                    return;
-                }
-
-                // Safe/Allowed
-                if (data.includes("\"TRUSTED\"") ||
-                    data.includes("\"WHITELIST\"") ||
-                    data.includes("\"URLS\":[{}]}")) {
-                    console.debug(`[${shortName}] Added URL to allowed cache: ${url}`);
-                    CacheManager.addUrlToAllowedCache(urlObject, cacheName);
-                    callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, origin));
-                    return;
-                }
-
-                // Unexpected result
-                console.warn(`[${shortName}] Returned an unexpected result for URL ${url}: ${data}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, origin));
-            } catch (error) {
-                console.debug(`[${shortName}] Failed to check URL ${url}: ${error}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, origin));
-            }
-        }
-
-        /**
          * Checks the URL with SmartScreen's API.
          *
          * @param {Object} settings - The settings object containing user preferences.
@@ -2002,7 +1894,6 @@ const BrowserProtection = (() => {
             checkUrlWithDNS0Family(settings);
             checkUrlWithDNS4EUSecurity(settings);
             checkUrlWithDNS4EUFamily(settings);
-            checkUrlWithGDATA(settings);
             checkUrlWithSmartScreen(settings);
             checkUrlWithNorton(settings);
             checkUrlWithQuad9(settings);

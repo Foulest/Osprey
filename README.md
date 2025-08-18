@@ -109,7 +109,6 @@ The following providers are **disabled** by default:
 
 - [ ] **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
 - [ ] [Microsoft SmartScreen](https://learn.microsoft.com/en-us/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen)
-- [ ] [G DATA Web Protection](https://www.gdata.de/help/en/consumer/FAQ/webProtectionWinFAQ)
 - [ ] [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
 - [ ] [Norton Safe Web](https://safeweb.norton.com)
 

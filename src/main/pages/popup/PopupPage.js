@@ -152,14 +152,6 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             messageType: Messages.DNS4EU_FAMILY_TOGGLED,
         },
         {
-            origin: ProtectionResult.Origin.G_DATA,
-            name: "gDataEnabled",
-            title: ProtectionResult.FullName[origin],
-            labelElementId: "gDataStatus",
-            switchElementId: "gDataSwitch",
-            messageType: Messages.G_DATA_TOGGLED,
-        },
-        {
             origin: ProtectionResult.Origin.SMARTSCREEN,
             name: "smartScreenEnabled",
             title: ProtectionResult.FullName[origin],

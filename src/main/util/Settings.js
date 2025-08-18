@@ -33,7 +33,6 @@ const Settings = (() => {
         precisionSecEnabled: true,
 
         // Non-Partnered Providers
-        gDataEnabled: false,
         certEEEnabled: false,
         cleanBrowsingSecurityEnabled: true,
         cleanBrowsingFamilyEnabled: false,
@@ -176,7 +175,6 @@ const Settings = (() => {
             !settings.controlDSecurityEnabled &&
             !settings.controlDFamilyEnabled &&
             !settings.precisionSecEnabled &&
-            !settings.gDataEnabled &&
             !settings.certEEEnabled &&
             !settings.cleanBrowsingSecurityEnabled &&
             !settings.cleanBrowsingFamilyEnabled &&

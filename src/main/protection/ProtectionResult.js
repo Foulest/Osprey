@@ -65,10 +65,9 @@ ProtectionResult.Origin = {
     DNS0_FAMILY: 13,
     DNS4EU_SECURITY: 14,
     DNS4EU_FAMILY: 15,
-    G_DATA: 16,
-    SMARTSCREEN: 17,
-    NORTON: 18,
-    QUAD9: 19,
+    SMARTSCREEN: 16,
+    NORTON: 17,
+    QUAD9: 18,
 };
 
 ProtectionResult.FullName = {
@@ -92,10 +91,9 @@ ProtectionResult.FullName = {
     13: "DNS0.eu Family DNS",
     14: "DNS4EU Security DNS",
     15: "DNS4EU Family DNS",
-    16: "G DATA Web Protection",
-    17: "Microsoft SmartScreen",
-    18: "Norton Safe Web",
-    19: "Quad9 Security DNS",
+    16: "Microsoft SmartScreen",
+    17: "Norton Safe Web",
+    18: "Quad9 Security DNS",
 };
 
 ProtectionResult.ShortName = {
@@ -119,10 +117,9 @@ ProtectionResult.ShortName = {
     13: "DNS0.eu Family",
     14: "DNS4EU Security",
     15: "DNS4EU Family",
-    16: "G DATA",
-    17: "SmartScreen",
-    18: "Norton",
-    19: "Quad9",
+    16: "SmartScreen",
+    17: "Norton",
+    18: "Quad9",
 };
 
 ProtectionResult.CacheName = {
@@ -146,8 +143,7 @@ ProtectionResult.CacheName = {
     13: "dns0Family",
     14: "dns4EUSecurity",
     15: "dns4EUFamily",
-    16: "gData",
-    17: "smartScreen",
-    18: "norton",
-    19: "quad9",
+    16: "smartScreen",
+    17: "norton",
+    18: "quad9",
 };

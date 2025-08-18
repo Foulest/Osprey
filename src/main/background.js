@@ -369,7 +369,6 @@
         'PrecisionSecEnabled',
 
         // Non-Partnered Providers
-        'GDATAEnabled',
         'CERTEEEnabled',
         'CleanBrowsingSecurityEnabled',
         'CleanBrowsingFamilyEnabled',
@@ -500,12 +499,6 @@
             if (policies.PrecisionSecEnabled !== undefined) {
                 settings.precisionSecEnabled = policies.PrecisionSecEnabled;
                 console.debug("PrecisionSec is managed by system policy.");
-            }
-
-            // Checks and sets the G DATA settings using the policy
-            if (policies.GDATAEnabled !== undefined) {
-                settings.gDataEnabled = policies.GDATAEnabled;
-                console.debug("G DATA is managed by system policy.");
             }
 
             // Checks and sets the CERT-EE settings using the policy
@@ -894,7 +887,6 @@
             case Messages.DNS0_SECURITY_TOGGLED:
             case Messages.DNS4EU_FAMILY_TOGGLED:
             case Messages.DNS4EU_SECURITY_TOGGLED:
-            case Messages.G_DATA_TOGGLED:
             case Messages.NORTON_TOGGLED:
             case Messages.PRECISIONSEC_TOGGLED:
             case Messages.QUAD9_TOGGLED:

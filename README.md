@@ -22,7 +22,7 @@
 
 ###
 
-![Osprey Banner](https://i.imgur.com/JsASX99.png)
+![Osprey Banner](https://i.imgur.com/pFTHZRB.png)
 
 ## Official Partners
 

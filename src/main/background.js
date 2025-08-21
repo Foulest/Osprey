@@ -922,7 +922,8 @@
             case "clearAllowedSites": {
                 CacheManager.clearAllowedCache();
                 CacheManager.clearBlockedCache();
-                console.debug("Cleared allowed and blocked site caches.");
+                CacheManager.clearProcessingCache();
+                console.debug("Cleared all internal site caches.");
 
                 // Builds the browser notification to send the user
                 const notificationOptions = {

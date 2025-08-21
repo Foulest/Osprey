@@ -8,7 +8,7 @@
 
 **Osprey** is a browser extension that protects you from malicious websites.
 
-[LinkedIn](https://www.linkedin.com/company/osprey-browser-protection)
+[LinkedIn Page](https://www.linkedin.com/company/osprey-browser-protection)
 • [Privacy Policy](https://github.com/Foulest/Osprey/blob/main/.github/PRIVACY.md)
 • [Wiki (FAQs)](https://github.com/Foulest/Osprey/wiki)
 • [MalwareTips](https://malwaretips.com/threads/osprey-browser-protection-discussion-and-updates.135565)

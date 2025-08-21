@@ -656,7 +656,7 @@ const CacheManager = (() => {
 
         try {
             const key = normalizeUrl(url);
-            const expTime = Date.now() + 10 * 1000; // Expiration for processing cache is 10 seconds
+            const expTime = Date.now() + 60 * 1000; // Expiration for processing cache is 60 seconds
             const entry = {exp: expTime, tabId: tabId};
 
             if (name === "all") {

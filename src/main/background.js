@@ -177,7 +177,7 @@
             }
 
             // Checks for invalid characters in the hostname.
-            if (!/^[a-zA-Z0-9.-]+$/.test(hostname)) {
+            if (!/^[a-zA-Z0-9._-]+$/.test(hostname)) {
                 console.warn(`Hostname contains invalid characters: ${hostname}; bailing out.`);
                 return;
             }

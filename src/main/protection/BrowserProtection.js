@@ -30,7 +30,6 @@ const BrowserProtection = (() => {
     // These aren't meant to be secret, but they are obfuscated to stop sniffers.
     let alphaMountainKey = atob("YTRhNDVkYzMtNjFmMC00OGIzLTlmMjUtNjQxMzgxYjgwNWQ3");
     let precisionSecKey = atob("MGI1Yjc2MjgtMzgyYi0xMWYwLWE1OWMtYjNiNTIyN2IxMDc2");
-    let smartScreenKey = atob("MzgxZGRkMWUtZTYwMC00MmRlLTk0ZWQtOGMzNGJmNzNmMTZk");
 
     // Map to store AbortControllers for each tab
     let tabAbortControllers = new Map();
@@ -82,7 +81,6 @@ const BrowserProtection = (() => {
         // Parse the URL to extract the hostname and pathname
         const urlObject = new URL(url);
         const urlHostname = urlObject.hostname;
-        const urlPathname = urlObject.pathname;
 
         // The non-filtering URL used for DNS lookups
         const nonFilteringURL = `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(urlHostname)}`;
@@ -1569,125 +1567,6 @@ const BrowserProtection = (() => {
         }
 
         /**
-         * Checks the URL with SmartScreen's API.
-         *
-         * @param {Object} settings - The settings object containing user preferences.
-         */
-        async function checkUrlWithSmartScreen(settings) {
-            // Checks if the provider is enabled
-            if (!settings.smartScreenEnabled) {
-                return;
-            }
-
-            const origin = ProtectionResult.Origin.SMARTSCREEN;
-            const shortName = ProtectionResult.ShortName[origin];
-            const cacheName = ProtectionResult.CacheName[origin];
-
-            // Checks if the URL is in the allowed cache
-            if (CacheManager.isUrlInAllowedCache(urlObject, cacheName)) {
-                console.debug(`[${shortName}] URL is already allowed: ${url}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.KNOWN_SAFE, origin));
-                return;
-            }
-
-            // Checks if the URL is in the blocked cache
-            if (CacheManager.isUrlInBlockedCache(urlObject, cacheName)) {
-                console.debug(`[${shortName}] URL is already blocked: ${url}`);
-                callback(new ProtectionResult(url, CacheManager.getBlockedResultType(url, cacheName), origin));
-                return;
-            }
-
-            // Checks if the URL is in the processing cache
-            if (CacheManager.isUrlInProcessingCache(urlObject, cacheName)) {
-                console.debug(`[${shortName}] URL is already processing: ${url}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.WAITING, origin));
-                return;
-            }
-
-            // Adds the URL to the processing cache to prevent duplicate requests
-            CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
-
-            // Adds a small delay for non-partnered providers
-            if (!Settings.allPartnersDisabled(settings)) {
-                await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
-            }
-
-            // Prepare request data
-            const requestData = JSON.stringify({
-                destination: {
-                    uri: UrlHelpers.normalizeHostname(urlHostname + urlPathname)
-                }
-            });
-
-            // Generate the hash and authorization header
-            const {hash, key} = SmartScreenUtil.hash(requestData);
-            const authHeader = `SmartScreenHash ${btoa(JSON.stringify({
-                authId: smartScreenKey,
-                hash,
-                key
-            }))}`;
-
-            try {
-                const response = await fetch("https://bf.smartscreen.microsoft.com/api/browser/Navigate/1", {
-                    method: "POST",
-                    credentials: "omit",
-                    headers: {
-                        "Content-Type": "application/json; charset=utf-8",
-                        Authorization: authHeader
-                    },
-                    body: requestData,
-                    signal
-                });
-
-                // Return early if the response is not OK
-                if (!response.ok) {
-                    console.warn(`[${shortName}] Returned early: ${response.status}`);
-                    callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, origin));
-                    return;
-                }
-
-                const data = await response.json();
-                const {responseCategory} = data;
-
-                switch (responseCategory) {
-                    case "TechScam":
-                    case "Phishing":
-                        console.debug(`[${shortName}] Added URL to blocked cache: ${url}`);
-                        CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.PHISHING);
-                        callback(new ProtectionResult(url, ProtectionResult.ResultType.PHISHING, origin));
-                        break;
-
-                    case "Exploit":
-                    case "Malicious":
-                        console.debug(`[${shortName}] Added URL to blocked cache: ${url}`);
-                        CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.MALICIOUS);
-                        callback(new ProtectionResult(url, ProtectionResult.ResultType.MALICIOUS, origin));
-                        break;
-
-                    case "Untrusted":
-                        console.debug(`[${shortName}] Added URL to blocked cache: ${url}`);
-                        CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.UNTRUSTED);
-                        callback(new ProtectionResult(url, ProtectionResult.ResultType.UNTRUSTED, origin));
-                        break;
-
-                    case "Allowed":
-                        console.debug(`[${shortName}] Added URL to allowed cache: ${url}`);
-                        CacheManager.addUrlToAllowedCache(urlObject, cacheName);
-                        callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, origin));
-                        break;
-
-                    default:
-                        console.warn(`[${shortName}] Returned an unexpected result for URL ${url}: ${JSON.stringify(data)}`);
-                        callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, origin));
-                        break;
-                }
-            } catch (error) {
-                console.debug(`[${shortName}] Failed to check URL ${url}: ${error}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, origin));
-            }
-        }
-
-        /**
          * Checks the URL with Norton's API.
          *
          * @param {Object} settings - The settings object containing user preferences.
@@ -1894,7 +1773,6 @@ const BrowserProtection = (() => {
             checkUrlWithDNS0Family(settings);
             checkUrlWithDNS4EUSecurity(settings);
             checkUrlWithDNS4EUFamily(settings);
-            checkUrlWithSmartScreen(settings);
             checkUrlWithNorton(settings);
             checkUrlWithQuad9(settings);
         });

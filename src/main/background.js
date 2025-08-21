@@ -65,9 +65,6 @@
             "util/CacheManager.js",
             "util/MessageType.js",
 
-            // Other
-            "util/other/SmartScreenUtil.js",
-
             // Protection
             "protection/ProtectionResult.js",
             "protection/BrowserProtection.js"
@@ -378,7 +375,6 @@
         'DNS0FamilyEnabled',
         'DNS4EUSecurityEnabled',
         'DNS4EUFamilyEnabled',
-        'SmartScreenEnabled',
         'NortonEnabled',
         'Quad9Enabled',
     ];
@@ -553,12 +549,6 @@
             if (policies.DNS4EUFamilyEnabled !== undefined) {
                 settings.dns4EUFamilyEnabled = policies.DNS4EUFamilyEnabled;
                 console.debug("DNS4EU Family is managed by system policy.");
-            }
-
-            // Checks and sets the SmartScreen settings using the policy
-            if (policies.SmartScreenEnabled !== undefined) {
-                settings.smartScreenEnabled = policies.SmartScreenEnabled;
-                console.debug("SmartScreen is managed by system policy.");
             }
 
             // Checks and sets the Norton settings using the policy
@@ -881,7 +871,6 @@
             case Messages.NORTON_TOGGLED:
             case Messages.PRECISIONSEC_TOGGLED:
             case Messages.QUAD9_TOGGLED:
-            case Messages.SMARTSCREEN_TOGGLED:
                 console.info(`${message.title} has been ${message.toggleState ? "enabled" : "disabled"}.`);
                 break;
 

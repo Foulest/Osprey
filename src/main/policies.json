@@ -133,11 +133,6 @@
       "description": "If set to true, DNS4EU Family will be enabled.",
       "type": "boolean"
     },
-    "SmartScreenEnabled": {
-      "title": "SmartScreen Enabled",
-      "description": "If set to true, SmartScreen will be enabled.",
-      "type": "boolean"
-    },
     "NortonEnabled": {
       "title": "Norton Enabled",
       "description": "If set to true, Norton will be enabled.",

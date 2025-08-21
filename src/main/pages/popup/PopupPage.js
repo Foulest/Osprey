@@ -152,14 +152,6 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             messageType: Messages.DNS4EU_FAMILY_TOGGLED,
         },
         {
-            origin: ProtectionResult.Origin.SMARTSCREEN,
-            name: "smartScreenEnabled",
-            title: ProtectionResult.FullName[origin],
-            labelElementId: "smartScreenStatus",
-            switchElementId: "smartScreenSwitch",
-            messageType: Messages.SMARTSCREEN_TOGGLED,
-        },
-        {
             origin: ProtectionResult.Origin.NORTON,
             name: "nortonEnabled",
             title: ProtectionResult.FullName[origin],

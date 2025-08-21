@@ -239,9 +239,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
 
-                case ProtectionResult.Origin.SMARTSCREEN:
-                    return new URL("https://feedback.smartscreen.microsoft.com/feedback.aspx?t=16&url=" + blockedUrl);
-
                 case ProtectionResult.Origin.NORTON:
                     return new URL("https://safeweb.norton.com/report?url=" + encodedBlockedUrl);
 

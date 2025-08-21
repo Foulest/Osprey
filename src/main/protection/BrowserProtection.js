@@ -1058,7 +1058,7 @@ const BrowserProtection = (() => {
                     // And the data matches this specific pattern, it's blocked.
                     if (filteringDataString.includes("EDE(16): Censored") ||
                         filteringDataString.includes("\"TTL\":60,\"data\":\"0.0.0.0\"")) {
-                        console.debug(`[Cloudflare Security] Added URL to blocked cache: ${url}`);
+                        console.debug(`[${shortName}] Added URL to blocked cache: ${url}`);
                         CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.MALICIOUS);
                         callback(new ProtectionResult(url, ProtectionResult.ResultType.MALICIOUS, origin));
                         return;

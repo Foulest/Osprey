@@ -129,7 +129,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                 case ProtectionResult.Origin.ADGUARD_SECURITY:
                     return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
-                        "%0A%0AProduct%3A%20AdGuard%20D%20Public%20DNS" +
+                        "%0A%0AProduct%3A%20AdGuard%20Public%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
@@ -139,7 +139,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                 case ProtectionResult.Origin.ADGUARD_FAMILY:
                     return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
-                        "%0A%0AProduct%3A%20AdGuard%20D%20Family%20DNS" +
+                        "%0A%0AProduct%3A%20AdGuard%20Family%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
                         "%0ADetected%20as%3A%20" + encodedResult +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +

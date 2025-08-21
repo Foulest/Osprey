@@ -629,17 +629,6 @@
         frameZeroURLs.delete(tabId);
     });
 
-    // Listener for onUpdated events.
-    browserAPI.tabs.onUpdated.addListener((tabId, changeInfo) => {
-        if (changeInfo.url) {
-            changeInfo.tabId = tabId;
-            changeInfo.frameId = 0;
-
-            console.debug(`[onTabUpdated] ${tabId} updated URL to ${changeInfo.url})`);
-            handleNavigation(changeInfo);
-        }
-    });
-
     // Listener for onBeforeNavigate events.
     browserAPI.webNavigation.onBeforeNavigate.addListener(callback => {
         console.debug(`[onBeforeNavigate] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);

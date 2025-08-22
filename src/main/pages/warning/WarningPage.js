@@ -219,7 +219,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
                 case ProtectionResult.Origin.DNS4EU_SECURITY:
                     // TODO: Needs verification of response from support team.
-                    return new URL("mailto:contact@dns4.eu?subject=False%20Positive&body=Hello%2C" +
+                    return new URL("mailto:viliam.peli@whalebone.io?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20DNS4EU%20Protective%20Resolution%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
@@ -230,7 +230,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
                 case ProtectionResult.Origin.DNS4EU_FAMILY:
                     // TODO: Needs verification of response from support team.
-                    return new URL("mailto:contact@dns4.eu?subject=False%20Positive&body=Hello%2C" +
+                    return new URL("mailto:viliam.peli@whalebone.io?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20DNS4EU%20Protective%20Resolution%20with%20Child%20Protection%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +

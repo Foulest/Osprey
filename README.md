@@ -58,7 +58,8 @@ our [Privacy Policy here](https://github.com/Foulest/Osprey/blob/main/.github/PR
 
 The more protection providers join the project, the better the Osprey threat intelligence platform becomes. If you're
 interested in improving global threat intelligence and want to join the project, feel free to get in contact with me
-by [using my developer email found here.](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd#:~:text=English-,Developer,-Website)
+at **support@osprey.ac** or via Osprey's
+[LinkedIn Page](https://www.linkedin.com/company/osprey-browser-protection).
 
 ## Warning
 
@@ -197,8 +198,8 @@ Osprey is not affiliated with or endorsed by any of the third-party providers li
 otherwise. Use of their services is subject to their respective terms of use and privacy policies.
 
 If you represent a listed provider and have questions, feedback, or concerns regarding attribution or inclusion, please
-contact the developer via the
-[Chrome Web Store contact link](https://chromewebstore.google.com/detail/osprey-browser-protection/jmnpibhfpmpfjhhkmpadlbgjnbhpjgnd#:~:text=English-,Developer,-Website).
+contact the developer at **support@osprey.ac** or via Osprey's
+[LinkedIn Page](https://www.linkedin.com/company/osprey-browser-protection).
 
 ## Getting Help
 

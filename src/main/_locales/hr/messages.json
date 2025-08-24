@@ -12,10 +12,10 @@
     "message": "Upozorenje: Ova web stranica nije sigurna"
   },
   "recommendation": {
-    "message": "Osprey je blokirao pristup ovoj web stranici. Nastavak nije siguran."
+    "message": "Osprey je blokirao pristup ovoj web stranici. Nije sigurno nastaviti."
   },
   "details": {
-    "message": "Ako ste vlasnik ove web stranice, kontaktirajte davatelja sigurnosnih usluga kako biste riješili problem."
+    "message": "Ako ste vlasnik ove web stranice, kontaktirajte pružatelja sigurnosnih usluga kako biste riješili problem."
   },
   "urlLabel": {
     "message": "URL: "
@@ -45,7 +45,7 @@
     "message": "Nastavi svejedno"
   },
   "popupTitle": {
-    "message": "Opcije zaštite"
+    "message": "Postavke zaštite"
   },
   "githubLink": {
     "message": "Pogledaj na GitHubu"
@@ -54,7 +54,7 @@
     "message": "Verzija: "
   },
   "privacyPolicy": {
-    "message": "Pravila privatnosti"
+    "message": "Politika privatnosti"
   },
   "onText": {
     "message": "Uključeno"

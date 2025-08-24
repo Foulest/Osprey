@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Tšireletso ea Sebatli"
+  },
+  "logoAlt": {
+    "message": "Letšoao la Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Tšireletso ea Sebatli"
+  },
+  "warningTitle": {
+    "message": "Tlhokomeliso: Webosaete ena ha e bolokehe"
+  },
+  "recommendation": {
+    "message": "Osprey e thibile phihlello ho webosaete ena. Ha ho bolokehe ho tsoela pele."
+  },
+  "details": {
+    "message": "Haeba u mong'a webosaete ena, ka kopo ikopanye le mofani oa tšireletso ho rarolla bothata."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "E tlalehiloe ke: "
+  },
+  "reportedByOthers": {
+    "message": "(le ba bang ___)"
+  },
+  "reportedByAlso": {
+    "message": "Hape e tlalehiloe ke: "
+  },
+  "reasonLabel": {
+    "message": "Lebaka: "
+  },
+  "reportSite": {
+    "message": "Tlaleha webosaete ena e le e bolokehileng"
+  },
+  "allowSite": {
+    "message": "Kamehla hlokomoloha webosaete ena"
+  },
+  "backButton": {
+    "message": "Khutlela polokehong"
+  },
+  "continueButton": {
+    "message": "Tsoela pele leha ho le joalo"
+  },
+  "popupTitle": {
+    "message": "Likhetho tsa Tšireletso"
+  },
+  "githubLink": {
+    "message": "Sheba ho GitHub"
+  },
+  "version": {
+    "message": "Phetolelo: "
+  },
+  "privacyPolicy": {
+    "message": "Leano la Lekunutu"
+  },
+  "onText": {
+    "message": "Bulehile"
+  },
+  "offText": {
+    "message": "Tima"
+  },
+  "onLockedText": {
+    "message": "Bulehile (Notletsoe)"
+  },
+  "offLockedText": {
+    "message": "Tima (Notletsoe)"
+  },
+  "knownSafe": {
+    "message": "E Tsejoa e le e Bolokehileng"
+  },
+  "failed": {
+    "message": "Hlolehile"
+  },
+  "waiting": {
+    "message": "E emetse"
+  },
+  "allowed": {
+    "message": "Lumelletsoeng"
+  },
+  "malicious": {
+    "message": "Kotsi"
+  },
+  "phishing": {
+    "message": "Phishing (Bokhoba ba bosholu)"
+  },
+  "untrusted": {
+    "message": "Ha e tšepahale"
+  },
+  "adultContent": {
+    "message": "Litaba tsa Batho ba Baholo"
+  },
+  "toggleNotificationsContext": {
+    "message": "Lumella litsebiso"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Hlokomoloha navigation ea foreimi"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Hlakola lethathamo la liwebosaete tse lumelletsoeng"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Liwebosaete tse Lumelletsoeng li Hlakotsoe"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Liwebosaete tsohle tse lumelletsoeng li hlakotsoe."
+  },
+  "restoreDefaultsContext": {
+    "message": "Khutlisetsa litlhophiso tse sa fetoheng"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Litlhophiso tse sa fetoheng li Khutliselitsoe"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Litlhophiso tse sa fetoheng li khutliselitsoe."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Webosaete e sa Sireletsehang e Thibetsoe"
+  },
+  "officialPartnerTitle": {
+    "message": "Molekane oa Semmuso"
+  },
+  "adGuardLogoAlt": {
+    "message": "Letšoao la AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Letšoao la alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Letšoao la Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Letšoao la PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Letšoao la CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Letšoao la CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Letšoao la Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Letšoao la DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Letšoao la DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Letšoao la Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Letšoao la Quad9"
+  }
+}

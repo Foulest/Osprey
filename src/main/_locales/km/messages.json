@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: ការពាររុករក"
+  },
+  "logoAlt": {
+    "message": "រូបសញ្ញា Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: ការពាររុករក"
+  },
+  "warningTitle": {
+    "message": "ការព្រមាន៖ វេបសាយនេះមិនមានសុវត្ថិភាពទេ"
+  },
+  "recommendation": {
+    "message": "Osprey បានទប់ស្កាត់ការចូលទៅកាន់វេបសាយនេះ។ វាគ្មានសុវត្ថិភាពក្នុងការបន្តទៀត។"
+  },
+  "details": {
+    "message": "ប្រសិនបើអ្នកជាម្ចាស់វេបសាយនេះ សូមទាក់ទងអ្នកផ្តល់សេវាសន្តិសុខដើម្បីដោះស្រាយបញ្ហា។"
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "រាយការណ៍ដោយ: "
+  },
+  "reportedByOthers": {
+    "message": "(និង ___ អ្នកផ្សេងទៀត)"
+  },
+  "reportedByAlso": {
+    "message": "ក៏បានរាយការណ៍ដោយ: "
+  },
+  "reasonLabel": {
+    "message": "ហេតុផល: "
+  },
+  "reportSite": {
+    "message": "រាយការណ៍វេបសាយនេះថាមានសុវត្ថិភាព"
+  },
+  "allowSite": {
+    "message": "មិនអើពើវេបសាយនេះជានិច្ច"
+  },
+  "backButton": {
+    "message": "ត្រឡប់ទៅកាន់សុវត្ថិភាព"
+  },
+  "continueButton": {
+    "message": "បន្តទោះបីជាមិនមានសុវត្ថិភាព"
+  },
+  "popupTitle": {
+    "message": "ជម្រើសការពារ"
+  },
+  "githubLink": {
+    "message": "មើលនៅលើ GitHub"
+  },
+  "version": {
+    "message": "កំណែ: "
+  },
+  "privacyPolicy": {
+    "message": "គោលនយោបាយឯកជនភាព"
+  },
+  "onText": {
+    "message": "បើក"
+  },
+  "offText": {
+    "message": "បិទ"
+  },
+  "onLockedText": {
+    "message": "បើក (ចាក់សោ)"
+  },
+  "offLockedText": {
+    "message": "បិទ (ចាក់សោ)"
+  },
+  "knownSafe": {
+    "message": "ត្រូវបានគេស្គាល់ថាមានសុវត្ថិភាព"
+  },
+  "failed": {
+    "message": "បរាជ័យ"
+  },
+  "waiting": {
+    "message": "កំពុងរង់ចាំ"
+  },
+  "allowed": {
+    "message": "អនុញ្ញាត"
+  },
+  "malicious": {
+    "message": "គ្រោះថ្នាក់"
+  },
+  "phishing": {
+    "message": "Phishing (ការលួចព័ត៌មាន)"
+  },
+  "untrusted": {
+    "message": "គ្មានទំនុកចិត្ត"
+  },
+  "adultContent": {
+    "message": "មាតិកាសម្រាប់មនុស្សពេញវ័យ"
+  },
+  "toggleNotificationsContext": {
+    "message": "បើកការជូនដំណឹង"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "មិនអើពើការរុករកក្នុងស៊ុម"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "សម្អាតបញ្ជីវេបសាយដែលបានអនុញ្ញាត"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "វេបសាយដែលបានអនុញ្ញាតត្រូវបានសម្អាត"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "វេបសាយទាំងអស់ដែលបានអនុញ្ញាតត្រូវបានសម្អាត។"
+  },
+  "restoreDefaultsContext": {
+    "message": "ស្ដារការកំណត់លំនាំដើម"
+  },
+  "restoreDefaultsTitle": {
+    "message": "ការកំណត់លំនាំដើមត្រូវបានស្ដារ"
+  },
+  "restoreDefaultsMessage": {
+    "message": "ការកំណត់លំនាំដើមត្រូវបានស្ដារឡើងវិញ។"
+  },
+  "unsafeWebsiteTitle": {
+    "message": "បានទប់ស្កាត់វេបសាយគ្មានសុវត្ថិភាព"
+  },
+  "officialPartnerTitle": {
+    "message": "ដៃគូផ្លូវការ"
+  },
+  "adGuardLogoAlt": {
+    "message": "រូបសញ្ញា AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "រូបសញ្ញា alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "រូបសញ្ញា Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "រូបសញ្ញា PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "រូបសញ្ញា CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "រូបសញ្ញា CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "រូបសញ្ញា Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "រូបសញ្ញា DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "រូបសញ្ញា DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "រូបសញ្ញា Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "រូបសញ្ញា Quad9"
+  }
+}

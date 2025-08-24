@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Ñawpaqman ama llullakuy"
+  },
+  "logoAlt": {
+    "message": "Osprey Unanchan"
+  },
+  "bannerText": {
+    "message": "Osprey: Ñawpaqman ama llullakuy"
+  },
+  "warningTitle": {
+    "message": "Willakuy: Kay web wasi mana seguridadniyuqmi"
+  },
+  "recommendation": {
+    "message": "Ospreyqa hark'akurqan kay web wasiman. Mana seguridadniyuqmi ñawpaqman riqkuy."
+  },
+  "details": {
+    "message": "Qammi kay web wasipa dueño kashanki chayqa, ama hina kay, seguridad ruwasqaykita rimaykachiy kayqa chaskiykamuykipaq."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Willakuchisqa: "
+  },
+  "reportedByOthers": {
+    "message": "(hinallataq ___ hukkunawan)"
+  },
+  "reportedByAlso": {
+    "message": "Hinallataq willakuchisqa: "
+  },
+  "reasonLabel": {
+    "message": "Imaraykupi: "
+  },
+  "reportSite": {
+    "message": "Kay web wasita seguridadniyuq hina willakuy"
+  },
+  "allowSite": {
+    "message": "Sapa kuti kay web wasita ama ñawinchaychu"
+  },
+  "backButton": {
+    "message": "Seguridadman kutiy"
+  },
+  "continueButton": {
+    "message": "Kunanpuniña ñawpaqman riqsiy"
+  },
+  "popupTitle": {
+    "message": "Ama llullakuy ruwanakuna"
+  },
+  "githubLink": {
+    "message": "GitHubpi qhaway"
+  },
+  "version": {
+    "message": "Versión: "
+  },
+  "privacyPolicy": {
+    "message": "Privacidad Kamachiy"
+  },
+  "onText": {
+    "message": "On"
+  },
+  "offText": {
+    "message": "Off"
+  },
+  "onLockedText": {
+    "message": "On (Wichq'asqa)"
+  },
+  "offLockedText": {
+    "message": "Off (Wichq'asqa)"
+  },
+  "knownSafe": {
+    "message": "Rikuchisqa seguridadniyuq"
+  },
+  "failed": {
+    "message": "Mana atisqa"
+  },
+  "waiting": {
+    "message": "Suyachkashan"
+  },
+  "allowed": {
+    "message": "Kamaqchisqa"
+  },
+  "malicious": {
+    "message": "Q'illqasqa"
+  },
+  "phishing": {
+    "message": "Llullakusqa (Phishing)"
+  },
+  "untrusted": {
+    "message": "Mana iyarisqa"
+  },
+  "adultContent": {
+    "message": "Runa hatun ñawpaqpi ruwasqa"
+  },
+  "toggleNotificationsContext": {
+    "message": "Willakuykunata kachariy"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Marco navegacionta ama qhawariychu"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Kamaqchisqa web wasikuna listanta pichay"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Kamaqchisqa web wasikuna pichasqa"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Llapan kamaqchisqa web wasikuna pichasqanku."
+  },
+  "restoreDefaultsContext": {
+    "message": "Chayqa ñawpaq kamachikuna kutichiy"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Ñawpaq kamachikuna kutichisqa"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Ñawpaq kamachikuna kutichisqa kachkan."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Mana seguridadniyuq web wasi hark'asqa"
+  },
+  "officialPartnerTitle": {
+    "message": "Kamachisqa Yanapakuy"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard Unanchan"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain Unanchan"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D Unanchan"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec Unanchan"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE Unanchan"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing Unanchan"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare Unanchan"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu Unanchan"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU Unanchan"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton Unanchan"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 Unanchan"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Fiarovana Mpitety"
+  },
+  "logoAlt": {
+    "message": "Sary famantarana Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Fiarovana Mpitety"
+  },
+  "warningTitle": {
+    "message": "Fampitandremana: Tsy azo antoka ity tranonkala ity"
+  },
+  "recommendation": {
+    "message": "Osprey dia nanakana ny fidirana amin'ity tranonkala ity. Tsy azo antoka ny manohy."
+  },
+  "details": {
+    "message": "Raha ianao no tompon'ity tranonkala ity, azafady mifandraisa amin'ny mpamatsy fiarovana mba hamahana ny olana."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Nolazain'i: "
+  },
+  "reportedByOthers": {
+    "message": "(sy ___ hafa)"
+  },
+  "reportedByAlso": {
+    "message": "Nolazain'i koa: "
+  },
+  "reasonLabel": {
+    "message": "Antony: "
+  },
+  "reportSite": {
+    "message": "Lazao ho azo antoka ity tranonkala ity"
+  },
+  "allowSite": {
+    "message": "Hadino foana ity tranonkala ity"
+  },
+  "backButton": {
+    "message": "Miverina amin'ny fiarovana"
+  },
+  "continueButton": {
+    "message": "Tohizo ihany"
+  },
+  "popupTitle": {
+    "message": "Safidy Fiarovana"
+  },
+  "githubLink": {
+    "message": "Jereo ao amin'ny GitHub"
+  },
+  "version": {
+    "message": "Dikan-teny: "
+  },
+  "privacyPolicy": {
+    "message": "Politikan'ny tsiambaratelo"
+  },
+  "onText": {
+    "message": "Mandeha"
+  },
+  "offText": {
+    "message": "Maty"
+  },
+  "onLockedText": {
+    "message": "Mandeha (Voahidy)"
+  },
+  "offLockedText": {
+    "message": "Maty (Voahidy)"
+  },
+  "knownSafe": {
+    "message": "Fantatra fa azo antoka"
+  },
+  "failed": {
+    "message": "Tsy nahomby"
+  },
+  "waiting": {
+    "message": "Miandry"
+  },
+  "allowed": {
+    "message": "Nekeny"
+  },
+  "malicious": {
+    "message": "Manimba"
+  },
+  "phishing": {
+    "message": "Fitaka (Phishing)"
+  },
+  "untrusted": {
+    "message": "Tsy azo itokisana"
+  },
+  "adultContent": {
+    "message": "Atiny ho an'ny olon-dehibe"
+  },
+  "toggleNotificationsContext": {
+    "message": "Alefaso ny fampandrenesana"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Aza jerena ny fitetezana frame"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Fafao ny lisitry ny tranonkala voaekena"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Voafafa ny tranonkala voaekena"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Voafafa daholo ny tranonkala voaekena rehetra."
+  },
+  "restoreDefaultsContext": {
+    "message": "Avereno amin'ny fanahafana fototra"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Naverina ny fanahafana fototra"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Naverina ny fanahafana fototra."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Tranokala tsy azo antoka voasakana"
+  },
+  "officialPartnerTitle": {
+    "message": "Mpamatsy ofisialy"
+  },
+  "adGuardLogoAlt": {
+    "message": "Sary famantarana AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Sary famantarana alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Sary famantarana Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Sary famantarana PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Sary famantarana CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Sary famantarana CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Sary famantarana Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Sary famantarana DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Sary famantarana DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Sary famantarana Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Sary famantarana Quad9"
+  }
+}

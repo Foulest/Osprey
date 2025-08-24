@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Хөтөч хамгаалалт"
+  },
+  "logoAlt": {
+    "message": "Osprey лого"
+  },
+  "bannerText": {
+    "message": "Osprey: Хөтөч хамгаалалт"
+  },
+  "warningTitle": {
+    "message": "Анхааруулга: Энэ вэбсайт аюултай"
+  },
+  "recommendation": {
+    "message": "Osprey энэ вэбсайт руу нэвтрэхийг хаасан. Үргэлжлүүлэх нь аюултай."
+  },
+  "details": {
+    "message": "Хэрэв та энэ вэбсайтын эзэн бол аюулгүй байдлын үйлчилгээ үзүүлэгчтэй холбогдож асуудлыг шийдвэрлэнэ үү."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Мэдээлсэн: "
+  },
+  "reportedByOthers": {
+    "message": "(ба ___ бусад)"
+  },
+  "reportedByAlso": {
+    "message": "Мөн мэдээлсэн: "
+  },
+  "reasonLabel": {
+    "message": "Шалтгаан: "
+  },
+  "reportSite": {
+    "message": "Энэ вэбсайтыг аюулгүй гэж мэдээлэх"
+  },
+  "allowSite": {
+    "message": "Энэ вэбсайтыг үргэлж үл тоомсорлох"
+  },
+  "backButton": {
+    "message": "Аюулгүй байдал руу буцах"
+  },
+  "continueButton": {
+    "message": "Ямартай ч үргэлжлүүлэх"
+  },
+  "popupTitle": {
+    "message": "Хамгаалалтын тохиргоо"
+  },
+  "githubLink": {
+    "message": "GitHub дээр харах"
+  },
+  "version": {
+    "message": "Хувилбар: "
+  },
+  "privacyPolicy": {
+    "message": "Нууцлалын бодлого"
+  },
+  "onText": {
+    "message": "Асаалттай"
+  },
+  "offText": {
+    "message": "Унтраалттай"
+  },
+  "onLockedText": {
+    "message": "Асаалттай (Түгжигдсэн)"
+  },
+  "offLockedText": {
+    "message": "Унтраалттай (Түгжигдсэн)"
+  },
+  "knownSafe": {
+    "message": "Аюулгүй гэж мэдэгдсэн"
+  },
+  "failed": {
+    "message": "Амжилтгүй"
+  },
+  "waiting": {
+    "message": "Хүлээж байна"
+  },
+  "allowed": {
+    "message": "Зөвшөөрсөн"
+  },
+  "malicious": {
+    "message": "Хорлонтой"
+  },
+  "phishing": {
+    "message": "Фишинг"
+  },
+  "untrusted": {
+    "message": "Итгэж болохгүй"
+  },
+  "adultContent": {
+    "message": "Насанд хүрэгчдийн агуулга"
+  },
+  "toggleNotificationsContext": {
+    "message": "Мэдэгдлийг идэвхжүүлэх"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Frame навигацыг үл тоомсорлох"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Зөвшөөрөгдсөн вэбсайтуудын жагсаалтыг арилгах"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Зөвшөөрөгдсөн вэбсайтууд устгагдсан"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Зөвшөөрөгдсөн бүх вэбсайтууд устгагдсан."
+  },
+  "restoreDefaultsContext": {
+    "message": "Үндсэн тохиргоог сэргээх"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Үндсэн тохиргоо сэргээгдсэн"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Үндсэн тохиргоо сэргээгдсэн."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Аюултай вэбсайт хаагдсан"
+  },
+  "officialPartnerTitle": {
+    "message": "Албан ёсны түнш"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard лого"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain лого"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D лого"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec лого"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE лого"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing лого"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare лого"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu лого"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU лого"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton лого"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 лого"
+  }
+}

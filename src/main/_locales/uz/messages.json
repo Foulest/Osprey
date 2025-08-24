@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Brauzer Himoyasi"
+  },
+  "logoAlt": {
+    "message": "Osprey Logotipi"
+  },
+  "bannerText": {
+    "message": "Osprey: Brauzer Himoyasi"
+  },
+  "warningTitle": {
+    "message": "Ogohlantirish: Bu veb-sayt xavfsiz emas"
+  },
+  "recommendation": {
+    "message": "Osprey ushbu veb-saytga kirishni blokladi. Davom etish xavfsiz emas."
+  },
+  "details": {
+    "message": "Agar siz ushbu veb-sayt egasi bo‘lsangiz, muammoni hal qilish uchun xavfsizlik provayderiga murojaat qiling."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Xabar bergan: "
+  },
+  "reportedByOthers": {
+    "message": "(va ___ boshqalar)"
+  },
+  "reportedByAlso": {
+    "message": "Shuningdek, xabar bergan: "
+  },
+  "reasonLabel": {
+    "message": "Sabab: "
+  },
+  "reportSite": {
+    "message": "Ushbu veb-saytni xavfsiz deb xabar qiling"
+  },
+  "allowSite": {
+    "message": "Doim ushbu veb-saytni e’tiborsiz qoldiring"
+  },
+  "backButton": {
+    "message": "Xavfsizlikka qaytish"
+  },
+  "continueButton": {
+    "message": "Baribir davom etish"
+  },
+  "popupTitle": {
+    "message": "Himoya Sozlamalari"
+  },
+  "githubLink": {
+    "message": "GitHub’da ko‘rish"
+  },
+  "version": {
+    "message": "Versiya: "
+  },
+  "privacyPolicy": {
+    "message": "Maxfiylik Siyosati"
+  },
+  "onText": {
+    "message": "Yoqilgan"
+  },
+  "offText": {
+    "message": "O‘chirilgan"
+  },
+  "onLockedText": {
+    "message": "Yoqilgan (Bloklangan)"
+  },
+  "offLockedText": {
+    "message": "O‘chirilgan (Bloklangan)"
+  },
+  "knownSafe": {
+    "message": "Xavfsiz deb tan olingan"
+  },
+  "failed": {
+    "message": "Muvaffaqiyatsiz"
+  },
+  "waiting": {
+    "message": "Kutilmoqda"
+  },
+  "allowed": {
+    "message": "Ruxsat etilgan"
+  },
+  "malicious": {
+    "message": "Xavfli"
+  },
+  "phishing": {
+    "message": "Fishing"
+  },
+  "untrusted": {
+    "message": "Ishonchsiz"
+  },
+  "adultContent": {
+    "message": "Kattalar uchun Kontent"
+  },
+  "toggleNotificationsContext": {
+    "message": "Bildirishnomalarni yoqish"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Freym navigatsiyasini e’tiborsiz qoldirish"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Ruxsat etilgan veb-saytlar ro‘yxatini tozalash"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Ruxsat etilgan veb-saytlar tozalandi"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Barcha ruxsat etilgan veb-saytlar tozalandi."
+  },
+  "restoreDefaultsContext": {
+    "message": "Standart sozlamalarni tiklash"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Standart Sozlamalar Tiklandi"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Standart sozlamalar tiklandi."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Xavfsiz bo‘lmagan veb-sayt bloklandi"
+  },
+  "officialPartnerTitle": {
+    "message": "Rasmiy Hamkor"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard Logotipi"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain Logotipi"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D Logotipi"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec Logotipi"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE Logotipi"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing Logotipi"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare Logotipi"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu Logotipi"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU Logotipi"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton Logotipi"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 Logotipi"
+  }
+}

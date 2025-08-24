@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Reden: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Meld deze website als veilig"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Negeer deze website altijd"
   },
   "backButton": {

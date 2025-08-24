@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "理由: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "このウェブサイトを安全として報告する"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "常にこのウェブサイトを無視する"
   },
   "backButton": {

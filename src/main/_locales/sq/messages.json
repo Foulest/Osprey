@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Arsyeja: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Raporto këtë website si të sigurt"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Gjithmonë injoro këtë website"
   },
   "backButton": {

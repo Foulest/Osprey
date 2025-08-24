@@ -93,8 +93,8 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                 'urlLabel': 'urlLabel',
                 'reportedByLabel': 'reportedByLabel',
                 'reasonLabel': 'reasonLabel',
-                'reportSite': 'reportSite',
-                'allowSite': 'allowSite',
+                'reportWebsite': 'reportWebsite',
+                'allowWebsite': 'allowWebsite',
                 'backButton': 'backButton',
                 'continueButton': 'continueButton'
             };
@@ -129,7 +129,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
         // Cache for DOM elements
         const domElements = Object.fromEntries(
-            ["reason", "url", "reportedBy", "reportSite", "allowSite", "backButton", "continueButton"]
+            ["reason", "url", "reportedBy", "reportWebsite", "allowWebsite", "backButton", "continueButton"]
                 .map(id => [id, document.getElementById(id)])
         );
 
@@ -353,18 +353,18 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
         // Adds event listener to "Report this website as safe" button
         Settings.get(settings => {
-            domElements.reportSite.addEventListener("click", async () => {
+            domElements.reportWebsite.addEventListener("click", async () => {
                 if (!settings.hideReportButton) {
-                    await sendMessage(Messages.REPORT_SITE, {
+                    await sendMessage(Messages.REPORT_WEBSITE, {
                         reportUrl: getReportUrl()
                     });
                 }
             });
 
             // Adds event listener to "Always ignore this website" button
-            domElements.allowSite.addEventListener("click", async () => {
+            domElements.allowWebsite.addEventListener("click", async () => {
                 if (!settings.hideContinueButtons) {
-                    await sendMessage(Messages.ALLOW_SITE, {
+                    await sendMessage(Messages.ALLOW_WEBSITE, {
                         blockedUrl: blockedUrl,
                         continueUrl: continueUrl
                     });
@@ -381,7 +381,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
             // Adds event listener to "Continue anyway" button
             domElements.continueButton.addEventListener("click", async () => {
                 if (!settings.hideContinueButtons) {
-                    await sendMessage(Messages.CONTINUE_TO_SITE, {
+                    await sendMessage(Messages.CONTINUE_TO_WEBSITE, {
                         blockedUrl: blockedUrl,
                         continueUrl: continueUrl
                     });
@@ -390,13 +390,13 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
             // Handles the hide continue buttons policy
             if (!settings.hideContinueButtons) {
-                document.getElementById("allowSite").style.display = "";
+                document.getElementById("allowWebsite").style.display = "";
                 document.getElementById("continueButton").style.display = "";
             }
 
             // Handles the hide report button policy
             if (!settings.hideReportButton) {
-                document.getElementById("reportSite").style.display = "";
+                document.getElementById("reportWebsite").style.display = "";
                 document.getElementById("reportBreakpoint").style.display = "";
             }
 

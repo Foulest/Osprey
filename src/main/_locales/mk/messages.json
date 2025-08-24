@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Причина: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Пријави ја оваа веб-страница како безбедна"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Секогаш игнорирај ја оваа веб-страница"
   },
   "backButton": {

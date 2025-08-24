@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Шалтгаан: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Энэ вэбсайтыг аюулгүй гэж мэдээлэх"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Энэ вэбсайтыг үргэлж үл тоомсорлох"
   },
   "backButton": {

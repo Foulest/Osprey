@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Razlog: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Prijavi to spletno stran kot varno"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Vedno ignoriraj to spletno stran"
   },
   "backButton": {

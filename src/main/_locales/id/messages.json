@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Alasan: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Laporkan situs web ini sebagai aman"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Selalu abaikan situs web ini"
   },
   "backButton": {

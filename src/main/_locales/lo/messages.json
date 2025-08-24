@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "ເຫດຜົນ: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "ລາຍງານເວັບໄຊນີ້ວ່າປອດໄພ"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "ມອບອະນຸຍາດເວັບໄຊນີ້ເທື່ອຫນ້າ"
   },
   "backButton": {

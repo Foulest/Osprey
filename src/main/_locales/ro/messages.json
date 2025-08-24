@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Motiv: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Raportați acest site web ca sigur"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Ignorați întotdeauna acest site web"
   },
   "backButton": {

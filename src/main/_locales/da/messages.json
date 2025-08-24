@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Årsag: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Rapportér dette websted som sikkert"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Ignorer altid dette websted"
   },
   "backButton": {

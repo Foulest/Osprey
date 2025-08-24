@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Põhjus: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Teata see veebisait turvaliseks"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Ignoreeri seda veebisaiti alati"
   },
   "backButton": {

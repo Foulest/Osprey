@@ -25,9 +25,9 @@ const Messages = {
 
     // Block Page Actions
     CONTINUE_TO_SAFETY: "continueToSafety",
-    CONTINUE_TO_SITE: "continueToSite",
-    REPORT_SITE: "reportSite",
-    ALLOW_SITE: "allowSite",
+    CONTINUE_TO_WEBSITE: "continueToWebsite",
+    REPORT_WEBSITE: "reportWebsite",
+    ALLOW_WEBSITE: "allowWebsite",
 
     // Official Partners
     ADGUARD_SECURITY_TOGGLED: "adGuardSecurityToggled",

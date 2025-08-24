@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Dôvod: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Nahlásiť túto stránku ako bezpečnú"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Vždy ignorovať túto stránku"
   },
   "backButton": {

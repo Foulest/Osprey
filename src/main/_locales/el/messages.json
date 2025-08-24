@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Αιτία: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Αναφορά αυτού του ιστότοπου ως ασφαλούς"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Να αγνοείται πάντα αυτός ο ιστότοπος"
   },
   "backButton": {

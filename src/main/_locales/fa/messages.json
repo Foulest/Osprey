@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "دلیل: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "گزارش این وب‌سایت به‌عنوان امن"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "همیشه این وب‌سایت را نادیده بگیر"
   },
   "backButton": {

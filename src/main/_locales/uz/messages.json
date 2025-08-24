@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Sabab: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Ushbu veb-saytni xavfsiz deb xabar qiling"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Doim ushbu veb-saytni e’tiborsiz qoldiring"
   },
   "backButton": {

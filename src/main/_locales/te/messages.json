@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "కారణం: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "ఈ వెబ్‌సైట్‌ను సురక్షితంగా రిపోర్ట్ చేయండి"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "ఎల్లప్పుడూ ఈ వెబ్‌సైట్‌ను నిర్లక్ష్యం చేయండి"
   },
   "backButton": {

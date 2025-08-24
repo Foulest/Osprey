@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Dahilan: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Iulat ang website na ito bilang ligtas"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Laging balewalain ang website na ito"
   },
   "backButton": {

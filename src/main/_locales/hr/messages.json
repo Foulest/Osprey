@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Razlog: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Prijavi ovu web stranicu kao sigurnu"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Uvijek ignoriraj ovu web stranicu"
   },
   "backButton": {

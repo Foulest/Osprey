@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "কারণ: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "এই ওয়েবসাইটটিকে নিরাপদ হিসেবে রিপোর্ট করুন"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "সবসময় এই ওয়েবসাইট উপেক্ষা করুন"
   },
   "backButton": {

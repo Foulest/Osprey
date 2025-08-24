@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Sebep: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Bu web sitesini güvenli olarak bildir"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Bu web sitesini her zaman yoksay"
   },
   "backButton": {

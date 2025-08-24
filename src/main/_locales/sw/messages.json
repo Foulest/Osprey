@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Sababu: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Ripoti tovuti hii kama salama"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Puuza tovuti hii kila wakati"
   },
   "backButton": {

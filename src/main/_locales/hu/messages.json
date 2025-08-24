@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Ok: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Jelentse ezt a weboldalt biztonságosként"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Mindig hagyja figyelmen kívül ezt a weboldalt"
   },
   "backButton": {

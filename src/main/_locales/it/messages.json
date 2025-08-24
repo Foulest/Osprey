@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Motivo: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Segnala questo sito web come sicuro"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Ignora sempre questo sito web"
   },
   "backButton": {

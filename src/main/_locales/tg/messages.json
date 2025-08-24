@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Сабаб: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Ин сомонаро ҳамчун бехатар гузориш диҳед"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Ҳамеша ин сомонаро нодида гиред"
   },
   "backButton": {

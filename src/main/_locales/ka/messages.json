@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "მიზეზი: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "მიუთითეთ ეს ვებგვერდი როგორც უსაფრთხო"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "ყოველთვის იგნორირება ამ ვებგვერდის"
   },
   "backButton": {

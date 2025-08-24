@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Պատճառը․ "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Հաղորդել այս կայքը որպես անվտանգ"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Միշտ անտեսել այս կայքը"
   },
   "backButton": {

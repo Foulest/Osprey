@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "ಕಾರಣ: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "ಈ ವೆಬ್‌ಸೈಟ್‌ನ್ನು ಸುರಕ್ಷಿತವೆಂದು ವರದಿ ಮಾಡಿ"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "ಯಾವಾಗಲೂ ಈ ವೆಬ್‌ಸೈಟ್ ಅನ್ನು ನಿರ್ಲಕ್ಷಿಸಿ"
   },
   "backButton": {

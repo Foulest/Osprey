@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "အကြောင်းရင်း: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "ဤဝဘ်ဆိုဒ်ကို အန္တရာယ်မရှိဟု တင်ပြရန်"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "ဤဝဘ်ဆိုဒ်ကို အမြဲ လျစ်လျူရှုရန်"
   },
   "backButton": {

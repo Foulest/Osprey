@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Motiu: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Informa d'aquest lloc web com a segur"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Ignoreu sempre aquest lloc web"
   },
   "backButton": {

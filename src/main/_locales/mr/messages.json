@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "कारण: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "ही वेबसाइट सुरक्षित म्हणून नोंदवा"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "नेहमी ही वेबसाइट दुर्लक्षित करा"
   },
   "backButton": {

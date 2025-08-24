@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Sebäbi: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Bu web-saýty howpsuz diýip belläň"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Bu web-saýty hemişe äsgermezlik et"
   },
   "backButton": {

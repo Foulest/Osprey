@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "סיבה: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "דווח על אתר זה כבטוח"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "התעלם תמיד מאתר זה"
   },
   "backButton": {

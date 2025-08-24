@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "原因: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "将此网站报告为安全"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "始终忽略此网站"
   },
   "backButton": {

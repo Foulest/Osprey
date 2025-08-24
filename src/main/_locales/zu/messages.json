@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Isizathu: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Bika le webhusayithi njengephephile"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Hlala ungayinaki le webhusayithi"
   },
   "backButton": {

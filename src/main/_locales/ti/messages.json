@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "እቲ እተንቀሳቀሰታ: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "እዚ ድሕሪት ከም ዝሓለፈ ብዛዕባኡ ዘርዝር"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "እዚ ድሕሪት ሓደ ግዜ ኣይትረኽብን"
   },
   "backButton": {

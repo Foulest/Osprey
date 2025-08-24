@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Причина: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Докладвайте този уебсайт като безопасен"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Винаги игнорирай този уебсайт"
   },
   "backButton": {

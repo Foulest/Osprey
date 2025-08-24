@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "이유: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "이 웹사이트를 안전하다고 신고"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "항상 이 웹사이트 무시"
   },
   "backButton": {

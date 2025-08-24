@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Syy: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Ilmoita tämä verkkosivusto turvalliseksi"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Ohita tämä verkkosivusto aina"
   },
   "backButton": {

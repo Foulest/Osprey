@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Себеби: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Бул веб-сайтты коопсуз деп билдирүү"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Бул веб-сайтты ар дайым четке кагуу"
   },
   "backButton": {

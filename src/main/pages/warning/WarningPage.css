@@ -144,14 +144,14 @@ p {
     color: rgb(243, 186, 34);
 }
 
-#reportSite,
-#allowSite {
+#reportWebsite,
+#allowWebsite {
     color: rgb(243, 186, 34);
     text-decoration: underline;
 }
 
-#reportSite:hover,
-#allowSite:hover {
+#reportWebsite:hover,
+#allowWebsite:hover {
     cursor: pointer;
 }
 

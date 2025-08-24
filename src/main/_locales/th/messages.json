@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "เหตุผล: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "รายงานเว็บไซต์นี้ว่าปลอดภัย"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "เพิกเฉยเว็บไซต์นี้เสมอ"
   },
   "backButton": {

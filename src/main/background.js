@@ -674,7 +674,7 @@
         const tabId = sender.tab ? sender.tab.id : null;
 
         switch (message.messageType) {
-            case Messages.CONTINUE_TO_SITE: {
+            case Messages.CONTINUE_TO_WEBSITE: {
                 // Checks if the message has a blocked URL
                 if (!message.blockedUrl) {
                     console.debug(`No blocked URL was found; sending to new tab page.`);
@@ -759,7 +759,7 @@
                 }, 200);
                 break;
 
-            case Messages.REPORT_SITE: {
+            case Messages.REPORT_WEBSITE: {
                 // Ignores blank report URLs
                 if (message.reportUrl === null || message.reportUrl === "") {
                     console.debug(`Report URL is blank.`);
@@ -788,7 +788,7 @@
                 break;
             }
 
-            case Messages.ALLOW_SITE: {
+            case Messages.ALLOW_WEBSITE: {
                 // Ignores blank blocked URLs.
                 if (message.blockedUrl === null || message.blockedUrl === "") {
                     console.debug(`Blocked URL is blank.`);

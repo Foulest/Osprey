@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "އިތުރު: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "މި ވެބްސައިޓް ސޭފް ކަމަށް ރިޕޯޓް ކުރޭ"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "މި ވެބްސައިޓް ހުރިހާއި ދިމާވެއްޖެ"
   },
   "backButton": {

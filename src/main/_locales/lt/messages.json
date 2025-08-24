@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Priežastis: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Pranešti, kad ši svetainė yra saugi"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Visada ignoruoti šią svetainę"
   },
   "backButton": {

@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Ástæða: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Tilkynna þessa vefsíðu sem örugga"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Alltaf hunsa þessa vefsíðu"
   },
   "backButton": {

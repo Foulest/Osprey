@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "ምክንያት፡ "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "ይህን ድር ጣቢያ እንደ ደህንነቱ ተጠብቆ ሪፖርት አድርግ"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "ይህንን ድር ጣቢያ ሁልጊዜ ችላ አድርግ"
   },
   "backButton": {

@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Iemesls: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Ziņot par šo vietni kā drošu"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Vienmēr ignorēt šo vietni"
   },
   "backButton": {

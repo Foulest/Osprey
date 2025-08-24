@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Důvod: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Nahlásit tento web jako bezpečný"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Tento web vždy ignorovat"
   },
   "backButton": {

@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "سبب: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "الإبلاغ عن هذا الموقع على أنه آمن"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "تجاهل هذا الموقع دائمًا"
   },
   "backButton": {

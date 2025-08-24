@@ -32,10 +32,10 @@
   "reasonLabel": {
     "message": "Lý do: "
   },
-  "reportSite": {
+  "reportWebsite": {
     "message": "Báo cáo trang web này là an toàn"
   },
-  "allowSite": {
+  "allowWebsite": {
     "message": "Luôn bỏ qua trang web này"
   },
   "backButton": {

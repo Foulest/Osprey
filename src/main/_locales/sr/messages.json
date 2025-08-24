@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Zaštita pregledača"
+  },
+  "logoAlt": {
+    "message": "Osprey logo"
+  },
+  "bannerText": {
+    "message": "Osprey: Zaštita pregledača"
+  },
+  "warningTitle": {
+    "message": "Upozorenje: Ovaj veb-sajt nije bezbedan"
+  },
+  "recommendation": {
+    "message": "Osprey je blokirao pristup ovom veb-sajtu. Nije bezbedno nastaviti."
+  },
+  "details": {
+    "message": "Ako ste vlasnik ovog veb-sajta, kontaktirajte provajdera bezbednosti da rešite problem."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Prijavio: "
+  },
+  "reportedByOthers": {
+    "message": "(i ___ drugih)"
+  },
+  "reportedByAlso": {
+    "message": "Takođe prijavili: "
+  },
+  "reasonLabel": {
+    "message": "Razlog: "
+  },
+  "reportSite": {
+    "message": "Prijavi ovaj veb-sajt kao bezbedan"
+  },
+  "allowSite": {
+    "message": "Uvek ignoriši ovaj veb-sajt"
+  },
+  "backButton": {
+    "message": "Nazad na bezbedno"
+  },
+  "continueButton": {
+    "message": "Nastavi ipak"
+  },
+  "popupTitle": {
+    "message": "Opcije zaštite"
+  },
+  "githubLink": {
+    "message": "Pogledaj na GitHub-u"
+  },
+  "version": {
+    "message": "Verzija: "
+  },
+  "privacyPolicy": {
+    "message": "Politika privatnosti"
+  },
+  "onText": {
+    "message": "Uključeno"
+  },
+  "offText": {
+    "message": "Isključeno"
+  },
+  "onLockedText": {
+    "message": "Uključeno (zaključano)"
+  },
+  "offLockedText": {
+    "message": "Isključeno (zaključano)"
+  },
+  "knownSafe": {
+    "message": "Poznato kao bezbedno"
+  },
+  "failed": {
+    "message": "Neuspešno"
+  },
+  "waiting": {
+    "message": "Čekanje"
+  },
+  "allowed": {
+    "message": "Dozvoljeno"
+  },
+  "malicious": {
+    "message": "Zlonamerno"
+  },
+  "phishing": {
+    "message": "Fišing"
+  },
+  "untrusted": {
+    "message": "Nepouzdano"
+  },
+  "adultContent": {
+    "message": "Sadržaj za odrasle"
+  },
+  "toggleNotificationsContext": {
+    "message": "Omogući obaveštenja"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Ignoriši navigaciju u frejmovima"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Obriši listu dozvoljenih sajtova"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Dozvoljeni sajtovi obrisani"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Svi dozvoljeni sajtovi su obrisani."
+  },
+  "restoreDefaultsContext": {
+    "message": "Vrati podrazumevana podešavanja"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Podrazumevana podešavanja vraćena"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Podrazumevana podešavanja su vraćena."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Nebezbedan veb-sajt blokiran"
+  },
+  "officialPartnerTitle": {
+    "message": "Zvanični partner"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard logo"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain logo"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D logo"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec logo"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE logo"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing logo"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare logo"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu logo"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU logo"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton logo"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 logo"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Ochrana prohlížeče"
+  },
+  "logoAlt": {
+    "message": "Logo Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Ochrana prohlížeče"
+  },
+  "warningTitle": {
+    "message": "Varování: Tento web je nebezpečný"
+  },
+  "recommendation": {
+    "message": "Osprey zablokoval přístup k tomuto webu. Pokračování je nebezpečné."
+  },
+  "details": {
+    "message": "Pokud jste vlastníkem tohoto webu, kontaktujte prosím poskytovatele zabezpečení, aby problém vyřešil."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Nahlásil(a): "
+  },
+  "reportedByOthers": {
+    "message": "(a ___ dalších)"
+  },
+  "reportedByAlso": {
+    "message": "Také nahlásili: "
+  },
+  "reasonLabel": {
+    "message": "Důvod: "
+  },
+  "reportSite": {
+    "message": "Nahlásit tento web jako bezpečný"
+  },
+  "allowSite": {
+    "message": "Tento web vždy ignorovat"
+  },
+  "backButton": {
+    "message": "Zpět na bezpečnou stránku"
+  },
+  "continueButton": {
+    "message": "Pokračovat přesto"
+  },
+  "popupTitle": {
+    "message": "Možnosti ochrany"
+  },
+  "githubLink": {
+    "message": "Zobrazit na GitHubu"
+  },
+  "version": {
+    "message": "Verze: "
+  },
+  "privacyPolicy": {
+    "message": "Zásady ochrany osobních údajů"
+  },
+  "onText": {
+    "message": "Zapnuto"
+  },
+  "offText": {
+    "message": "Vypnuto"
+  },
+  "onLockedText": {
+    "message": "Zapnuto (uzamčeno)"
+  },
+  "offLockedText": {
+    "message": "Vypnuto (uzamčeno)"
+  },
+  "knownSafe": {
+    "message": "Důvěryhodný"
+  },
+  "failed": {
+    "message": "Chyba"
+  },
+  "waiting": {
+    "message": "Čekání…"
+  },
+  "allowed": {
+    "message": "Povoleno"
+  },
+  "malicious": {
+    "message": "Škodlivý"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Nedůvěryhodný"
+  },
+  "adultContent": {
+    "message": "Obsah pro dospělé"
+  },
+  "toggleNotificationsContext": {
+    "message": "Povolit upozornění"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Ignorovat navigaci rámců"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Vymazat seznam povolených webů"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Seznam povolených webů byl vymazán"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Všechny povolené weby byly vymazány."
+  },
+  "restoreDefaultsContext": {
+    "message": "Obnovit výchozí nastavení"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Výchozí nastavení obnoveno"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Výchozí nastavení bylo obnoveno."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Nebezpečný web zablokován"
+  },
+  "officialPartnerTitle": {
+    "message": "Oficiální partner"
+  },
+  "adGuardLogoAlt": {
+    "message": "Logo AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Logo alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Logo Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Logo PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Logo CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Logo CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Logo Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Logo DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Logo DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Logo Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Logo Quad9"
+  }
+}

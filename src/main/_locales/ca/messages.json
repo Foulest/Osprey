@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Protecció del navegador"
+  },
+  "logoAlt": {
+    "message": "Logotip d’Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Protecció del navegador"
+  },
+  "warningTitle": {
+    "message": "Avís: Aquest lloc web no és segur"
+  },
+  "recommendation": {
+    "message": "Osprey ha bloquejat l'accés a aquest lloc web. No és segur continuar."
+  },
+  "details": {
+    "message": "Si sou el propietari d'aquest lloc web, poseu-vos en contacte amb el proveïdor de seguretat per resoldre el problema."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Reportat per: "
+  },
+  "reportedByOthers": {
+    "message": "(i ___ altres)"
+  },
+  "reportedByAlso": {
+    "message": "També reportat per: "
+  },
+  "reasonLabel": {
+    "message": "Motiu: "
+  },
+  "reportSite": {
+    "message": "Informa d'aquest lloc web com a segur"
+  },
+  "allowSite": {
+    "message": "Ignoreu sempre aquest lloc web"
+  },
+  "backButton": {
+    "message": "Torna a una pàgina segura"
+  },
+  "continueButton": {
+    "message": "Continueu igualment"
+  },
+  "popupTitle": {
+    "message": "Opcions de protecció"
+  },
+  "githubLink": {
+    "message": "Veure a GitHub"
+  },
+  "version": {
+    "message": "Versió: "
+  },
+  "privacyPolicy": {
+    "message": "Política de privadesa"
+  },
+  "onText": {
+    "message": "Activat"
+  },
+  "offText": {
+    "message": "Desactivat"
+  },
+  "onLockedText": {
+    "message": "Activat (bloquejat)"
+  },
+  "offLockedText": {
+    "message": "Desactivat (bloquejat)"
+  },
+  "knownSafe": {
+    "message": "De confiança"
+  },
+  "failed": {
+    "message": "Error"
+  },
+  "waiting": {
+    "message": "En espera"
+  },
+  "allowed": {
+    "message": "Permès"
+  },
+  "malicious": {
+    "message": "Maliciós"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "No fiable"
+  },
+  "adultContent": {
+    "message": "Contingut per a adults"
+  },
+  "toggleNotificationsContext": {
+    "message": "Activa les notificacions"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Ignora la navegació per marcs"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Esborra la llista de llocs web permesos"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Llista de llocs web permesos esborrada"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Tots els llocs web permesos han estat eliminats."
+  },
+  "restoreDefaultsContext": {
+    "message": "Restaura la configuració predeterminada"
+  },
+  "restoreDefaultsTitle": {
+    "message": "S’ha restaurat la configuració predeterminada"
+  },
+  "restoreDefaultsMessage": {
+    "message": "S'han restaurat els paràmetres predeterminats."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Lloc web insegur blocat"
+  },
+  "officialPartnerTitle": {
+    "message": "Soci oficial"
+  },
+  "adGuardLogoAlt": {
+    "message": "Logotip d’AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Logotip d’alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Logotip de Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Logotip de PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Logotip de CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Logotip de CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Logotip de Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Logotip de DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Logotip de DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Logotip de Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Logotip de Quad9"
+  }
+}

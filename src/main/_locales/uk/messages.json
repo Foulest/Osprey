@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Захист браузера"
+  },
+  "logoAlt": {
+    "message": "Логотип Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Захист браузера"
+  },
+  "warningTitle": {
+    "message": "Попередження: цей вебсайт небезпечний"
+  },
+  "recommendation": {
+    "message": "Osprey заблокував доступ до цього вебсайту. Продовжувати небезпечно."
+  },
+  "details": {
+    "message": "Якщо ви є власником цього вебсайту, будь ласка, зверніться до постачальника безпеки для вирішення проблеми."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Повідомлено: "
+  },
+  "reportedByOthers": {
+    "message": "(та ще ___ інших)"
+  },
+  "reportedByAlso": {
+    "message": "Також повідомили: "
+  },
+  "reasonLabel": {
+    "message": "Причина: "
+  },
+  "reportSite": {
+    "message": "Повідомити, що цей вебсайт безпечний"
+  },
+  "allowSite": {
+    "message": "Завжди ігнорувати цей вебсайт"
+  },
+  "backButton": {
+    "message": "Повернутися до безпеки"
+  },
+  "continueButton": {
+    "message": "Продовжити все одно"
+  },
+  "popupTitle": {
+    "message": "Параметри захисту"
+  },
+  "githubLink": {
+    "message": "Переглянути на GitHub"
+  },
+  "version": {
+    "message": "Версія: "
+  },
+  "privacyPolicy": {
+    "message": "Політика конфіденційності"
+  },
+  "onText": {
+    "message": "Увімкнено"
+  },
+  "offText": {
+    "message": "Вимкнено"
+  },
+  "onLockedText": {
+    "message": "Увімкнено (Заблоковано)"
+  },
+  "offLockedText": {
+    "message": "Вимкнено (Заблоковано)"
+  },
+  "knownSafe": {
+    "message": "Відомо як безпечний"
+  },
+  "failed": {
+    "message": "Помилка"
+  },
+  "waiting": {
+    "message": "Очікування"
+  },
+  "allowed": {
+    "message": "Дозволено"
+  },
+  "malicious": {
+    "message": "Зловмисний"
+  },
+  "phishing": {
+    "message": "Фішинг"
+  },
+  "untrusted": {
+    "message": "Ненадійний"
+  },
+  "adultContent": {
+    "message": "Контент для дорослих"
+  },
+  "toggleNotificationsContext": {
+    "message": "Увімкнути сповіщення"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Ігнорувати навігацію у фреймах"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Очистити список дозволених вебсайтів"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Список дозволених вебсайтів очищено"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Усі дозволені вебсайти було очищено."
+  },
+  "restoreDefaultsContext": {
+    "message": "Відновити стандартні налаштування"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Стандартні налаштування відновлено"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Стандартні налаштування відновлено."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Небезпечний вебсайт заблоковано"
+  },
+  "officialPartnerTitle": {
+    "message": "Офіційний партнер"
+  },
+  "adGuardLogoAlt": {
+    "message": "Логотип AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Логотип alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Логотип Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Логотип PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Логотип CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Логотип CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Логотип Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Логотип DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Логотип DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Логотип Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Логотип Quad9"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: محافظت مرورگر"
+  },
+  "logoAlt": {
+    "message": "لوگوی Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: محافظت مرورگر"
+  },
+  "warningTitle": {
+    "message": "هشدار: این وب‌سایت ناامن است"
+  },
+  "recommendation": {
+    "message": "Osprey دسترسی به این وب‌سایت را مسدود کرده است. ادامه دادن ناامن است."
+  },
+  "details": {
+    "message": "اگر مالک این وب‌سایت هستید، لطفاً برای رفع مشکل با ارائه‌دهنده امنیت تماس بگیرید."
+  },
+  "urlLabel": {
+    "message": "آدرس URL: "
+  },
+  "reportedByLabel": {
+    "message": "گزارش شده توسط: "
+  },
+  "reportedByOthers": {
+    "message": "(و ___ نفر دیگر)"
+  },
+  "reportedByAlso": {
+    "message": "همچنین گزارش شده توسط: "
+  },
+  "reasonLabel": {
+    "message": "دلیل: "
+  },
+  "reportSite": {
+    "message": "گزارش این وب‌سایت به‌عنوان امن"
+  },
+  "allowSite": {
+    "message": "همیشه این وب‌سایت را نادیده بگیر"
+  },
+  "backButton": {
+    "message": "بازگشت به حالت امن"
+  },
+  "continueButton": {
+    "message": "ادامه با وجود خطر"
+  },
+  "popupTitle": {
+    "message": "گزینه‌های محافظت"
+  },
+  "githubLink": {
+    "message": "مشاهده در GitHub"
+  },
+  "version": {
+    "message": "نسخه: "
+  },
+  "privacyPolicy": {
+    "message": "سیاست حفظ حریم خصوصی"
+  },
+  "onText": {
+    "message": "روشن"
+  },
+  "offText": {
+    "message": "خاموش"
+  },
+  "onLockedText": {
+    "message": "روشن (قفل شده)"
+  },
+  "offLockedText": {
+    "message": "خاموش (قفل شده)"
+  },
+  "knownSafe": {
+    "message": "مطمئن شناخته شده"
+  },
+  "failed": {
+    "message": "ناموفق"
+  },
+  "waiting": {
+    "message": "در انتظار"
+  },
+  "allowed": {
+    "message": "مجاز"
+  },
+  "malicious": {
+    "message": "بدافزار"
+  },
+  "phishing": {
+    "message": "فیشینگ"
+  },
+  "untrusted": {
+    "message": "غیرقابل اعتماد"
+  },
+  "adultContent": {
+    "message": "محتوای بزرگسالان"
+  },
+  "toggleNotificationsContext": {
+    "message": "فعال‌سازی اعلان‌ها"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "نادیده گرفتن ناوبری فریم‌ها"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "پاک کردن فهرست وب‌سایت‌های مجاز"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "وب‌سایت‌های مجاز پاک شدند"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "تمام وب‌سایت‌های مجاز پاک شدند."
+  },
+  "restoreDefaultsContext": {
+    "message": "بازگرداندن تنظیمات پیش‌فرض"
+  },
+  "restoreDefaultsTitle": {
+    "message": "تنظیمات پیش‌فرض بازگردانده شد"
+  },
+  "restoreDefaultsMessage": {
+    "message": "تنظیمات پیش‌فرض بازگردانده شدند."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "وب‌سایت ناامن مسدود شد"
+  },
+  "officialPartnerTitle": {
+    "message": "شریک رسمی"
+  },
+  "adGuardLogoAlt": {
+    "message": "لوگوی AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "لوگوی alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "لوگوی Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "لوگوی PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "لوگوی CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "لوگوی CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "لوگوی Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "لوگوی DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "لوگوی DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "لوگوی Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "لوگوی Quad9"
+  }
+}

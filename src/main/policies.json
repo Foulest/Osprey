@@ -35,9 +35,9 @@
       "description": "If set to true, the protection options will be hidden.",
       "type": "boolean"
     },
-    "DisableClearAllowedSites": {
-      "title": "Disable Clear Allowed Sites",
-      "description": "If set to true, the clear allowed sites button will be disabled.",
+    "DisableClearAllowedWebsites": {
+      "title": "Disable Clear Allowed Websites",
+      "description": "If set to true, the clear allowed websites button will be disabled.",
       "type": "boolean"
     },
     "DisableRestoreDefaultSettings": {

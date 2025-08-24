@@ -215,8 +215,10 @@
             BrowserProtection.checkIfUrlIsMalicious(tabId, currentUrl, (result) => {
                 const duration = Date.now() - startTime;
                 const cacheName = ProtectionResult.CacheName[result.origin];
-                const systemName = ProtectionResult.ShortName[result.origin];
+                const fullName = ProtectionResult.FullName[result.origin];
+                const shortName = ProtectionResult.ShortName[result.origin];
                 const resultType = result.resultType;
+                const resultTypeNameEN = ProtectionResult.ResultTypeNameEN[resultType];
 
                 // Removes the URL from the system's processing cache on every callback.
                 // Doesn't remove it if the result is still waiting for a response.
@@ -224,7 +226,7 @@
                     CacheManager.removeUrlFromProcessingCache(urlObject, cacheName);
                 }
 
-                console.info(`[${systemName}] Result for ${currentUrl}: ${resultType} (${duration}ms)`);
+                console.info(`[${shortName}] Result for ${currentUrl}: ${resultTypeNameEN} (${duration}ms)`);
 
                 if (resultType !== ProtectionResult.ResultType.FAILED &&
                     resultType !== ProtectionResult.ResultType.WAITING &&
@@ -246,7 +248,7 @@
                                 if (pendingUrl.startsWith("chrome-extension:") ||
                                     pendingUrl.startsWith("moz-extension:") ||
                                     pendingUrl.startsWith("extension:")) {
-                                    console.debug(`[${systemName}] The tab is at an extension page; bailing out. ${pendingUrl} ${frameId}`);
+                                    console.debug(`[${shortName}] The tab is at an extension page; bailing out. ${pendingUrl} ${frameId}`);
                                     return;
                                 }
                             }
@@ -257,7 +259,7 @@
                                 const blockPageUrl = UrlHelpers.getBlockPageUrl(result, frameZeroURLs.get(tabId) === undefined ? result.url : frameZeroURLs.get(tabId));
 
                                 // Navigates to the block page
-                                console.debug(`[${systemName}] Navigating to block page: ${blockPageUrl}.`);
+                                console.debug(`[${shortName}] Navigating to block page: ${blockPageUrl}.`);
                                 browserAPI.tabs.update(tab.id, {url: blockPageUrl}).catch(error => {
                                     console.error(`Failed to update tab ${tabId}:`, error);
                                     sendToNewTabPage(tabId);
@@ -268,8 +270,8 @@
                                     const notificationOptions = {
                                         type: "basic",
                                         iconUrl: "assets/icons/icon128.png",
-                                        title: "Unsafe Website Blocked",
-                                        message: `URL: ${currentUrl}\nReason: ${resultType}\nReported by: ${systemName}`,
+                                        title: browserAPI.i18n.getMessage('unsafeWebsiteTitle'),
+                                        message: `${browserAPI.i18n.getMessage('urlLabel')}${currentUrl}\n${browserAPI.i18n.getMessage('reportedByLabel')}${fullName}\n${browserAPI.i18n.getMessage('reasonLabel')}${resultType}`,
                                         priority: 2,
                                     };
 
@@ -290,12 +292,12 @@
 
                     // TODO: Migrate this logic to work on refresh
                     blocked = true;
-                    firstSystemName = firstSystemName === "" ? systemName : firstSystemName;
+                    firstSystemName = firstSystemName === "" ? shortName : firstSystemName;
 
                     // Tracks the system name that flagged the URL
                     const existingSystems = resultSystemNames.get(tabId) || [];
-                    if (!existingSystems.includes(systemName) && systemName !== firstSystemName) {
-                        existingSystems.push(systemName);
+                    if (!existingSystems.includes(shortName) && shortName !== firstSystemName) {
+                        existingSystems.push(shortName);
                         resultSystemNames.set(tabId, existingSystems);
                     }
 
@@ -899,18 +901,18 @@
                 console.debug(`Ignore frame navigation: ${info.checked}`);
                 break;
 
-            case "clearAllowedSites": {
+            case "clearAllowedWebsites": {
                 CacheManager.clearAllowedCache();
                 CacheManager.clearBlockedCache();
                 CacheManager.clearProcessingCache();
-                console.debug("Cleared all internal site caches.");
+                console.debug("Cleared all internal website caches.");
 
                 // Builds the browser notification to send the user
                 const notificationOptions = {
                     type: "basic",
                     iconUrl: "assets/icons/icon128.png",
-                    title: "Allowed Sites Cleared",
-                    message: "All allowed sites have been cleared.",
+                    title: browserAPI.i18n.getMessage('clearAllowedWebsitesTitle'),
+                    message: browserAPI.i18n.getMessage('clearAllowedWebsitesMessage'),
                     priority: 2,
                 };
 
@@ -933,8 +935,8 @@
                 const notificationOptions = {
                     type: "basic",
                     iconUrl: "assets/icons/icon128.png",
-                    title: "Restore Default Settings",
-                    message: "Default settings have been restored.",
+                    title: browserAPI.i18n.getMessage('restoreDefaultsTitle'),
+                    message: browserAPI.i18n.getMessage('restoreDefaultsMessage'),
                     priority: 2,
                 };
 
@@ -975,7 +977,7 @@
             // Creates the toggle notifications menu item
             contextMenuAPI.create({
                 id: "toggleNotifications",
-                title: "Enable notifications",
+                title: browserAPI.i18n.getMessage('toggleNotificationsContext'),
                 type: "checkbox",
                 checked: settings.notificationsEnabled,
                 contexts: ["action"],
@@ -984,23 +986,23 @@
             // Creates the toggle frame navigation menu item
             contextMenuAPI.create({
                 id: "toggleFrameNavigation",
-                title: "Ignore frame navigation",
+                title: browserAPI.i18n.getMessage('toggleFrameNavigationContext'),
                 type: "checkbox",
                 checked: settings.ignoreFrameNavigation,
                 contexts: ["action"],
             });
 
-            // Creates the clear allowed sites menu item
+            // Creates the clear allowed websites menu item
             contextMenuAPI.create({
-                id: "clearAllowedSites",
-                title: "Clear list of allowed sites",
+                id: "clearAllowedWebsites",
+                title: browserAPI.i18n.getMessage('clearAllowedWebsitesContext'),
                 contexts: ["action"],
             });
 
             // Creates the restore default settings menu item
             contextMenuAPI.create({
                 id: "restoreDefaultSettings",
-                title: "Restore default settings",
+                title: browserAPI.i18n.getMessage('restoreDefaultsContext'),
                 contexts: ["action"],
             });
 
@@ -1012,7 +1014,7 @@
             // Gathers the policy values for updating the context menu
             const policyKeys = [
                 "DisableNotifications",
-                "DisableClearAllowedSites",
+                "DisableClearAllowedWebsites",
                 "IgnoreFrameNavigation",
                 "DisableRestoreDefaultSettings"
             ];
@@ -1042,13 +1044,13 @@
                     console.debug("Ignoring frame navigation is managed by system policy.");
                 }
 
-                // Checks if the clear allowed sites button should be disabled
-                if (policies.DisableClearAllowedSites !== undefined && policies.DisableClearAllowedSites) {
-                    contextMenuAPI.update("clearAllowedSites", {
+                // Checks if the clear allowed websites button should be disabled
+                if (policies.DisableClearAllowedWebsites !== undefined && policies.DisableClearAllowedWebsites) {
+                    contextMenuAPI.update("clearAllowedWebsites", {
                         enabled: false,
                     });
 
-                    console.debug("Clear allowed sites button is managed by system policy.");
+                    console.debug("Clear allowed websites button is managed by system policy.");
                 }
 
                 // Checks if the restore default settings button should be disabled

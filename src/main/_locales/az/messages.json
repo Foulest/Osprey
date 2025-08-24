@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Brauzer Qorunması"
+  },
+  "logoAlt": {
+    "message": "Osprey Loqosu"
+  },
+  "bannerText": {
+    "message": "Osprey: Brauzer Qorunması"
+  },
+  "warningTitle": {
+    "message": "Xəbərdarlıq: Bu vebsayt təhlükəlidir"
+  },
+  "recommendation": {
+    "message": "Osprey bu vebsayta girişi blokladı. Davam etmək təhlükəlidir."
+  },
+  "details": {
+    "message": "Əgər bu vebsaytın sahibisinizsə, problemi həll etmək üçün təhlükəsizlik təminatçısı ilə əlaqə saxlayın."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Hesabat verən: "
+  },
+  "reportedByOthers": {
+    "message": "(və ___ digər)"
+  },
+  "reportedByAlso": {
+    "message": "Həmçinin hesabat verən: "
+  },
+  "reasonLabel": {
+    "message": "Səbəb: "
+  },
+  "reportSite": {
+    "message": "Bu vebsaytı təhlükəsiz olaraq bildir"
+  },
+  "allowSite": {
+    "message": "Həmişə bu vebsaytı görməməzlikdən gəl"
+  },
+  "backButton": {
+    "message": "Təhlükəsizliyə qayıt"
+  },
+  "continueButton": {
+    "message": "Hər halda davam et"
+  },
+  "popupTitle": {
+    "message": "Qorunma Seçimləri"
+  },
+  "githubLink": {
+    "message": "GitHub-da bax"
+  },
+  "version": {
+    "message": "Versiya: "
+  },
+  "privacyPolicy": {
+    "message": "Məxfilik Siyasəti"
+  },
+  "onText": {
+    "message": "Açıq"
+  },
+  "offText": {
+    "message": "Bağlı"
+  },
+  "onLockedText": {
+    "message": "Açıq (Bloklanıb)"
+  },
+  "offLockedText": {
+    "message": "Bağlı (Bloklanıb)"
+  },
+  "knownSafe": {
+    "message": "Məlum Təhlükəsiz"
+  },
+  "failed": {
+    "message": "Uğursuz"
+  },
+  "waiting": {
+    "message": "Gözlənilir"
+  },
+  "allowed": {
+    "message": "İcazə verildi"
+  },
+  "malicious": {
+    "message": "Zərərli"
+  },
+  "phishing": {
+    "message": "Fişinq"
+  },
+  "untrusted": {
+    "message": "Etibarsız"
+  },
+  "adultContent": {
+    "message": "Yetkinlər üçün Məzmun"
+  },
+  "toggleNotificationsContext": {
+    "message": "Bildirişləri aktiv et"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Çərçivə naviqasiyasını görməməzlikdən gəl"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "İcazə verilmiş vebsaytların siyahısını təmizlə"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "İcazə verilmiş vebsaytlar təmizləndi"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Bütün icazə verilmiş vebsaytlar təmizlənib."
+  },
+  "restoreDefaultsContext": {
+    "message": "Defolt ayarları bərpa et"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Defolt Ayarlar Bərpa Olundu"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Defolt ayarlar bərpa edilib."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Təhlükəli Vebsayt Bloklandı"
+  },
+  "officialPartnerTitle": {
+    "message": "Rəsmi Tərəfdaş"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard Loqosu"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain Loqosu"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D Loqosu"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec Loqosu"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE Loqosu"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing Loqosu"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare Loqosu"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu Loqosu"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU Loqosu"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton Loqosu"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 Loqosu"
+  }
+}

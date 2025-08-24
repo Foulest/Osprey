@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Browserbeskyttelse"
+  },
+  "logoAlt": {
+    "message": "Osprey Logo"
+  },
+  "bannerText": {
+    "message": "Osprey: Browserbeskyttelse"
+  },
+  "warningTitle": {
+    "message": "Advarsel: Dette websted er usikkert"
+  },
+  "recommendation": {
+    "message": "Osprey har blokeret adgangen til dette websted. Det er usikkert at fortsætte."
+  },
+  "details": {
+    "message": "Hvis du er ejeren af dette websted, bedes du kontakte sikkerhedsudbyderen for at løse problemet."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Rapporteret af: "
+  },
+  "reportedByOthers": {
+    "message": "(og ___ andre)"
+  },
+  "reportedByAlso": {
+    "message": "Også rapporteret af: "
+  },
+  "reasonLabel": {
+    "message": "Årsag: "
+  },
+  "reportSite": {
+    "message": "Rapportér dette websted som sikkert"
+  },
+  "allowSite": {
+    "message": "Ignorer altid dette websted"
+  },
+  "backButton": {
+    "message": "Tilbage til sikker side"
+  },
+  "continueButton": {
+    "message": "Fortsæt alligevel"
+  },
+  "popupTitle": {
+    "message": "Beskyttelsesindstillinger"
+  },
+  "githubLink": {
+    "message": "Vis på GitHub"
+  },
+  "version": {
+    "message": "Version: "
+  },
+  "privacyPolicy": {
+    "message": "Privatlivspolitik"
+  },
+  "onText": {
+    "message": "Til"
+  },
+  "offText": {
+    "message": "Fra"
+  },
+  "onLockedText": {
+    "message": "Til (låst)"
+  },
+  "offLockedText": {
+    "message": "Fra (låst)"
+  },
+  "knownSafe": {
+    "message": "Kendt som sikker"
+  },
+  "failed": {
+    "message": "Mislykket"
+  },
+  "waiting": {
+    "message": "Venter"
+  },
+  "allowed": {
+    "message": "Tilladt"
+  },
+  "malicious": {
+    "message": "Ondsindet"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Ikke pålidelig"
+  },
+  "adultContent": {
+    "message": "Voksenindhold"
+  },
+  "toggleNotificationsContext": {
+    "message": "Aktivér meddelelser"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Ignorer rammenavigation"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Ryd listen over tilladte websteder"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Listen over tilladte websteder er ryddet"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Alle tilladte websteder er blevet ryddet."
+  },
+  "restoreDefaultsContext": {
+    "message": "Gendan standardindstillinger"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Standardindstillinger gendannet"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Standardindstillingerne er blevet gendannet."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Usikkert websted blokeret"
+  },
+  "officialPartnerTitle": {
+    "message": "Officiel partner"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard Logo"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain Logo"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D Logo"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec Logo"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE Logo"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing Logo"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare Logo"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu Logo"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU Logo"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton Logo"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 Logo"
+  }
+}

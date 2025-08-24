@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: ბრაუზერის დაცვა"
+  },
+  "logoAlt": {
+    "message": "Osprey ლოგო"
+  },
+  "bannerText": {
+    "message": "Osprey: ბრაუზერის დაცვა"
+  },
+  "warningTitle": {
+    "message": "გაფრთხილება: ეს ვებგვერდი არ არის უსაფრთხო"
+  },
+  "recommendation": {
+    "message": "Osprey-მა დაბლოკა წვდომა ამ ვებგვერდზე. გაგრძელება არ არის უსაფრთხო."
+  },
+  "details": {
+    "message": "თუ თქვენ ხართ ამ ვებგვერდის მფლობელი, გთხოვთ დაუკავშირდეთ უსაფრთხოების მომწოდებელს პრობლემის მოსაგვარებლად."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "განაცხადი გააკეთა: "
+  },
+  "reportedByOthers": {
+    "message": "(და ___ სხვა)"
+  },
+  "reportedByAlso": {
+    "message": "ასევე განაცხადი გააკეთა: "
+  },
+  "reasonLabel": {
+    "message": "მიზეზი: "
+  },
+  "reportSite": {
+    "message": "მიუთითეთ ეს ვებგვერდი როგორც უსაფრთხო"
+  },
+  "allowSite": {
+    "message": "ყოველთვის იგნორირება ამ ვებგვერდის"
+  },
+  "backButton": {
+    "message": "დაბრუნება უსაფრთხო გარემოში"
+  },
+  "continueButton": {
+    "message": "გაგრძელება მიუხედავად ამისა"
+  },
+  "popupTitle": {
+    "message": "დაცვის პარამეტრები"
+  },
+  "githubLink": {
+    "message": "გახსენით GitHub-ზე"
+  },
+  "version": {
+    "message": "ვერსია: "
+  },
+  "privacyPolicy": {
+    "message": "კონფიდენციალურობის პოლიტიკა"
+  },
+  "onText": {
+    "message": "ჩართულია"
+  },
+  "offText": {
+    "message": "გამორთულია"
+  },
+  "onLockedText": {
+    "message": "ჩართულია (დაბლოკილი)"
+  },
+  "offLockedText": {
+    "message": "გამორთულია (დაბლოკილი)"
+  },
+  "knownSafe": {
+    "message": "ცნობილი როგორც უსაფრთხო"
+  },
+  "failed": {
+    "message": "წარუმატებელი"
+  },
+  "waiting": {
+    "message": "მოლოდინში"
+  },
+  "allowed": {
+    "message": "ნებადართულია"
+  },
+  "malicious": {
+    "message": "მავნე"
+  },
+  "phishing": {
+    "message": "ფიშინგი"
+  },
+  "untrusted": {
+    "message": " अविश्वसनीय"
+  },
+  "adultContent": {
+    "message": "ზრდასრული შინაარსი"
+  },
+  "toggleNotificationsContext": {
+    "message": "შეტყობინებების ჩართვა"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "ფრემის ნავიგაციის იგნორირება"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "ნებადართული ვებგვერდების სიის გასუფთავება"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "ნებადართული ვებგვერდები გასუფთავდა"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "ყველა ნებადართული ვებგვერდი გასუფთავდა."
+  },
+  "restoreDefaultsContext": {
+    "message": "ნაგულისხმევ პარამეტრებზე დაბრუნება"
+  },
+  "restoreDefaultsTitle": {
+    "message": "ნაგულისხმევი პარამეტრები აღდგა"
+  },
+  "restoreDefaultsMessage": {
+    "message": "ნაგულისხმევი პარამეტრები აღდგა."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "არაუზრუნველყოფილი ვებგვერდი დაბლოკილია"
+  },
+  "officialPartnerTitle": {
+    "message": "ოფიციალური პარტნიორი"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard ლოგო"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain ლოგო"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D ლოგო"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec ლოგო"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE ლოგო"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing ლოგო"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare ლოგო"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu ლოგო"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU ლოგო"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton ლოგო"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 ლოგო"
+  }
+}

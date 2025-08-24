@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Tarayıcı Koruması"
+  },
+  "logoAlt": {
+    "message": "Osprey Logosu"
+  },
+  "bannerText": {
+    "message": "Osprey: Tarayıcı Koruması"
+  },
+  "warningTitle": {
+    "message": "Uyarı: Bu web sitesi güvenli değil"
+  },
+  "recommendation": {
+    "message": "Osprey bu web sitesine erişimi engelledi. Devam etmek güvenli değil."
+  },
+  "details": {
+    "message": "Bu web sitesinin sahibiyseniz, lütfen sorunu çözmek için güvenlik sağlayıcısıyla iletişime geçin."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Bildirilen kişi: "
+  },
+  "reportedByOthers": {
+    "message": "(ve ___ diğerleri)"
+  },
+  "reportedByAlso": {
+    "message": "Ayrıca bildirenler: "
+  },
+  "reasonLabel": {
+    "message": "Sebep: "
+  },
+  "reportSite": {
+    "message": "Bu web sitesini güvenli olarak bildir"
+  },
+  "allowSite": {
+    "message": "Bu web sitesini her zaman yoksay"
+  },
+  "backButton": {
+    "message": "Güvenliğe geri dön"
+  },
+  "continueButton": {
+    "message": "Yine de devam et"
+  },
+  "popupTitle": {
+    "message": "Koruma Seçenekleri"
+  },
+  "githubLink": {
+    "message": "GitHub’da Görüntüle"
+  },
+  "version": {
+    "message": "Sürüm: "
+  },
+  "privacyPolicy": {
+    "message": "Gizlilik Politikası"
+  },
+  "onText": {
+    "message": "Açık"
+  },
+  "offText": {
+    "message": "Kapalı"
+  },
+  "onLockedText": {
+    "message": "Açık (Kilitli)"
+  },
+  "offLockedText": {
+    "message": "Kapalı (Kilitli)"
+  },
+  "knownSafe": {
+    "message": "Güvenli Bilinen"
+  },
+  "failed": {
+    "message": "Başarısız"
+  },
+  "waiting": {
+    "message": "Bekleniyor"
+  },
+  "allowed": {
+    "message": "İzin Verildi"
+  },
+  "malicious": {
+    "message": "Kötü Amaçlı"
+  },
+  "phishing": {
+    "message": "Oltalama"
+  },
+  "untrusted": {
+    "message": "Güvenilmez"
+  },
+  "adultContent": {
+    "message": "Yetişkin İçeriği"
+  },
+  "toggleNotificationsContext": {
+    "message": "Bildirimleri etkinleştir"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Çerçeve gezinmesini yoksay"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "İzin verilen web siteleri listesini temizle"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "İzin Verilen Web Siteleri Temizlendi"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Tüm izin verilen web siteleri temizlendi."
+  },
+  "restoreDefaultsContext": {
+    "message": "Varsayılan ayarları geri yükle"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Varsayılan Ayarlar Geri Yüklendi"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Varsayılan ayarlar geri yüklendi."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Güvenli Olmayan Web Sitesi Engellendi"
+  },
+  "officialPartnerTitle": {
+    "message": "Resmî Ortak"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard Logosu"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain Logosu"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D Logosu"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec Logosu"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE Logosu"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing Logosu"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare Logosu"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu Logosu"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU Logosu"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton Logosu"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 Logosu"
+  }
+}

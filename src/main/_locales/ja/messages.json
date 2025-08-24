@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: ブラウザー保護"
+  },
+  "logoAlt": {
+    "message": "Osprey ロゴ"
+  },
+  "bannerText": {
+    "message": "Osprey: ブラウザー保護"
+  },
+  "warningTitle": {
+    "message": "警告: このウェブサイトは安全ではありません"
+  },
+  "recommendation": {
+    "message": "Osprey がこのウェブサイトへのアクセスをブロックしました。続行するのは安全ではありません。"
+  },
+  "details": {
+    "message": "このウェブサイトの所有者である場合は、問題を解決するためにセキュリティプロバイダーに連絡してください。"
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "報告者: "
+  },
+  "reportedByOthers": {
+    "message": "(および ___ 人)"
+  },
+  "reportedByAlso": {
+    "message": "また報告者: "
+  },
+  "reasonLabel": {
+    "message": "理由: "
+  },
+  "reportSite": {
+    "message": "このウェブサイトを安全として報告する"
+  },
+  "allowSite": {
+    "message": "常にこのウェブサイトを無視する"
+  },
+  "backButton": {
+    "message": "安全に戻る"
+  },
+  "continueButton": {
+    "message": "それでも続行する"
+  },
+  "popupTitle": {
+    "message": "保護オプション"
+  },
+  "githubLink": {
+    "message": "GitHub で表示"
+  },
+  "version": {
+    "message": "バージョン: "
+  },
+  "privacyPolicy": {
+    "message": "プライバシーポリシー"
+  },
+  "onText": {
+    "message": "オン"
+  },
+  "offText": {
+    "message": "オフ"
+  },
+  "onLockedText": {
+    "message": "オン (ロック中)"
+  },
+  "offLockedText": {
+    "message": "オフ (ロック中)"
+  },
+  "knownSafe": {
+    "message": "安全と確認済み"
+  },
+  "failed": {
+    "message": "失敗"
+  },
+  "waiting": {
+    "message": "待機中"
+  },
+  "allowed": {
+    "message": "許可済み"
+  },
+  "malicious": {
+    "message": "悪意のある"
+  },
+  "phishing": {
+    "message": "フィッシング"
+  },
+  "untrusted": {
+    "message": "信頼できない"
+  },
+  "adultContent": {
+    "message": "アダルトコンテンツ"
+  },
+  "toggleNotificationsContext": {
+    "message": "通知を有効にする"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "フレームナビゲーションを無視する"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "許可されたウェブサイト一覧をクリア"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "許可されたウェブサイトをクリアしました"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "すべての許可されたウェブサイトがクリアされました。"
+  },
+  "restoreDefaultsContext": {
+    "message": "デフォルト設定を復元"
+  },
+  "restoreDefaultsTitle": {
+    "message": "デフォルト設定が復元されました"
+  },
+  "restoreDefaultsMessage": {
+    "message": "デフォルト設定が復元されました。"
+  },
+  "unsafeWebsiteTitle": {
+    "message": "安全でないウェブサイトがブロックされました"
+  },
+  "officialPartnerTitle": {
+    "message": "公式パートナー"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard ロゴ"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain ロゴ"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D ロゴ"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec ロゴ"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE ロゴ"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing ロゴ"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare ロゴ"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu ロゴ"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU ロゴ"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton ロゴ"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 ロゴ"
+  }
+}

@@ -68,26 +68,80 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         const pageUrl = window.document.URL;
         const result = UrlHelpers.extractResult(pageUrl);
 
-        // Sets the reason text based on the result
+        // Checks if the result is valid
         if (!result) {
             console.warn("No result found in the URL.");
             return;
         }
 
+        // Converts the result code to a human-readable string
+        const resultText = ProtectionResult.ResultTypeName[result];
+        const resultTextEN = ProtectionResult.ResultTypeNameEN[result];
+
+        /**
+         * Localizes the page by replacing text content with localized messages.
+         */
+        function localizePage() {
+            // Helper function to get localized messages
+            const getMessage = (key) => browserAPI.i18n.getMessage(key);
+
+            // Maps element IDs to their corresponding i18n message keys
+            const elements = {
+                'warningTitle': 'warningTitle',
+                'recommendation': 'recommendation',
+                'details': 'details',
+                'urlLabel': 'urlLabel',
+                'reportedByLabel': 'reportedByLabel',
+                'reasonLabel': 'reasonLabel',
+                'reportSite': 'reportSite',
+                'allowSite': 'allowSite',
+                'backButton': 'backButton',
+                'continueButton': 'continueButton'
+            };
+
+            // Sets the text content for each element based on its i18n message
+            for (const [id, key] of Object.entries(elements)) {
+                const element = document.getElementById(id);
+
+                if (element) {
+                    element.textContent = getMessage(key);
+                }
+            }
+
+            // Sets the document title text
+            document.title = getMessage('title');
+
+            // Sets the banner text
+            const bannerText = document.querySelector('.bannerText');
+            if (bannerText) {
+                bannerText.textContent = getMessage('bannerText');
+            }
+
+            // Sets the alt text for the logo
+            const logo = document.getElementById('logo');
+            if (logo) {
+                logo.alt = getMessage('logoAlt');
+            }
+        }
+
+        // Localizes the page content
+        localizePage();
+
         // Cache for DOM elements
         const domElements = Object.fromEntries(
-            ["reason", "url", "reportedBy", "reportSite", "allowSite", "homepageButton", "continueButton"]
+            ["reason", "url", "reportedBy", "reportSite", "allowSite", "backButton", "continueButton"]
                 .map(id => [id, document.getElementById(id)])
         );
 
-        domElements.reason.innerText = result;
+        // Sets the reason text to the extracted result
+        domElements.reason.innerText = resultText;
 
         // Extracts the blocked URL from the current page URL
         const blockedUrl = UrlHelpers.extractBlockedUrl(pageUrl);
 
         // Encodes the URLs for safe use in other contexts
         const encodedBlockedUrl = encodeURIComponent(blockedUrl);
-        const encodedResult = encodeURIComponent(result);
+        const encodedResultTextEN = encodeURIComponent(resultTextEN);
 
         // Sets the URL text to the current page URL
         domElements.url.innerText = blockedUrl;
@@ -104,15 +158,20 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         // Listens for PONG messages to update the reported by count
         browserAPI.runtime.onMessage.addListener(message => {
             if (message.messageType === Messages.BLOCKED_COUNTER_PONG && message.count > 0) {
-                domElements.reportedBy.innerText = `${reportedByText} (and ${message.count} others)`;
+                let othersText = browserAPI.i18n.getMessage("reportedByOthers", message.count.toString());
+                othersText = othersText.replace("___", message.count.toString());
+
+                // Sets the reported by text with the count of other systems
+                domElements.reportedBy.innerText = `${reportedByText} ${othersText}`;
 
                 // Make the innerText hoverable and set the hover text
-                const wrappedTitle = wrapSystemNamesText(`Also reported by: ${message.systems.join(', ')}`);
+                const alsoReportedBy = browserAPI.i18n.getMessage("reportedByAlso");
+                const wrappedTitle = wrapSystemNamesText(`${alsoReportedBy}${message.systems.join(', ')}`);
                 domElements.reportedBy.title = `${wrappedTitle}`;
             }
         });
 
-        // Sends a PING message to get the count of reported sites
+        // Sends a PING message to get the count of reported websites
         // TODO: Send this on refresh of tab as well
         browserAPI.runtime.sendMessage({
             messageType: Messages.BLOCKED_COUNTER_PING
@@ -131,7 +190,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20AdGuard%20Public%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -141,7 +200,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20AdGuard%20Family%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -154,7 +213,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20Control%20D%20Security%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -164,7 +223,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20Control%20D%20Family%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -174,7 +233,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20PrecisionSec%20Web%20Protection" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -184,7 +243,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20CERT-EE%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -194,7 +253,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20CleanBrowsing%20Security%20Filter" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -204,7 +263,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20CleanBrowsing%20Adult%20Filter" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -223,7 +282,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20DNS4EU%20Protective%20Resolution%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -234,7 +293,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20DNS4EU%20Protective%20Resolution%20with%20Child%20Protection%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -249,7 +308,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20Quad9%20DNS" +
                         "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResult +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
                         "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
                         "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
                         "%0AWebsite:%20https://osprey.ac");
@@ -313,7 +372,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
             });
 
             // Adds event listener to "Back to safety" button
-            domElements.homepageButton.addEventListener("click", async () => {
+            domElements.backButton.addEventListener("click", async () => {
                 await sendMessage(Messages.CONTINUE_TO_SAFETY, {
                     blockedUrl: blockedUrl
                 });
@@ -341,8 +400,8 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                 document.getElementById("reportBreakpoint").style.display = "";
             }
 
-            // Handles the homepage button visibility
-            document.getElementById("homepageButton").style.display = "";
+            // Handles the back button visibility
+            document.getElementById("backButton").style.display = "";
         });
     }
 

@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey․ Բրաուզերի Պաշտպանություն"
+  },
+  "logoAlt": {
+    "message": "Osprey Լոգո"
+  },
+  "bannerText": {
+    "message": "Osprey․ Բրաուզերի Պաշտպանություն"
+  },
+  "warningTitle": {
+    "message": "Զգուշացում․ Այս կայքը անվտանգ չէ"
+  },
+  "recommendation": {
+    "message": "Osprey-ը արգելափակել է մուտքը այս կայք։ Անվտանգ չէ շարունակել։"
+  },
+  "details": {
+    "message": "Եթե դուք այս կայքի սեփականատերն եք, խնդրում ենք կապվել անվտանգության մատակարարի հետ խնդիրը լուծելու համար։"
+  },
+  "urlLabel": {
+    "message": "Հղում (URL): "
+  },
+  "reportedByLabel": {
+    "message": "Հաղորդել է․ "
+  },
+  "reportedByOthers": {
+    "message": "(և ___ ուրիշներ)"
+  },
+  "reportedByAlso": {
+    "message": "Նաեւ հաղորդել են․ "
+  },
+  "reasonLabel": {
+    "message": "Պատճառը․ "
+  },
+  "reportSite": {
+    "message": "Հաղորդել այս կայքը որպես անվտանգ"
+  },
+  "allowSite": {
+    "message": "Միշտ անտեսել այս կայքը"
+  },
+  "backButton": {
+    "message": "Վերադառնալ անվտանգ"
+  },
+  "continueButton": {
+    "message": "Շարունակել ամեն դեպքում"
+  },
+  "popupTitle": {
+    "message": "Պաշտպանության Կարգավորումներ"
+  },
+  "githubLink": {
+    "message": "Դիտել GitHub-ում"
+  },
+  "version": {
+    "message": "Տարբերակ․ "
+  },
+  "privacyPolicy": {
+    "message": "Գաղտնիության Քաղաքականություն"
+  },
+  "onText": {
+    "message": "Միացված"
+  },
+  "offText": {
+    "message": "Անջատված"
+  },
+  "onLockedText": {
+    "message": "Միացված (Կողպված)"
+  },
+  "offLockedText": {
+    "message": "Անջատված (Կողպված)"
+  },
+  "knownSafe": {
+    "message": "Գիտակցաբար Անվտանգ"
+  },
+  "failed": {
+    "message": "Չհաջողվեց"
+  },
+  "waiting": {
+    "message": "Սպասում է"
+  },
+  "allowed": {
+    "message": "Թույլատրված"
+  },
+  "malicious": {
+    "message": "Վնասաբեր"
+  },
+  "phishing": {
+    "message": "Ֆիշինգ"
+  },
+  "untrusted": {
+    "message": "Անվստահելի"
+  },
+  "adultContent": {
+    "message": "Մեծահասակների Բովանդակություն"
+  },
+  "toggleNotificationsContext": {
+    "message": "Միացնել ծանուցումները"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Անտեսել շրջանակային նավիգացիան"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Մաքրել թույլատրված կայքերի ցանկը"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Թույլատրված կայքերը մաքրվեցին"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Բոլոր թույլատրված կայքերը մաքրվեցին։"
+  },
+  "restoreDefaultsContext": {
+    "message": "Վերականգնել նախնական կարգավորումները"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Նախնական կարգավորումները վերականգնվեցին"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Նախնական կարգավորումները վերականգնվել են։"
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Անվտանգ չեղած կայքը արգելափակված է"
+  },
+  "officialPartnerTitle": {
+    "message": "Պաշտոնական Գործընկեր"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard Լոգո"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain Լոգո"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D Լոգո"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec Լոգո"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE Լոգո"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing Լոգո"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare Լոգո"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu Լոգո"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU Լոգո"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton Լոգո"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 Լոգո"
+  }
+}

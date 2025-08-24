@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Pwoteksyon Navigatè"
+  },
+  "logoAlt": {
+    "message": "Logo Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Pwoteksyon Navigatè"
+  },
+  "warningTitle": {
+    "message": "Avètisman: Sit entènèt sa a pa an sekirite"
+  },
+  "recommendation": {
+    "message": "Osprey bloke aksè ak sit entènèt sa a. Li pa an sekirite pou kontinye."
+  },
+  "details": {
+    "message": "Si ou se pwopriyetè sit entènèt sa a, tanpri kontakte founisè sekirite a pou rezoud pwoblèm nan."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Rapòte pa: "
+  },
+  "reportedByOthers": {
+    "message": "(ak ___ lòt)"
+  },
+  "reportedByAlso": {
+    "message": "Epitou rapòte pa: "
+  },
+  "reasonLabel": {
+    "message": "Rezon: "
+  },
+  "reportSite": {
+    "message": "Rapòte sit entènèt sa a kòm an sekirite"
+  },
+  "allowSite": {
+    "message": "Toujou inyore sit entènèt sa a"
+  },
+  "backButton": {
+    "message": "Retounen nan sekirite"
+  },
+  "continueButton": {
+    "message": "Kontinye kanmenm"
+  },
+  "popupTitle": {
+    "message": "Opsyon Pwoteksyon"
+  },
+  "githubLink": {
+    "message": "Gade sou GitHub"
+  },
+  "version": {
+    "message": "Vèsyon: "
+  },
+  "privacyPolicy": {
+    "message": "Règleman sou Konfidansyalite"
+  },
+  "onText": {
+    "message": "Limèn"
+  },
+  "offText": {
+    "message": "Etenn"
+  },
+  "onLockedText": {
+    "message": "Limèn (Bloke)"
+  },
+  "offLockedText": {
+    "message": "Etenn (Bloke)"
+  },
+  "knownSafe": {
+    "message": "Konnen kòm an Sekirite"
+  },
+  "failed": {
+    "message": "Echwe"
+  },
+  "waiting": {
+    "message": "Ap tann"
+  },
+  "allowed": {
+    "message": "Pèmèt"
+  },
+  "malicious": {
+    "message": "Malveyan"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Pa gen konfyans"
+  },
+  "adultContent": {
+    "message": "Kontni pou granmoun"
+  },
+  "toggleNotificationsContext": {
+    "message": "Pèmèt notifikasyon yo"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Inyore navigasyon ankadreman"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Efase lis sit entènèt ki pèmèt yo"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Sit entènèt ki pèmèt yo efase"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Tout sit entènèt ki pèmèt yo efase."
+  },
+  "restoreDefaultsContext": {
+    "message": "Retabli paramèt default yo"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Paramèt default yo retabli"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Paramèt default yo te retabli."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Sit entènèt ki pa an sekirite bloke"
+  },
+  "officialPartnerTitle": {
+    "message": "Patnè Ofisyèl"
+  },
+  "adGuardLogoAlt": {
+    "message": "Logo AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Logo alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Logo Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Logo PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Logo CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Logo CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Logo Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Logo DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Logo DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Logo Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Logo Quad9"
+  }
+}

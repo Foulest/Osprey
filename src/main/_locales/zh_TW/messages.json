@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey：瀏覽器保護"
+  },
+  "logoAlt": {
+    "message": "Osprey 標誌"
+  },
+  "bannerText": {
+    "message": "Osprey：瀏覽器保護"
+  },
+  "warningTitle": {
+    "message": "警告：此網站不安全"
+  },
+  "recommendation": {
+    "message": "Osprey 已封鎖存取此網站。繼續操作不安全。"
+  },
+  "details": {
+    "message": "如果您是此網站的擁有者，請聯繫安全提供商以解決問題。"
+  },
+  "urlLabel": {
+    "message": "網址: "
+  },
+  "reportedByLabel": {
+    "message": "回報者: "
+  },
+  "reportedByOthers": {
+    "message": "（以及 ___ 其他人）"
+  },
+  "reportedByAlso": {
+    "message": "也由以下回報: "
+  },
+  "reasonLabel": {
+    "message": "原因: "
+  },
+  "reportSite": {
+    "message": "將此網站回報為安全"
+  },
+  "allowSite": {
+    "message": "一律忽略此網站"
+  },
+  "backButton": {
+    "message": "返回安全"
+  },
+  "continueButton": {
+    "message": "仍然繼續"
+  },
+  "popupTitle": {
+    "message": "保護選項"
+  },
+  "githubLink": {
+    "message": "在 GitHub 檢視"
+  },
+  "version": {
+    "message": "版本: "
+  },
+  "privacyPolicy": {
+    "message": "隱私權政策"
+  },
+  "onText": {
+    "message": "開啟"
+  },
+  "offText": {
+    "message": "關閉"
+  },
+  "onLockedText": {
+    "message": "開啟（已鎖定）"
+  },
+  "offLockedText": {
+    "message": "關閉（已鎖定）"
+  },
+  "knownSafe": {
+    "message": "已知安全"
+  },
+  "failed": {
+    "message": "失敗"
+  },
+  "waiting": {
+    "message": "等待中"
+  },
+  "allowed": {
+    "message": "已允許"
+  },
+  "malicious": {
+    "message": "惡意"
+  },
+  "phishing": {
+    "message": "網路釣魚"
+  },
+  "untrusted": {
+    "message": "不受信任"
+  },
+  "adultContent": {
+    "message": "成人內容"
+  },
+  "toggleNotificationsContext": {
+    "message": "啟用通知"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "忽略框架導覽"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "清除允許的網站清單"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "允許的網站已清除"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "所有允許的網站已被清除。"
+  },
+  "restoreDefaultsContext": {
+    "message": "還原預設設定"
+  },
+  "restoreDefaultsTitle": {
+    "message": "預設設定已還原"
+  },
+  "restoreDefaultsMessage": {
+    "message": "預設設定已還原。"
+  },
+  "unsafeWebsiteTitle": {
+    "message": "不安全的網站已被封鎖"
+  },
+  "officialPartnerTitle": {
+    "message": "官方合作夥伴"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard 標誌"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain 標誌"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D 標誌"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec 標誌"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE 標誌"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing 標誌"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare 標誌"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu 標誌"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU 標誌"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton 標誌"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 標誌"
+  }
+}

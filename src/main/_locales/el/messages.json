@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Προστασία προγράμματος περιήγησης"
+  },
+  "logoAlt": {
+    "message": "Λογότυπο Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Προστασία προγράμματος περιήγησης"
+  },
+  "warningTitle": {
+    "message": "Προειδοποίηση: Αυτός ο ιστότοπος δεν είναι ασφαλής"
+  },
+  "recommendation": {
+    "message": "Ο Osprey έχει αποκλείσει την πρόσβαση σε αυτόν τον ιστότοπο. Δεν είναι ασφαλές να συνεχίσετε."
+  },
+  "details": {
+    "message": "Εάν είστε ο κάτοχος αυτού του ιστότοπου, επικοινωνήστε με τον πάροχο ασφάλειας για να επιλύσετε το πρόβλημα."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Αναφέρθηκε από: "
+  },
+  "reportedByOthers": {
+    "message": "(και ___ άλλοι)"
+  },
+  "reportedByAlso": {
+    "message": "Αναφέρθηκε επίσης από: "
+  },
+  "reasonLabel": {
+    "message": "Αιτία: "
+  },
+  "reportSite": {
+    "message": "Αναφορά αυτού του ιστότοπου ως ασφαλούς"
+  },
+  "allowSite": {
+    "message": "Να αγνοείται πάντα αυτός ο ιστότοπος"
+  },
+  "backButton": {
+    "message": "Επιστροφή σε ασφαλή σελίδα"
+  },
+  "continueButton": {
+    "message": "Συνέχεια ούτως ή άλλως"
+  },
+  "popupTitle": {
+    "message": "Επιλογές προστασίας"
+  },
+  "githubLink": {
+    "message": "Προβολή στο GitHub"
+  },
+  "version": {
+    "message": "Έκδοση: "
+  },
+  "privacyPolicy": {
+    "message": "Πολιτική απορρήτου"
+  },
+  "onText": {
+    "message": "Ενεργό"
+  },
+  "offText": {
+    "message": "Ανενεργό"
+  },
+  "onLockedText": {
+    "message": "Ενεργό (Κλειδωμένο)"
+  },
+  "offLockedText": {
+    "message": "Ανενεργό (Κλειδωμένο)"
+  },
+  "knownSafe": {
+    "message": "Αξιόπιστο"
+  },
+  "failed": {
+    "message": "Αποτυχία"
+  },
+  "waiting": {
+    "message": "Αναμονή"
+  },
+  "allowed": {
+    "message": "Επιτρεπόμενο"
+  },
+  "malicious": {
+    "message": "Κακόβουλο"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Μη αξιόπιστο"
+  },
+  "adultContent": {
+    "message": "Περιεχόμενο ενηλίκων"
+  },
+  "toggleNotificationsContext": {
+    "message": "Ενεργοποίηση ειδοποιήσεων"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Παράβλεψη πλοήγησης σε πλαίσια"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Εκκαθάριση λίστας επιτρεπόμενων ιστότοπων"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Η λίστα επιτρεπόμενων ιστότοπων διαγράφηκε"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Όλοι οι επιτρεπόμενοι ιστότοποι έχουν διαγραφεί."
+  },
+  "restoreDefaultsContext": {
+    "message": "Επαναφορά προεπιλεγμένων ρυθμίσεων"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Οι προεπιλεγμένες ρυθμίσεις επαναφέρθηκαν"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Οι προεπιλεγμένες ρυθμίσεις έχουν επαναφερθεί."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Μη ασφαλής ιστότοπος αποκλείστηκε"
+  },
+  "officialPartnerTitle": {
+    "message": "Επίσημος συνεργάτης"
+  },
+  "adGuardLogoAlt": {
+    "message": "Λογότυπο AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Λογότυπο alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Λογότυπο Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Λογότυπο PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Λογότυπο CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Λογότυπο CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Λογότυπο Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Λογότυπο DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Λογότυπο DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Λογότυπο Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Λογότυπο Quad9"
+  }
+}

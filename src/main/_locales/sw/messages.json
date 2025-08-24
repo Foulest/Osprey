@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Ulinzi wa Kivinjari"
+  },
+  "logoAlt": {
+    "message": "Nembo ya Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Ulinzi wa Kivinjari"
+  },
+  "warningTitle": {
+    "message": "Onyo: Tovuti hii si salama"
+  },
+  "recommendation": {
+    "message": "Osprey imezuia ufikiaji wa tovuti hii. Sio salama kuendelea."
+  },
+  "details": {
+    "message": "Kama wewe ni mmiliki wa tovuti hii, tafadhali wasiliana na mtoa huduma wa usalama ili kutatua tatizo."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Imearifiwa na: "
+  },
+  "reportedByOthers": {
+    "message": "(na ___ wengine)"
+  },
+  "reportedByAlso": {
+    "message": "Pia imeripotiwa na: "
+  },
+  "reasonLabel": {
+    "message": "Sababu: "
+  },
+  "reportSite": {
+    "message": "Ripoti tovuti hii kama salama"
+  },
+  "allowSite": {
+    "message": "Puuza tovuti hii kila wakati"
+  },
+  "backButton": {
+    "message": "Rudi kwenye usalama"
+  },
+  "continueButton": {
+    "message": "Endelea hata hivyo"
+  },
+  "popupTitle": {
+    "message": "Chaguo za Ulinzi"
+  },
+  "githubLink": {
+    "message": "Tazama kwenye GitHub"
+  },
+  "version": {
+    "message": "Toleo: "
+  },
+  "privacyPolicy": {
+    "message": "Sera ya Faragha"
+  },
+  "onText": {
+    "message": "Washa"
+  },
+  "offText": {
+    "message": "Zima"
+  },
+  "onLockedText": {
+    "message": "Washa (Imefungwa)"
+  },
+  "offLockedText": {
+    "message": "Zima (Imefungwa)"
+  },
+  "knownSafe": {
+    "message": "Inajulikana kuwa salama"
+  },
+  "failed": {
+    "message": "Imeshindikana"
+  },
+  "waiting": {
+    "message": "Inasubiri"
+  },
+  "allowed": {
+    "message": "Imekubaliwa"
+  },
+  "malicious": {
+    "message": "Hasidi"
+  },
+  "phishing": {
+    "message": "Uvuvi (Phishing)"
+  },
+  "untrusted": {
+    "message": "Haitumiki kwa kuaminika"
+  },
+  "adultContent": {
+    "message": "Maudhui ya watu wazima"
+  },
+  "toggleNotificationsContext": {
+    "message": "Wezesha arifa"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Puuza urambazaji wa fremu"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Futa orodha ya tovuti zilizoidhinishwa"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Tovuti zilizoidhinishwa zimefutwa"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Tovuti zote zilizoidhinishwa zimefutwa."
+  },
+  "restoreDefaultsContext": {
+    "message": "Rejesha mipangilio chaguomsingi"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Mipangilio Chaguomsingi Imerudishwa"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Mipangilio chaguomsingi imerudishwa."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Tovuti isiyo salama imezuiwa"
+  },
+  "officialPartnerTitle": {
+    "message": "Mshirika Rasmi"
+  },
+  "adGuardLogoAlt": {
+    "message": "Nembo ya AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Nembo ya alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Nembo ya Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Nembo ya PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Nembo ya CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Nembo ya CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Nembo ya Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Nembo ya DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Nembo ya DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Nembo ya Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Nembo ya Quad9"
+  }
+}

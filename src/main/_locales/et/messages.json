@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Brauseri kaitse"
+  },
+  "logoAlt": {
+    "message": "Osprey logo"
+  },
+  "bannerText": {
+    "message": "Osprey: Brauseri kaitse"
+  },
+  "warningTitle": {
+    "message": "Hoiatus: See veebisait ei ole turvaline"
+  },
+  "recommendation": {
+    "message": "Osprey on blokeerinud juurdepääsu sellele veebisaidile. Jätkamine ei ole turvaline."
+  },
+  "details": {
+    "message": "Kui olete selle veebisaidi omanik, võtke probleemi lahendamiseks ühendust turvateenuse pakkujaga."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Teatatud: "
+  },
+  "reportedByOthers": {
+    "message": "(ja ___ teised)"
+  },
+  "reportedByAlso": {
+    "message": "Teatatud ka: "
+  },
+  "reasonLabel": {
+    "message": "Põhjus: "
+  },
+  "reportSite": {
+    "message": "Teata see veebisait turvaliseks"
+  },
+  "allowSite": {
+    "message": "Ignoreeri seda veebisaiti alati"
+  },
+  "backButton": {
+    "message": "Tagasi turvalisuse juurde"
+  },
+  "continueButton": {
+    "message": "Jätka ikkagi"
+  },
+  "popupTitle": {
+    "message": "Kaitsevalikud"
+  },
+  "githubLink": {
+    "message": "Vaata GitHubis"
+  },
+  "version": {
+    "message": "Versioon: "
+  },
+  "privacyPolicy": {
+    "message": "Privaatsuspoliitika"
+  },
+  "onText": {
+    "message": "Sees"
+  },
+  "offText": {
+    "message": "Väljas"
+  },
+  "onLockedText": {
+    "message": "Sees (lukus)"
+  },
+  "offLockedText": {
+    "message": "Väljas (lukus)"
+  },
+  "knownSafe": {
+    "message": "Tuntud kui turvaline"
+  },
+  "failed": {
+    "message": "Ebaõnnestus"
+  },
+  "waiting": {
+    "message": "Ootel"
+  },
+  "allowed": {
+    "message": "Lubatud"
+  },
+  "malicious": {
+    "message": "Pahatahtlik"
+  },
+  "phishing": {
+    "message": "Andmepüük"
+  },
+  "untrusted": {
+    "message": "Ebausaldusväärne"
+  },
+  "adultContent": {
+    "message": "Täiskasvanute sisu"
+  },
+  "toggleNotificationsContext": {
+    "message": "Luba teavitused"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Eira raaminavigatsiooni"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Kustuta lubatud veebisaitide loend"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Lubatud veebisaidid kustutatud"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Kõik lubatud veebisaidid on kustutatud."
+  },
+  "restoreDefaultsContext": {
+    "message": "Taasta vaikeväärtused"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Vaikeväärtused taastatud"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Vaikeväärtused on taastatud."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Ohtlik veebisait blokeeritud"
+  },
+  "officialPartnerTitle": {
+    "message": "Ametlik partner"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard logo"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain logo"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D logo"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec logo"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE logo"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing logo"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare logo"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu logo"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU logo"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton logo"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 logo"
+  }
+}

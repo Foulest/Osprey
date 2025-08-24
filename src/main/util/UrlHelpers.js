@@ -24,9 +24,9 @@ const UrlHelpers = (() => {
     const browserAPI = typeof browser === 'undefined' ? chrome : browser;
 
     /**
-     * Extracts the blocked URL (the site being reported as malicious) from the query parameters of a URL.
+     * Extracts the blocked URL (the website being reported as malicious) from the query parameters of a URL.
      *
-     * @param {string} url - The URL containing the blocked site information.
+     * @param {string} url - The URL containing the blocked website information.
      * @returns {string|null} - The blocked URL, or null if not found.
      */
     function extractBlockedUrl(url) {
@@ -79,12 +79,12 @@ const UrlHelpers = (() => {
             return new URL(url).searchParams.get("rs");
         } catch (error) {
             console.warn(`Invalid URL format: ${error.message}`);
-            return null;
+            return "0";
         }
     }
 
     /**
-     * Constructs the URL for the browser's block page, which shows a warning when a site is blocked.
+     * Constructs the URL for the browser's block page, which shows a warning when a website is blocked.
      *
      * @param {object} protectionResult - The result object containing details about the threat.
      * @param {object} continueURL - The URL to continue to if the user clicks a continue button.
@@ -110,10 +110,10 @@ const UrlHelpers = (() => {
 
             // Sets the search parameters for the block page URL
             blockPageUrl.search = new URLSearchParams([
-                ["url", protectionResult.url],       // The URL of the blocked site
+                ["url", protectionResult.url],       // The URL of the blocked wesite
                 ["curl", continueURL || ''],         // The continue URL
                 ["or", protectionResult.origin],     // The origin of the protection result
-                ["rs", protectionResult.resultType]      // The result string (e.g. Malicious)
+                ["rs", protectionResult.resultType]  // The result type
             ]).toString();
 
             // Returns the constructed block page URL as a string

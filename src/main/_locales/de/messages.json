@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Browserschutz"
+  },
+  "logoAlt": {
+    "message": "Osprey Logo"
+  },
+  "bannerText": {
+    "message": "Osprey: Browserschutz"
+  },
+  "warningTitle": {
+    "message": "Warnung: Diese Website ist unsicher"
+  },
+  "recommendation": {
+    "message": "Osprey hat den Zugriff auf diese Website blockiert. Es ist nicht sicher, fortzufahren."
+  },
+  "details": {
+    "message": "Wenn Sie der Eigentümer dieser Website sind, wenden Sie sich bitte an den Sicherheitsanbieter, um das Problem zu beheben."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Gemeldet von: "
+  },
+  "reportedByOthers": {
+    "message": "(und ___ andere)"
+  },
+  "reportedByAlso": {
+    "message": "Außerdem gemeldet von: "
+  },
+  "reasonLabel": {
+    "message": "Grund: "
+  },
+  "reportSite": {
+    "message": "Diese Website als sicher melden"
+  },
+  "allowSite": {
+    "message": "Diese Website immer ignorieren"
+  },
+  "backButton": {
+    "message": "Zurück zur sicheren Seite"
+  },
+  "continueButton": {
+    "message": "Trotzdem fortfahren"
+  },
+  "popupTitle": {
+    "message": "Schutzoptionen"
+  },
+  "githubLink": {
+    "message": "Auf GitHub anzeigen"
+  },
+  "version": {
+    "message": "Version: "
+  },
+  "privacyPolicy": {
+    "message": "Datenschutzerklärung"
+  },
+  "onText": {
+    "message": "Ein"
+  },
+  "offText": {
+    "message": "Aus"
+  },
+  "onLockedText": {
+    "message": "Ein (gesperrt)"
+  },
+  "offLockedText": {
+    "message": "Aus (gesperrt)"
+  },
+  "knownSafe": {
+    "message": "Als sicher bekannt"
+  },
+  "failed": {
+    "message": "Fehlgeschlagen"
+  },
+  "waiting": {
+    "message": "Warten …"
+  },
+  "allowed": {
+    "message": "Erlaubt"
+  },
+  "malicious": {
+    "message": "Schädlich"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Nicht vertrauenswürdig"
+  },
+  "adultContent": {
+    "message": "Inhalt für Erwachsene"
+  },
+  "toggleNotificationsContext": {
+    "message": "Benachrichtigungen aktivieren"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Frame-Navigation ignorieren"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Liste der erlaubten Websites löschen"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Liste der erlaubten Websites gelöscht"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Alle erlaubten Websites wurden gelöscht."
+  },
+  "restoreDefaultsContext": {
+    "message": "Standardeinstellungen wiederherstellen"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Standardeinstellungen wiederhergestellt"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Die Standardeinstellungen wurden wiederhergestellt."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Unsichere Website blockiert"
+  },
+  "officialPartnerTitle": {
+    "message": "Offizieller Partner"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard Logo"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain Logo"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D Logo"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec Logo"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE Logo"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing Logo"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare Logo"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu Logo"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU Logo"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton Logo"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 Logo"
+  }
+}

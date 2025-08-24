@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Naršyklės apsauga"
+  },
+  "logoAlt": {
+    "message": "Osprey logotipas"
+  },
+  "bannerText": {
+    "message": "Osprey: Naršyklės apsauga"
+  },
+  "warningTitle": {
+    "message": "Įspėjimas: Ši svetainė yra nesaugi"
+  },
+  "recommendation": {
+    "message": "„Osprey“ užblokavo prieigą prie šios svetainės. Tęsti yra nesaugu."
+  },
+  "details": {
+    "message": "Jei esate šios svetainės savininkas, susisiekite su saugumo paslaugų teikėju, kad išspręstumėte problemą."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Pranešė: "
+  },
+  "reportedByOthers": {
+    "message": "(ir ___ kiti)"
+  },
+  "reportedByAlso": {
+    "message": "Taip pat pranešė: "
+  },
+  "reasonLabel": {
+    "message": "Priežastis: "
+  },
+  "reportSite": {
+    "message": "Pranešti, kad ši svetainė yra saugi"
+  },
+  "allowSite": {
+    "message": "Visada ignoruoti šią svetainę"
+  },
+  "backButton": {
+    "message": "Grįžti į saugumą"
+  },
+  "continueButton": {
+    "message": "Tęsti vis tiek"
+  },
+  "popupTitle": {
+    "message": "Apsaugos parinktys"
+  },
+  "githubLink": {
+    "message": "Peržiūrėti GitHub"
+  },
+  "version": {
+    "message": "Versija: "
+  },
+  "privacyPolicy": {
+    "message": "Privatumo politika"
+  },
+  "onText": {
+    "message": "Įjungta"
+  },
+  "offText": {
+    "message": "Išjungta"
+  },
+  "onLockedText": {
+    "message": "Įjungta (užrakinta)"
+  },
+  "offLockedText": {
+    "message": "Išjungta (užrakinta)"
+  },
+  "knownSafe": {
+    "message": "Žinoma kaip saugi"
+  },
+  "failed": {
+    "message": "Nepavyko"
+  },
+  "waiting": {
+    "message": "Laukiama"
+  },
+  "allowed": {
+    "message": "Leidžiama"
+  },
+  "malicious": {
+    "message": "Kenksminga"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Nepatikima"
+  },
+  "adultContent": {
+    "message": "Suaugusiųjų turinys"
+  },
+  "toggleNotificationsContext": {
+    "message": "Įjungti pranešimus"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Ignoruoti kadrų naršymą"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Išvalyti leistinų svetainių sąrašą"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Leidžiamos svetainės išvalytos"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Visos leistos svetainės buvo išvalytos."
+  },
+  "restoreDefaultsContext": {
+    "message": "Atkurti numatytuosius nustatymus"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Numatytieji nustatymai atkurti"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Numatytieji nustatymai buvo atkurti."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Nesaugi svetainė užblokuota"
+  },
+  "officialPartnerTitle": {
+    "message": "Oficialus partneris"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard logotipas"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain logotipas"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D logotipas"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec logotipas"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE logotipas"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing logotipas"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare logotipas"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu logotipas"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU logotipas"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton logotipas"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 logotipas"
+  }
+}

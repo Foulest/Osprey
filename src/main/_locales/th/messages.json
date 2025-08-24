@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: การป้องกันเบราว์เซอร์"
+  },
+  "logoAlt": {
+    "message": "โลโก้ Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: การป้องกันเบราว์เซอร์"
+  },
+  "warningTitle": {
+    "message": "คำเตือน: เว็บไซต์นี้ไม่ปลอดภัย"
+  },
+  "recommendation": {
+    "message": "Osprey ได้บล็อกการเข้าถึงเว็บไซต์นี้ การดำเนินการต่อไม่ปลอดภัย"
+  },
+  "details": {
+    "message": "หากคุณเป็นเจ้าของเว็บไซต์นี้ โปรดติดต่อผู้ให้บริการด้านความปลอดภัยเพื่อแก้ไขปัญหา"
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "รายงานโดย: "
+  },
+  "reportedByOthers": {
+    "message": "(และ ___ คนอื่นๆ)"
+  },
+  "reportedByAlso": {
+    "message": "รายงานเพิ่มเติมโดย: "
+  },
+  "reasonLabel": {
+    "message": "เหตุผล: "
+  },
+  "reportSite": {
+    "message": "รายงานเว็บไซต์นี้ว่าปลอดภัย"
+  },
+  "allowSite": {
+    "message": "เพิกเฉยเว็บไซต์นี้เสมอ"
+  },
+  "backButton": {
+    "message": "กลับสู่ความปลอดภัย"
+  },
+  "continueButton": {
+    "message": "ดำเนินการต่อ"
+  },
+  "popupTitle": {
+    "message": "ตัวเลือกการป้องกัน"
+  },
+  "githubLink": {
+    "message": "ดูบน GitHub"
+  },
+  "version": {
+    "message": "เวอร์ชัน: "
+  },
+  "privacyPolicy": {
+    "message": "นโยบายความเป็นส่วนตัว"
+  },
+  "onText": {
+    "message": "เปิด"
+  },
+  "offText": {
+    "message": "ปิด"
+  },
+  "onLockedText": {
+    "message": "เปิด (ล็อก)"
+  },
+  "offLockedText": {
+    "message": "ปิด (ล็อก)"
+  },
+  "knownSafe": {
+    "message": "ทราบว่าปลอดภัย"
+  },
+  "failed": {
+    "message": "ล้มเหลว"
+  },
+  "waiting": {
+    "message": "กำลังรอ"
+  },
+  "allowed": {
+    "message": "อนุญาตแล้ว"
+  },
+  "malicious": {
+    "message": "เป็นอันตราย"
+  },
+  "phishing": {
+    "message": "ฟิชชิง"
+  },
+  "untrusted": {
+    "message": "ไม่น่าเชื่อถือ"
+  },
+  "adultContent": {
+    "message": "เนื้อหาสำหรับผู้ใหญ่"
+  },
+  "toggleNotificationsContext": {
+    "message": "เปิดการแจ้งเตือน"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "ละเว้นการนำทางเฟรม"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "ล้างรายการเว็บไซต์ที่อนุญาต"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "ล้างเว็บไซต์ที่อนุญาตแล้ว"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "เว็บไซต์ที่อนุญาตทั้งหมดถูกล้างแล้ว"
+  },
+  "restoreDefaultsContext": {
+    "message": "กู้คืนการตั้งค่าเริ่มต้น"
+  },
+  "restoreDefaultsTitle": {
+    "message": "การตั้งค่าเริ่มต้นถูกกู้คืนแล้ว"
+  },
+  "restoreDefaultsMessage": {
+    "message": "การตั้งค่าเริ่มต้นถูกกู้คืนแล้ว"
+  },
+  "unsafeWebsiteTitle": {
+    "message": "บล็อกเว็บไซต์ที่ไม่ปลอดภัย"
+  },
+  "officialPartnerTitle": {
+    "message": "พาร์ทเนอร์อย่างเป็นทางการ"
+  },
+  "adGuardLogoAlt": {
+    "message": "โลโก้ AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "โลโก้ alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "โลโก้ Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "โลโก้ PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "โลโก้ CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "โลโก้ CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "โลโก้ Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "โลโก้ DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "โลโก้ DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "โลโก้ Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "โลโก้ Quad9"
+  }
+}

@@ -8,11 +8,11 @@
 
 **Osprey** is a browser extension that protects you from malicious websites.
 
-[LinkedIn Page](https://www.linkedin.com/company/osprey-browser-protection)
-• [Privacy Policy](https://github.com/Foulest/Osprey/blob/main/.github/PRIVACY.md)
+[LinkedIn Page](https://linkedin.com/company/osprey-browser-protection)
+• [Privacy Policy](https://osprey.ac/privacy)
 • [Wiki (FAQs)](https://github.com/Foulest/Osprey/wiki)
-• [MalwareTips](https://malwaretips.com/threads/osprey-browser-protection-discussion-and-updates.135565)
-• [Wilders Security](https://www.wilderssecurity.com/threads/osprey-browser-protection.456729)
+• [MalwareTips](https://malwaretips.com/threads/osprey-browser-protection-discussion-and-updates.135565/?utm_source=osprey)
+• [Wilders Security](https://wilderssecurity.com/threads/osprey-browser-protection.456729/?utm_source=osprey)
 
 ###
 
@@ -33,7 +33,7 @@ possible. Check out some of our partners below:
 
 <p align="center">
   <a href="https://adguard-dns.io/?utm_source=osprey"><img src="https://i.imgur.com/4AXgbsC.png" alt="AdGuard DNS"></a>
-  <a href="https://www.alphamountain.ai/?utm_source=osprey"><img src="https://i.imgur.com/EbcGHb2.png" alt="alphaMountain"></a>
+  <a href="https://alphamountain.ai/?utm_source=osprey"><img src="https://i.imgur.com/EbcGHb2.png" alt="alphaMountain"></a>
   <a href="https://controld.com/?utm_source=osprey"><img src="https://i.imgur.com/xh7qTT8.png" alt="Control D"></a>
   <a href="https://precisionsec.com/?utm_source=osprey"><img src="https://i.imgur.com/gf9ahFa.png" alt="PrecisionSec"></a>
 </p>
@@ -50,16 +50,15 @@ researchers, and end-users can trust to secure their browsing, wherever they go,
 Osprey is committed to being non-profit, non-commercial, and open-source, **forever**, with no plans to monetize the
 project in any way.
 Unlike other free browser extensions, Osprey doesn't collect, profile,
-and [sell your browsing data](https://www.ftc.gov/news-events/news/press-releases/2024/02/ftc-order-will-ban-avast-selling-browsing-data-advertising-purposes-require-it-pay-165-million-over)
+and [sell your browsing data](https://ftc.gov/news-events/news/press-releases/2024/02/ftc-order-will-ban-avast-selling-browsing-data-advertising-purposes-require-it-pay-165-million-over/?utm_source=osprey)
 behind your back. We're fully GDPR-compliant and committed to being as transparent as possible. We don't use centralized
 servers or user accounts to protect your devices. Osprey runs locally on your device, offline or online, with zero
-telemetry or back-end analytics. Check out
-our [Privacy Policy here](https://github.com/Foulest/Osprey/blob/main/.github/PRIVACY.md) for more info.
+telemetry or back-end analytics. Check out our [Privacy Policy here](https://osprey.ac/privacy) for more info.
 
 The more protection providers join the project, the better the Osprey threat intelligence platform becomes. If you're
 interested in improving global threat intelligence and want to join the project, feel free to get in contact with me
 at **support@osprey.ac** or via Osprey's
-[LinkedIn Page](https://www.linkedin.com/company/osprey-browser-protection).
+[LinkedIn Page](https://linkedin.com/company/osprey-browser-protection).
 
 ## Warning
 
@@ -88,40 +87,40 @@ You can restore them by right-clicking the extension icon and selecting **Restor
 
 Osprey blocks websites that are classified as:
 
-- [Malicious](https://us.norton.com/blog/malware/what-are-malicious-websites)
-- [Phishing](https://us.norton.com/blog/online-scams/what-is-phishing)
-- [Untrusted](https://mcafee.com/blogs/internet-security/how-to-tell-whether-a-website-is-safe-or-unsafe)
-- [Adult Content](https://library.fiveable.me/key-terms/mass-media-society/adult-content)
+- [Malicious](https://us.norton.com/blog/malware/what-are-malicious-websites/?utm_source=osprey)
+- [Phishing](https://us.norton.com/blog/online-scams/what-is-phishing/?utm_source=osprey)
+- [Untrusted](https://mcafee.com/blogs/internet-security/how-to-tell-whether-a-website-is-safe-or-unsafe/?utm_source=osprey)
+- [Adult Content](https://library.fiveable.me/key-terms/mass-media-society/adult-content/?utm_source=osprey)
 
 ## Protection Providers
 
 The following providers are **enabled** by default:
 
 - [x] **[AdGuard Security DNS](https://adguard-dns.io/?utm_source=osprey)**
-- [x] **[alphaMountain Web Protection](https://www.alphamountain.ai/?utm_source=osprey)**
-- [x] **[PrecisionSec Web Protection](https://www.precisionsec.com/?utm_source=osprey)**
-- [x] [CleanBrowsing Security DNS](https://www.cleanbrowsing.org/filters/#step3)
-- [x] [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/#two-flavors-1-1-1-2-no-malware-1-1-1-3-no-malware-or-adult-content)
-- [x] [DNS0.eu Security DNS](https://www.dns0.eu/zero)
-- [x] [DNS4EU Security DNS](https://www.joindns4.eu/for-public)
-- [x] [Quad9 Security DNS](https://www.quad9.net)
+- [x] **[alphaMountain Web Protection](https://alphamountain.ai/?utm_source=osprey)**
+- [x] **[PrecisionSec Web Protection](https://precisionsec.com/?utm_source=osprey)**
+- [x] [CleanBrowsing Security DNS](https://cleanbrowsing.org/filters/?utm_source=osprey)
+- [x] [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/?utm_source=osprey)
+- [x] [DNS0.eu Security DNS](https://dns0.eu/?utm_source=osprey)
+- [x] [DNS4EU Security DNS](https://joindns4.eu/for-public/?utm_source=osprey)
+- [x] [Quad9 Security DNS](https://quad9.net/?utm_source=osprey)
 
 The following providers are **disabled** by default:
 
 #### Security Filters
 
 - [ ] **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
-- [ ] [CERT-EE Security DNS](https://www.ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware)
-- [ ] [Norton Safe Web](https://safeweb.norton.com)
+- [ ] [CERT-EE Security DNS](https://ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware/?utm_source=osprey)
+- [ ] [Norton Safe Web](https://safeweb.norton.com/?utm_source=osprey)
 
 #### Adult Content Filters
 
 - [ ] **[AdGuard Family DNS](https://adguard-dns.io/?utm_source=osprey)**
 - [ ] **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
-- [ ] [CleanBrowsing Family DNS](https://www.cleanbrowsing.org/filters/#step2)
-- [ ] [Cloudflare Family DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families)
-- [ ] [DNS0.eu Family DNS](https://www.dns0.eu/kids)
-- [ ] [DNS4EU Family DNS](https://www.joindns4.eu/for-public)
+- [ ] [CleanBrowsing Family DNS](https://cleanbrowsing.org/filters/?utm_source=osprey)
+- [ ] [Cloudflare Family DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/?utm_source=osprey)
+- [ ] [DNS0.eu Family DNS](https://dns0.eu/kids/?utm_source=osprey)
+- [ ] [DNS4EU Family DNS](https://joindns4.eu/for-public/?utm_source=osprey)
 
 Providers disabled by default are either due to:
 
@@ -144,7 +143,7 @@ For example:
    visit: https://www.amazon.com/s?k=shirts&crid=3TOVSW14ZHF8V&sprefix=shirt%2Caps%2C175&ref=nb_sb_noss_1
 2. Osprey will only send https://amazon.com/s to any APIs you have enabled.
 3. If the APIs report that the page is safe to visit, Osprey caches the result for 24 hours.
-4. It will also be cached if you click 'Continue anyway' or 'Always ignore this website' on a blocked site.
+4. It will also be cached if you click 'Continue anyway' or 'Always ignore this website' on a blocked website.
 5. As long as a URL is cached, no new network requests will be made for it.
 
 The only data the APIs receive is the stripped-down URL, your user agent, and your IP address. Use a reputable VPN or
@@ -177,7 +176,7 @@ For other installations, you can install the extension manually:
 ### Firefox
 
 > **Note:** This only works
-> for [builds of Firefox that allow unsigned addons.](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox)
+> for [builds of Firefox that allow unsigned addons.](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox/?utm_source=osprey)
 
 1. Navigate to the [Actions section](https://github.com/Foulest/Osprey/actions/workflows) and click
    `Compile for Firefox`.
@@ -198,8 +197,8 @@ Osprey is not affiliated with or endorsed by any of the third-party providers li
 otherwise. Use of their services is subject to their respective terms of use and privacy policies.
 
 If you represent a listed provider and have questions, feedback, or concerns regarding attribution or inclusion, please
-contact the developer at **support@osprey.ac** or via Osprey's
-[LinkedIn Page](https://www.linkedin.com/company/osprey-browser-protection).
+contact me at **support@osprey.ac** or via
+Osprey's [LinkedIn Page](https://linkedin.com/company/osprey-browser-protection).
 
 ## Getting Help
 

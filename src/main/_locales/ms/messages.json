@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Perlindungan Pelayar"
+  },
+  "logoAlt": {
+    "message": "Logo Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Perlindungan Pelayar"
+  },
+  "warningTitle": {
+    "message": "Amaran: Laman web ini tidak selamat"
+  },
+  "recommendation": {
+    "message": "Osprey telah menyekat akses ke laman web ini. Tidak selamat untuk diteruskan."
+  },
+  "details": {
+    "message": "Jika anda pemilik laman web ini, sila hubungi penyedia keselamatan untuk menyelesaikan isu ini."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Dilaporkan oleh: "
+  },
+  "reportedByOthers": {
+    "message": "(dan ___ yang lain)"
+  },
+  "reportedByAlso": {
+    "message": "Juga dilaporkan oleh: "
+  },
+  "reasonLabel": {
+    "message": "Sebab: "
+  },
+  "reportSite": {
+    "message": "Laporkan laman web ini sebagai selamat"
+  },
+  "allowSite": {
+    "message": "Sentiasa abaikan laman web ini"
+  },
+  "backButton": {
+    "message": "Kembali ke keselamatan"
+  },
+  "continueButton": {
+    "message": "Teruskan juga"
+  },
+  "popupTitle": {
+    "message": "Pilihan Perlindungan"
+  },
+  "githubLink": {
+    "message": "Lihat di GitHub"
+  },
+  "version": {
+    "message": "Versi: "
+  },
+  "privacyPolicy": {
+    "message": "Dasar Privasi"
+  },
+  "onText": {
+    "message": "Hidup"
+  },
+  "offText": {
+    "message": "Mati"
+  },
+  "onLockedText": {
+    "message": "Hidup (Dikunci)"
+  },
+  "offLockedText": {
+    "message": "Mati (Dikunci)"
+  },
+  "knownSafe": {
+    "message": "Dikenali Selamat"
+  },
+  "failed": {
+    "message": "Gagal"
+  },
+  "waiting": {
+    "message": "Menunggu"
+  },
+  "allowed": {
+    "message": "Dibenarkan"
+  },
+  "malicious": {
+    "message": "Berbahaya"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Tidak Dipercayai"
+  },
+  "adultContent": {
+    "message": "Kandungan Dewasa"
+  },
+  "toggleNotificationsContext": {
+    "message": "Dayakan notifikasi"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Abaikan navigasi bingkai"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Kosongkan senarai laman web yang dibenarkan"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Laman Web Dibenarkan Dikosongkan"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Semua laman web yang dibenarkan telah dikosongkan."
+  },
+  "restoreDefaultsContext": {
+    "message": "Pulihkan tetapan lalai"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Tetapan Lalai Dipulihkan"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Tetapan lalai telah dipulihkan."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Laman Web Tidak Selamat Disekat"
+  },
+  "officialPartnerTitle": {
+    "message": "Rakan Kongsi Rasmi"
+  },
+  "adGuardLogoAlt": {
+    "message": "Logo AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Logo alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Logo Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Logo PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Logo CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Logo CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Logo Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Logo DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Logo DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Logo Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Logo Quad9"
+  }
+}

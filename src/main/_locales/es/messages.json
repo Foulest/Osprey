@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Protección del navegador"
+  },
+  "logoAlt": {
+    "message": "Logotipo de Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Protección del navegador"
+  },
+  "warningTitle": {
+    "message": "Advertencia: este sitio web no es seguro"
+  },
+  "recommendation": {
+    "message": "Osprey ha bloqueado el acceso a este sitio web. No es seguro continuar."
+  },
+  "details": {
+    "message": "Si usted es el propietario de este sitio web, comuníquese con el proveedor de seguridad para resolver el problema."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Informado por: "
+  },
+  "reportedByOthers": {
+    "message": "(y ___ otros)"
+  },
+  "reportedByAlso": {
+    "message": "También informado por: "
+  },
+  "reasonLabel": {
+    "message": "Motivo: "
+  },
+  "reportSite": {
+    "message": "Reportar este sitio web como seguro"
+  },
+  "allowSite": {
+    "message": "Ignorar siempre este sitio web"
+  },
+  "backButton": {
+    "message": "Volver a estar seguro"
+  },
+  "continueButton": {
+    "message": "Continuar de todos modos"
+  },
+  "popupTitle": {
+    "message": "Opciones de protección"
+  },
+  "githubLink": {
+    "message": "Ver en GitHub"
+  },
+  "version": {
+    "message": "Versión: "
+  },
+  "privacyPolicy": {
+    "message": "Política de privacidad"
+  },
+  "onText": {
+    "message": "Activado"
+  },
+  "offText": {
+    "message": "Desactivado"
+  },
+  "onLockedText": {
+    "message": "Activado (bloqueado)"
+  },
+  "offLockedText": {
+    "message": "Desactivado (bloqueado)"
+  },
+  "knownSafe": {
+    "message": "Confiable"
+  },
+  "failed": {
+    "message": "Fallido"
+  },
+  "waiting": {
+    "message": "En espera"
+  },
+  "allowed": {
+    "message": "Permitido"
+  },
+  "malicious": {
+    "message": "Malicioso"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "No confiable"
+  },
+  "adultContent": {
+    "message": "Contenido para adultos"
+  },
+  "toggleNotificationsContext": {
+    "message": "Habilitar notificaciones"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Ignorar la navegación en marcos"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Borrar lista de sitios web permitidos"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Lista de sitios web permitidos borrada"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Se han borrado todos los sitios web permitidos."
+  },
+  "restoreDefaultsContext": {
+    "message": "Restaurar la configuración predeterminada"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Configuración predeterminada restaurada"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Se ha restaurado la configuración predeterminada."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Sitio web inseguro bloqueado"
+  },
+  "officialPartnerTitle": {
+    "message": "Socio oficial"
+  },
+  "adGuardLogoAlt": {
+    "message": "Logotipo de AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Logotipo de alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Logotipo de Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Logotipo de PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Logotipo de CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Logotipo de CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Logotipo de Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Logotipo de DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Logotipo de DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Logotipo de Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Logotipo de Quad9"
+  }
+}

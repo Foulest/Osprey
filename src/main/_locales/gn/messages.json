@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Ñangareko Kundahára rehe"
+  },
+  "logoAlt": {
+    "message": "Osprey ra’ãnga’i"
+  },
+  "bannerText": {
+    "message": "Osprey: Ñangareko Kundahára rehe"
+  },
+  "warningTitle": {
+    "message": "Ñemomomarandu: Ko ñanduti renda ndaha’éi hekorosãva"
+  },
+  "recommendation": {
+    "message": "Osprey ojokóma ko ñanduti renda. Ndaikatúi eheja hag̃ua tekorosãme."
+  },
+  "details": {
+    "message": "Nde ha’e ramo ko ñanduti renda jára, eñe’ẽke ñangareko me’ẽhára ndive emyatyrõ hag̃ua apañuãi."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Ojehechakuaa rehegua: "
+  },
+  "reportedByOthers": {
+    "message": "(ha ___ ambue)"
+  },
+  "reportedByAlso": {
+    "message": "Avei ojehechakuaa rehegua: "
+  },
+  "reasonLabel": {
+    "message": "Mba’ére: "
+  },
+  "reportSite": {
+    "message": "Ehechauka ko ñanduti renda hekorosãha"
+  },
+  "allowSite": {
+    "message": "Tapiagua emboyke ko ñanduti renda"
+  },
+  "backButton": {
+    "message": "Ejevy tekorosãme"
+  },
+  "continueButton": {
+    "message": "Eku’ejey katu"
+  },
+  "popupTitle": {
+    "message": "Ñemoĩporã ñangareko rehegua"
+  },
+  "githubLink": {
+    "message": "Hecha GitHub-pe"
+  },
+  "version": {
+    "message": "Peteĩchagua: "
+  },
+  "privacyPolicy": {
+    "message": "Política ñemigua rehegua"
+  },
+  "onText": {
+    "message": "Oĩ hína"
+  },
+  "offText": {
+    "message": "Ndoikói"
+  },
+  "onLockedText": {
+    "message": "Oĩ hína (Ojoko)"
+  },
+  "offLockedText": {
+    "message": "Ndoikói (Ojoko)"
+  },
+  "knownSafe": {
+    "message": "Ojekuaa hekorosãha"
+  },
+  "failed": {
+    "message": "Ndohupytyi"
+  },
+  "waiting": {
+    "message": "Oha’arõ"
+  },
+  "allowed": {
+    "message": "Moneĩmbyre"
+  },
+  "malicious": {
+    "message": "Mba’evai"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Ndojeroviáiva"
+  },
+  "adultContent": {
+    "message": "Ñe’ẽrã kakuaa rehegua"
+  },
+  "toggleNotificationsContext": {
+    "message": "Emoneĩ marandu’i"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Embopoi koraikutu rape"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Emopotĩ ñanduti renda moneĩmbyre rysýi"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Ñanduti renda moneĩmbyre oñemopotĩ"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Opavave ñanduti renda moneĩmbyre oñemopotĩma."
+  },
+  "restoreDefaultsContext": {
+    "message": "Emyengovia ñemoĩporã ijypykuéva"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Ñemoĩporã ijypykuéva ojevy"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Ñemoĩporã ijypykuéva oñembojevýma."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Ñanduti renda hekorosã’ỹva ojoko"
+  },
+  "officialPartnerTitle": {
+    "message": "Irũ tee"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard ra’ãnga’i"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain ra’ãnga’i"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D ra’ãnga’i"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec ra’ãnga’i"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE ra’ãnga’i"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing ra’ãnga’i"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare ra’ãnga’i"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu ra’ãnga’i"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU ra’ãnga’i"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton ra’ãnga’i"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 ra’ãnga’i"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Böngészővédelem"
+  },
+  "logoAlt": {
+    "message": "Osprey logó"
+  },
+  "bannerText": {
+    "message": "Osprey: Böngészővédelem"
+  },
+  "warningTitle": {
+    "message": "Figyelmeztetés: Ez a weboldal nem biztonságos"
+  },
+  "recommendation": {
+    "message": "Az Osprey letiltotta a hozzáférést ehhez a weboldalhoz. A folytatás nem biztonságos."
+  },
+  "details": {
+    "message": "Ha Ön a weboldal tulajdonosa, kérjük, vegye fel a kapcsolatot a biztonsági szolgáltatóval a probléma megoldásához."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Jelentette: "
+  },
+  "reportedByOthers": {
+    "message": "(és még ___ mások)"
+  },
+  "reportedByAlso": {
+    "message": "Továbbá jelentette: "
+  },
+  "reasonLabel": {
+    "message": "Ok: "
+  },
+  "reportSite": {
+    "message": "Jelentse ezt a weboldalt biztonságosként"
+  },
+  "allowSite": {
+    "message": "Mindig hagyja figyelmen kívül ezt a weboldalt"
+  },
+  "backButton": {
+    "message": "Vissza a biztonsághoz"
+  },
+  "continueButton": {
+    "message": "Folytatás mindenképp"
+  },
+  "popupTitle": {
+    "message": "Védelmi beállítások"
+  },
+  "githubLink": {
+    "message": "Megtekintés GitHubon"
+  },
+  "version": {
+    "message": "Verzió: "
+  },
+  "privacyPolicy": {
+    "message": "Adatvédelmi irányelvek"
+  },
+  "onText": {
+    "message": "Be"
+  },
+  "offText": {
+    "message": "Ki"
+  },
+  "onLockedText": {
+    "message": "Be (zárolva)"
+  },
+  "offLockedText": {
+    "message": "Ki (zárolva)"
+  },
+  "knownSafe": {
+    "message": "Ismert biztonságos"
+  },
+  "failed": {
+    "message": "Sikertelen"
+  },
+  "waiting": {
+    "message": "Várakozás"
+  },
+  "allowed": {
+    "message": "Engedélyezve"
+  },
+  "malicious": {
+    "message": "Kártékony"
+  },
+  "phishing": {
+    "message": "Adathalászat"
+  },
+  "untrusted": {
+    "message": "Megbízhatatlan"
+  },
+  "adultContent": {
+    "message": "Felnőtt tartalom"
+  },
+  "toggleNotificationsContext": {
+    "message": "Értesítések engedélyezése"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Keretes navigáció figyelmen kívül hagyása"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Engedélyezett weboldalak listájának törlése"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Engedélyezett weboldalak törölve"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Minden engedélyezett weboldal törölve lett."
+  },
+  "restoreDefaultsContext": {
+    "message": "Alapértelmezett beállítások visszaállítása"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Alapértelmezett beállítások visszaállítva"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Az alapértelmezett beállítások visszaállításra kerültek."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Nem biztonságos weboldal blokkolva"
+  },
+  "officialPartnerTitle": {
+    "message": "Hivatalos partner"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard logó"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain logó"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D logó"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec logó"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE logó"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing logó"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare logó"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu logó"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU logó"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton logó"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9 logó"
+  }
+}

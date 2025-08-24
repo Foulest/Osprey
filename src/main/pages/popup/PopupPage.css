@@ -49,7 +49,7 @@ html, body {
     margin-right: 15px;
 }
 
-.banner-text {
+.bannerText {
     font-size: 18px;
     text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
@@ -141,7 +141,7 @@ section {
 }
 
 #privacyPolicy:hover,
-#github:hover {
+#githubLink:hover {
     text-decoration: underline;
 }
 
@@ -191,7 +191,7 @@ section {
 /* --------------------------------------------------
    Partner Labels
 -------------------------------------------------- */
-.partner-label {
+.partnerLabel {
     position: relative;
     bottom: 2px;
     left: 2px;
@@ -199,14 +199,14 @@ section {
     text-decoration: none;
 }
 
-.partner-label:hover {
+.partnerLabel:hover {
     text-decoration: underline;
 }
 
 /* --------------------------------------------------
    Other Labels
 -------------------------------------------------- */
-.star-symbol {
+.starSymbol {
     position: relative;
     bottom: 2px;
     margin-right: 1px;

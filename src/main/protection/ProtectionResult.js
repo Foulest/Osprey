@@ -24,7 +24,7 @@ class ProtectionResult {
      *
      * @param {string} urlChecked - The URL that was checked.
      * @param {string} resultType - The result type of the protection check (e.g., "allowed", "malicious").
-     * @param {number} resultOrigin - The origin of the result (e.g., from endpoint or known top site).
+     * @param {number} resultOrigin - The origin of the result (e.g., from endpoint or known top website).
      */
     constructor(urlChecked, resultType, resultOrigin) {
         this.url = urlChecked;
@@ -33,15 +33,40 @@ class ProtectionResult {
     }
 }
 
+// Browser API compatibility between Chrome and Firefox
+const browserAPI = typeof browser === 'undefined' ? chrome : browser;
+
 ProtectionResult.ResultType = {
-    KNOWN_SAFE: "Known Safe",
-    FAILED: "Failed",
-    WAITING: "Waiting",
-    ALLOWED: "Allowed",
-    MALICIOUS: "Malicious",
-    PHISHING: "Phishing",
-    UNTRUSTED: "Untrusted",
-    ADULT_CONTENT: "Adult Content",
+    KNOWN_SAFE: 0,
+    FAILED: 1,
+    WAITING: 2,
+    ALLOWED: 3,
+    MALICIOUS: 4,
+    PHISHING: 5,
+    UNTRUSTED: 6,
+    ADULT_CONTENT: 7,
+};
+
+ProtectionResult.ResultTypeName = {
+    0: browserAPI.i18n.getMessage("knownSafe"),
+    1: browserAPI.i18n.getMessage("failed"),
+    2: browserAPI.i18n.getMessage("waiting"),
+    3: browserAPI.i18n.getMessage("allowed"),
+    4: browserAPI.i18n.getMessage("malicious"),
+    5: browserAPI.i18n.getMessage("phishing"),
+    6: browserAPI.i18n.getMessage("untrusted"),
+    7: browserAPI.i18n.getMessage("adultContent"),
+};
+
+ProtectionResult.ResultTypeNameEN = {
+    0: "Known Safe",
+    1: "Failed",
+    2: "Waiting",
+    3: "Allowed",
+    4: "Malicious",
+    5: "Phishing",
+    6: "Untrusted",
+    7: "Adult Content",
 };
 
 ProtectionResult.Origin = {

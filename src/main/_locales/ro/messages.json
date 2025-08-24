@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Protecția browserului"
+  },
+  "logoAlt": {
+    "message": "Logo Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Protecția browserului"
+  },
+  "warningTitle": {
+    "message": "Avertizare: Acest site web nu este sigur"
+  },
+  "recommendation": {
+    "message": "Osprey a blocat accesul la acest site web. Nu este sigur să continuați."
+  },
+  "details": {
+    "message": "Dacă sunteți proprietarul acestui site web, vă rugăm să contactați furnizorul de securitate pentru a rezolva problema."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Raportat de: "
+  },
+  "reportedByOthers": {
+    "message": "(și ___ alții)"
+  },
+  "reportedByAlso": {
+    "message": "Raportat de asemenea de: "
+  },
+  "reasonLabel": {
+    "message": "Motiv: "
+  },
+  "reportSite": {
+    "message": "Raportați acest site web ca sigur"
+  },
+  "allowSite": {
+    "message": "Ignorați întotdeauna acest site web"
+  },
+  "backButton": {
+    "message": "Înapoi la siguranță"
+  },
+  "continueButton": {
+    "message": "Continuați oricum"
+  },
+  "popupTitle": {
+    "message": "Opțiuni de protecție"
+  },
+  "githubLink": {
+    "message": "Vizualizați pe GitHub"
+  },
+  "version": {
+    "message": "Versiune: "
+  },
+  "privacyPolicy": {
+    "message": "Politica de confidențialitate"
+  },
+  "onText": {
+    "message": "Pornit"
+  },
+  "offText": {
+    "message": "Oprit"
+  },
+  "onLockedText": {
+    "message": "Pornit (blocat)"
+  },
+  "offLockedText": {
+    "message": "Oprit (blocat)"
+  },
+  "knownSafe": {
+    "message": "Cunoscut ca sigur"
+  },
+  "failed": {
+    "message": "Eșuat"
+  },
+  "waiting": {
+    "message": "Se așteaptă"
+  },
+  "allowed": {
+    "message": "Permis"
+  },
+  "malicious": {
+    "message": "Rău intenționat"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Nesigur"
+  },
+  "adultContent": {
+    "message": "Conținut pentru adulți"
+  },
+  "toggleNotificationsContext": {
+    "message": "Activați notificările"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Ignorați navigarea în cadre"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Ștergeți lista site-urilor permise"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Site-urile permise au fost șterse"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Toate site-urile permise au fost șterse."
+  },
+  "restoreDefaultsContext": {
+    "message": "Restaurați setările implicite"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Setările implicite au fost restaurate"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Setările implicite au fost restaurate."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Site web nesigur blocat"
+  },
+  "officialPartnerTitle": {
+    "message": "Partener oficial"
+  },
+  "adGuardLogoAlt": {
+    "message": "Logo AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Logo alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Logo Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Logo PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Logo CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Logo CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Logo Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Logo DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Logo DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Logo Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Logo Quad9"
+  }
+}

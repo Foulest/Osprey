@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Защита на браузъра"
+  },
+  "logoAlt": {
+    "message": "Лого на Osprey"
+  },
+  "bannerText": {
+    "message": "Osprey: Защита на браузъра"
+  },
+  "warningTitle": {
+    "message": "Предупреждение: Този уебсайт е опасен"
+  },
+  "recommendation": {
+    "message": "Osprey е блокирал достъпа до този уебсайт. Не е безопасно да продължите."
+  },
+  "details": {
+    "message": "Ако сте собственик на този уебсайт, моля свържете се с доставчика на сигурност, за да разрешите проблема."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Докладвано от: "
+  },
+  "reportedByOthers": {
+    "message": "(и ___ други)"
+  },
+  "reportedByAlso": {
+    "message": "Докладвано също от: "
+  },
+  "reasonLabel": {
+    "message": "Причина: "
+  },
+  "reportSite": {
+    "message": "Докладвайте този уебсайт като безопасен"
+  },
+  "allowSite": {
+    "message": "Винаги игнорирай този уебсайт"
+  },
+  "backButton": {
+    "message": "Назад към сигурността"
+  },
+  "continueButton": {
+    "message": "Все пак продължи"
+  },
+  "popupTitle": {
+    "message": "Опции за защита"
+  },
+  "githubLink": {
+    "message": "Преглед в GitHub"
+  },
+  "version": {
+    "message": "Версия: "
+  },
+  "privacyPolicy": {
+    "message": "Политика за поверителност"
+  },
+  "onText": {
+    "message": "Включено"
+  },
+  "offText": {
+    "message": "Изключено"
+  },
+  "onLockedText": {
+    "message": "Включено (Заключено)"
+  },
+  "offLockedText": {
+    "message": "Изключено (Заключено)"
+  },
+  "knownSafe": {
+    "message": "Доверен"
+  },
+  "failed": {
+    "message": "Неуспешно"
+  },
+  "waiting": {
+    "message": "Изчакване…"
+  },
+  "allowed": {
+    "message": "Разрешено"
+  },
+  "malicious": {
+    "message": "Зловреден"
+  },
+  "phishing": {
+    "message": "Фишинг"
+  },
+  "untrusted": {
+    "message": "Ненадежден"
+  },
+  "adultContent": {
+    "message": "Съдържание за възрастни"
+  },
+  "toggleNotificationsContext": {
+    "message": "Активиране на известията"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Игнориране на навигация в рамки"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Изчистване на списъка с разрешени уебсайтове"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Разрешените уебсайтове са изчистени"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Всички разрешени уебсайтове са изчистени."
+  },
+  "restoreDefaultsContext": {
+    "message": "Възстановяване на настройките по подразбиране"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Настройките по подразбиране са възстановени"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Настройките по подразбиране са възстановени."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Опасен уебсайт блокиран"
+  },
+  "officialPartnerTitle": {
+    "message": "Официален партньор"
+  },
+  "adGuardLogoAlt": {
+    "message": "Лого на AdGuard"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "Лого на alphaMountain"
+  },
+  "controlDLogoAlt": {
+    "message": "Лого на Control D"
+  },
+  "precisionSecLogoAlt": {
+    "message": "Лого на PrecisionSec"
+  },
+  "certEELogoAlt": {
+    "message": "Лого на CERT-EE"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "Лого на CleanBrowsing"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Лого на Cloudflare"
+  },
+  "dns0LogoAlt": {
+    "message": "Лого на DNS0.eu"
+  },
+  "dns4EULogoAlt": {
+    "message": "Лого на DNS4EU"
+  },
+  "nortonLogoAlt": {
+    "message": "Лого на Norton"
+  },
+  "quad9LogoAlt": {
+    "message": "Лого на Quad9"
+  }
+}

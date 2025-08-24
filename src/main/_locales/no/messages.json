@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Nettleserbeskyttelse"
+  },
+  "logoAlt": {
+    "message": "Osprey-logo"
+  },
+  "bannerText": {
+    "message": "Osprey: Nettleserbeskyttelse"
+  },
+  "warningTitle": {
+    "message": "Advarsel: Dette nettstedet er ikke sikkert"
+  },
+  "recommendation": {
+    "message": "Osprey har blokkert tilgangen til dette nettstedet. Det er ikke trygt å fortsette."
+  },
+  "details": {
+    "message": "Hvis du er eier av dette nettstedet, vennligst kontakt sikkerhetsleverandøren for å løse problemet."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Rapportert av: "
+  },
+  "reportedByOthers": {
+    "message": "(og ___ andre)"
+  },
+  "reportedByAlso": {
+    "message": "Også rapportert av: "
+  },
+  "reasonLabel": {
+    "message": "Årsak: "
+  },
+  "reportSite": {
+    "message": "Rapporter dette nettstedet som trygt"
+  },
+  "allowSite": {
+    "message": "Ignorer alltid dette nettstedet"
+  },
+  "backButton": {
+    "message": "Tilbake til trygghet"
+  },
+  "continueButton": {
+    "message": "Fortsett likevel"
+  },
+  "popupTitle": {
+    "message": "Beskyttelsesvalg"
+  },
+  "githubLink": {
+    "message": "Se på GitHub"
+  },
+  "version": {
+    "message": "Versjon: "
+  },
+  "privacyPolicy": {
+    "message": "Personvernerklæring"
+  },
+  "onText": {
+    "message": "På"
+  },
+  "offText": {
+    "message": "Av"
+  },
+  "onLockedText": {
+    "message": "På (låst)"
+  },
+  "offLockedText": {
+    "message": "Av (låst)"
+  },
+  "knownSafe": {
+    "message": "Kjent som trygg"
+  },
+  "failed": {
+    "message": "Mislyktes"
+  },
+  "waiting": {
+    "message": "Venter"
+  },
+  "allowed": {
+    "message": "Tillatt"
+  },
+  "malicious": {
+    "message": "Ondsinnet"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Utrustelig"
+  },
+  "adultContent": {
+    "message": "Vokseninnhold"
+  },
+  "toggleNotificationsContext": {
+    "message": "Aktiver varsler"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Ignorer ramme-navigasjon"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Tøm listen over tillatte nettsteder"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Tillatte nettsteder er tømt"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Alle tillatte nettsteder er tømt."
+  },
+  "restoreDefaultsContext": {
+    "message": "Gjenopprett standardinnstillinger"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Standardinnstillinger gjenopprettet"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Standardinnstillingene er gjenopprettet."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Usikkert nettsted blokkert"
+  },
+  "officialPartnerTitle": {
+    "message": "Offisiell partner"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard-logo"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain-logo"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D-logo"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec-logo"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE-logo"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing-logo"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare-logo"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu-logo"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU-logo"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton-logo"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9-logo"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "title": {
+    "message": "Osprey: Browserbeveiliging"
+  },
+  "logoAlt": {
+    "message": "Osprey-logo"
+  },
+  "bannerText": {
+    "message": "Osprey: Browserbeveiliging"
+  },
+  "warningTitle": {
+    "message": "Waarschuwing: Deze website is onveilig"
+  },
+  "recommendation": {
+    "message": "Osprey heeft de toegang tot deze website geblokkeerd. Het is onveilig om door te gaan."
+  },
+  "details": {
+    "message": "Als u de eigenaar van deze website bent, neem dan contact op met de beveiligingsprovider om het probleem op te lossen."
+  },
+  "urlLabel": {
+    "message": "URL: "
+  },
+  "reportedByLabel": {
+    "message": "Gerapporteerd door: "
+  },
+  "reportedByOthers": {
+    "message": "(en ___ anderen)"
+  },
+  "reportedByAlso": {
+    "message": "Ook gerapporteerd door: "
+  },
+  "reasonLabel": {
+    "message": "Reden: "
+  },
+  "reportSite": {
+    "message": "Meld deze website als veilig"
+  },
+  "allowSite": {
+    "message": "Negeer deze website altijd"
+  },
+  "backButton": {
+    "message": "Terug naar veiligheid"
+  },
+  "continueButton": {
+    "message": "Toch doorgaan"
+  },
+  "popupTitle": {
+    "message": "Beveiligingsopties"
+  },
+  "githubLink": {
+    "message": "Bekijk op GitHub"
+  },
+  "version": {
+    "message": "Versie: "
+  },
+  "privacyPolicy": {
+    "message": "Privacybeleid"
+  },
+  "onText": {
+    "message": "Aan"
+  },
+  "offText": {
+    "message": "Uit"
+  },
+  "onLockedText": {
+    "message": "Aan (vergrendeld)"
+  },
+  "offLockedText": {
+    "message": "Uit (vergrendeld)"
+  },
+  "knownSafe": {
+    "message": "Bekend als veilig"
+  },
+  "failed": {
+    "message": "Mislukt"
+  },
+  "waiting": {
+    "message": "Wachten"
+  },
+  "allowed": {
+    "message": "Toegestaan"
+  },
+  "malicious": {
+    "message": "Kwaadaardig"
+  },
+  "phishing": {
+    "message": "Phishing"
+  },
+  "untrusted": {
+    "message": "Onbetrouwbaar"
+  },
+  "adultContent": {
+    "message": "Inhoud voor volwassenen"
+  },
+  "toggleNotificationsContext": {
+    "message": "Meldingen inschakelen"
+  },
+  "toggleFrameNavigationContext": {
+    "message": "Framenavigatie negeren"
+  },
+  "clearAllowedWebsitesContext": {
+    "message": "Lijst met toegestane websites wissen"
+  },
+  "clearAllowedWebsitesTitle": {
+    "message": "Toegestane websites gewist"
+  },
+  "clearAllowedWebsitesMessage": {
+    "message": "Alle toegestane websites zijn gewist."
+  },
+  "restoreDefaultsContext": {
+    "message": "Standaardinstellingen herstellen"
+  },
+  "restoreDefaultsTitle": {
+    "message": "Standaardinstellingen hersteld"
+  },
+  "restoreDefaultsMessage": {
+    "message": "Standaardinstellingen zijn hersteld."
+  },
+  "unsafeWebsiteTitle": {
+    "message": "Onveilige website geblokkeerd"
+  },
+  "officialPartnerTitle": {
+    "message": "Officiële partner"
+  },
+  "adGuardLogoAlt": {
+    "message": "AdGuard-logo"
+  },
+  "alphaMountainLogoAlt": {
+    "message": "alphaMountain-logo"
+  },
+  "controlDLogoAlt": {
+    "message": "Control D-logo"
+  },
+  "precisionSecLogoAlt": {
+    "message": "PrecisionSec-logo"
+  },
+  "certEELogoAlt": {
+    "message": "CERT-EE-logo"
+  },
+  "cleanBrowsingLogoAlt": {
+    "message": "CleanBrowsing-logo"
+  },
+  "cloudflareLogoAlt": {
+    "message": "Cloudflare-logo"
+  },
+  "dns0LogoAlt": {
+    "message": "DNS0.eu-logo"
+  },
+  "dns4EULogoAlt": {
+    "message": "DNS4EU-logo"
+  },
+  "nortonLogoAlt": {
+    "message": "Norton-logo"
+  },
+  "quad9LogoAlt": {
+    "message": "Quad9-logo"
+  }
+}

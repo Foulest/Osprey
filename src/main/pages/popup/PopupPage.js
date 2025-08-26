@@ -34,7 +34,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.ADGUARD_SECURITY,
             name: "adGuardSecurityEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "adGuardSecurityStatus",
             switchElementId: "adGuardSecuritySwitch",
             messageType: Messages.ADGUARD_SECURITY_TOGGLED,
@@ -42,7 +42,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.ADGUARD_FAMILY,
             name: "adGuardFamilyEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "adGuardFamilyStatus",
             switchElementId: "adGuardFamilySwitch",
             messageType: Messages.ADGUARD_FAMILY_TOGGLED,
@@ -50,7 +50,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.ALPHAMOUNTAIN,
             name: "alphaMountainEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "alphaMountainStatus",
             switchElementId: "alphaMountainSwitch",
             messageType: Messages.ALPHAMOUNTAIN_TOGGLED,
@@ -58,7 +58,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.CONTROL_D_SECURITY,
             name: "controlDSecurityEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "controlDSecurityStatus",
             switchElementId: "controlDSecuritySwitch",
             messageType: Messages.CONTROL_D_SECURITY_TOGGLED,
@@ -66,7 +66,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.CONTROL_D_FAMILY,
             name: "controlDFamilyEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "controlDFamilyStatus",
             switchElementId: "controlDFamilySwitch",
             messageType: Messages.CONTROL_D_FAMILY_TOGGLED,
@@ -74,7 +74,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.PRECISIONSEC,
             name: "precisionSecEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "precisionSecStatus",
             switchElementId: "precisionSecSwitch",
             messageType: Messages.PRECISIONSEC_TOGGLED,
@@ -82,7 +82,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.CERT_EE,
             name: "certEEEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "certEEStatus",
             switchElementId: "certEESwitch",
             messageType: Messages.CERT_EE_TOGGLED,
@@ -90,7 +90,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.CLEANBROWSING_SECURITY,
             name: "cleanBrowsingSecurityEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "cleanBrowsingSecurityStatus",
             switchElementId: "cleanBrowsingSecuritySwitch",
             messageType: Messages.CLEANBROWSING_SECURITY_TOGGLED,
@@ -98,7 +98,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.CLEANBROWSING_FAMILY,
             name: "cleanBrowsingFamilyEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "cleanBrowsingFamilyStatus",
             switchElementId: "cleanBrowsingFamilySwitch",
             messageType: Messages.CLEANBROWSING_FAMILY_TOGGLED,
@@ -106,7 +106,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.CLOUDFLARE_SECURITY,
             name: "cloudflareSecurityEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "cloudflareSecurityStatus",
             switchElementId: "cloudflareSecuritySwitch",
             messageType: Messages.CLOUDFLARE_SECURITY_TOGGLED,
@@ -114,7 +114,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.CLOUDFLARE_FAMILY,
             name: "cloudflareFamilyEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "cloudflareFamilyStatus",
             switchElementId: "cloudflareFamilySwitch",
             messageType: Messages.CLOUDFLARE_FAMILY_TOGGLED,
@@ -122,7 +122,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.DNS0_SECURITY,
             name: "dns0SecurityEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "dns0SecurityStatus",
             switchElementId: "dns0SecuritySwitch",
             messageType: Messages.DNS0_SECURITY_TOGGLED,
@@ -130,7 +130,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.DNS0_FAMILY,
             name: "dns0FamilyEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "dns0FamilyStatus",
             switchElementId: "dns0FamilySwitch",
             messageType: Messages.DNS0_FAMILY_TOGGLED,
@@ -138,7 +138,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.DNS4EU_SECURITY,
             name: "dns4EUSecurityEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "dns4EUSecurityStatus",
             switchElementId: "dns4EUSecuritySwitch",
             messageType: Messages.DNS4EU_SECURITY_TOGGLED,
@@ -146,7 +146,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.DNS4EU_FAMILY,
             name: "dns4EUFamilyEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "dns4EUFamilyStatus",
             switchElementId: "dns4EUFamilySwitch",
             messageType: Messages.DNS4EU_FAMILY_TOGGLED,
@@ -154,7 +154,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.NORTON,
             name: "nortonEnabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "nortonStatus",
             switchElementId: "nortonSwitch",
             messageType: Messages.NORTON_TOGGLED,
@@ -162,7 +162,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         {
             origin: ProtectionResult.Origin.QUAD9,
             name: "quad9Enabled",
-            title: ProtectionResult.FullName[origin],
+            title: ProtectionResult.FullName[this.origin],
             labelElementId: "quad9Status",
             switchElementId: "quad9Switch",
             messageType: Messages.QUAD9_TOGGLED,
@@ -244,7 +244,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
 
                 browserAPI.runtime.sendMessage({
                     messageType: system.messageType,
-                    title: ProtectionResult.FullName[origin],
+                    title: ProtectionResult.FullName[system.origin],
                     toggleState: newState,
                 }).catch(error => {
                     console.error(`Failed to send message for ${system.name}:`, error);

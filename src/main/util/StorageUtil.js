@@ -23,11 +23,6 @@ const StorageUtil = (() => {
     // Browser API compatibility between Chrome and Firefox
     const browserAPI = typeof browser === 'undefined' ? chrome : browser;
 
-    // Checks if the storage API is available in the browser.
-    const isAvailable = !!(browserAPI && browserAPI.storage &&
-        browserAPI.storage.local && browserAPI.storage.session
-    );
-
     /**
      * Retrieves data from the browser's local storage.
      *
@@ -35,9 +30,9 @@ const StorageUtil = (() => {
      * @param {Function} callback - The function to call with the retrieved value.
      */
     function getFromLocalStore(key, callback) {
-        // Checks if the storage API is available
-        if (!isAvailable) {
-            console.error('StorageUtil API not available');
+        // Checks if local storage is supported
+        if (!browserAPI?.storage?.local) {
+            console.error('Local storage API not available');
             callback(null);
             return;
         }
@@ -51,7 +46,7 @@ const StorageUtil = (() => {
             }
 
             // Extracts the value associated with the key.
-            let value = result && result[key];
+            let value = result?.[key];
 
             // Calls the callback function with the retrieved value.
             callback(value);
@@ -66,9 +61,9 @@ const StorageUtil = (() => {
      * @param {Function} [callback] - Optional callback to call after saving.
      */
     function setToLocalStore(key, value, callback) {
-        // Checks if the storage API is available
-        if (!isAvailable) {
-            console.error('StorageUtil API not available');
+        // Checks if local storage is supported
+        if (!browserAPI?.storage?.local) {
+            console.error('Local storage API not available');
             callback(null);
             return;
         }
@@ -104,9 +99,9 @@ const StorageUtil = (() => {
      * @param {Function} callback - The function to call with the retrieved value.
      */
     function getFromSessionStore(key, callback) {
-        // Checks if the storage API is available
-        if (!isAvailable) {
-            console.error('StorageUtil API not available');
+        // Checks if session storage is supported
+        if (!browserAPI?.storage?.session) {
+            console.error('Session storage API not available');
             callback(null);
             return;
         }
@@ -120,7 +115,7 @@ const StorageUtil = (() => {
             }
 
             // Extracts the value associated with the key.
-            let value = result && result[key];
+            let value = result?.[key];
 
             // Calls the callback function with the retrieved value.
             callback(value);
@@ -135,9 +130,9 @@ const StorageUtil = (() => {
      * @param {Function} [callback] - Optional callback to call after saving.
      */
     function setToSessionStore(key, value, callback) {
-        // Checks if the storage API is available
-        if (!isAvailable) {
-            console.error('StorageUtil API not available');
+        // Checks if session storage is supported
+        if (!browserAPI?.storage?.session) {
+            console.error('Session storage API not available');
             callback(null);
             return;
         }

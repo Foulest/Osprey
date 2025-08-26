@@ -100,7 +100,7 @@
             }
 
             // Checks if the URL is missing or incomplete.
-            if (!currentUrl || !currentUrl.includes('://')) {
+            if (!currentUrl?.includes('://')) {
                 console.debug(`Incomplete or missing URL: ${currentUrl}; bailing out.`);
                 return;
             }
@@ -667,7 +667,7 @@
     // Listener for incoming messages.
     browserAPI.runtime.onMessage.addListener((message, sender) => {
         // Checks if the message exists and has a valid type
-        if (!(message && message.messageType)) {
+        if (!message?.messageType) {
             return;
         }
 

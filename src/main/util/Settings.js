@@ -110,7 +110,7 @@ const Settings = (() => {
             updateIfChanged(mergedSettings, storedSettings);
 
             // Invokes the callback with the merged settings
-            callback && callback(mergedSettings);
+            callback?.(mergedSettings);
         });
     }
 

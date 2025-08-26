@@ -477,7 +477,7 @@ const CacheManager = (() => {
             const key = normalizeUrl(url);
             const map = blockedCaches[name];
 
-            if (!map || !map.has(key)) {
+            if (!map?.has(key)) {
                 return false;
             }
 
@@ -550,7 +550,7 @@ const CacheManager = (() => {
             const key = normalizeUrl(url);
             const cache = blockedCaches[name];
 
-            if (!cache || !cache.has(key)) {
+            if (!cache?.has(key)) {
                 return null;
             }
 
@@ -778,7 +778,7 @@ const CacheManager = (() => {
         // Persist the changes to session storage
         if (removedCount > 0) {
             console.debug(`Removed ${removedCount} entries from processing cache for tab ID ${tabId}`);
-            updateSessionStorage(false);
+            updateSessionStorage();
         }
     }
 

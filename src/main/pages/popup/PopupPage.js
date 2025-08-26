@@ -261,7 +261,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         securitySystems.forEach(system => {
             const elements = domElements[system.name];
 
-            if (elements && elements.switchElement) {
+            if (elements?.switchElement) {
                 elements.switchElement.onclick = null;
             }
         });

@@ -1825,7 +1825,7 @@ const BrowserProtection = (() => {
         return btoa(String.fromCharCode(...dnsPacket))
             .replace(/\+/g, '-')
             .replace(/\//g, '_')
-            .replace(/=+$/, '');
+            .replace(/=*$/, '');
     }
 
     return {

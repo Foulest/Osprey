@@ -148,7 +148,7 @@ const UrlHelpers = (() => {
         }
 
         // Removes trailing dots from the hostname
-        hostname = hostname.replace(/\.+$/, '');
+        hostname = hostname.replace(/\.*$/, '');
         return hostname;
     }
 
@@ -188,7 +188,7 @@ const UrlHelpers = (() => {
     function isPrivateIP(ip) {
         return ip.startsWith("127.") ||
             ip.startsWith("10.") ||
-            /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(ip) ||
+            /^172\.(1[6-9]|2\d|3[0-1])\./.test(ip) ||
             ip.startsWith("192.168.") ||
             ip.startsWith("0.0.0.0");
     }

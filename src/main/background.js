@@ -136,7 +136,7 @@
 
             // Removes trailing slashes from the URL.
             // Example: turns https://example.com/ into https://example.com
-            currentUrl = currentUrl.replace(/\/+$/, '');
+            currentUrl = currentUrl.replace(/\/*$/, '');
 
             // Sanitizes and encodes the URL to handle spaces and special characters.
             try {

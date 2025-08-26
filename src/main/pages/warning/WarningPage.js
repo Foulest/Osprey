@@ -277,7 +277,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                     return new URL("https://www.dns0.eu/report");
 
                 case ProtectionResult.Origin.DNS4EU_SECURITY:
-                    // TODO: Needs verification of response from support team.
                     return new URL("mailto:viliam.peli@whalebone.io?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20DNS4EU%20Protective%20Resolution%20DNS" +
@@ -288,7 +287,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                         "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.DNS4EU_FAMILY:
-                    // TODO: Needs verification of response from support team.
                     return new URL("mailto:viliam.peli@whalebone.io?subject=False%20Positive&body=Hello%2C" +
                         "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
                         "%0A%0AProduct%3A%20DNS4EU%20Protective%20Resolution%20with%20Child%20Protection%20DNS" +

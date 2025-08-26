@@ -80,7 +80,7 @@ const Settings = (() => {
             // Iterates through the source object properties
             // If the values differ, update the target and mark changes
             for (const key in source) {
-                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                if (Object.hasOwn(source, key)) {
                     if (source[key] !== target[key]) {
                         target[key] = source[key];
                         hasChanges = true;

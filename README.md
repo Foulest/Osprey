@@ -32,13 +32,22 @@ possible. Check out some of our partners below:
 ###
 
 <p align="center">
-  <a href="https://adguard-dns.io/?utm_source=osprey"><img src="https://i.imgur.com/4AXgbsC.png" alt="AdGuard DNS"></a>
-  <a href="https://alphamountain.ai/?utm_source=osprey"><img src="https://i.imgur.com/EbcGHb2.png" alt="alphaMountain"></a>
-  <a href="https://controld.com/?utm_source=osprey"><img src="https://i.imgur.com/xh7qTT8.png" alt="Control D"></a>
-  <a href="https://precisionsec.com/?utm_source=osprey"><img src="https://i.imgur.com/gf9ahFa.png" alt="PrecisionSec"></a>
+  <a href="https://adguard-dns.io/?utm_source=osprey" title="AdGuard DNS"><img src="https://i.imgur.com/4AXgbsC.png" alt="AdGuard DNS"></a>
+  <a href="https://alphamountain.ai/?utm_source=osprey" title="alphaMountain"><img src="https://i.imgur.com/EbcGHb2.png" alt="alphaMountain"></a>
+  <a href="https://controld.com/?utm_source=osprey" title="Control D"><img src="https://i.imgur.com/xh7qTT8.png" alt="Control D"></a>
+  <a href="https://precisionsec.com/?utm_source=osprey" title="PrecisionSec"><img src="https://i.imgur.com/gf9ahFa.png" alt="PrecisionSec"></a>
 </p>
 
 ###
+
+## Other Partners
+
+Osprey doesn't just endorse our partnered security providers. We also support businesses that love what we do! Check out
+some of the companies that love Osprey:
+
+<p align="center">
+  <a href="https://concourse-cloud.com/?utm_source=osprey" title="Concourse Cloud"><img src="https://i.imgur.com/pfAZVvp.png" alt="Concourse Cloud"></a>
+</p>
 
 ## Our Mission
 

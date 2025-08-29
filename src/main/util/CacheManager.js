@@ -631,7 +631,7 @@ const CacheManager = (() => {
 
                 map.delete(key);
                 cleanExpiredEntries();
-                updateLocalStorage();
+                updateSessionStorage();
             }
         } catch (error) {
             console.error(`Error checking processing cache for ${url}:`, error);
@@ -667,7 +667,7 @@ const CacheManager = (() => {
             }
 
             cleanExpiredEntries();
-            updateLocalStorage();
+            updateSessionStorage();
         } catch (error) {
             console.error(`Error adding URL to processing cache for ${url}:`, error);
         }
@@ -698,7 +698,7 @@ const CacheManager = (() => {
             }
 
             cleanExpiredEntries();
-            updateLocalStorage();
+            updateSessionStorage();
         } catch (error) {
             console.error(`Error removing URL from processing cache for ${url}:`, error);
         }

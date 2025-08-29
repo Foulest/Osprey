@@ -82,8 +82,12 @@ const BrowserProtection = (() => {
         const urlObject = new URL(url);
         const urlHostname = urlObject.hostname;
 
+        // Encode the URL and hostname for use in API requests
+        const encodedUrl = encodeURIComponent(url);
+        const encodedUrlHostname = encodeURIComponent(urlHostname);
+
         // The non-filtering URL used for DNS lookups
-        const nonFilteringURL = `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(urlHostname)}`;
+        const nonFilteringURL = `https://cloudflare-dns.com/dns-query?name=${encodedUrlHostname}`;
 
         // Ensure there is an AbortController for the tab
         if (!tabAbortControllers.has(tabId)) {
@@ -132,7 +136,7 @@ const BrowserProtection = (() => {
             // Adds the URL to the processing cache to prevent duplicate requests
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
-            const encodedQuery = encodeDNSQuery(encodeURIComponent(urlHostname));
+            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
             const filteringURL = `https://dns.adguard-dns.com/dns-query?dns=${encodedQuery}`;
 
             try {
@@ -226,7 +230,7 @@ const BrowserProtection = (() => {
             // Adds the URL to the processing cache to prevent duplicate requests
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
-            const encodedQuery = encodeDNSQuery(encodeURIComponent(urlHostname));
+            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
             const filteringURL = `https://family.adguard-dns.com/dns-query?dns=${encodedQuery}`;
 
             try {
@@ -448,7 +452,7 @@ const BrowserProtection = (() => {
             // Adds the URL to the processing cache to prevent duplicate requests
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
-            const filteringURL = `https://freedns.controld.com/no-malware-typo?name=${encodeURIComponent(urlHostname)}`;
+            const filteringURL = `https://freedns.controld.com/no-malware-typo?name=${encodedUrlHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -541,7 +545,7 @@ const BrowserProtection = (() => {
             // Adds the URL to the processing cache to prevent duplicate requests
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
-            const filteringURL = `https://freedns.controld.com/no-drugs-porn-gambling-malware-typo?name=${encodeURIComponent(urlHostname)}`;
+            const filteringURL = `https://freedns.controld.com/no-drugs-porn-gambling-malware-typo?name=${encodedUrlHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -634,7 +638,7 @@ const BrowserProtection = (() => {
             // Adds the URL to the processing cache to prevent duplicate requests
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
-            const apiUrl = `https://api.precisionsec.com/check_url/${encodeURIComponent(url)}`;
+            const apiUrl = `https://api.precisionsec.com/check_url/${encodedUrl}`;
 
             try {
                 const response = await fetch(apiUrl, {
@@ -725,7 +729,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodeURIComponent(urlHostname));
+            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
             const filteringURL = `https://dns.cert.ee/dns-query?dns=${encodedQuery}`;
 
             try {
@@ -824,7 +828,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodeURIComponent(urlHostname));
+            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
             const filteringURL = `https://doh.cleanbrowsing.org/doh/security-filter/dns-query?dns=${encodedQuery}`;
 
             try {
@@ -922,7 +926,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodeURIComponent(urlHostname));
+            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
             const filteringURL = `https://doh.cleanbrowsing.org/doh/adult-filter/dns-query?dns=${encodedQuery}`;
 
             try {
@@ -1020,7 +1024,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const filteringURL = `https://security.cloudflare-dns.com/dns-query?name=${encodeURIComponent(urlHostname)}`;
+            const filteringURL = `https://security.cloudflare-dns.com/dns-query?name=${encodedUrlHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1119,7 +1123,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const filteringURL = `https://family.cloudflare-dns.com/dns-query?name=${encodeURIComponent(urlHostname)}`;
+            const filteringURL = `https://family.cloudflare-dns.com/dns-query?name=${encodedUrlHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1218,7 +1222,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const filteringURL = `https://dns0.eu/dns-query?name=${encodeURIComponent(urlHostname)}`;
+            const filteringURL = `https://dns0.eu/dns-query?name=${encodedUrlHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1315,7 +1319,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const filteringURL = `https://kids.dns0.eu/dns-query?name=${encodeURIComponent(urlHostname)}`;
+            const filteringURL = `https://kids.dns0.eu/dns-query?name=${encodedUrlHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1412,7 +1416,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodeURIComponent(urlHostname));
+            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
             const filteringURL = `https://protective.joindns4.eu/dns-query?dns=${encodedQuery}`;
 
             try {
@@ -1511,7 +1515,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodeURIComponent(urlHostname));
+            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
             const filteringURL = `https://child.joindns4.eu/dns-query?dns=${encodedQuery}`;
 
             try {
@@ -1610,7 +1614,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const apiUrl = `https://ratings-wrs.norton.com/brief?url=${encodeURIComponent(url)}`;
+            const apiUrl = `https://ratings-wrs.norton.com/brief?url=${encodedUrl}`;
 
             try {
                 const response = await fetch(apiUrl, {
@@ -1699,7 +1703,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodeURIComponent(urlHostname));
+            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
             const filteringURL = `https://dns.quad9.net/dns-query?dns=${encodedQuery}`;
 
             try {

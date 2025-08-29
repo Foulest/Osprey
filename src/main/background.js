@@ -272,7 +272,7 @@
                                         type: "basic",
                                         iconUrl: "assets/icons/icon128.png",
                                         title: LangUtil.UNSAFE_WEBSITE_TITLE,
-                                        message: `${LangUtil.URL_LABEL}${currentUrl}\n${LangUtil.REPORTED_BY_LABEL}${fullName}\n${LangUtil.REASON_LABEL}${resultType}`,
+                                        message: `${LangUtil.URL_LABEL}${currentUrl}\n${LangUtil.REPORTED_BY_LABEL}${fullName}\n${LangUtil.REASON_LABEL}${resultTypeNameEN}`,
                                         priority: 2,
                                     };
 

@@ -27,7 +27,7 @@ const BrowserProtection = (() => {
     const nonPartnerDelay = 100;
 
     // API keys for various protection services
-    // These aren't meant to be secret, but they are obfuscated to stop sniffers.
+    // These aren't meant to be secret, but they are obfuscated to stop secret sniffers.
     let alphaMountainKey = atob("YTRhNDVkYzMtNjFmMC00OGIzLTlmMjUtNjQxMzgxYjgwNWQ3");
     let precisionSecKey = atob("MGI1Yjc2MjgtMzgyYi0xMWYwLWE1OWMtYjNiNTIyN2IxMDc2");
 
@@ -82,12 +82,13 @@ const BrowserProtection = (() => {
         const urlObject = new URL(url);
         const urlHostname = urlObject.hostname;
 
-        // Encode the URL and hostname for use in API requests
-        const encodedUrl = encodeURIComponent(url);
-        const encodedUrlHostname = encodeURIComponent(urlHostname);
+        // Encode the URL components for use in API requests
+        const encodedURL = encodeURIComponent(url);
+        const encodedURLHostname = encodeURIComponent(urlHostname);
+        const encodedDNSQuery = UrlHelpers.encodeDNSQuery(encodedURLHostname);
 
         // The non-filtering URL used for DNS lookups
-        const nonFilteringURL = `https://cloudflare-dns.com/dns-query?name=${encodedUrlHostname}`;
+        const nonFilteringURL = `https://cloudflare-dns.com/dns-query?name=${encodedURLHostname}`;
 
         // Ensure there is an AbortController for the tab
         if (!tabAbortControllers.has(tabId)) {
@@ -136,8 +137,7 @@ const BrowserProtection = (() => {
             // Adds the URL to the processing cache to prevent duplicate requests
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
-            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
-            const filteringURL = `https://dns.adguard-dns.com/dns-query?dns=${encodedQuery}`;
+            const filteringURL = `https://dns.adguard-dns.com/dns-query?dns=${encodedDNSQuery}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -230,8 +230,7 @@ const BrowserProtection = (() => {
             // Adds the URL to the processing cache to prevent duplicate requests
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
-            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
-            const filteringURL = `https://family.adguard-dns.com/dns-query?dns=${encodedQuery}`;
+            const filteringURL = `https://family.adguard-dns.com/dns-query?dns=${encodedDNSQuery}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -452,7 +451,7 @@ const BrowserProtection = (() => {
             // Adds the URL to the processing cache to prevent duplicate requests
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
-            const filteringURL = `https://freedns.controld.com/no-malware-typo?name=${encodedUrlHostname}`;
+            const filteringURL = `https://freedns.controld.com/no-malware-typo?name=${encodedURLHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -545,7 +544,7 @@ const BrowserProtection = (() => {
             // Adds the URL to the processing cache to prevent duplicate requests
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
-            const filteringURL = `https://freedns.controld.com/no-drugs-porn-gambling-malware-typo?name=${encodedUrlHostname}`;
+            const filteringURL = `https://freedns.controld.com/no-drugs-porn-gambling-malware-typo?name=${encodedURLHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -638,7 +637,7 @@ const BrowserProtection = (() => {
             // Adds the URL to the processing cache to prevent duplicate requests
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
-            const apiUrl = `https://api.precisionsec.com/check_url/${encodedUrl}`;
+            const apiUrl = `https://api.precisionsec.com/check_url/${encodedURL}`;
 
             try {
                 const response = await fetch(apiUrl, {
@@ -729,8 +728,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
-            const filteringURL = `https://dns.cert.ee/dns-query?dns=${encodedQuery}`;
+            const filteringURL = `https://dns.cert.ee/dns-query?dns=${encodedDNSQuery}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -828,8 +826,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
-            const filteringURL = `https://doh.cleanbrowsing.org/doh/security-filter/dns-query?dns=${encodedQuery}`;
+            const filteringURL = `https://doh.cleanbrowsing.org/doh/security-filter/dns-query?dns=${encodedDNSQuery}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -926,8 +923,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
-            const filteringURL = `https://doh.cleanbrowsing.org/doh/adult-filter/dns-query?dns=${encodedQuery}`;
+            const filteringURL = `https://doh.cleanbrowsing.org/doh/adult-filter/dns-query?dns=${encodedDNSQuery}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1024,7 +1020,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const filteringURL = `https://security.cloudflare-dns.com/dns-query?name=${encodedUrlHostname}`;
+            const filteringURL = `https://security.cloudflare-dns.com/dns-query?name=${encodedURLHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1123,7 +1119,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const filteringURL = `https://family.cloudflare-dns.com/dns-query?name=${encodedUrlHostname}`;
+            const filteringURL = `https://family.cloudflare-dns.com/dns-query?name=${encodedURLHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1222,7 +1218,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const filteringURL = `https://dns0.eu/dns-query?name=${encodedUrlHostname}`;
+            const filteringURL = `https://dns0.eu/dns-query?name=${encodedURLHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1319,7 +1315,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const filteringURL = `https://kids.dns0.eu/dns-query?name=${encodedUrlHostname}`;
+            const filteringURL = `https://kids.dns0.eu/dns-query?name=${encodedURLHostname}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1416,8 +1412,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
-            const filteringURL = `https://protective.joindns4.eu/dns-query?dns=${encodedQuery}`;
+            const filteringURL = `https://protective.joindns4.eu/dns-query?dns=${encodedDNSQuery}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1515,8 +1510,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
-            const filteringURL = `https://child.joindns4.eu/dns-query?dns=${encodedQuery}`;
+            const filteringURL = `https://child.joindns4.eu/dns-query?dns=${encodedDNSQuery}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1614,7 +1608,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const apiUrl = `https://ratings-wrs.norton.com/brief?url=${encodedUrl}`;
+            const apiUrl = `https://ratings-wrs.norton.com/brief?url=${encodedURL}`;
 
             try {
                 const response = await fetch(apiUrl, {
@@ -1703,8 +1697,7 @@ const BrowserProtection = (() => {
                 await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
             }
 
-            const encodedQuery = encodeDNSQuery(encodedUrlHostname);
-            const filteringURL = `https://dns.quad9.net/dns-query?dns=${encodedQuery}`;
+            const filteringURL = `https://dns.quad9.net/dns-query?dns=${encodedDNSQuery}`;
 
             try {
                 const filteringResponse = await fetch(filteringURL, {
@@ -1783,53 +1776,6 @@ const BrowserProtection = (() => {
 
         // Cleans up controllers for tabs that no longer exist
         cleanupTabControllers();
-    }
-
-    /**
-     * Encodes a DNS query for the given domain and type.
-     *
-     * @param {string} domain - The domain to encode.
-     * @param {number} type - The type of DNS record (default is 1 for A record).
-     * @return {string} - The base64url encoded DNS query.
-     */
-    function encodeDNSQuery(domain, type = 1) {
-        // Creates DNS query components
-        const header = new Uint8Array([
-            0x00, 0x00, // ID (0)
-            0x01, 0x00, // Flags: standard query
-            0x00, 0x01, // QDCOUNT: 1 question
-            0x00, 0x00, // ANCOUNT: 0 answers
-            0x00, 0x00, // NSCOUNT: 0 authority records
-            0x00, 0x00  // ARCOUNT: 0 additional records
-        ]);
-
-        // Encodes domain parts
-        const domainParts = domain.split('.');
-        let domainBuffer = [];
-
-        for (const part of domainParts) {
-            domainBuffer.push(part.length);
-
-            for (let i = 0; i < part.length; i++) {
-                domainBuffer.push(part.charCodeAt(i));
-            }
-        }
-
-        // Adds terminating zero
-        domainBuffer.push(0);
-
-        // Adds QTYPE and QCLASS
-        domainBuffer.push(0x00, type); // QTYPE (1 = A record)
-        domainBuffer.push(0x00, 0x01); // QCLASS (1 = IN)
-
-        // Combines the header and domain parts
-        const dnsPacket = new Uint8Array([...header, ...domainBuffer]);
-
-        // Encodes and returns the results
-        return btoa(String.fromCharCode(...dnsPacket))
-            .replace(/\+/g, '-')
-            .replace(/\//g, '_')
-            .replace(/=*$/, '');
     }
 
     return {

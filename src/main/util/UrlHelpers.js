@@ -238,6 +238,53 @@ const UrlHelpers = (() => {
         return null;
     }
 
+    /**
+     * Encodes a DNS query for the given domain and type.
+     *
+     * @param {string} domain - The domain to encode.
+     * @param {number} type - The type of DNS record (default is 1 for A record).
+     * @return {string} - The base64url encoded DNS query.
+     */
+    function encodeDNSQuery(domain, type = 1) {
+        // Creates DNS query components
+        const header = new Uint8Array([
+            0x00, 0x00, // ID (0)
+            0x01, 0x00, // Flags: standard query
+            0x00, 0x01, // QDCOUNT: 1 question
+            0x00, 0x00, // ANCOUNT: 0 answers
+            0x00, 0x00, // NSCOUNT: 0 authority records
+            0x00, 0x00  // ARCOUNT: 0 additional records
+        ]);
+
+        // Encodes domain parts
+        const domainParts = domain.split('.');
+        let domainBuffer = [];
+
+        for (const part of domainParts) {
+            domainBuffer.push(part.length);
+
+            for (let i = 0; i < part.length; i++) {
+                domainBuffer.push(part.charCodeAt(i));
+            }
+        }
+
+        // Adds terminating zero
+        domainBuffer.push(0);
+
+        // Adds QTYPE and QCLASS
+        domainBuffer.push(0x00, type); // QTYPE (1 = A record)
+        domainBuffer.push(0x00, 0x01); // QCLASS (1 = IN)
+
+        // Combines the header and domain parts
+        const dnsPacket = new Uint8Array([...header, ...domainBuffer]);
+
+        // Encodes and returns the results
+        return btoa(String.fromCharCode(...dnsPacket))
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=*$/, '');
+    }
+
     return {
         extractBlockedUrl,
         extractContinueUrl,
@@ -245,6 +292,7 @@ const UrlHelpers = (() => {
         extractResult,
         getBlockPageUrl,
         normalizeHostname,
-        isInternalAddress
+        isInternalAddress,
+        encodeDNSQuery
     };
 })();

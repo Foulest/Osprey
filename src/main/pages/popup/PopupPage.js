@@ -166,6 +166,9 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         }
     ];
 
+    // Cached manifest data
+    const manifest = browserAPI.runtime.getManifest();
+
     /**
      * Gets DOM elements for a system, caching them for future use.
      *
@@ -434,7 +437,6 @@ window.PopupSingleton = window.PopupSingleton || (() => {
 
         // Updates the version display
         if (versionElement) {
-            const manifest = browserAPI.runtime.getManifest();
             const version = manifest.version;
             versionElement.textContent += version;
         }

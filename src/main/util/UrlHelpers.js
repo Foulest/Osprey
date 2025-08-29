@@ -20,6 +20,8 @@
 // Object containing helper functions for working with URLs.
 const UrlHelpers = (() => {
 
+    // Base URL for the block page
+    const blockPageBaseUrl = browserAPI.runtime.getURL("pages/warning/WarningPage.html");
 
     /**
      * Extracts the blocked URL (the website being reported as malicious) from the query parameters of a URL.
@@ -98,9 +100,6 @@ const UrlHelpers = (() => {
         if (!protectionResult.url || !protectionResult.origin || !protectionResult.resultType) {
             throw new Error('Missing required protection result properties');
         }
-
-        // Base URL for the block page
-        const blockPageBaseUrl = browserAPI.runtime.getURL("pages/warning/WarningPage.html");
 
         try {
             // Constructs a new URL object for the block page

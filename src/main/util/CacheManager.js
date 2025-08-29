@@ -223,9 +223,9 @@ const CacheManager = (() => {
      * @returns {string|string} - The normalized URL as a string.
      */
     function normalizeUrl(url) {
-        const u = typeof url === "string" ? new URL(url) : url;
-        let norm = UrlHelpers.normalizeHostname(u.hostname + u.pathname);
-        return norm.endsWith("/") ? norm.slice(0, -1) : norm;
+        const urlObject = typeof url === "string" ? new URL(url) : url;
+        let normalized = UrlHelpers.normalizeHostname(urlObject.hostname + urlObject.pathname);
+        return normalized.endsWith("/") ? normalized.slice(0, -1) : normalized;
     }
 
     /**

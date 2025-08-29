@@ -64,6 +64,7 @@
             "util/UrlHelpers.js",
             "util/CacheManager.js",
             "util/MessageType.js",
+            "util/LangUtil.js",
 
             // Protection
             "protection/ProtectionResult.js",
@@ -270,8 +271,8 @@
                                     const notificationOptions = {
                                         type: "basic",
                                         iconUrl: "assets/icons/icon128.png",
-                                        title: browserAPI.i18n.getMessage('unsafeWebsiteTitle'),
-                                        message: `${browserAPI.i18n.getMessage('urlLabel')}${currentUrl}\n${browserAPI.i18n.getMessage('reportedByLabel')}${fullName}\n${browserAPI.i18n.getMessage('reasonLabel')}${resultType}`,
+                                        title: LangUtil.UNSAFE_WEBSITE_TITLE,
+                                        message: `${LangUtil.URL_LABEL}${currentUrl}\n${LangUtil.REPORTED_BY_LABEL}${fullName}\n${LangUtil.REASON_LABEL}${resultType}`,
                                         priority: 2,
                                     };
 
@@ -911,8 +912,8 @@
                 const notificationOptions = {
                     type: "basic",
                     iconUrl: "assets/icons/icon128.png",
-                    title: browserAPI.i18n.getMessage('clearAllowedWebsitesTitle'),
-                    message: browserAPI.i18n.getMessage('clearAllowedWebsitesMessage'),
+                    title: LangUtil.CLEAR_ALLOWED_WEBSITES_TITLE,
+                    message: LangUtil.CLEAR_ALLOWED_WEBSITES_MESSAGE,
                     priority: 2,
                 };
 
@@ -935,8 +936,8 @@
                 const notificationOptions = {
                     type: "basic",
                     iconUrl: "assets/icons/icon128.png",
-                    title: browserAPI.i18n.getMessage('restoreDefaultsTitle'),
-                    message: browserAPI.i18n.getMessage('restoreDefaultsMessage'),
+                    title: LangUtil.RESTORE_DEFAULTS_TITLE,
+                    message: LangUtil.RESTORE_DEFAULTS_MESSAGE,
                     priority: 2,
                 };
 
@@ -977,7 +978,7 @@
             // Creates the toggle notifications menu item
             contextMenuAPI.create({
                 id: "toggleNotifications",
-                title: browserAPI.i18n.getMessage('toggleNotificationsContext'),
+                title: LangUtil.TOGGLE_NOTIFICATIONS_CONTEXT,
                 type: "checkbox",
                 checked: settings.notificationsEnabled,
                 contexts: ["action"],
@@ -986,7 +987,7 @@
             // Creates the toggle frame navigation menu item
             contextMenuAPI.create({
                 id: "toggleFrameNavigation",
-                title: browserAPI.i18n.getMessage('toggleFrameNavigationContext'),
+                title: LangUtil.TOGGLE_FRAME_NAVIGATION_CONTEXT,
                 type: "checkbox",
                 checked: settings.ignoreFrameNavigation,
                 contexts: ["action"],
@@ -995,14 +996,14 @@
             // Creates the clear allowed websites menu item
             contextMenuAPI.create({
                 id: "clearAllowedWebsites",
-                title: browserAPI.i18n.getMessage('clearAllowedWebsitesContext'),
+                title: LangUtil.CLEAR_ALLOWED_WEBSITES_CONTEXT,
                 contexts: ["action"],
             });
 
             // Creates the restore default settings menu item
             contextMenuAPI.create({
                 id: "restoreDefaultSettings",
-                title: browserAPI.i18n.getMessage('restoreDefaultsContext'),
+                title: LangUtil.RESTORE_DEFAULTS_CONTEXT,
                 contexts: ["action"],
             });
 

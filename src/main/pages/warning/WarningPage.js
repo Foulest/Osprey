@@ -82,45 +82,79 @@ window.WarningSingleton = window.WarningSingleton || (() => {
          * Localizes the page by replacing text content with localized messages.
          */
         function localizePage() {
-            // Helper function to get localized messages
-            const getMessage = (key) => browserAPI.i18n.getMessage(key);
+            // Sets the warning title text
+            const warningTitle = document.getElementById('warningTitle');
+            if (warningTitle) {
+                warningTitle.textContent = LangUtil.WARNING_TITLE;
+            }
 
-            // Maps element IDs to their corresponding i18n message keys
-            const elements = {
-                'warningTitle': 'warningTitle',
-                'recommendation': 'recommendation',
-                'details': 'details',
-                'urlLabel': 'urlLabel',
-                'reportedByLabel': 'reportedByLabel',
-                'reasonLabel': 'reasonLabel',
-                'reportWebsite': 'reportWebsite',
-                'allowWebsite': 'allowWebsite',
-                'backButton': 'backButton',
-                'continueButton': 'continueButton'
-            };
+            // Sets the recommendation text
+            const recommendation = document.getElementById('recommendation');
+            if (recommendation) {
+                recommendation.textContent = LangUtil.RECOMMENDATION;
+            }
 
-            // Sets the text content for each element based on its i18n message
-            for (const [id, key] of Object.entries(elements)) {
-                const element = document.getElementById(id);
+            // Sets the details text
+            const details = document.getElementById('details');
+            if (details) {
+                details.textContent = LangUtil.DETAILS;
+            }
 
-                if (element) {
-                    element.textContent = getMessage(key);
-                }
+            // Sets the URL label text
+            const urlLabel = document.getElementById('urlLabel');
+            if (urlLabel) {
+                urlLabel.textContent = LangUtil.URL_LABEL;
+            }
+
+            // Sets the reported by label text
+            const reportedByLabel = document.getElementById('reportedByLabel');
+            if (reportedByLabel) {
+                reportedByLabel.textContent = LangUtil.REPORTED_BY_LABEL;
+            }
+
+            // Sets the reason label text
+            const reasonLabel = document.getElementById('reasonLabel');
+            if (reasonLabel) {
+                reasonLabel.textContent = LangUtil.REASON_LABEL;
+            }
+
+            // Sets the report website button text
+            const reportWebsite = document.getElementById('reportWebsite');
+            if (reportWebsite) {
+                reportWebsite.textContent = LangUtil.REPORT_WEBSITE;
+            }
+
+            // Sets the allow website button text
+            const allowWebsite = document.getElementById('allowWebsite');
+            if (allowWebsite) {
+                allowWebsite.textContent = LangUtil.ALLOW_WEBSITE;
+            }
+
+            // Sets the back button text
+            const backButton = document.getElementById('backButton');
+            if (backButton) {
+                backButton.textContent = LangUtil.BACK_BUTTON;
+            }
+
+            // Sets the continue button text
+            const continueButton = document.getElementById('continueButton');
+            if (continueButton) {
+                continueButton.textContent = LangUtil.CONTINUE_BUTTON;
             }
 
             // Sets the document title text
-            document.title = getMessage('title');
+            document.title = LangUtil.TITLE;
 
             // Sets the banner text
             const bannerText = document.querySelector('.bannerText');
             if (bannerText) {
-                bannerText.textContent = getMessage('bannerText');
+                bannerText.textContent = LangUtil.BANNER_TEXT;
             }
 
             // Sets the alt text for the logo
             const logo = document.getElementById('logo');
             if (logo) {
-                logo.alt = getMessage('logoAlt');
+                logo.alt = LangUtil.LOGO_ALT;
             }
         }
 
@@ -158,14 +192,14 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         // Listens for PONG messages to update the reported by count
         browserAPI.runtime.onMessage.addListener(message => {
             if (message.messageType === Messages.BLOCKED_COUNTER_PONG && message.count > 0) {
-                let othersText = browserAPI.i18n.getMessage("reportedByOthers", message.count.toString());
+                let othersText = LangUtil.REPORTED_BY_OTHERS;
                 othersText = othersText.replace("___", message.count.toString());
 
                 // Sets the reported by text with the count of other systems
                 domElements.reportedBy.innerText = `${reportedByText} ${othersText}`;
 
                 // Make the innerText hoverable and set the hover text
-                const alsoReportedBy = browserAPI.i18n.getMessage("reportedByAlso");
+                const alsoReportedBy = LangUtil.REPORTED_BY_ALSO;
                 const wrappedTitle = wrapSystemNamesText(`${alsoReportedBy}${message.systems.join(', ')}`);
                 domElements.reportedBy.title = `${wrappedTitle}`;
             }

@@ -48,14 +48,14 @@ ProtectionResult.ResultType = {
 };
 
 ProtectionResult.ResultTypeName = {
-    0: browserAPI.i18n.getMessage("knownSafe"),
-    1: browserAPI.i18n.getMessage("failed"),
-    2: browserAPI.i18n.getMessage("waiting"),
-    3: browserAPI.i18n.getMessage("allowed"),
-    4: browserAPI.i18n.getMessage("malicious"),
-    5: browserAPI.i18n.getMessage("phishing"),
-    6: browserAPI.i18n.getMessage("untrusted"),
-    7: browserAPI.i18n.getMessage("adultContent"),
+    0: LangUtil.KNOWN_SAFE,
+    1: LangUtil.FAILED,
+    2: LangUtil.WAITING,
+    3: LangUtil.ALLOWED,
+    4: LangUtil.MALICIOUS,
+    5: LangUtil.PHISHING,
+    6: LangUtil.UNTRUSTED,
+    7: LangUtil.ADULT_CONTENT
 };
 
 ProtectionResult.ResultTypeNameEN = {

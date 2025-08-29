@@ -34,8 +34,11 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         const lines = [];
         let currentLine = '';
 
+        // Handles the Firefox-specific line length discrepancy
         const isFirefox = typeof browser !== 'undefined';
-        let maxLineLength = isFirefox ? 110 : 100;
+        const firefoxLineLength = 110;
+        const otherLineLength = 100;
+        let maxLineLength = isFirefox ? firefoxLineLength : otherLineLength;
 
         for (const part of parts) {
             const nextSegment = currentLine ? `${currentLine}, ${part}` : part;

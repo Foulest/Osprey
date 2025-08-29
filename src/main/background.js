@@ -307,6 +307,8 @@ const browserAPI = typeof browser === 'undefined' ? chrome : browser;
                     // Iterates through the results and update the counts.
                     const fullCount = resultSystemNames.get(tabId).length + 1 || 0;
 
+                    const blockedCounterDelay = 150;
+
                     setTimeout(() => {
                         // Sets the action text to the result count.
                         browserAPI.action.setBadgeText({
@@ -345,7 +347,7 @@ const browserAPI = typeof browser === 'undefined' ? chrome : browser;
                             }).catch(() => {
                             });
                         });
-                    }, 150);
+                    }, blockedCounterDelay);
                 }
             });
         });
@@ -405,12 +407,16 @@ const browserAPI = typeof browser === 'undefined' ? chrome : browser;
                 }
             }
 
+            const defaultCacheExpiration = 86400; // 24 hours in seconds
+
             // Checks and sets the cache expiration time using the policy
             if (policies.CacheExpirationSeconds === undefined) {
-                settings.cacheExpirationSeconds = 86400; // Default to 24 hours
+                settings.cacheExpirationSeconds = defaultCacheExpiration;
             } else {
-                if (typeof policies.CacheExpirationSeconds !== "number" || policies.CacheExpirationSeconds < 60) {
-                    settings.cacheExpirationSeconds = 86400;
+                const minSeconds = 60;
+
+                if (typeof policies.CacheExpirationSeconds !== "number" || policies.CacheExpirationSeconds < minSeconds) {
+                    settings.cacheExpirationSeconds = defaultCacheExpiration;
                     console.debug("Cache expiration time is invalid; using default value.");
                 } else {
                     settings.cacheExpirationSeconds = policies.CacheExpirationSeconds;
@@ -756,10 +762,12 @@ const browserAPI = typeof browser === 'undefined' ? chrome : browser;
             }
 
             case Messages.CONTINUE_TO_SAFETY:
+                const redirectDelay = 200;
+
                 // Redirects to the new tab page
                 setTimeout(() => {
                     sendToNewTabPage(tabId);
-                }, 200);
+                }, redirectDelay);
                 break;
 
             case Messages.REPORT_WEBSITE: {

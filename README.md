@@ -45,9 +45,13 @@ possible. Check out some of our partners below:
 Osprey doesn't just endorse our partnered security providers. We also support businesses that love what we do! Check out
 some of the companies that love Osprey:
 
+###
+
 <p align="center">
   <a href="https://concourse-cloud.com/?utm_source=osprey" title="Concourse Cloud"><img src="https://i.imgur.com/pfAZVvp.png" alt="Concourse Cloud"></a>
 </p>
+
+###
 
 ## Our Mission
 

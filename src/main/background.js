@@ -17,11 +17,13 @@
  */
 "use strict";
 
+// Browser API compatibility between Chrome and Firefox
+const browserAPI = typeof browser === 'undefined' ? chrome : browser;
+
 // noinspection JSDeprecatedSymbols
 (() => {
     // Browser API compatibility between Chrome and Firefox
     const isFirefox = typeof browser !== 'undefined';
-    const browserAPI = isFirefox ? browser : chrome;
     const contextMenuAPI = isFirefox ? browserAPI.menus : browserAPI.contextMenus;
     let supportsManagedPolicies = true;
 

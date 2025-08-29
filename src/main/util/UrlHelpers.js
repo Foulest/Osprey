@@ -20,8 +20,6 @@
 // Object containing helper functions for working with URLs.
 const UrlHelpers = (() => {
 
-    // Browser API compatibility between Chrome and Firefox
-    const browserAPI = typeof browser === 'undefined' ? chrome : browser;
 
     /**
      * Extracts the blocked URL (the website being reported as malicious) from the query parameters of a URL.

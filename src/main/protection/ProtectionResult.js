@@ -33,9 +33,6 @@ class ProtectionResult {
     }
 }
 
-// Browser API compatibility between Chrome and Firefox
-const browserAPI = typeof browser === 'undefined' ? chrome : browser;
-
 ProtectionResult.ResultType = {
     KNOWN_SAFE: 0,
     FAILED: 1,

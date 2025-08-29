@@ -23,9 +23,6 @@ let reportedByText;
 // noinspection FunctionWithInconsistentReturnsJS
 window.WarningSingleton = window.WarningSingleton || (() => {
 
-    // Browser API compatibility between Chrome and Firefox
-    const browserAPI = typeof browser === 'undefined' ? chrome : browser;
-
     /**
      * Wraps system names text to fit within a specified maximum line length.
      *

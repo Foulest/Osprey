@@ -679,6 +679,7 @@
         }
 
         const tabId = sender.tab ? sender.tab.id : null;
+        const redirectDelay = 200;
 
         switch (message.messageType) {
             case Messages.CONTINUE_TO_WEBSITE: {
@@ -760,8 +761,6 @@
             }
 
             case Messages.CONTINUE_TO_SAFETY:
-                const redirectDelay = 200;
-
                 // Redirects to the new tab page
                 setTimeout(() => {
                     sendToNewTabPage(tabId);

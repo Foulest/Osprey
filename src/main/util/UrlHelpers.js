@@ -107,7 +107,7 @@ const UrlHelpers = (() => {
 
             // Sets the search parameters for the block page URL
             blockPageUrl.search = new URLSearchParams([
-                ["url", protectionResult.url],       // The URL of the blocked wesite
+                ["url", protectionResult.url],       // The URL of the blocked website
                 ["curl", continueURL || ''],         // The continue URL
                 ["or", protectionResult.origin],     // The origin of the protection result
                 ["rs", protectionResult.resultType]  // The result type
@@ -193,7 +193,7 @@ const UrlHelpers = (() => {
     /**
      * Normalizes an IP address.
      *
-     * @param hostname - The IP/hostname to check.
+     * @param {string} hostname - The IP/hostname to check.
      * @returns {null|string} - The normalized IP address.
      */
     function normalizeIP(hostname) {

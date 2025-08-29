@@ -162,6 +162,7 @@ section {
     margin-bottom: 15px;
 }
 
+/*noinspection CssBrowserCompatibilityForProperties*/
 .arrow {
     cursor: pointer;
     padding: 0 5px;

@@ -17,6 +17,9 @@
  */
 "use strict";
 
+// Browser API compatibility between Chrome and Firefox
+const browserAPI = typeof browser === 'undefined' ? chrome : browser;
+
 const LangUtil = {
 
     // Global

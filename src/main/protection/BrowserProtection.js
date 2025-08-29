@@ -20,6 +20,9 @@
 // Main object for managing browser protection functionality
 const BrowserProtection = (() => {
 
+    // Browser API compatibility between Chrome and Firefox
+    const browserAPI = typeof browser === 'undefined' ? chrome : browser;
+
     // Delay in milliseconds for non-partnered providers
     const nonPartnerDelay = 100;
 

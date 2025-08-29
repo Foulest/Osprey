@@ -20,6 +20,9 @@
 // Use a global singleton pattern to ensure we don't duplicate resources
 window.PopupSingleton = window.PopupSingleton || (() => {
 
+    // Browser API compatibility between Chrome and Firefox
+    const browserAPI = typeof browser === 'undefined' ? chrome : browser;
+
     // Tracks initialization state
     let isInitialized = false;
 

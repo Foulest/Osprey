@@ -20,6 +20,9 @@
 // Storage utility for interacting with the browser's local storage.
 const StorageUtil = (() => {
 
+    // Browser API compatibility between Chrome and Firefox
+    const browserAPI = typeof browser === 'undefined' ? chrome : browser;
+
     /**
      * Retrieves data from the browser's local storage.
      *

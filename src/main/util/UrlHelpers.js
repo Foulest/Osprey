@@ -20,6 +20,9 @@
 // Object containing helper functions for working with URLs.
 const UrlHelpers = (() => {
 
+    // Browser API compatibility between Chrome and Firefox
+    const browserAPI = typeof browser === 'undefined' ? chrome : browser;
+
     // Base URL for the block page
     const blockPageBaseUrl = browserAPI.runtime.getURL("pages/warning/WarningPage.html");
 

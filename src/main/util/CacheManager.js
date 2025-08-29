@@ -741,7 +741,7 @@ const CacheManager = (() => {
         }
 
         cleanExpiredEntries();
-        updateLocalStorage();
+        updateSessionStorage();
         return results;
     }
 

@@ -152,14 +152,6 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             messageType: Messages.DNS4EU_FAMILY_TOGGLED,
         },
         {
-            origin: ProtectionResult.Origin.NORTON,
-            name: "nortonEnabled",
-            title: ProtectionResult.FullName[this.origin],
-            labelElementId: "nortonStatus",
-            switchElementId: "nortonSwitch",
-            messageType: Messages.NORTON_TOGGLED,
-        },
-        {
             origin: ProtectionResult.Origin.QUAD9,
             name: "quad9Enabled",
             title: ProtectionResult.FullName[this.origin],
@@ -391,13 +383,6 @@ window.PopupSingleton = window.PopupSingleton || (() => {
                 element.alt = LangUtil.DNS4EU_LOGO_ALT;
                 element.setAttribute('title', LangUtil.DNS4EU_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.DNS4EU_LOGO_ALT);
-            });
-
-            // Sets the alt text for the Norton logo
-            document.querySelectorAll('.nortonLogo').forEach(element => {
-                element.alt = LangUtil.NORTON_LOGO_ALT;
-                element.setAttribute('title', LangUtil.NORTON_LOGO_ALT);
-                element.setAttribute('aria-label', LangUtil.NORTON_LOGO_ALT);
             });
 
             // Sets the alt text for the Quad9 logo

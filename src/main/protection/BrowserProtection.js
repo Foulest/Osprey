@@ -1565,95 +1565,6 @@ const BrowserProtection = (() => {
         }
 
         /**
-         * Checks the URL with Norton's API.
-         *
-         * @param {Object} settings - The settings object containing user preferences.
-         */
-        async function checkUrlWithNorton(settings) {
-            // Checks if the provider is enabled
-            if (!settings.nortonEnabled) {
-                return;
-            }
-
-            const origin = ProtectionResult.Origin.NORTON;
-            const shortName = ProtectionResult.ShortName[origin];
-            const cacheName = ProtectionResult.CacheName[origin];
-
-            // Checks if the URL is in the allowed cache
-            if (CacheManager.isUrlInAllowedCache(urlObject, cacheName)) {
-                console.debug(`[${shortName}] URL is already allowed: ${url}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.KNOWN_SAFE, origin));
-                return;
-            }
-
-            // Checks if the URL is in the blocked cache
-            if (CacheManager.isUrlInBlockedCache(urlObject, cacheName)) {
-                console.debug(`[${shortName}] URL is already blocked: ${url}`);
-                callback(new ProtectionResult(url, CacheManager.getBlockedResultType(url, cacheName), origin));
-                return;
-            }
-
-            // Checks if the URL is in the processing cache
-            if (CacheManager.isUrlInProcessingCache(urlObject, cacheName)) {
-                console.debug(`[${shortName}] URL is already processing: ${url}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.WAITING, origin));
-                return;
-            }
-
-            // Adds the URL to the processing cache to prevent duplicate requests
-            CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
-
-            // Adds a small delay for non-partnered providers
-            if (!Settings.allPartnersDisabled(settings)) {
-                await new Promise(resolve => setTimeout(resolve, nonPartnerDelay));
-            }
-
-            const apiUrl = `https://ratings-wrs.norton.com/brief?url=${encodedURL}`;
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: "GET",
-                    signal
-                });
-
-                // Return early if the response is not OK
-                if (!response.ok) {
-                    console.warn(`[${shortName}] Returned early: ${response.status}`);
-                    callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, origin));
-                    return;
-                }
-
-                const data = await response.text();
-
-                // Malicious
-                if (data.includes('r="b"')) {
-                    console.debug(`[${shortName}] Added URL to blocked cache: ${url}`);
-                    CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.MALICIOUS);
-                    callback(new ProtectionResult(url, ProtectionResult.ResultType.MALICIOUS, origin));
-                    return;
-                }
-
-                // Safe/Trusted
-                if (data.includes('r="g"') ||
-                    data.includes('r="r"') ||
-                    data.includes('r="w"') ||
-                    data.includes('r="u"')) {
-                    console.debug(`[${shortName}] Added URL to allowed cache: ${url}`);
-                    CacheManager.addUrlToAllowedCache(urlObject, cacheName);
-                    callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, origin));
-                    return;
-                }
-
-                // Unexpected result
-                console.warn(`[${shortName}] Returned an unexpected result for URL ${url}: ${data}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.ALLOWED, origin));
-            } catch (error) {
-                console.debug(`[${shortName}] Failed to check URL ${url}: ${error}`);
-                callback(new ProtectionResult(url, ProtectionResult.ResultType.FAILED, origin));
-            }
-        }
-
-        /**
          * Checks the URL with Quad9's DNS API.
          *
          * @param {Object} settings - The settings object containing user preferences.
@@ -1770,7 +1681,6 @@ const BrowserProtection = (() => {
             checkUrlWithDNS0Family(settings);
             checkUrlWithDNS4EUSecurity(settings);
             checkUrlWithDNS4EUFamily(settings);
-            checkUrlWithNorton(settings);
             checkUrlWithQuad9(settings);
         });
 

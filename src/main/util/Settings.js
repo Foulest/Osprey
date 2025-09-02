@@ -42,7 +42,6 @@ const Settings = (() => {
         dns0FamilyEnabled: false,
         dns4EUSecurityEnabled: true,
         dns4EUFamilyEnabled: false,
-        nortonEnabled: false,
         quad9Enabled: true,
 
         // General Settings
@@ -183,7 +182,6 @@ const Settings = (() => {
             !settings.dns0FamilyEnabled &&
             !settings.dns4EUSecurityEnabled &&
             !settings.dns4EUFamilyEnabled &&
-            !settings.nortonEnabled &&
             !settings.quad9Enabled;
     }
 

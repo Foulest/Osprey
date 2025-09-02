@@ -380,7 +380,6 @@
         'DNS0FamilyEnabled',
         'DNS4EUSecurityEnabled',
         'DNS4EUFamilyEnabled',
-        'NortonEnabled',
         'Quad9Enabled',
     ];
 
@@ -558,12 +557,6 @@
             if (policies.DNS4EUFamilyEnabled !== undefined) {
                 settings.dns4EUFamilyEnabled = policies.DNS4EUFamilyEnabled;
                 console.debug("DNS4EU Family is managed by system policy.");
-            }
-
-            // Checks and sets the Norton settings using the policy
-            if (policies.NortonEnabled !== undefined) {
-                settings.nortonEnabled = policies.NortonEnabled;
-                console.debug("Norton is managed by system policy.");
             }
 
             // Checks and sets the Quad9 settings using the policy
@@ -878,7 +871,6 @@
             case Messages.DNS0_SECURITY_TOGGLED:
             case Messages.DNS4EU_FAMILY_TOGGLED:
             case Messages.DNS4EU_SECURITY_TOGGLED:
-            case Messages.NORTON_TOGGLED:
             case Messages.PRECISIONSEC_TOGGLED:
             case Messages.QUAD9_TOGGLED:
                 console.info(`${message.title} has been ${message.toggleState ? "enabled" : "disabled"}.`);

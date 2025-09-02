@@ -317,9 +317,6 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                 case ProtectionResult.Origin.DNS4EU_FAMILY:
                     return new URL("https://www.joindns4.eu/for-public#form");
 
-                case ProtectionResult.Origin.NORTON:
-                    return new URL("https://safeweb.norton.com/report?url=" + encodedBlockedUrl);
-
                 case ProtectionResult.Origin.QUAD9:
                     // Old URL: "https://quad9.net/support/contact"
                     // TODO: Needs verification of response from support team.

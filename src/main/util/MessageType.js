@@ -47,6 +47,5 @@ const Messages = {
     DNS0_FAMILY_TOGGLED: "dns0FamilyToggled",
     DNS4EU_SECURITY_TOGGLED: "dns4EUSecurityToggled",
     DNS4EU_FAMILY_TOGGLED: "dns4EUFamilyToggled",
-    NORTON_TOGGLED: "nortonToggled",
     QUAD9_TOGGLED: "quad9Toggled",
 };

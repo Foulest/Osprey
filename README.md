@@ -124,7 +124,6 @@ The following providers are **disabled** by default:
 
 - [ ] **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
 - [ ] [CERT-EE Security DNS](https://ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware/?utm_source=osprey)
-- [ ] [Norton Safe Web](https://safeweb.norton.com/?utm_source=osprey)
 
 #### Adult Content Filters
 

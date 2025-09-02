@@ -60,7 +60,6 @@ const LangUtil = {
     CLOUDFLARE_LOGO_ALT: browserAPI.i18n.getMessage('cloudflareLogoAlt'),
     DNS0_LOGO_ALT: browserAPI.i18n.getMessage('dns0LogoAlt'),
     DNS4EU_LOGO_ALT: browserAPI.i18n.getMessage('dns4EULogoAlt'),
-    NORTON_LOGO_ALT: browserAPI.i18n.getMessage('nortonLogoAlt'),
     QUAD9_LOGO_ALT: browserAPI.i18n.getMessage('quad9LogoAlt'),
 
     // Warning Page

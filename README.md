@@ -188,7 +188,7 @@ For other installations, you can install the extension manually:
 ### Firefox
 
 > **Note:** This only works
-> for [builds of Firefox that allow unsigned addons.](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox/?utm_source=osprey)
+> for [builds of Firefox that allow unsigned addons.](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox)
 
 1. Navigate to the [Actions section](https://github.com/Foulest/Osprey/actions/workflows) and click
    `Compile for Firefox`.

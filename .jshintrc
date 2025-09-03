@@ -3,7 +3,6 @@
   "enforceall": true,
   "es3": false,
   "es5": false,
-
   "-W016": false,
   "-W030": false,
   "-W062": false,

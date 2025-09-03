@@ -661,7 +661,7 @@
 
     // Listener for onUpdated events.
     browserAPI.tabs.onUpdated.addListener((tabId, changeInfo) => {
-        if (changeInfo.url && changeInfo.url.startsWith("blob:")) {
+        if (changeInfo.url?.startsWith("blob:")) {
             changeInfo.tabId = tabId;
             changeInfo.frameId = 0;
 

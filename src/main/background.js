@@ -115,6 +115,9 @@
                 return;
             }
 
+            // Checks if the URL starts with blob:
+            let previouslyBlob = currentUrl.startsWith('blob:');
+
             // Removes the blob: prefix from the URL.
             // Example: turns blob:http://example.com into http://example.com
             currentUrl = currentUrl.replace(/^blob:http/, 'http');
@@ -148,7 +151,8 @@
             }
 
             const protocol = urlObject.protocol;
-            const hostname = urlObject.hostname;
+            let hostname = urlObject.hostname;
+            let noHostname = false;
 
             // Checks for incomplete URLs missing the scheme.
             if (!protocol || currentUrl.startsWith('//')) {
@@ -157,39 +161,54 @@
             }
 
             // Checks for valid protocols.
-            if (!validProtocols.includes(protocol.toLowerCase())) {
+            if (!validProtocols.includes(protocol.toLowerCase()) && !previouslyBlob) {
                 console.debug(`Invalid protocol: ${protocol}; bailing out.`);
                 return;
             }
 
             // Checks for missing hostname.
             if (!hostname) {
-                console.warn(`Missing hostname in URL: ${currentUrl}; bailing out.`);
-                return;
+                console.warn(`Missing hostname in URL: ${currentUrl}; extracting from URL object.`);
+
+                // Extract and set the hostname from the URL by taking the characters
+                // after the first "://" and before the first "/"
+                const parsedHostname = currentUrl.split('://')[1].split('/')[0].split(':')[0];
+
+                if (parsedHostname) {
+                    console.debug(`Extracted hostname: ${parsedHostname}`);
+                    urlObject.hostname = parsedHostname;
+                    hostname = parsedHostname;
+                } else {
+                    console.warn(`Failed to extract hostname from URL: ${currentUrl}; proceeding with empty hostname.`);
+                    noHostname = true;
+                }
             }
 
-            // Checks for missing the suffix.
-            if (!hostname.includes('.') || hostname.endsWith('.')) {
-                console.debug(`Missing suffix in URL: ${currentUrl}; bailing out.`);
-                return;
-            }
+            // This is an extra precaution, should never be true
+            if (!noHostname) {
+                // Checks for missing the suffix.
+                if (!hostname.includes('.') || hostname.endsWith('.')) {
+                    console.debug(`Missing suffix in URL: ${currentUrl}; bailing out.`);
+                    return;
+                }
 
-            // Checks for invalid characters in the hostname.
-            if (!/^[a-zA-Z0-9._-]+$/.test(hostname)) {
-                console.warn(`Hostname contains invalid characters: ${hostname}; bailing out.`);
-                return;
-            }
+                // Checks for invalid characters in the hostname.
+                if (!/^[a-zA-Z0-9._-]+$/.test(hostname)) {
+                    console.warn(`Hostname contains invalid characters: ${hostname}; bailing out.`);
+                    return;
+                }
 
-            // Excludes internal network addresses, loopback, or reserved domains.
-            if (UrlHelpers.isInternalAddress(hostname)) {
-                console.debug(`Local/internal network URL detected: ${currentUrl}; bailing out.`);
-                return;
-            }
+                // Excludes internal network addresses, loopback, or reserved domains.
+                if (UrlHelpers.isInternalAddress(hostname)) {
+                    console.debug(`Local/internal network URL detected: ${currentUrl}; bailing out.`);
+                    return;
+                }
 
-            // Checks if the hostname is in the global allowed cache.
-            if (CacheManager.isPatternInAllowedCache(hostname, "global")) {
-                console.debug(`URL is in the global allowed cache: ${currentUrl}; bailing out.`);
-                return;
+                // Checks if the hostname is in the global allowed cache.
+                if (CacheManager.isPatternInAllowedCache(hostname, "global")) {
+                    console.debug(`URL is in the global allowed cache: ${currentUrl}; bailing out.`);
+                    return;
+                }
             }
 
             // Cancels all pending requests for the main frame navigation.
@@ -637,6 +656,17 @@
         } else if (callback.transitionQualifiers.includes("client_redirect")) {
             console.debug(`[client_redirect] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId}) (type: ${callback.transitionType})`);
             handleNavigation(callback);
+        }
+    });
+
+    // Listener for onUpdated events.
+    browserAPI.tabs.onUpdated.addListener((tabId, changeInfo) => {
+        if (changeInfo.url && changeInfo.url.startsWith("blob:")) {
+            changeInfo.tabId = tabId;
+            changeInfo.frameId = 0;
+
+            console.debug(`[onTabUpdated] ${tabId} updated URL to ${changeInfo.url})`);
+            handleNavigation(changeInfo);
         }
     });
 

@@ -145,39 +145,6 @@ If a provider gives you false positives, report the links to them directly and d
 panel if needed. Osprey is designed to be customizable, so you can enable or disable any of the providers at any time.
 Osprey does not have control over the providers' databases or how they classify URLs.
 
-## Manual Install
-
-> **Note:** You need to have a GitHub account to download artifacts.
-
-You can install Osprey from the web stores listed at the top.
-
-For other installations, you can install the extension manually:
-
-### Chrome/Edge
-
-1. Navigate to the [Actions section](https://github.com/Foulest/Osprey/actions/workflows) and click `Compile for Chrome`
-   or `Compile for Edge`.
-2. Scroll down to the `Artifacts` section and download the artifact file.
-3. Extract the artifact's ZIP file to a folder on your computer.
-4. Navigate to `about://extensions` in your browser.
-5. Enable `Developer mode` and click `Load unpacked`.
-6. Select the downloaded ZIP file and click `Select Folder`.
-
-### Firefox
-
-> **Note:** This only works
-> for [builds of Firefox that allow unsigned addons.](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox)
-
-1. Navigate to the [Actions section](https://github.com/Foulest/Osprey/actions/workflows) and click
-   `Compile for Firefox`.
-2. Scroll down to the `Artifacts` section and download the artifact file.
-3. Extract the artifact's ZIP file to a folder on your computer.
-4. Navigate to `about:addons` in your browser.
-5. Click the gear icon and select `Install Add-on From File`.
-6. Select the downloaded ZIP file and click `Select Folder`.
-
-Osprey should now be installed in your browser.
-
 ## Disclaimer
 
 Osprey: Browser Protection uses the names of third-party DNS and security providers solely for descriptive and

@@ -8,7 +8,7 @@
 
 **Osprey** is a browser extension that protects you from malicious websites.
 
-[LinkedIn Page](https://linkedin.com/company/osprey-browser-protection)
+[LinkedIn Page](https://osprey.ac/linkedin)
 • [Privacy Policy](https://osprey.ac/privacy)
 • [Wiki (FAQs)](https://github.com/Foulest/Osprey/wiki)
 • [MalwareTips](https://malwaretips.com/threads/osprey-browser-protection-discussion-and-updates.135565/?utm_source=osprey)
@@ -70,8 +70,7 @@ telemetry or back-end analytics. Check out our [Privacy Policy here](https://osp
 
 The more protection providers join the project, the better the Osprey threat intelligence platform becomes. If you're
 interested in improving global threat intelligence and want to join the project, feel free to get in contact with me
-at **support@osprey.ac** or via Osprey's
-[LinkedIn Page](https://linkedin.com/company/osprey-browser-protection).
+at **support@osprey.ac** or via Osprey's [LinkedIn Page](https://osprey.ac/linkedin).
 
 ## Warning
 
@@ -154,8 +153,7 @@ Osprey is not affiliated with or endorsed by any of the third-party providers li
 otherwise. Use of their services is subject to their respective terms of use and privacy policies.
 
 If you represent a listed provider and have questions, feedback, or concerns regarding attribution or inclusion, please
-contact me at **support@osprey.ac** or via
-Osprey's [LinkedIn Page](https://linkedin.com/company/osprey-browser-protection).
+contact me at **support@osprey.ac** or via Osprey's [LinkedIn Page](https://osprey.ac/linkedin).
 
 ## Getting Help
 

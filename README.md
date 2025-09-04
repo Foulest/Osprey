@@ -145,28 +145,6 @@ If a provider gives you false positives, report the links to them directly and d
 panel if needed. Osprey is designed to be customizable, so you can enable or disable any of the providers at any time.
 Osprey does not have control over the providers' databases or how they classify URLs.
 
-## Privacy
-
-Osprey strips down each URL of tracking parameters before sending it to any APIs.
-
-For example:
-
-1. If you search for shirts on Amazon and
-   visit: https://www.amazon.com/s?k=shirts&crid=3TOVSW14ZHF8V&sprefix=shirt%2Caps%2C175&ref=nb_sb_noss_1
-2. Osprey will only send https://amazon.com/s to any APIs you have enabled.
-3. If the APIs report that the page is safe to visit, Osprey caches the result for 24 hours.
-4. It will also be cached if you click 'Continue anyway' or 'Always ignore this website' on a blocked website.
-5. As long as a URL is cached, no new network requests will be made for it.
-
-The only data the APIs receive is the stripped-down URL, your user agent, and your IP address. Use a reputable VPN or
-proxy service if you're concerned about IP-related privacy. There are also extensions that mask your user agent, if
-you're so inclined.
-
-As for why Osprey needs to check complete URLs instead of just the domain, many phishing attacks use legitimate
-companies such as Jotform to host their phishing campaigns. If Osprey only checked a website's domain name, it wouldn't
-detect those threats. Osprey only sends your hostname to its various DNS providers, so if you're highly concerned
-about URL page privacy, DNS providers like Quad9 are there for you.
-
 ## Manual Install
 
 > **Note:** You need to have a GitHub account to download artifacts.

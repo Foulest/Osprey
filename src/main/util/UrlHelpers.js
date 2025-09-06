@@ -146,7 +146,15 @@ const UrlHelpers = (() => {
             return true;
         }
 
-        const ip = normalizeIP(hostname);
+        // Check for IPv6 addresses
+        if (hostname.includes(':')) {
+            const h = hostname.toLowerCase();
+
+            // ::1 is loopback, fc00::/7 is unique local, fe80::/10 is link-local
+            return h === '::1' || h.startsWith('fc') || h.startsWith('fd') || h.startsWith('fe80:');
+        }
+
+        const ip = normalizeIP(hostname); // IPv4 dotted‑decimal only
         return ip ? isPrivateIP(ip) : false;
     }
 

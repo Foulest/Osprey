@@ -171,7 +171,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         );
 
         // Sets the reason text to the extracted result
-        domElements.reason.innerText = resultText;
+        domElements.reason.textContent = resultText;
 
         // Extracts the blocked URL from the current page URL
         const blockedUrl = UrlHelpers.extractBlockedUrl(pageUrl);
@@ -181,7 +181,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         const encodedResultTextEN = encodeURIComponent(resultTextEN);
 
         // Sets the URL text to the current page URL
-        domElements.url.innerText = blockedUrl;
+        domElements.url.textContent = blockedUrl;
 
         // Gets the origin information
         const origin = UrlHelpers.extractOrigin(pageUrl);
@@ -189,8 +189,8 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         const systemName = ProtectionResult.FullName[originInt];
 
         // Sets the reported by text
-        domElements.reportedBy.innerText = systemName || "Unknown";
-        reportedByText = domElements.reportedBy.innerText;
+        domElements.reportedBy.textContent = systemName || "Unknown";
+        reportedByText = domElements.reportedBy.textContent;
 
         // Listens for PONG messages to update the reported by count
         browserAPI.runtime.onMessage.addListener(message => {
@@ -199,7 +199,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                 othersText = othersText.replace("___", message.count.toString());
 
                 // Sets the reported by text with the count of other systems
-                domElements.reportedBy.innerText = `${reportedByText} ${othersText}`;
+                domElements.reportedBy.textContent = `${reportedByText} ${othersText}`;
 
                 // Make the innerText hoverable and set the hover text
                 const alsoReportedBy = LangUtil.REPORTED_BY_ALSO;

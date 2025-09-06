@@ -258,8 +258,8 @@ const UrlHelpers = (() => {
 
         let bin = '';
 
-        for (let i = 0; i < packet.length; i++) {
-            bin += String.fromCharCode(packet[i]);
+        for (const byte of packet) {
+            bin += String.fromCharCode(byte);
         }
         return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
     }

@@ -201,10 +201,10 @@ const UrlHelpers = (() => {
     function normalizeUrl(url) {
         const u = typeof url === "string" ? new URL(url) : url;
 
-        // Preserve 'www', lowercase host, drop only a trailing dot
+        // Removes trailing dots from the hostname
         const host = u.hostname.toLowerCase().replace(/\.$/, '');
 
-        // Normalize path (no trailing slash noise)
+        // Removes trailing slashes from the pathname
         const path = u.pathname.replace(/\/+$/, '');
         return host + path;
     }
@@ -239,7 +239,7 @@ const UrlHelpers = (() => {
             const bytes = new TextEncoder().encode(label);
 
             if (bytes.length === 0 || bytes.length > 63) {
-                throw new Error('invalid label length in domain');
+                throw new Error(`Invalid label length in domain ${domain}: ${bytes.length}`);
             }
 
             qname.push(bytes.length, ...bytes);

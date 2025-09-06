@@ -137,6 +137,14 @@
                 }
             }
 
+            // Canonicalize the URL by removing fragments, queries, credentials
+            urlObject.hash = "";
+            urlObject.search = "";
+            urlObject.username = "";
+            urlObject.password = "";
+            urlObject.port = "";
+            currentUrl = (urlObject.origin + urlObject.pathname).replace(/\/+$/, "");
+
             const protocol = urlObject.protocol;
             let hostname = urlObject.hostname;
             let noHostname = false;
@@ -173,19 +181,13 @@
 
             // This is an extra precaution, should never be true
             if (!noHostname) {
-                // Checks for missing the suffix.
-                if (!hostname.includes('.') || hostname.endsWith('.')) {
-                    console.debug(`Missing suffix in URL: ${currentUrl}; bailing out.`);
-                    return;
+                // Accept trailing-dot hosts by normalizing for checks/caches only
+                if (hostname.endsWith('.')) {
+                    hostname = hostname.slice(0, -1);
+                    urlObject.hostname = hostname;
                 }
 
-                // Checks for invalid characters in the hostname.
-                if (!/^[a-zA-Z0-9._-]+$/.test(hostname)) {
-                    console.warn(`Hostname contains invalid characters: ${hostname}; bailing out.`);
-                    return;
-                }
-
-                // Excludes internal network addresses, loopback, or reserved domains.
+                // Excludes local/internal network addresses
                 if (UrlHelpers.isInternalAddress(hostname)) {
                     console.debug(`Local/internal network URL detected: ${currentUrl}; bailing out.`);
                     return;

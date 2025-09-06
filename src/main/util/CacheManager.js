@@ -216,18 +216,6 @@ const CacheManager = (() => {
     }
 
     /**
-     * Normalizes a URL by removing the trailing slash and normalizing the hostname.
-     *
-     * @param url {string|URL} - The URL to normalize, can be a string or a URL object.
-     * @returns {string|string} - The normalized URL as a string.
-     */
-    function normalizeUrl(url) {
-        const urlObject = typeof url === "string" ? new URL(url) : url;
-        let normalized = UrlHelpers.normalizeHostname(urlObject.hostname + urlObject.pathname);
-        return normalized.endsWith("/") ? normalized.slice(0, -1) : normalized;
-    }
-
-    /**
      * Retrieves the allowed cache for a specific provider.
      *
      * @param name {string} - The name of the provider (e.g., "precisionSec").
@@ -301,7 +289,7 @@ const CacheManager = (() => {
         }
 
         try {
-            const key = normalizeUrl(url);
+            const key = UrlHelpers.normalizeUrl(url);
             const map = allowedCaches[name];
 
             if (!map) {
@@ -409,7 +397,7 @@ const CacheManager = (() => {
         }
 
         try {
-            const key = normalizeUrl(url);
+            const key = UrlHelpers.normalizeUrl(url);
             const expTime = Date.now() + expirationTime * 1000;
 
             if (name === "all") {
@@ -473,7 +461,7 @@ const CacheManager = (() => {
         }
 
         try {
-            const key = normalizeUrl(url);
+            const key = UrlHelpers.normalizeUrl(url);
             const map = blockedCaches[name];
 
             if (!map?.has(key)) {
@@ -510,7 +498,7 @@ const CacheManager = (() => {
         }
 
         try {
-            const key = normalizeUrl(url);
+            const key = UrlHelpers.normalizeUrl(url);
             const expTime = Date.now() + expirationTime * 1000;
             const cache = blockedCaches[name];
 
@@ -546,7 +534,7 @@ const CacheManager = (() => {
         }
 
         try {
-            const key = normalizeUrl(url);
+            const key = UrlHelpers.normalizeUrl(url);
             const cache = blockedCaches[name];
 
             if (!cache?.has(key)) {
@@ -582,7 +570,7 @@ const CacheManager = (() => {
         }
 
         try {
-            const key = normalizeUrl(url);
+            const key = UrlHelpers.normalizeUrl(url);
 
             if (name === "all") {
                 Object.values(blockedCaches).forEach(m => m.delete(key));
@@ -614,7 +602,7 @@ const CacheManager = (() => {
         }
 
         try {
-            const key = normalizeUrl(url);
+            const key = UrlHelpers.normalizeUrl(url);
             const map = processingCaches[name];
 
             if (!map) {
@@ -653,7 +641,7 @@ const CacheManager = (() => {
         }
 
         try {
-            const key = normalizeUrl(url);
+            const key = UrlHelpers.normalizeUrl(url);
             const expTime = Date.now() + 60 * 1000; // Expiration for processing cache is 60 seconds
             const entry = {exp: expTime, tabId: tabId};
 
@@ -686,7 +674,7 @@ const CacheManager = (() => {
         }
 
         try {
-            const key = normalizeUrl(url);
+            const key = UrlHelpers.normalizeUrl(url);
 
             if (name === "all") {
                 Object.values(processingCaches).forEach(m => m.delete(key));

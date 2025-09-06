@@ -115,39 +115,26 @@
                 return;
             }
 
-            // Checks if the URL starts with blob:
-            let previouslyBlob = currentUrl.startsWith('blob:');
+            let previouslyBlob = false;
 
-            // Removes the blob: prefix from the URL.
-            // Example: turns blob:http://example.com into http://example.com
-            currentUrl = currentUrl.replace(/^blob:http/, 'http');
+            // Unwrap blob: safely
+            if (urlObject.protocol === 'blob:') {
+                try {
+                    // Drop the "blob:" prefix and parse the inner URL
+                    const inner = new URL(currentUrl.slice(5));
 
-            // Removes www. from the start of the URL.
-            // Example: turns https://www.example.com into https://example.com
-            currentUrl = currentUrl.replace(/https?:\/\/www\./, 'https://');
-
-            // Removes query parameters, fragments (#) and & tags from the URL.
-            // Example: turns https://example.com?param=value#fragment into https://example.com
-            currentUrl = currentUrl.replace(/[?#&].*$/, '');
-
-            // Removes user and pass parameters from the start of the URL.
-            // Example: turns https://user:pass@example.com into https://example.com
-            currentUrl = currentUrl.replace(/https?:\/\/[^/]+@/, 'https://');
-
-            // Removes port numbers from the URL, even if at a page.
-            // Example: turns https://example.com:8080/test.php into https://example.com/test.php
-            currentUrl = currentUrl.replace(/:(\d+)(\/|$)/, '$2');
-
-            // Removes trailing slashes from the URL.
-            // Example: turns https://example.com/ into https://example.com
-            currentUrl = currentUrl.replace(/\/*$/, '');
-
-            // Sanitizes and encodes the URL to handle spaces and special characters.
-            try {
-                currentUrl = encodeURI(currentUrl);
-            } catch (error) {
-                console.warn(`Failed to encode URL: ${currentUrl}; bailing out: ${error}`);
-                return;
+                    if (inner.protocol === 'http:' || inner.protocol === 'https:') {
+                        urlObject = inner;
+                        currentUrl = inner.href;
+                        previouslyBlob = true;
+                    } else {
+                        console.debug(`Non-HTTP(S) blob origin: ${inner.protocol}; bailing out.`);
+                        return;
+                    }
+                } catch (e) {
+                    console.warn(`Invalid blob URL: ${currentUrl}; bailing out: ${e}`);
+                    return;
+                }
             }
 
             const protocol = urlObject.protocol;

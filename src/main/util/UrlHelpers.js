@@ -246,43 +246,51 @@ const UrlHelpers = (() => {
      * @return {string} - The base64url encoded DNS query.
      */
     function encodeDNSQuery(domain, type = 1) {
-        // Creates DNS query components
-        const header = new Uint8Array([
-            0x00, 0x00, // ID (0)
-            0x01, 0x00, // Flags: standard query
-            0x00, 0x01, // QDCOUNT: 1 question
-            0x00, 0x00, // ANCOUNT: 0 answers
-            0x00, 0x00, // NSCOUNT: 0 authority records
-            0x00, 0x00  // ARCOUNT: 0 additional records
-        ]);
-
-        // Encodes domain parts
-        const domainParts = domain.split('.');
-        let domainBuffer = [];
-
-        for (const part of domainParts) {
-            domainBuffer.push(part.length);
-
-            for (let i = 0; i < part.length; i++) {
-                domainBuffer.push(part.charCodeAt(i));
-            }
+        if (typeof domain !== 'string') {
+            throw new Error('domain must be a string');
         }
 
-        // Adds terminating zero
-        domainBuffer.push(0);
+        // Strip trailing dot; DNS wire format carries labels explicitly
+        domain = domain.trim().replace(/\.$/, '');
 
-        // Adds QTYPE and QCLASS
-        domainBuffer.push(0x00, type); // QTYPE (1 = A record)
-        domainBuffer.push(0x00, 0x01); // QCLASS (1 = IN)
+        const header = new Uint8Array([
+            0x00, 0x00, // ID
+            0x01, 0x00, // flags: standard query, recursion desired
+            0x00, 0x01, // QDCOUNT = 1
+            0x00, 0x00, // ANCOUNT
+            0x00, 0x00, // NSCOUNT
+            0x00, 0x00  // ARCOUNT
+        ]);
 
-        // Combines the header and domain parts
-        const dnsPacket = new Uint8Array([...header, ...domainBuffer]);
+        const qname = [];
 
-        // Encodes and returns the results
-        return btoa(String.fromCharCode(...dnsPacket))
-            .replace(/\+/g, '-')
-            .replace(/\//g, '_')
-            .replace(/=*$/, '');
+        for (const label of domain.split('.')) {
+            const bytes = new TextEncoder().encode(label);
+
+            if (bytes.length === 0 || bytes.length > 63) {
+                throw new Error('invalid label length in domain');
+            }
+
+            qname.push(bytes.length, ...bytes);
+        }
+
+        qname.push(0x00); // end of QNAME
+
+        const qtype = new Uint8Array([type >>> 8 & 0xff, type & 0xff]);
+        const qclass = new Uint8Array([0x00, 0x01]); // IN
+        const packet = new Uint8Array(header.length + qname.length + qtype.length + qclass.length);
+
+        packet.set(header, 0);
+        packet.set(qname, header.length);
+        packet.set(qtype, header.length + qname.length);
+        packet.set(qclass, header.length + qname.length + qtype.length);
+
+        let bin = '';
+
+        for (let i = 0; i < packet.length; i++) {
+            bin += String.fromCharCode(packet[i]);
+        }
+        return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
     }
 
     return {

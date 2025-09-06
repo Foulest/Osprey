@@ -179,42 +179,17 @@ const UrlHelpers = (() => {
      * @returns {null|string} - The normalized IP address.
      */
     function normalizeIP(hostname) {
-        // Checks if the input is a decimal IP (e.g. "3232235777")
-        if (/^\d+$/.test(hostname)) {
-            const n = parseInt(hostname, 10);
-            return [
-                n >>> 24 & 255,
-                n >>> 16 & 255,
-                n >>> 8 & 255,
-                n & 255
-            ].join(".");
+        // Accept only dotted‑decimal IPv4 (no octal/hex/decimal-int shorthands)
+        if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(hostname)) {
+            return null;
         }
 
-        const parts = hostname.split(".");
+        const nums = hostname.split('.').map(n => Number(n));
 
-        // Dotted format - may include decimal, octal, or hex
-        if (parts.length === 4) {
-            try {
-                const nums = parts.map(p => {
-                    if (/^0x/i.test(p)) {
-                        return parseInt(p, 16); // hex
-                    } else if (/^0[0-7]*$/.test(p)) {
-                        return parseInt(p, 8); // octal (starts with 0, only digits 0–7)
-                    } else {
-                        return parseInt(p, 10); // decimal
-                    }
-                });
-
-                if (nums.every(n => n >= 0 && n <= 255)) {
-                    return nums.join('.');
-                }
-                return nums.join(".");
-            } catch (error) {
-                console.warn(`Error in checking for dotted quad in URL: ${error}`);
-                return null;
-            }
+        if (nums.some(n => n < 0 || n > 255)) {
+            return null;
         }
-        return null;
+        return nums.join('.');
     }
 
     /**

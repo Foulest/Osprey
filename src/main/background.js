@@ -92,7 +92,7 @@
                 return;
             }
 
-            let {tabId, frameId, url: currentUrl} = navigationDetails;
+            let {tabId, frameId, url: urlString} = navigationDetails;
 
             // Checks if the frame ID is not the main frame
             if (settings.ignoreFrameNavigation && frameId !== 0) {
@@ -109,9 +109,9 @@
             // Parses the URL object
             let urlObject;
             try {
-                urlObject = new URL(currentUrl);
+                urlObject = new URL(urlString);
             } catch (error) {
-                console.warn(`Invalid URL format: ${currentUrl}; bailing out: ${error}`);
+                console.warn(`Invalid URL format: ${urlString}; bailing out: ${error}`);
                 return;
             }
 
@@ -120,19 +120,19 @@
             // Unwraps blob: URLs safely
             if (urlObject.protocol === 'blob:') {
                 try {
-                    const inner = new URL(currentUrl.slice(5));
+                    const inner = new URL(urlString.slice(5));
 
                     // Drops the "blob:" prefix and parses the inner URL
                     if (inner.protocol === 'http:' || inner.protocol === 'https:') {
                         urlObject = inner;
-                        currentUrl = inner.href;
+                        urlString = inner.href;
                         previouslyBlob = true;
                     } else {
                         console.debug(`Non-HTTP(S) blob origin: ${inner.protocol}; bailing out.`);
                         return;
                     }
                 } catch (e) {
-                    console.warn(`Invalid blob URL: ${currentUrl}; bailing out: ${e}`);
+                    console.warn(`Invalid blob URL: ${urlString}; bailing out: ${e}`);
                     return;
                 }
             }
@@ -167,15 +167,15 @@
 
                 // Extracts and sets the hostname from the URL by taking the characters
                 // after the first "://" and before the first "/"
-                const parsedHostname = currentUrl.split('://')[1].split('/')[0].split(':')[0];
+                const parsedHostname = urlString.split('://')[1].split('/')[0].split(':')[0];
 
                 if (parsedHostname) {
                     console.debug(`Extracted hostname: ${parsedHostname}`);
                     urlObject.hostname = parsedHostname;
                     hostname = parsedHostname;
                 } else {
-                    console.warn(`Failed to extract hostname from URL: ${currentUrl}; proceeding with empty hostname.`);
                     noHostname = true;
+                    console.warn(`Failed to extract hostname from URL: ${urlString}; proceeding with empty hostname.`);
                 }
             }
 
@@ -189,13 +189,13 @@
 
                 // Excludes local/internal network addresses
                 if (UrlHelpers.isInternalAddress(hostname)) {
-                    console.debug(`Local/internal network URL detected: ${currentUrl}; bailing out.`);
+                    console.debug(`Local/internal network URL detected: ${urlString}; bailing out.`);
                     return;
                 }
 
                 // Checks if the hostname is in the global allowed cache
                 if (CacheManager.isPatternInAllowedCache(hostname, "global")) {
-                    console.debug(`URL is in the global allowed cache: ${currentUrl}; bailing out.`);
+                    console.debug(`URL is in the global allowed cache: ${urlString}; bailing out.`);
                     return;
                 }
             }
@@ -234,7 +234,7 @@
                     CacheManager.removeUrlFromProcessingCache(urlObject, cacheName);
                 }
 
-                console.info(`[${shortName}] Result for ${currentUrl}: ${resultTypeNameEN} (${duration}ms)`);
+                console.info(`[${shortName}] Result for ${urlString}: ${resultTypeNameEN} (${duration}ms)`);
 
                 if (resultType !== ProtectionResult.ResultType.FAILED &&
                     resultType !== ProtectionResult.ResultType.WAITING &&
@@ -252,7 +252,7 @@
                             const pendingUrl = tab.pendingUrl || tab.url;
 
                             // Checks if the tab is at an extension page
-                            if (!(currentUrl !== pendingUrl && frameId === 0)) {
+                            if (!(urlString !== pendingUrl && frameId === 0)) {
                                 if (pendingUrl.startsWith("chrome-extension:") ||
                                     pendingUrl.startsWith("moz-extension:") ||
                                     pendingUrl.startsWith("extension:")) {
@@ -261,7 +261,7 @@
                                 }
                             }
 
-                            const targetUrl = frameId === 0 ? currentUrl : pendingUrl;
+                            const targetUrl = frameId === 0 ? urlString : pendingUrl;
 
                             if (targetUrl) {
                                 const blockPageUrl = UrlHelpers.getBlockPageUrl(result, frameZeroURLs.get(tabId) === undefined ? result.url : frameZeroURLs.get(tabId));
@@ -279,7 +279,7 @@
                                         type: "basic",
                                         iconUrl: "assets/icons/icon128.png",
                                         title: LangUtil.UNSAFE_WEBSITE_TITLE,
-                                        message: `${LangUtil.URL_LABEL}${currentUrl}\n${LangUtil.REPORTED_BY_LABEL}${fullName}\n${LangUtil.REASON_LABEL}${resultTypeNameEN}`,
+                                        message: `${LangUtil.URL_LABEL}${urlString}\n${LangUtil.REPORTED_BY_LABEL}${fullName}\n${LangUtil.REASON_LABEL}${resultTypeNameEN}`,
                                         priority: 2,
                                     };
 

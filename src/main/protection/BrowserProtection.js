@@ -85,7 +85,7 @@ const BrowserProtection = (() => {
         // Encode the URL components for use in API requests
         const encodedURL = encodeURIComponent(url);
         const encodedURLHostname = encodeURIComponent(urlHostname);
-        const encodedDNSQuery = UrlHelpers.encodeDNSQuery(encodedURLHostname);
+        const encodedDNSQuery = UrlHelpers.encodeDNSQuery(urlHostname);
 
         // The non-filtering URL used for DNS lookups
         const nonFilteringURL = `https://cloudflare-dns.com/dns-query?name=${encodedURLHostname}`;

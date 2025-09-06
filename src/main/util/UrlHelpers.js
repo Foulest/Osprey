@@ -124,35 +124,6 @@ const UrlHelpers = (() => {
     }
 
     /**
-     * Normalizes a hostname by removing "www." if it exists.
-     *
-     * @param {string} hostname - The hostname to normalize.
-     * @returns {string} - The normalized hostname.
-     */
-    function normalizeHostname(hostname) {
-        // Ensures the hostname is a string before proceeding
-        if (typeof hostname !== 'string') {
-            return '';
-        }
-
-        hostname = hostname.trim().toLowerCase();
-
-        // Checks if the hostname is invalid
-        if (!hostname) {
-            return '';
-        }
-
-        // Removes multiple possible www. prefixes
-        while (hostname.startsWith('www.')) {
-            hostname = hostname.substring(4);
-        }
-
-        // Removes trailing dots from the hostname
-        hostname = hostname.replace(/\.*$/, '');
-        return hostname;
-    }
-
-    /**
      * Checks if a hostname is locally hosted.
      *
      * @param hostname - The hostname to check.

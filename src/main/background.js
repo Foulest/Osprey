@@ -688,6 +688,23 @@
             return;
         }
 
+        const privileged = new Set([
+            Messages.CONTINUE_TO_WEBSITE,
+            Messages.CONTINUE_TO_SAFETY,
+            Messages.REPORT_WEBSITE,
+            Messages.ALLOW_WEBSITE
+        ]);
+
+        // Gate privileged actions to the Warning page
+        if (privileged.has(message.messageType)) {
+            const allowedPrefix = browserAPI.runtime.getURL("pages/warning/");
+
+            if (sender.id !== browserAPI.runtime.id || !sender.url?.startsWith(allowedPrefix)) {
+                console.warn(`Blocked privileged message from ${sender.url || 'unknown source'}`);
+                return;
+            }
+        }
+
         const tabId = sender.tab ? sender.tab.id : null;
         const redirectDelay = 200;
 

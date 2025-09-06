@@ -382,7 +382,7 @@ const CacheManager = (() => {
                 if (pattern.startsWith("*.")) {
                     const domain = pattern.slice(2);
 
-                    if (str.endsWith(domain)) {
+                    if (str === domain || str.endsWith("." + domain)) {
                         return true;
                     }
                 } else if (str === pattern) {

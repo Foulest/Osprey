@@ -253,7 +253,6 @@ const UrlHelpers = (() => {
         extractOrigin,
         extractResult,
         getBlockPageUrl,
-        normalizeHostname,
         isInternalAddress,
         encodeDNSQuery
     };

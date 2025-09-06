@@ -86,7 +86,7 @@
      */
     function handleNavigation(navigationDetails) {
         Settings.get(settings => {
-            // Retrieves settings to check if protection is enabled.
+            // Retrieves settings to check if protection is enabled
             if (Settings.allProvidersDisabled(settings)) {
                 console.debug("Protection is disabled; bailing out early.");
                 return;
@@ -94,7 +94,7 @@
 
             let {tabId, frameId, url: currentUrl} = navigationDetails;
 
-            // Checks if the frame ID is not the main frame.
+            // Checks if the frame ID is not the main frame
             if (settings.ignoreFrameNavigation && frameId !== 0) {
                 console.debug(`Ignoring frame navigation: ${currentUrl} #${frameId}; bailing out.`);
                 return;
@@ -106,7 +106,7 @@
                 return;
             }
 
-            // Parses the URL object.
+            // Parses the URL object
             let urlObject;
             try {
                 urlObject = new URL(currentUrl);
@@ -117,12 +117,12 @@
 
             let previouslyBlob = false;
 
-            // Unwrap blob: safely
+            // Unwraps blob: URLs safely
             if (urlObject.protocol === 'blob:') {
                 try {
-                    // Drop the "blob:" prefix and parse the inner URL
                     const inner = new URL(currentUrl.slice(5));
 
+                    // Drops the "blob:" prefix and parses the inner URL
                     if (inner.protocol === 'http:' || inner.protocol === 'https:') {
                         urlObject = inner;
                         currentUrl = inner.href;
@@ -155,7 +155,7 @@
                 return;
             }
 
-            // Checks for valid protocols.
+            // Checks if the URL has a valid protocol (HTTP or HTTPS)
             if (!validProtocols.includes(protocol.toLowerCase()) && !previouslyBlob) {
                 console.debug(`Invalid protocol: ${protocol}; bailing out.`);
                 return;
@@ -165,7 +165,7 @@
             if (!hostname) {
                 console.warn(`Missing hostname in URL: ${currentUrl}; extracting from URL object.`);
 
-                // Extract and set the hostname from the URL by taking the characters
+                // Extracts and sets the hostname from the URL by taking the characters
                 // after the first "://" and before the first "/"
                 const parsedHostname = currentUrl.split('://')[1].split('/')[0].split(':')[0];
 
@@ -193,24 +193,24 @@
                     return;
                 }
 
-                // Checks if the hostname is in the global allowed cache.
+                // Checks if the hostname is in the global allowed cache
                 if (CacheManager.isPatternInAllowedCache(hostname, "global")) {
                     console.debug(`URL is in the global allowed cache: ${currentUrl}; bailing out.`);
                     return;
                 }
             }
 
-            // Cancels all pending requests for the main frame navigation.
+            // Cancels all pending requests for the main frame navigation
             if (frameId === 0) {
                 BrowserProtection.abandonPendingRequests(tabId, "Cancelled by main frame navigation.");
 
-                // Remove all cached keys for the tab.
+                // Removes all cached keys for the tab
                 CacheManager.removeKeysByTabId(tabId);
                 resultSystemNames.delete(tabId);
 
-                // Reset the frame zero URLs for the tab.
+                // Resets the frame zero URLs for the tab
                 frameZeroURLs.delete(tabId);
-                frameZeroURLs.set(tabId, currentUrl);
+                frameZeroURLs.set(tabId, urlString);
             }
 
             let blocked = false;
@@ -218,10 +218,9 @@
             resultSystemNames.set(tabId, []);
 
             const startTime = Date.now();
-            console.info(`Checking URL: ${currentUrl}`);
+            console.info(`Checking URL: ${urlString}`);
 
-            // Checks if the URL is malicious.
-            BrowserProtection.checkIfUrlIsMalicious(tabId, currentUrl, (result) => {
+            // Checks if the URL is malicious
                 const duration = Date.now() - startTime;
                 const cacheName = ProtectionResult.CacheName[result.origin];
                 const fullName = ProtectionResult.FullName[result.origin];
@@ -229,8 +228,8 @@
                 const resultType = result.resultType;
                 const resultTypeNameEN = ProtectionResult.ResultTypeNameEN[resultType];
 
-                // Removes the URL from the system's processing cache on every callback.
-                // Doesn't remove it if the result is still waiting for a response.
+                // Removes the URL from the system's processing cache on every callback
+                // Doesn't remove it if the result is still waiting for a response
                 if (resultType !== ProtectionResult.ResultType.WAITING) {
                     CacheManager.removeUrlFromProcessingCache(urlObject, cacheName);
                 }
@@ -244,7 +243,7 @@
 
                     if (!blocked) {
                         browserAPI.tabs.get(tabId, tab => {
-                            // Check if the tab or tab.url is undefined
+                            // Checks if the tab or tab.url is undefined
                             if (!tab || tab.url === undefined) {
                                 console.debug(`tabs.get(${tabId}) failed '${browserAPI.runtime.lastError?.message}'; bailing out.`);
                                 return;
@@ -310,25 +309,25 @@
                         resultSystemNames.set(tabId, existingSystems);
                     }
 
-                    // Iterates through the results and update the counts.
+                    // Iterates through the results and update the counts
                     const fullCount = resultSystemNames.get(tabId).length + 1 || 0;
 
                     const blockedCounterDelay = 150;
 
                     setTimeout(() => {
-                        // Sets the action text to the result count.
+                        // Sets the action text to the result count
                         browserAPI.action.setBadgeText({
                             text: `${fullCount}`,
                             tabId: tabId
                         });
 
-                        // Sets the action background color to red.
+                        // Sets the action background color to red
                         browserAPI.action.setBadgeBackgroundColor({
                             color: "rgb(255,75,75)",
                             tabId: tabId
                         });
 
-                        // Sets the action text color to white.
+                        // Sets the action text color to white
                         browserAPI.action.setBadgeTextColor({
                             color: "white",
                             tabId: tabId
@@ -336,7 +335,7 @@
 
                         // If the page URL is the block page, send (count - 1)
                         browserAPI.tabs.get(tabId, tab => {
-                            // Check if the tab or tab.url is undefined
+                            // Checks if the tab or tab.url is undefined
                             if (!tab || tab.url === undefined) {
                                 console.debug(`tabs.get(${tabId}) failed '${browserAPI.runtime.lastError?.message}'; bailing out.`);
                                 return;
@@ -345,7 +344,7 @@
                             const isBlockPage = tab.url?.includes("/WarningPage.html");
                             const adjustedCount = isBlockPage && fullCount > 0 ? fullCount - 1 : fullCount;
 
-                            // Sends a PONG message to the content script to update the blocked counter.
+                            // Sends a PONG message to the content script to update the blocked counter
                             browserAPI.tabs.sendMessage(tabId, {
                                 messageType: Messages.BLOCKED_COUNTER_PONG,
                                 count: adjustedCount,
@@ -359,7 +358,7 @@
         });
     }
 
-    // Gather all policy keys needed for managed policies
+    // Sets all policy keys needed for managed policies
     const policyKeys = [
         'DisableContextMenu',
         'DisableNotifications',
@@ -573,7 +572,7 @@
                 console.debug("Quad9 is managed by system policy.");
             }
 
-            // Finally, if there are any updates, update the stored settings in one go.
+            // Updates the stored settings if any policies were applied
             if (Object.keys(settings).length > 0) {
                 Settings.set(settings, () => {
                     console.debug("Updated settings on install: ", settings);
@@ -585,7 +584,7 @@
         createContextMenu();
     });
 
-    // Listens for PING messages from content scripts to get the blocked counter.
+    // Listens for PING messages from content scripts to get the blocked counter
     browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.messageType === Messages.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id !== null) {
             const tabId = sender.tab.id;
@@ -600,7 +599,7 @@
 
             // If the page URL is the block page, sends (count - 1)
             browserAPI.tabs.get(tabId, tab => {
-                // Check if the tab or tab.url is undefined
+                // Checks if the tab or tab.url is undefined
                 if (!tab || tab.url === undefined) {
                     console.debug(`tabs.get(${tabId}) failed '${browserAPI.runtime.lastError?.message}'; bailing out.`);
                     return;
@@ -617,7 +616,7 @@
         }
     });
 
-    // Listener for onRemoved events.
+    // Listens for onRemoved events
     browserAPI.tabs.onRemoved.addListener((tabId, removeInfo) => {
         console.debug(`Tab removed: ${tabId} (windowId: ${removeInfo.windowId}) (isWindowClosing: ${removeInfo.isWindowClosing})`);
 
@@ -629,13 +628,13 @@
         frameZeroURLs.delete(tabId);
     });
 
-    // Listener for onBeforeNavigate events.
+    // Listens for onBeforeNavigate events
     browserAPI.webNavigation.onBeforeNavigate.addListener(callback => {
         console.debug(`[onBeforeNavigate] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
         handleNavigation(callback);
     });
 
-    // Listener for onCommitted events.
+    // Listens for onCommitted events
     browserAPI.webNavigation.onCommitted.addListener(callback => {
         if (callback.transitionQualifiers.includes("server_redirect") &&
             callback.frameId !== 0 &&
@@ -648,7 +647,7 @@
         }
     });
 
-    // Listener for onUpdated events.
+    // Listens for onUpdated events
     browserAPI.tabs.onUpdated.addListener((tabId, changeInfo) => {
         if (changeInfo.url?.startsWith("blob:")) {
             changeInfo.tabId = tabId;
@@ -659,31 +658,31 @@
         }
     });
 
-    // Listener for onCreatedNavigationTarget events.
+    // Listens for onCreatedNavigationTarget events
     browserAPI.webNavigation.onCreatedNavigationTarget.addListener(callback => {
         console.debug(`[onCreatedNavigationTarget] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
         handleNavigation(callback);
     });
 
-    // Listener for onHistoryStateUpdated events.
+    // Listens for onHistoryStateUpdated events
     browserAPI.webNavigation.onHistoryStateUpdated.addListener(callback => {
         console.debug(`[onHistoryStateUpdated] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
         handleNavigation(callback);
     });
 
-    // Listener for onReferenceFragmentUpdated events.
+    // Listens for onReferenceFragmentUpdated events
     browserAPI.webNavigation.onReferenceFragmentUpdated.addListener(callback => {
         console.debug(`[onReferenceFragmentUpdated] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
         handleNavigation(callback);
     });
 
-    // Listener for onTabReplaced events.
+    // Listens for onTabReplaced events
     browserAPI.webNavigation.onTabReplaced.addListener(callback => {
         console.debug(`[onTabReplaced] ${callback.url} (frameId: ${callback.frameId}) (tabId: ${callback.tabId})`);
         handleNavigation(callback);
     });
 
-    // Listener for incoming messages.
+    // Listens for incoming messages
     browserAPI.runtime.onMessage.addListener((message, sender) => {
         // Checks if the message exists and has a valid type
         if (!message?.messageType) {
@@ -815,7 +814,7 @@
                     console.debug(`Navigating to report URL: ${message.reportUrl}`);
                     browserAPI.tabs.create({url: message.reportUrl});
                 } else {
-                    // Ignore the mailto: protocol.
+                    // Ignores the mailto: protocol (used in the warning page)
                     if (reportUrlObject.protocol === "mailto:") {
                         browserAPI.tabs.create({url: message.reportUrl});
                     } else {
@@ -826,7 +825,7 @@
             }
 
             case Messages.ALLOW_WEBSITE: {
-                // Ignores blank blocked URLs.
+                // Ignores blank blocked URLs
                 if (message.blockedUrl === null || message.blockedUrl === "") {
                     console.debug(`Blocked URL is blank.`);
                     break;
@@ -886,6 +885,7 @@
                     return;
                 }
 
+                // Sends the user to the continue URL, or the new tab page on error
                 browserAPI.tabs.update(tabId, {url: message.continueUrl}).catch(error => {
                     console.error(`Failed to update tab ${tabId}:`, error);
                     sendToNewTabPage(tabId);

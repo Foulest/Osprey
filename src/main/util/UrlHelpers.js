@@ -193,6 +193,23 @@ const UrlHelpers = (() => {
     }
 
     /**
+     * Normalizes a URL by removing the trailing slash and normalizing the hostname.
+     *
+     * @param url {string|URL} - The URL to normalize, can be a string or a URL object.
+     * @returns {string|string} - The normalized URL as a string.
+     */
+    function normalizeUrl(url) {
+        const u = typeof url === "string" ? new URL(url) : url;
+
+        // Preserve 'www', lowercase host, drop only a trailing dot
+        const host = u.hostname.toLowerCase().replace(/\.$/, '');
+
+        // Normalize path (no trailing slash noise)
+        const path = u.pathname.replace(/\/+$/, '');
+        return host + path;
+    }
+
+    /**
      * Encodes a DNS query for the given domain and type.
      *
      * @param {string} domain - The domain to encode.
@@ -252,6 +269,7 @@ const UrlHelpers = (() => {
         extractContinueUrl,
         extractOrigin,
         extractResult,
+        normalizeUrl,
         getBlockPageUrl,
         isInternalAddress,
         encodeDNSQuery

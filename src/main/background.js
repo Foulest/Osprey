@@ -96,13 +96,7 @@
 
             // Checks if the frame ID is not the main frame
             if (settings.ignoreFrameNavigation && frameId !== 0) {
-                console.debug(`Ignoring frame navigation: ${currentUrl} #${frameId}; bailing out.`);
-                return;
-            }
-
-            // Checks if the URL is missing or incomplete.
-            if (!currentUrl?.includes('://')) {
-                console.debug(`Incomplete or missing URL: ${currentUrl}; bailing out.`);
+                console.debug(`Ignoring frame navigation: ${urlString} #${frameId}; bailing out.`);
                 return;
             }
 
@@ -115,6 +109,33 @@
                 return;
             }
 
+            // Canonicalizes the URL
+            urlObject.hash = "";
+            urlObject.host = "";
+            urlObject.password = "";
+            urlObject.port = "";
+            urlObject.search = "";
+            urlObject.username = "";
+
+            // Debug info for the URL object
+            console.debug(urlObject);
+
+            let hostname = urlObject.hostname;
+            let protocol = urlObject.protocol;
+
+            // Checks if the URL has a href
+            if (!urlObject.href || urlObject.href.length === 0) {
+                console.debug(`URL has no href: ${urlString}; bailing out.`);
+                return;
+            }
+
+            // Checks if the URL has a protocol
+            if (!protocol || protocol.length === 0) {
+                console.debug(`URL has no protocol: ${urlString}; bailing out.`);
+                return;
+            }
+
+            let hasHostname = true;
             let previouslyBlob = false;
 
             // Unwraps blob: URLs safely
@@ -137,33 +158,20 @@
                 }
             }
 
-            // Canonicalize the URL by removing fragments, queries, credentials
-            urlObject.hash = "";
-            urlObject.search = "";
-            urlObject.username = "";
-            urlObject.password = "";
-            urlObject.port = "";
-            currentUrl = (urlObject.origin + urlObject.pathname).replace(/\/+$/, "");
-
-            const protocol = urlObject.protocol;
-            let hostname = urlObject.hostname;
-            let noHostname = false;
-
-            // Checks for incomplete URLs missing the scheme.
-            if (!protocol || currentUrl.startsWith('//')) {
-                console.warn(`URL is missing a scheme: ${currentUrl}; bailing out.`);
-                return;
-            }
-
             // Checks if the URL has a valid protocol (HTTP or HTTPS)
             if (!validProtocols.includes(protocol.toLowerCase()) && !previouslyBlob) {
                 console.debug(`Invalid protocol: ${protocol}; bailing out.`);
                 return;
             }
 
-            // Checks for missing hostname.
-            if (!hostname) {
-                console.warn(`Missing hostname in URL: ${currentUrl}; extracting from URL object.`);
+            // Checks if the URL has a hostname
+            if (!hostname || hostname.length === 0) {
+                // This behavior is expected in blob: URLs
+                if (previouslyBlob) {
+                    console.debug(`Missing hostname in URL: ${urlString}; extracting from URL object.`);
+                } else {
+                    console.warn(`Missing hostname in URL: ${urlString}; extracting from URL object.`);
+                }
 
                 // Extracts and sets the hostname from the URL by taking the characters
                 // after the first "://" and before the first "/"
@@ -174,16 +182,28 @@
                     urlObject.hostname = parsedHostname;
                     hostname = parsedHostname;
                 } else {
-                    noHostname = true;
                     console.warn(`Failed to extract hostname from URL: ${urlString}; proceeding with empty hostname.`);
+                    hasHostname = false;
                 }
             }
 
-            // This is an extra precaution, should never be true
-            if (!noHostname) {
-                // Accept trailing-dot hosts by normalizing for checks/caches only
+            if (hasHostname) {
+                // Ignores hostnames with no dots at all
+                if (!hostname.includes('.')) {
+                    console.debug(`Hostname has no dots: ${hostname}; bailing out.`);
+                    return;
+                }
+
+                // Ignores hostnames with invalid trailing dot amounts
+                if (hostname.endsWith('..')) {
+                    console.debug(`Hostname has invalid trailing dots: ${hostname}; bailing out.`);
+                    return;
+                }
+
+                // Removes trailing dots from hostname
                 if (hostname.endsWith('.')) {
-                    hostname = hostname.slice(0, -1);
+                    console.debug(`Removing trailing dots from hostname: ${hostname}`);
+                    hostname = hostname.replace(/\.+$/, '');
                     urlObject.hostname = hostname;
                 }
 
@@ -198,6 +218,19 @@
                     console.debug(`URL is in the global allowed cache: ${urlString}; bailing out.`);
                     return;
                 }
+            }
+
+            // Removes trailing slashes from pathname
+            if (urlObject.pathname.endsWith('/') && urlObject.pathname.length > 1) {
+                urlObject.pathname = urlObject.pathname.replace(/\/+$/, '');
+            }
+
+            // Re-builds the URL string, sets it to the href if hostname is missing
+            if (hasHostname) {
+                urlString = "https://" + hostname + urlObject.pathname;
+            } else {
+                console.warn(`Hostname is missing; using full href: ${urlObject.href}`);
+                urlString = urlObject.href;
             }
 
             // Cancels all pending requests for the main frame navigation
@@ -221,6 +254,7 @@
             console.info(`Checking URL: ${urlString}`);
 
             // Checks if the URL is malicious
+            BrowserProtection.checkIfUrlIsMalicious(tabId, urlString, (result) => {
                 const duration = Date.now() - startTime;
                 const cacheName = ProtectionResult.CacheName[result.origin];
                 const fullName = ProtectionResult.FullName[result.origin];

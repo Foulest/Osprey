@@ -30,12 +30,14 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
     function applyOriginVisuals(originInt) {
         const systemName = ProtectionResult.FullName[originInt];
-        const reportedEl = document.getElementById('reportedBy');
+        const reportedByElement = document.getElementById('reportedBy');
 
         // Update the visible "Reported by" label
-        if (reportedEl) {
-            reportedEl.textContent = systemName || "Unknown";
-            reportedByText = reportedEl.textContent;
+        if (reportedByElement) {
+            reportedByElement.textContent = systemName || "Unknown";
+            reportedByText = reportedByElement.textContent;
+        } else {
+            console.warn("'reportedBy' element not found in the DOM.");
         }
     }
 
@@ -94,97 +96,121 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         const resultText = ProtectionResult.ResultTypeName[result];
         const resultTextEN = ProtectionResult.ResultTypeNameEN[result];
 
+        // Cache for DOM elements
+        const domElements = Object.fromEntries(
+            ["reason", "url", "reportedBy", "reportWebsite", "allowWebsite", "backButton", "continueButton",
+                "warningTitle", "recommendation", "details", "urlLabel", "reportedByLabel", "reasonLabel", "logo",
+                "reportBreakpoint"]
+                .map(id => [id, document.getElementById(id)])
+        );
+
         /**
          * Localizes the page by replacing text content with localized messages.
          */
         function localizePage() {
-            // Sets the warning title text
-            const warningTitle = document.getElementById('warningTitle');
-            if (warningTitle) {
-                warningTitle.textContent = LangUtil.WARNING_TITLE;
-            }
+            const bannerText = document.querySelector('.bannerText');
 
-            // Sets the recommendation text
-            const recommendation = document.getElementById('recommendation');
-            if (recommendation) {
-                recommendation.textContent = LangUtil.RECOMMENDATION;
-            }
-
-            // Sets the details text
-            const details = document.getElementById('details');
-            if (details) {
-                details.textContent = LangUtil.DETAILS;
-            }
-
-            // Sets the URL label text
-            const urlLabel = document.getElementById('urlLabel');
-            if (urlLabel) {
-                urlLabel.textContent = LangUtil.URL_LABEL;
-            }
-
-            // Sets the reported by label text
-            const reportedByLabel = document.getElementById('reportedByLabel');
-            if (reportedByLabel) {
-                reportedByLabel.textContent = LangUtil.REPORTED_BY_LABEL;
-            }
-
-            // Sets the reason label text
-            const reasonLabel = document.getElementById('reasonLabel');
-            if (reasonLabel) {
-                reasonLabel.textContent = LangUtil.REASON_LABEL;
-            }
-
-            // Sets the report website button text
-            const reportWebsite = document.getElementById('reportWebsite');
-            if (reportWebsite) {
-                reportWebsite.textContent = LangUtil.REPORT_WEBSITE;
-            }
-
-            // Sets the allow website button text
-            const allowWebsite = document.getElementById('allowWebsite');
-            if (allowWebsite) {
-                allowWebsite.textContent = LangUtil.ALLOW_WEBSITE;
-            }
-
-            // Sets the back button text
-            const backButton = document.getElementById('backButton');
-            if (backButton) {
-                backButton.textContent = LangUtil.BACK_BUTTON;
-            }
-
-            // Sets the continue button text
-            const continueButton = document.getElementById('continueButton');
-            if (continueButton) {
-                continueButton.textContent = LangUtil.CONTINUE_BUTTON;
+            // Sets the banner text
+            if (bannerText) {
+                bannerText.textContent = LangUtil.BANNER_TEXT;
+            } else {
+                console.warn("'bannerText' element not found in the WarningPage DOM.");
             }
 
             // Sets the document title text
-            document.title = LangUtil.TITLE;
+            if (document.title) {
+                document.title = LangUtil.TITLE;
+            } else {
+                console.warn("Document title element not found for the WarningPage.");
+            }
 
-            // Sets the banner text
-            const bannerText = document.querySelector('.bannerText');
-            if (bannerText) {
-                bannerText.textContent = LangUtil.BANNER_TEXT;
+            // Sets the warning title text
+            if (domElements.warningTitle) {
+                domElements.warningTitle.textContent = LangUtil.WARNING_TITLE;
+            } else {
+                console.warn("'warningTitle' element not found in the WarningPage DOM.");
+            }
+
+            // Sets the recommendation text
+            if (domElements.recommendation) {
+                domElements.recommendation.textContent = LangUtil.RECOMMENDATION;
+            } else {
+                console.warn("'recommendation' element not found in the WarningPage DOM.");
+            }
+
+            // Sets the details text
+            if (domElements.details) {
+                domElements.details.textContent = LangUtil.DETAILS;
+            } else {
+                console.warn("'details' element not found in the WarningPage DOM.");
+            }
+
+            // Sets the URL label text
+            if (domElements.urlLabel) {
+                domElements.urlLabel.textContent = LangUtil.URL_LABEL;
+            } else {
+                console.warn("'urlLabel' element not found in the WarningPage DOM.");
+            }
+
+            // Sets the reported by label text
+            if (domElements.reportedByLabel) {
+                domElements.reportedByLabel.textContent = LangUtil.REPORTED_BY_LABEL;
+            } else {
+                console.warn("'reportedByLabel' element not found in the WarningPage DOM.");
+            }
+
+            // Sets the reason label text
+            if (domElements.reasonLabel) {
+                domElements.reasonLabel.textContent = LangUtil.REASON_LABEL;
+            } else {
+                console.warn("'reasonLabel' element not found in the WarningPage DOM.");
+            }
+
+            // Sets the report website button text
+            if (domElements.reportWebsite) {
+                domElements.reportWebsite.textContent = LangUtil.REPORT_WEBSITE;
+            } else {
+                console.warn("'reportWebsite' element not found in the WarningPage DOM.");
+            }
+
+            // Sets the allow website button text
+            if (domElements.allowWebsite) {
+                domElements.allowWebsite.textContent = LangUtil.ALLOW_WEBSITE;
+            } else {
+                console.warn("'allowWebsite' element not found in the WarningPage DOM.");
+            }
+
+            // Sets the back button text
+            if (domElements.backButton) {
+                domElements.backButton.textContent = LangUtil.BACK_BUTTON;
+            } else {
+                console.warn("'backButton' element not found in the WarningPage DOM.");
+            }
+
+            // Sets the continue button text
+            if (domElements.continueButton) {
+                domElements.continueButton.textContent = LangUtil.CONTINUE_BUTTON;
+            } else {
+                console.warn("'continueButton' element not found in the WarningPage DOM.");
             }
 
             // Sets the alt text for the logo
-            const logo = document.getElementById('logo');
-            if (logo) {
-                logo.alt = LangUtil.LOGO_ALT;
+            if (domElements.logo) {
+                domElements.logo.alt = LangUtil.LOGO_ALT;
+            } else {
+                console.warn("'logo' element not found in the WarningPage DOM.");
             }
         }
 
         // Localizes the page content
         localizePage();
 
-        // Cache for DOM elements
-        const domElements = Object.fromEntries(
-            ["reason", "url", "reportedBy", "reportWebsite", "allowWebsite", "backButton", "continueButton"]
-                .map(id => [id, document.getElementById(id)])
-        );
-
         // Sets the reason text to the extracted result
-        domElements.reason.textContent = resultText;
+        if (domElements.reason) {
+            domElements.reason.textContent = resultText;
+        } else {
+            console.warn("'reason' element not found in the WarningPage DOM.");
+        }
 
         // Extracts the blocked URL from the current page URL
         const blockedUrl = UrlHelpers.extractBlockedUrl(pageUrl);
@@ -194,7 +220,11 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         const encodedResultTextEN = encodeURIComponent(resultTextEN);
 
         // Sets the URL text to the current page URL
-        domElements.url.textContent = blockedUrl;
+        if (domElements.url) {
+            domElements.url.textContent = blockedUrl;
+        } else {
+            console.warn("'url' element not found in the WarningPage DOM.");
+        }
 
         // Gets the origin information
         const origin = UrlHelpers.extractOrigin(pageUrl);
@@ -205,21 +235,25 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
         // Listens for PONG messages to update the reported by count
         browserAPI.runtime.onMessage.addListener(message => {
-            if (message.messageType === Messages.BLOCKED_COUNTER_PONG && message.count > 0) {
-                let othersText = LangUtil.REPORTED_BY_OTHERS;
-                othersText = othersText.replace("___", message.count.toString());
+            if (domElements.reportedBy) {
+                if (message.messageType === Messages.BLOCKED_COUNTER_PONG && message.count > 0) {
+                    let othersText = LangUtil.REPORTED_BY_OTHERS;
+                    othersText = othersText.replace("___", message.count.toString());
 
-                // Sets the reported by text with the count of other systems
-                domElements.reportedBy.textContent = `${reportedByText} ${othersText}`;
+                    // Sets the reported by text with the count of other systems
+                    domElements.reportedBy.textContent = `${reportedByText} ${othersText}`;
 
-                // Make the innerText hoverable and set the hover text
-                const alsoReportedBy = LangUtil.REPORTED_BY_ALSO;
-                const wrappedTitle = wrapSystemNamesText(`${alsoReportedBy}${message.systems.join(', ')}`);
-                domElements.reportedBy.title = `${wrappedTitle}`;
-            } else if (message.messageType === Messages.BLOCKED_COUNTER_PONG) {
-                // If there are no "others", revert to base text & clear tooltip
-                domElements.reportedBy.textContent = reportedByText;
-                domElements.reportedBy.title = "";
+                    // Make the innerText hoverable and set the hover text
+                    const alsoReportedBy = LangUtil.REPORTED_BY_ALSO;
+                    const wrappedTitle = wrapSystemNamesText(`${alsoReportedBy}${message.systems.join(', ')}`);
+                    domElements.reportedBy.title = `${wrappedTitle}`;
+                } else if (message.messageType === Messages.BLOCKED_COUNTER_PONG) {
+                    // If there are no "others", revert to base text & clear tooltip
+                    domElements.reportedBy.textContent = reportedByText;
+                    domElements.reportedBy.title = "";
+                }
+            } else {
+                console.warn("'reportedBy' element not found in the WarningPage DOM.");
             }
         });
 
@@ -391,57 +425,95 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         // Extracts the blocked URL from the current page URL
         const continueUrl = UrlHelpers.extractContinueUrl(pageUrl);
 
-        // Adds event listener to "Report this website as safe" button
         Settings.get(settings => {
-            domElements.reportWebsite.addEventListener("click", async () => {
-                if (!settings.hideReportButton) {
-                    await sendMessage(Messages.REPORT_WEBSITE, {
-                        reportUrl: getReportUrl()
-                    });
-                }
-            });
+            // Adds event listener to "Report this website as safe" button
+            if (domElements.reportWebsite) {
+                domElements.reportWebsite.addEventListener("click", async () => {
+                    if (!settings.hideReportButton) {
+                        await sendMessage(Messages.REPORT_WEBSITE, {
+                            reportUrl: getReportUrl()
+                        });
+                    }
+                });
+            } else {
+                console.warn("'reportWebsite' element not found in the WarningPage DOM.");
+            }
 
             // Adds event listener to "Always ignore this website" button
-            domElements.allowWebsite.addEventListener("click", async () => {
-                if (!settings.hideContinueButtons) {
-                    await sendMessage(Messages.ALLOW_WEBSITE, {
-                        blockedUrl: blockedUrl,
-                        continueUrl: continueUrl
-                    });
-                }
-            });
+            if (domElements.allowWebsite) {
+                domElements.allowWebsite.addEventListener("click", async () => {
+                    if (!settings.hideContinueButtons) {
+                        await sendMessage(Messages.ALLOW_WEBSITE, {
+                            blockedUrl: blockedUrl,
+                            continueUrl: continueUrl
+                        });
+                    }
+                });
+            } else {
+                console.warn("'allowWebsite' element not found in the WarningPage DOM.");
+            }
 
             // Adds event listener to "Back to safety" button
-            domElements.backButton.addEventListener("click", async () => {
-                await sendMessage(Messages.CONTINUE_TO_SAFETY, {
-                    blockedUrl: blockedUrl
+            if (domElements.backButton) {
+                domElements.backButton.addEventListener("click", async () => {
+                    await sendMessage(Messages.CONTINUE_TO_SAFETY, {
+                        blockedUrl: blockedUrl
+                    });
                 });
-            });
+            } else {
+                console.warn("'backButton' element not found in the WarningPage DOM.");
+            }
 
             // Adds event listener to "Continue anyway" button
-            domElements.continueButton.addEventListener("click", async () => {
-                if (!settings.hideContinueButtons) {
-                    await sendMessage(Messages.CONTINUE_TO_WEBSITE, {
-                        blockedUrl: blockedUrl,
-                        continueUrl: continueUrl
-                    });
-                }
-            });
+            if (domElements.continueButton) {
+                domElements.continueButton.addEventListener("click", async () => {
+                    if (!settings.hideContinueButtons) {
+                        await sendMessage(Messages.CONTINUE_TO_WEBSITE, {
+                            blockedUrl: blockedUrl,
+                            continueUrl: continueUrl
+                        });
+                    }
+                });
+            } else {
+                console.warn("'continueButton' element not found in the WarningPage DOM.");
+            }
 
             // Handles the hide continue buttons policy
             if (!settings.hideContinueButtons) {
-                document.getElementById("allowWebsite").style.display = "";
-                document.getElementById("continueButton").style.display = "";
+                if (domElements.allowWebsite) {
+                    domElements.allowWebsite.style.display = "";
+                } else {
+                    console.warn("'allowWebsite' element not found in the WarningPage DOM.");
+                }
+
+                if (domElements.continueButton) {
+                    domElements.continueButton.style.display = "";
+                } else {
+                    console.warn("'continueButton' element not found in the WarningPage DOM.");
+                }
             }
 
             // Handles the hide report button policy
             if (!settings.hideReportButton) {
-                document.getElementById("reportWebsite").style.display = "";
-                document.getElementById("reportBreakpoint").style.display = "";
+                if (domElements.reportWebsite) {
+                    domElements.reportWebsite.style.display = "";
+                } else {
+                    console.warn("'reportWebsite' element not found in the WarningPage DOM.");
+                }
+
+                if (domElements.reportBreakpoint) {
+                    domElements.reportBreakpoint.style.display = "";
+                } else {
+                    console.warn("'reportBreakpoint' element not found in the WarningPage DOM.");
+                }
             }
 
             // Handles the back button visibility
-            document.getElementById("backButton").style.display = "";
+            if (domElements.backButton) {
+                domElements.backButton.style.display = "";
+            } else {
+                console.warn("'backButton' element not found in the WarningPage DOM.");
+            }
         });
     }
 

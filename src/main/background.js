@@ -74,10 +74,10 @@
      * Sends a message to open a new tab with the extension's new tab page.
      *
      * @param key - The key to send in the message.
-     * @param cb - Callback function to execute after sending the message.
+     * @param callback - Callback function to execute after sending the message.
      */
-    function getOrder(key, cb) {
-        StorageUtil.getFromSessionStore(key, (order) => cb(Array.isArray(order) ? order : []));
+    function getOrder(key, callback) {
+        StorageUtil.getFromSessionStore(key, (order) => callback(Array.isArray(order) ? order : []));
     }
 
     /**
@@ -85,10 +85,10 @@
      *
      * @param key - The key for the ordered list in session storage.
      * @param order - The array of keys representing the order.
-     * @param cb - Callback function to execute after setting.
+     * @param callback - Callback function to execute after setting.
      */
-    function setOrder(key, order, cb) {
-        StorageUtil.setToSessionStore(key, order, () => typeof cb === 'function' ? cb() : undefined);
+    function setOrder(key, order, callback) {
+        StorageUtil.setToSessionStore(key, order, () => typeof callback === 'function' ? callback() : undefined);
     }
 
     /**
@@ -96,13 +96,15 @@
      *
      * @param orderKey - The key for the ordered list in session storage.
      * @param keyStr - The key to append to the list.
-     * @param cb - Callback function to execute after appending.
+     * @param callback - Callback function to execute after appending.
      */
-    function appendKeyToEnd(orderKey, keyStr, cb) {
+    function appendKeyToEnd(orderKey, keyStr, callback) {
         getOrder(orderKey, (ord) => {
             const next = ord.filter(k => k !== keyStr);
-            next.push(keyStr); // newest at end
-            setOrder(orderKey, next, cb);
+
+            // Append to the end
+            next.push(keyStr);
+            setOrder(orderKey, next, callback);
         });
     }
 
@@ -110,10 +112,10 @@
      * Retrieves all key-value pairs from a map stored in session storage.
      *
      * @param mapKey - The key for the map in session storage.
-     * @param cb - Callback function to execute with the retrieved object.
+     * @param callback - Callback function to execute with the retrieved object.
      */
-    function getAll(mapKey, cb) {
-        StorageUtil.getFromSessionStore(mapKey, (obj) => cb(obj && typeof obj === 'object' ? obj : {}));
+    function getAll(mapKey, callback) {
+        StorageUtil.getFromSessionStore(mapKey, (obj) => callback(obj && typeof obj === 'object' ? obj : {}));
     }
 
     /**
@@ -121,10 +123,10 @@
      *
      * @param mapKey - The key for the map in session storage.
      * @param obj - The object containing key-value pairs to set.
-     * @param cb - Callback function to execute after setting.
+     * @param callback - Callback function to execute after setting.
      */
-    function setAll(mapKey, obj, cb) {
-        StorageUtil.setToSessionStore(mapKey, obj, () => typeof cb === 'function' ? cb() : undefined);
+    function setAll(mapKey, obj, callback) {
+        StorageUtil.setToSessionStore(mapKey, obj, () => typeof callback === 'function' ? callback() : undefined);
     }
 
     /**
@@ -132,10 +134,10 @@
      *
      * @param tabId - The ID of the tab.
      * @param origin - The origin to append.
-     * @param cb - Callback function to execute after appending.
-     * @param attempt - Current attempt count for retrying in
+     * @param callback - Callback function to execute after appending.
+     * @param attempt - Current attempt count for retrying in.
      */
-    function appendResultOrigin(tabId, origin, cb, attempt = 0) {
+    function appendResultOrigin(tabId, origin, callback, attempt = 0) {
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => {
@@ -154,9 +156,9 @@
                     const finalArr = Array.isArray(after?.[k]) ? after[k] : [];
 
                     if (!finalArr.includes(origin) && attempt < 2) {
-                        appendResultOrigin(tabId, origin, cb, attempt + 1);
+                        appendResultOrigin(tabId, origin, callback, attempt + 1);
                     } else {
-                        appendKeyToEnd(STORAGE_KEYS.RESULT_ORIGINS_ORDER, k, cb);
+                        appendKeyToEnd(STORAGE_KEYS.RESULT_ORIGINS_ORDER, k, callback);
                     }
                 });
             });
@@ -167,28 +169,28 @@
      * Retrieves the list of result origins for a specific tab.
      *
      * @param tabId - The ID of the tab.
-     * @param cb - Callback function to execute with the retrieved array.
+     * @param callback - Callback function to execute with the retrieved array.
      */
-    function getResultOrigins(tabId, cb) {
+    function getResultOrigins(tabId, callback) {
         const k = tabKey(tabId);
-        getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => cb(obj[k] || []));
+        getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => callback(obj[k] || []));
     }
 
     /**
      * Sets the list of result origins for a specific tab.
      *
      * @param tabId - The ID of the tab.
-     * @param arr - The array of origins to set.
-     * @param cb - Callback function to execute after setting.
+     * @param origins - The array of origins to set.
+     * @param callback - Callback function to execute after setting.
      */
-    function setResultOrigins(tabId, arr, cb) {
+    function setResultOrigins(tabId, origins, callback) {
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => {
-            obj[k] = Array.isArray(arr) ? arr : [];
+            obj[k] = Array.isArray(origins) ? origins : [];
 
             setAll(STORAGE_KEYS.RESULT_ORIGINS, obj, () =>
-                appendKeyToEnd(STORAGE_KEYS.RESULT_ORIGINS_ORDER, k, cb)
+                appendKeyToEnd(STORAGE_KEYS.RESULT_ORIGINS_ORDER, k, callback)
             );
         });
     }
@@ -197,9 +199,9 @@
      * Deletes the result origins for a specific tab.
      *
      * @param tabId - The ID of the tab.
-     * @param cb - Callback function to execute after deletion.
+     * @param callback - Callback function to execute after deletion.
      */
-    function deleteResultOrigins(tabId, cb) {
+    function deleteResultOrigins(tabId, callback) {
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => {
@@ -209,7 +211,7 @@
 
             setAll(STORAGE_KEYS.RESULT_ORIGINS, obj, () => {
                 getOrder(STORAGE_KEYS.RESULT_ORIGINS_ORDER, (ord) =>
-                    setOrder(STORAGE_KEYS.RESULT_ORIGINS_ORDER, ord.filter(x => x !== k), cb)
+                    setOrder(STORAGE_KEYS.RESULT_ORIGINS_ORDER, ord.filter(x => x !== k), callback)
                 );
             });
         });
@@ -219,11 +221,11 @@
      * Retrieves the frame-zero URL for a specific tab.
      *
      * @param tabId - The ID of the tab.
-     * @param cb - Callback function to execute with the retrieved URL.
+     * @param callback - Callback function to execute with the retrieved URL.
      */
-    function getFrameZeroUrl(tabId, cb) {
+    function getFrameZeroUrl(tabId, callback) {
         const k = tabKey(tabId);
-        getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => cb(obj[k]));
+        getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => callback(obj[k]));
     }
 
     /**
@@ -231,16 +233,16 @@
      *
      * @param tabId - The ID of the tab.
      * @param url - The URL to set.
-     * @param cb - Callback function to execute after setting.
+     * @param callback - Callback function to execute after setting.
      */
-    function setFrameZeroUrl(tabId, url, cb) {
+    function setFrameZeroUrl(tabId, url, callback) {
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => {
             obj[k] = url;
 
             setAll(STORAGE_KEYS.FRAME_ZERO_URLS, obj, () =>
-                appendKeyToEnd(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, k, cb)
+                appendKeyToEnd(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, k, callback)
             );
         });
     }
@@ -249,9 +251,9 @@
      * Deletes the frame-zero URL for a specific tab.
      *
      * @param tabId - The ID of the tab.
-     * @param cb - Callback function to execute after deletion.
+     * @param callback - Callback function to execute after deletion.
      */
-    function deleteFrameZeroUrl(tabId, cb) {
+    function deleteFrameZeroUrl(tabId, callback) {
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => {
@@ -261,7 +263,7 @@
 
             setAll(STORAGE_KEYS.FRAME_ZERO_URLS, obj, () => {
                 getOrder(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, (ord) =>
-                    setOrder(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, ord.filter(x => x !== k), cb)
+                    setOrder(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, ord.filter(x => x !== k), callback)
                 );
             });
         });

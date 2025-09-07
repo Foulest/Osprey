@@ -25,6 +25,28 @@
     const contextMenuAPI = isFirefox ? browserAPI.menus : browserAPI.contextMenus;
     let supportsManagedPolicies = true;
 
+    // Import necessary scripts for functionality
+    try {
+        // This will work in Chrome service workers but throw in Firefox
+        importScripts(
+            // Util
+            "util/StorageUtil.js",
+            "util/Settings.js",
+            "util/UrlHelpers.js",
+            "util/CacheManager.js",
+            "util/MessageType.js",
+            "util/LangUtil.js",
+
+            // Protection
+            "protection/ProtectionResult.js",
+            "protection/BrowserProtection.js"
+        );
+    } catch (error) {
+        // In Firefox, importScripts is not available, but scripts are loaded via background.html
+        console.debug("Running in Firefox or another environment without importScripts");
+        console.debug(`Error: ${error}`);
+    }
+
     // Keys for session storage maps
     const STORAGE_KEYS = {
         RESULT_ORIGINS: 'resultOrigins',
@@ -32,6 +54,19 @@
         FRAME_ZERO_URLS: 'frameZeroUrls',
         FRAME_ZERO_URLS_ORDER: 'frameZeroUrlsOrder',
     };
+
+    // Clears all session storage elements
+    StorageUtil.setToSessionStore(STORAGE_KEYS.RESULT_ORIGINS, {}, () => {
+    });
+    StorageUtil.setToSessionStore(STORAGE_KEYS.RESULT_ORIGINS_ORDER, [], () => {
+    });
+    StorageUtil.setToSessionStore(STORAGE_KEYS.FRAME_ZERO_URLS, {}, () => {
+    });
+    StorageUtil.setToSessionStore(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, [], () => {
+    });
+
+    // Clears the processing cache
+    CacheManager.clearProcessingCache();
 
     const tabKey = (tabId) => `tab_${tabId}`;
 
@@ -276,28 +311,6 @@
             });
         });
     }, CLEANUP_INTERVAL);
-
-    // Import necessary scripts for functionality
-    try {
-        // This will work in Chrome service workers but throw in Firefox
-        importScripts(
-            // Util
-            "util/StorageUtil.js",
-            "util/Settings.js",
-            "util/UrlHelpers.js",
-            "util/CacheManager.js",
-            "util/MessageType.js",
-            "util/LangUtil.js",
-
-            // Protection
-            "protection/ProtectionResult.js",
-            "protection/BrowserProtection.js"
-        );
-    } catch (error) {
-        // In Firefox, importScripts is not available, but scripts are loaded via background.html
-        console.debug("Running in Firefox or another environment without importScripts");
-        console.debug(`Error: ${error}`);
-    }
 
     // List of valid protocols to check for
     const validProtocols = ['http:', 'https:'];

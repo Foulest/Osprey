@@ -26,8 +26,11 @@ window.PopupSingleton = window.PopupSingleton || (() => {
     // Tracks initialization state
     let isInitialized = false;
 
+    // Cache for system elements
+    const systemElements = {};
+
     // Cache for DOM elements
-    const domElements = {};
+    let domElements = {};
 
     // Security systems configuration - only defined once
     const securitySystems = [
@@ -171,13 +174,13 @@ window.PopupSingleton = window.PopupSingleton || (() => {
      * @returns {Object} Object containing the label and switch elements
      */
     function getSystemElements(system) {
-        if (!domElements[system.name]) {
-            domElements[system.name] = {
+        if (!systemElements[system.name]) {
+            systemElements[system.name] = {
                 label: document.getElementById(system.labelElementId),
                 switchElement: document.getElementById(system.switchElementId)
             };
         }
-        return domElements[system.name];
+        return systemElements[system.name];
     }
 
     /**
@@ -201,6 +204,8 @@ window.PopupSingleton = window.PopupSingleton || (() => {
                         elements.label.textContent = isOn ? LangUtil.ON_TEXT : LangUtil.OFF_TEXT;
                     }
                 });
+            } else {
+                console.warn(`'label' element not found for ${system.name} in the PopupPage DOM.`);
             }
 
             if (elements.switchElement) {
@@ -211,6 +216,8 @@ window.PopupSingleton = window.PopupSingleton || (() => {
                     elements.switchElement.classList.remove("on");
                     elements.switchElement.classList.add("off");
                 }
+            } else {
+                console.warn(`'switchElement' not found for ${system.name} in the PopupPage DOM.`);
             }
         });
 
@@ -227,10 +234,28 @@ window.PopupSingleton = window.PopupSingleton || (() => {
      */
     function toggleProtection(system) {
         Settings.get(settings => {
+            // Validates name before sending the message
+            if (!system.name) {
+                console.error(`No name defined for system with origin ${system.origin}; cannot send toggle message.`);
+                return;
+            }
+
             const currentState = settings[system.name];
             const newState = !currentState;
 
             Settings.set({[system.name]: newState}, () => {
+                // Validates messageType before sending the message
+                if (!system.messageType) {
+                    console.error(`No messageType defined for ${system.name}; cannot send toggle message.`);
+                    return;
+                }
+
+                // Validates origin before sending the message
+                if (!system.origin) {
+                    console.error(`No origin defined for ${system.name}; cannot send toggle message.`);
+                    return;
+                }
+
                 updateProtectionStatusUI(system, newState);
 
                 browserAPI.runtime.sendMessage({
@@ -250,7 +275,13 @@ window.PopupSingleton = window.PopupSingleton || (() => {
     function reset() {
         // Removes click handlers from all switches
         securitySystems.forEach(system => {
-            const elements = domElements[system.name];
+            // Validates name before sending the message
+            if (!system.name) {
+                console.error(`No name defined for system with origin ${system.origin}; cannot remove click handler.`);
+                return;
+            }
+
+            const elements = systemElements[system.name];
 
             if (elements?.switchElement) {
                 elements.switchElement.onclick = null;
@@ -265,6 +296,12 @@ window.PopupSingleton = window.PopupSingleton || (() => {
      * Initializes the popup or refresh if already initialized.
      */
     function initialize() {
+        // Initializes the DOM element cache
+        domElements = Object.fromEntries(
+            ["popupTitle", "githubLink", "version", "privacyPolicy", "logo", "prevPage", "nextPage", "pageIndicator"]
+                .map(id => [id, document.getElementById(id)])
+        );
+
         // If already initialized, reset first
         if (isInitialized) {
             reset();
@@ -277,28 +314,20 @@ window.PopupSingleton = window.PopupSingleton || (() => {
          * Localizes the page by replacing text content with localized messages.
          */
         function localizePage() {
-            // Sets the popup title text
-            const popupTitle = document.getElementById('popupTitle');
-            if (popupTitle) {
-                popupTitle.textContent = LangUtil.POPUP_TITLE;
+            const bannerText = document.querySelector('.bannerText');
+
+            // Sets the document title text
+            if (document.title) {
+                document.title = LangUtil.TITLE;
+            } else {
+                console.warn("Document title not found in the PopupPage DOM.");
             }
 
-            // Sets the GitHub link text
-            const githubLink = document.getElementById('githubLink');
-            if (githubLink) {
-                githubLink.textContent = LangUtil.GITHUB_LINK;
-            }
-
-            // Sets the version text
-            const version = document.getElementById('version');
-            if (version) {
-                version.textContent = LangUtil.VERSION;
-            }
-
-            // Sets the Privacy Policy text
-            const privacyPolicy = document.getElementById('privacyPolicy');
-            if (privacyPolicy) {
-                privacyPolicy.textContent = LangUtil.PRIVACY_POLICY;
+            // Sets the banner text
+            if (bannerText) {
+                bannerText.textContent = LangUtil.BANNER_TEXT;
+            } else {
+                console.warn("'bannerText' element not found in the PopupPage DOM.");
             }
 
             // Sets titles and aria-labels for star symbols and partner labels
@@ -306,21 +335,6 @@ window.PopupSingleton = window.PopupSingleton || (() => {
                 element.setAttribute('title', LangUtil.OFFICIAL_PARTNER_TITLE);
                 element.setAttribute('aria-label', LangUtil.OFFICIAL_PARTNER_TITLE);
             });
-
-            // Sets the document title text
-            document.title = LangUtil.TITLE;
-
-            // Sets the banner text
-            const bannerText = document.querySelector('.bannerText');
-            if (bannerText) {
-                bannerText.textContent = LangUtil.BANNER_TEXT;
-            }
-
-            // Sets the alt text for the Osprey logo
-            const logo = document.getElementById('logo');
-            if (logo) {
-                logo.alt = LangUtil.LOGO_ALT;
-            }
 
             // Sets the alt text for the AdGuard logo
             document.querySelectorAll('.adGuardLogo').forEach(element => {
@@ -391,6 +405,41 @@ window.PopupSingleton = window.PopupSingleton || (() => {
                 element.setAttribute('title', LangUtil.QUAD9_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.QUAD9_LOGO_ALT);
             });
+
+            // Sets the alt text for the Osprey logo
+            if (domElements.logo) {
+                domElements.logo.alt = LangUtil.LOGO_ALT;
+            } else {
+                console.warn("'logo' element not found in the PopupPage DOM.");
+            }
+
+            // Sets the popup title text
+            if (domElements.popupTitle) {
+                domElements.popupTitle.textContent = LangUtil.POPUP_TITLE;
+            } else {
+                console.warn("'popupTitle' element not found in the PopupPage DOM.");
+            }
+
+            // Sets the GitHub link text
+            if (domElements.githubLink) {
+                domElements.githubLink.textContent = LangUtil.GITHUB_LINK;
+            } else {
+                console.warn("'githubLink' element not found in the PopupPage DOM.");
+            }
+
+            // Sets the version text
+            if (domElements.version) {
+                domElements.version.textContent = LangUtil.VERSION;
+            } else {
+                console.warn("'version' element not found in the PopupPage DOM.");
+            }
+
+            // Sets the Privacy Policy text
+            if (domElements.privacyPolicy) {
+                domElements.privacyPolicy.textContent = LangUtil.PRIVACY_POLICY;
+            } else {
+                console.warn("'privacyPolicy' element not found in the PopupPage DOM.");
+            }
         }
 
         // Localizes the page content
@@ -410,31 +459,35 @@ window.PopupSingleton = window.PopupSingleton || (() => {
                         }
                     });
                 };
+            } else {
+                console.warn(`'switchElement' not found for ${system.name} in the PopupPage DOM; cannot set click handler.`);
             }
         });
 
         // Loads and applies settings
         Settings.get(settings => {
             securitySystems.forEach(system => {
+                // Validates name before sending the message
+                if (!system.name) {
+                    console.error(`No name defined for system with origin ${system.origin}; cannot apply settings.`);
+                    return;
+                }
+
                 const isEnabled = settings[system.name];
                 updateProtectionStatusUI(system, isEnabled);
             });
         });
 
-        const versionElement = document.getElementById("version");
-
         // Updates the version display
-        if (versionElement) {
+        if (domElements.version) {
             const version = manifest.version;
-            versionElement.textContent += version;
+            domElements.version.textContent += version;
+        } else {
+            console.warn("'version' element not found in the PopupPage DOM.");
         }
 
         // Get all elements with the class 'page'
         const pages = document.querySelectorAll('.page');
-        const prevPage = document.getElementById("prevPage");
-        const nextPage = document.getElementById("nextPage");
-        const pageIndicator = document.getElementById("pageIndicator");
-
         let currentPage = 1;
         const totalPages = pages.length;
 
@@ -456,20 +509,30 @@ window.PopupSingleton = window.PopupSingleton || (() => {
             });
 
             // Updates the page indicator
-            if (pageIndicator) {
-                pageIndicator.textContent = `${currentPage}/${totalPages}`;
+            if (domElements.pageIndicator) {
+                domElements.pageIndicator.textContent = `${currentPage}/${totalPages}`;
+            } else {
+                console.warn("'pageIndicator' element not found in the PopupPage DOM.");
             }
         }
 
-        prevPage.addEventListener("click", function () {
-            currentPage = currentPage === 1 ? totalPages : currentPage - 1;
-            updatePageDisplay();
-        });
+        if (domElements.prevPage) {
+            domElements.prevPage.addEventListener("click", function () {
+                currentPage = currentPage === 1 ? totalPages : currentPage - 1;
+                updatePageDisplay();
+            });
+        } else {
+            console.warn("'prevPage' element not found in the PopupPage DOM.");
+        }
 
-        nextPage.addEventListener("click", function () {
-            currentPage = currentPage === totalPages ? 1 : currentPage + 1;
-            updatePageDisplay();
-        });
+        if (domElements.nextPage) {
+            domElements.nextPage.addEventListener("click", function () {
+                currentPage = currentPage === totalPages ? 1 : currentPage + 1;
+                updatePageDisplay();
+            });
+        } else {
+            console.warn("'nextPage' element not found in the PopupPage DOM.");
+        }
 
         // Initializes the page display
         updatePageDisplay();

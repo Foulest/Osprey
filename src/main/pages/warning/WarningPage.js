@@ -26,6 +26,19 @@ window.WarningSingleton = window.WarningSingleton || (() => {
     // Browser API compatibility between Chrome and Firefox
     const browserAPI = typeof browser === 'undefined' ? chrome : browser;
 
+    let currentOriginInt = ProtectionResult.Origin.UNKNOWN;
+
+    function applyOriginVisuals(originInt) {
+        const systemName = ProtectionResult.FullName[originInt];
+        const reportedEl = document.getElementById('reportedBy');
+
+        // Update the visible "Reported by" label
+        if (reportedEl) {
+            reportedEl.textContent = systemName || "Unknown";
+            reportedByText = reportedEl.textContent;
+        }
+    }
+
     /**
      * Wraps system names text to fit within a specified maximum line length.
      *
@@ -186,11 +199,9 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         // Gets the origin information
         const origin = UrlHelpers.extractOrigin(pageUrl);
         const originInt = parseInt(origin);
-        const systemName = ProtectionResult.FullName[originInt];
 
-        // Sets the reported by text
-        domElements.reportedBy.textContent = systemName || "Unknown";
-        reportedByText = domElements.reportedBy.textContent;
+        currentOriginInt = isNaN(originInt) ? ProtectionResult.Origin.UNKNOWN : originInt;
+        applyOriginVisuals(currentOriginInt);
 
         // Listens for PONG messages to update the reported by count
         browserAPI.runtime.onMessage.addListener(message => {
@@ -205,14 +216,27 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                 const alsoReportedBy = LangUtil.REPORTED_BY_ALSO;
                 const wrappedTitle = wrapSystemNamesText(`${alsoReportedBy}${message.systems.join(', ')}`);
                 domElements.reportedBy.title = `${wrappedTitle}`;
+            } else if (message.messageType === Messages.BLOCKED_COUNTER_PONG) {
+                // If there are no "others", revert to base text & clear tooltip
+                domElements.reportedBy.textContent = reportedByText;
+                domElements.reportedBy.title = "";
             }
         });
 
         // Sends a PING message to get the count of reported websites
-        // TODO: Send this on refresh of tab as well
         browserAPI.runtime.sendMessage({
             messageType: Messages.BLOCKED_COUNTER_PING
         }).catch(() => {
+        });
+
+        // Re-apply icon & re-request counts on refresh / bfcache restore
+        window.addEventListener('pageshow', () => {
+            applyOriginVisuals(currentOriginInt);
+
+            browserAPI.runtime.sendMessage({
+                messageType: Messages.BLOCKED_COUNTER_PING
+            }).catch(() => {
+            });
         });
 
         /**

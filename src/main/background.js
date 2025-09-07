@@ -25,9 +25,212 @@
     const contextMenuAPI = isFirefox ? browserAPI.menus : browserAPI.contextMenus;
     let supportsManagedPolicies = true;
 
-    // Maps for tab-related functions
-    const resultSystemNames = new Map();
-    const frameZeroURLs = new Map();
+    // Keys for session storage maps
+    const STORAGE_KEYS = {
+        RESULT_ORIGINS: 'resultOrigins',
+        RESULT_ORIGINS_ORDER: 'resultOriginsOrder',
+        FRAME_ZERO_URLS: 'frameZeroUrls',
+        FRAME_ZERO_URLS_ORDER: 'frameZeroUrlsOrder',
+    };
+
+    const tabKey = (tabId) => `tab_${tabId}`;
+
+    /**
+     * Sends a message to open a new tab with the extension's new tab page.
+     *
+     * @param key - The key to send in the message.
+     * @param cb - Callback function to execute after sending the message.
+     */
+    function getOrder(key, cb) {
+        StorageUtil.getFromSessionStore(key, (order) => cb(Array.isArray(order) ? order : []));
+    }
+
+    /**
+     * Sets the order of keys in session storage.
+     *
+     * @param key - The key for the ordered list in session storage.
+     * @param order - The array of keys representing the order.
+     * @param cb - Callback function to execute after setting.
+     */
+    function setOrder(key, order, cb) {
+        StorageUtil.setToSessionStore(key, order, () => typeof cb === 'function' ? cb() : undefined);
+    }
+
+    /**
+     * Appends a key to the end of an ordered list stored in session storage.
+     *
+     * @param orderKey - The key for the ordered list in session storage.
+     * @param keyStr - The key to append to the list.
+     * @param cb - Callback function to execute after appending.
+     */
+    function appendKeyToEnd(orderKey, keyStr, cb) {
+        getOrder(orderKey, (ord) => {
+            const next = ord.filter(k => k !== keyStr);
+            next.push(keyStr); // newest at end
+            setOrder(orderKey, next, cb);
+        });
+    }
+
+    /**
+     * Retrieves all key-value pairs from a map stored in session storage.
+     *
+     * @param mapKey - The key for the map in session storage.
+     * @param cb - Callback function to execute with the retrieved object.
+     */
+    function getAll(mapKey, cb) {
+        StorageUtil.getFromSessionStore(mapKey, (obj) => cb(obj && typeof obj === 'object' ? obj : {}));
+    }
+
+    /**
+     * Sets all key-value pairs in a map stored in session storage.
+     *
+     * @param mapKey - The key for the map in session storage.
+     * @param obj - The object containing key-value pairs to set.
+     * @param cb - Callback function to execute after setting.
+     */
+    function setAll(mapKey, obj, cb) {
+        StorageUtil.setToSessionStore(mapKey, obj, () => typeof cb === 'function' ? cb() : undefined);
+    }
+
+    /**
+     * Appends a result origin to the list for a specific tab.
+     *
+     * @param tabId - The ID of the tab.
+     * @param origin - The origin to append.
+     * @param cb - Callback function to execute after appending.
+     * @param attempt - Current attempt count for retrying in
+     */
+    function appendResultOrigin(tabId, origin, cb, attempt = 0) {
+        const k = tabKey(tabId);
+
+        getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => {
+            const next = obj && typeof obj === 'object' ? obj : {};
+            const arr = Array.isArray(next[k]) ? next[k] : [];
+
+            if (!arr.includes(origin)) {
+                arr.push(origin);
+            }
+
+            next[k] = arr;
+
+            setAll(STORAGE_KEYS.RESULT_ORIGINS, next, () => {
+                // Verify after write; if we lost a race, merge and retry (bounded).
+                getAll(STORAGE_KEYS.RESULT_ORIGINS, (after) => {
+                    const finalArr = Array.isArray(after?.[k]) ? after[k] : [];
+
+                    if (!finalArr.includes(origin) && attempt < 2) {
+                        appendResultOrigin(tabId, origin, cb, attempt + 1);
+                    } else {
+                        appendKeyToEnd(STORAGE_KEYS.RESULT_ORIGINS_ORDER, k, cb);
+                    }
+                });
+            });
+        });
+    }
+
+    /**
+     * Retrieves the list of result origins for a specific tab.
+     *
+     * @param tabId - The ID of the tab.
+     * @param cb - Callback function to execute with the retrieved array.
+     */
+    function getResultOrigins(tabId, cb) {
+        const k = tabKey(tabId);
+        getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => cb(obj[k] || []));
+    }
+
+    /**
+     * Sets the list of result origins for a specific tab.
+     *
+     * @param tabId - The ID of the tab.
+     * @param arr - The array of origins to set.
+     * @param cb - Callback function to execute after setting.
+     */
+    function setResultOrigins(tabId, arr, cb) {
+        const k = tabKey(tabId);
+
+        getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => {
+            obj[k] = Array.isArray(arr) ? arr : [];
+
+            setAll(STORAGE_KEYS.RESULT_ORIGINS, obj, () =>
+                appendKeyToEnd(STORAGE_KEYS.RESULT_ORIGINS_ORDER, k, cb)
+            );
+        });
+    }
+
+    /**
+     * Deletes the result origins for a specific tab.
+     *
+     * @param tabId - The ID of the tab.
+     * @param cb - Callback function to execute after deletion.
+     */
+    function deleteResultOrigins(tabId, cb) {
+        const k = tabKey(tabId);
+
+        getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => {
+            if (Object.prototype.hasOwnProperty.call(obj, k)) {
+                delete obj[k];
+            }
+
+            setAll(STORAGE_KEYS.RESULT_ORIGINS, obj, () => {
+                getOrder(STORAGE_KEYS.RESULT_ORIGINS_ORDER, (ord) =>
+                    setOrder(STORAGE_KEYS.RESULT_ORIGINS_ORDER, ord.filter(x => x !== k), cb)
+                );
+            });
+        });
+    }
+
+    /**
+     * Retrieves the frame-zero URL for a specific tab.
+     *
+     * @param tabId - The ID of the tab.
+     * @param cb - Callback function to execute with the retrieved URL.
+     */
+    function getFrameZeroUrl(tabId, cb) {
+        const k = tabKey(tabId);
+        getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => cb(obj[k]));
+    }
+
+    /**
+     * Sets the frame-zero URL for a specific tab.
+     *
+     * @param tabId - The ID of the tab.
+     * @param url - The URL to set.
+     * @param cb - Callback function to execute after setting.
+     */
+    function setFrameZeroUrl(tabId, url, cb) {
+        const k = tabKey(tabId);
+
+        getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => {
+            obj[k] = url;
+
+            setAll(STORAGE_KEYS.FRAME_ZERO_URLS, obj, () =>
+                appendKeyToEnd(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, k, cb)
+            );
+        });
+    }
+
+    /**
+     * Deletes the frame-zero URL for a specific tab.
+     *
+     * @param tabId - The ID of the tab.
+     * @param cb - Callback function to execute after deletion.
+     */
+    function deleteFrameZeroUrl(tabId, cb) {
+        const k = tabKey(tabId);
+
+        getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => {
+            if (Object.prototype.hasOwnProperty.call(obj, k)) {
+                delete obj[k];
+            }
+
+            setAll(STORAGE_KEYS.FRAME_ZERO_URLS, obj, () => {
+                getOrder(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, (ord) =>
+                    setOrder(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, ord.filter(x => x !== k), cb)
+                );
+            });
+        });
+    }
 
     // Interval for map cleanups
     const CLEANUP_INTERVAL = 1800000; // 30 minutes
@@ -35,23 +238,43 @@
     // Cleans up maps automatically
     setInterval(() => {
         console.debug(`Cleaning up maps...`);
-        console.debug(`[BEFORE] resultSystemNames: ${resultSystemNames.keys().toArray().toString()}`);
-        console.debug(`[BEFORE] frameZeroURLs: ${frameZeroURLs.keys().toArray().toString()}`);
 
-        browserAPI.tabs.query({}, tabs => {
-            const activeTabIds = new Set(tabs.map(tab => tab.id));
+        getOrder(STORAGE_KEYS.RESULT_ORIGINS_ORDER, (rOrder) => {
+            getOrder(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, (fOrder) => {
+                browserAPI.tabs.query({}, tabs => {
+                    const activeTabIds = new Set(tabs.map(tab => tab.id));
+                    const activeKeys = new Set([...activeTabIds].map(id => tabKey(id)));
 
-            // Deletes inactive tabs from local maps
-            for (const [tabId] of resultSystemNames) {
-                if (!activeTabIds.has(tabId)) {
-                    resultSystemNames.delete(tabId);
-                    frameZeroURLs.delete(tabId);
-                }
-            }
+                    getAll(STORAGE_KEYS.RESULT_ORIGINS, (rMap) => {
+                        getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (fMap) => {
+                            for (const k of Object.keys(rMap)) {
+                                if (!activeKeys.has(k)) {
+                                    delete rMap[k];
+                                }
+                            }
+
+                            for (const k of Object.keys(fMap)) {
+                                if (!activeKeys.has(k)) {
+                                    delete fMap[k];
+                                }
+                            }
+
+                            const newROrder = (rOrder || []).filter(k => Object.prototype.hasOwnProperty.call(rMap, k));
+                            const newFOrder = (fOrder || []).filter(k => Object.prototype.hasOwnProperty.call(fMap, k));
+
+                            setAll(STORAGE_KEYS.RESULT_ORIGINS, rMap, () => {
+                                setAll(STORAGE_KEYS.FRAME_ZERO_URLS, fMap, () => {
+                                    setOrder(STORAGE_KEYS.RESULT_ORIGINS_ORDER, newROrder, () => {
+                                        setOrder(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, newFOrder, () => {
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
         });
-
-        console.debug(`[AFTER] resultSystemNames: ${resultSystemNames.keys().toArray().toString()}`);
-        console.debug(`[AFTER] frameZeroURLs: ${frameZeroURLs.keys().toArray().toString()}`);
     }, CLEANUP_INTERVAL);
 
     // Import necessary scripts for functionality
@@ -239,16 +462,16 @@
 
                 // Removes all cached keys for the tab
                 CacheManager.removeKeysByTabId(tabId);
-                resultSystemNames.delete(tabId);
 
-                // Resets the frame zero URLs for the tab
-                frameZeroURLs.delete(tabId);
-                frameZeroURLs.set(tabId, urlString);
+                // Resets per-tab session data and push keys to the end (preserves addition order)
+                deleteResultOrigins(tabId);
+                setFrameZeroUrl(tabId, urlString);
             }
 
             let blocked = false;
-            let firstSystemName = "";
-            resultSystemNames.set(tabId, []);
+            let firstOrigin = ProtectionResult.Origin.UNKNOWN;
+
+            setResultOrigins(tabId, []);
 
             const startTime = Date.now();
             console.info(`Checking URL: ${urlString}`);
@@ -298,13 +521,16 @@
                             const targetUrl = frameId === 0 ? urlString : pendingUrl;
 
                             if (targetUrl) {
-                                const blockPageUrl = UrlHelpers.getBlockPageUrl(result, frameZeroURLs.get(tabId) === undefined ? result.url : frameZeroURLs.get(tabId));
+                                // Obtains frame-zero URL from session, falls back to result.url if unavailable
+                                getFrameZeroUrl(tabId, (f0) => {
+                                    const blockPageUrl = UrlHelpers.getBlockPageUrl(result, f0 === undefined ? result.url : f0);
 
-                                // Navigates to the block page
-                                console.debug(`[${shortName}] Navigating to block page: ${blockPageUrl}.`);
-                                browserAPI.tabs.update(tab.id, {url: blockPageUrl}).catch(error => {
-                                    console.error(`Failed to update tab ${tabId}:`, error);
-                                    sendToNewTabPage(tabId);
+                                    // Navigates to the block page
+                                    console.debug(`[${shortName}] Navigating to block page: ${blockPageUrl}.`);
+                                    browserAPI.tabs.update(tab.id, {url: blockPageUrl}).catch(error => {
+                                        console.error(`Failed to update tab ${tabId}:`, error);
+                                        sendToNewTabPage(tabId);
+                                    });
                                 });
 
                                 // Builds the warning notification options
@@ -332,58 +558,42 @@
                         });
                     }
 
-                    // TODO: Migrate this logic to work on refresh
                     blocked = true;
-                    firstSystemName = firstSystemName === "" ? shortName : firstSystemName;
+                    firstOrigin = firstOrigin === ProtectionResult.Origin.UNKNOWN ? result.origin : firstOrigin;
 
-                    // Tracks the system name that flagged the URL
-                    const existingSystems = resultSystemNames.get(tabId) || [];
-                    if (!existingSystems.includes(shortName) && shortName !== firstSystemName) {
-                        existingSystems.push(shortName);
-                        resultSystemNames.set(tabId, existingSystems);
+                    // Tracks additional origins (numbers), excluding the first origin
+                    if (result.origin !== firstOrigin) {
+                        appendResultOrigin(tabId, result.origin);
                     }
-
-                    // Iterates through the results and update the counts
-                    const fullCount = resultSystemNames.get(tabId).length + 1 || 0;
 
                     const blockedCounterDelay = 150;
 
                     setTimeout(() => {
-                        // Sets the action text to the result count
-                        browserAPI.action.setBadgeText({
-                            text: `${fullCount}`,
-                            tabId: tabId
-                        });
+                        getResultOrigins(tabId, (originsArr) => {
+                            const fullCount = (Array.isArray(originsArr) ? originsArr.length : 0) + 1;
 
-                        // Sets the action background color to red
-                        browserAPI.action.setBadgeBackgroundColor({
-                            color: "rgb(255,75,75)",
-                            tabId: tabId
-                        });
+                            // Sets the action text to the result count
+                            browserAPI.action.setBadgeText({text: `${fullCount}`, tabId});
+                            browserAPI.action.setBadgeBackgroundColor({color: "rgb(255,75,75)", tabId});
+                            browserAPI.action.setBadgeTextColor({color: "white", tabId});
 
-                        // Sets the action text color to white
-                        browserAPI.action.setBadgeTextColor({
-                            color: "white",
-                            tabId: tabId
-                        });
+                            // If the page URL is the block page, send (count - 1)
+                            browserAPI.tabs.get(tabId, tab => {
+                                if (!tab || tab.url === undefined) {
+                                    console.debug(`tabs.get(${tabId}) failed '${browserAPI.runtime.lastError?.message}'; bailing out.`);
+                                    return;
+                                }
 
-                        // If the page URL is the block page, send (count - 1)
-                        browserAPI.tabs.get(tabId, tab => {
-                            // Checks if the tab or tab.url is undefined
-                            if (!tab || tab.url === undefined) {
-                                console.debug(`tabs.get(${tabId}) failed '${browserAPI.runtime.lastError?.message}'; bailing out.`);
-                                return;
-                            }
+                                const isBlockPage = tab.url?.includes("/WarningPage.html");
+                                const adjustedCount = isBlockPage && fullCount > 0 ? fullCount - 1 : fullCount;
 
-                            const isBlockPage = tab.url?.includes("/WarningPage.html");
-                            const adjustedCount = isBlockPage && fullCount > 0 ? fullCount - 1 : fullCount;
-
-                            // Sends a PONG message to the content script to update the blocked counter
-                            browserAPI.tabs.sendMessage(tabId, {
-                                messageType: Messages.BLOCKED_COUNTER_PONG,
-                                count: adjustedCount,
-                                systems: resultSystemNames.get(tabId) || []
-                            }).catch(() => {
+                                // Sends a PONG message to the content script to update the blocked counter
+                                browserAPI.tabs.sendMessage(tabId, {
+                                    messageType: Messages.BLOCKED_COUNTER_PONG,
+                                    count: adjustedCount,
+                                    systems: originsArr || [] // array of origin numbers
+                                }).catch(() => {
+                                });
                             });
                         });
                     }, blockedCounterDelay);
@@ -622,32 +832,70 @@
     browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.messageType === Messages.BLOCKED_COUNTER_PING && sender.tab && sender.tab.id !== null) {
             const tabId = sender.tab.id;
+            const k = tabKey(tabId);
 
-            // Ignores tabs that have already been cleaned up
-            if (resultSystemNames.get(tabId) === undefined) {
-                console.debug(`Result system names is undefined for tab ID ${tabId}`);
-                return;
-            }
+            getAll(STORAGE_KEYS.RESULT_ORIGINS, (all) => {
+                if (!Object.prototype.hasOwnProperty.call(all, k)) {
+                    console.debug(`Result origins is undefined for tab ID ${tabId}`);
 
-            const fullCount = resultSystemNames.get(tabId).length + 1 || 0;
+                    // Clears the badge if we don't have state for this tab
+                    browserAPI.action.setBadgeText({text: "", tabId});
 
-            // If the page URL is the block page, sends (count - 1)
-            browserAPI.tabs.get(tabId, tab => {
-                // Checks if the tab or tab.url is undefined
-                if (!tab || tab.url === undefined) {
-                    console.debug(`tabs.get(${tabId}) failed '${browserAPI.runtime.lastError?.message}'; bailing out.`);
+                    // Replies and also broadcasts a PONG so the warning page updates itself
+                    browserAPI.tabs.sendMessage(tabId, {
+                        messageType: Messages.BLOCKED_COUNTER_PONG,
+                        count: 0,
+                        systems: []
+                    }).catch(() => {
+                    });
+
+                    sendResponse({count: 0, systems: []});
                     return;
                 }
 
-                const isBlockPage = tab.url?.includes("/WarningPage.html");
-                const adjustedCount = isBlockPage && fullCount > 0 ? fullCount - 1 : fullCount;
+                const arr = all[k] || [];
+                const fullCount = (arr.length || 0) + 1;
 
-                sendResponse({
-                    count: adjustedCount,
-                    systems: resultSystemNames.get(tabId) || []
+                // Sets the action text to the result count
+                browserAPI.action.setBadgeText({text: `${fullCount}`, tabId});
+                browserAPI.action.setBadgeBackgroundColor({color: "rgb(255,75,75)", tabId});
+                browserAPI.action.setBadgeTextColor({color: "white", tabId});
+
+                // If the page URL is the block page, sends (count - 1)
+                browserAPI.tabs.get(tabId, tab => {
+                    if (!tab || tab.url === undefined) {
+                        console.debug(`tabs.get(${tabId}) failed '${browserAPI.runtime.lastError?.message}'; bailing out.`);
+
+                        // Broadcast PONG even if tabs.get fails, then respond.
+                        browserAPI.tabs.sendMessage(tabId, {
+                            messageType: Messages.BLOCKED_COUNTER_PONG,
+                            count: fullCount,
+                            systems: arr || []
+                        }).catch(() => {
+                        });
+
+                        sendResponse({count: fullCount, systems: arr || []});
+                        return;
+                    }
+
+                    const isBlockPage = tab.url?.includes("/WarningPage.html");
+                    const adjustedCount = isBlockPage && fullCount > 0 ? fullCount - 1 : fullCount;
+
+                    // Broadcasts PONG so the warning page updates after refresh
+                    browserAPI.tabs.sendMessage(tabId, {
+                        messageType: Messages.BLOCKED_COUNTER_PONG,
+                        count: adjustedCount,
+                        systems: arr || []
+                    }).catch(() => {
+                    });
+
+                    // And responds to the original PING as well
+                    sendResponse({count: adjustedCount, systems: arr || []});
                 });
             });
+            return true;
         }
+        return false;
     });
 
     // Listens for onRemoved events
@@ -657,9 +905,9 @@
         // Removes all cached keys for the tab
         CacheManager.removeKeysByTabId(tabId);
 
-        // Removes the tab from local maps
-        resultSystemNames.delete(tabId);
-        frameZeroURLs.delete(tabId);
+        // Removes the tab from session-backed maps
+        deleteResultOrigins(tabId);
+        deleteFrameZeroUrl(tabId);
     });
 
     // Listens for onBeforeNavigate events

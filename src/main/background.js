@@ -277,9 +277,8 @@
         console.debug(`Cleaning up maps...`);
 
         // Prints before text for all maps
-        console.debug(`Before cleanup:`);
-        getAll(STORAGE_KEYS.RESULT_ORIGINS, (rMap) => console.debug(`Result Origins Map:`, rMap));
-        getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (fMap) => console.debug(`Frame Zero URLs Map:`, fMap));
+        getAll(STORAGE_KEYS.RESULT_ORIGINS, (rMap) => console.debug(`[Before] RESULT_ORIGINS:`, rMap));
+        getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (fMap) => console.debug(`[Before] FRAME_ZERO_URLS:`, fMap));
 
         getOrder(STORAGE_KEYS.RESULT_ORIGINS_ORDER, (rOrder) => {
             getOrder(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, (fOrder) => {
@@ -319,9 +318,8 @@
         });
 
         // Prints after text for all maps
-        console.debug(`After cleanup:`);
-        getAll(STORAGE_KEYS.RESULT_ORIGINS, (rMap) => console.debug(`Result Origins Map:`, rMap));
-        getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (fMap) => console.debug(`Frame Zero URLs Map:`, fMap));
+        getAll(STORAGE_KEYS.RESULT_ORIGINS, (rMap) => console.debug(`[After] RESULT_ORIGINS:`, rMap));
+        getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (fMap) => console.debug(`[After] FRAME_ZERO_URLS:`, fMap));
     }, CLEANUP_INTERVAL);
 
     // List of valid protocols to check for

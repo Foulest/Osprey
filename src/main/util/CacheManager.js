@@ -753,7 +753,6 @@ const CacheManager = (() => {
     }
 
     return {
-        getAllowedCache,
         clearAllowedCache,
         clearBlockedCache,
         clearProcessingCache,

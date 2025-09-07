@@ -168,7 +168,7 @@
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => {
-            if (Object.prototype.hasOwnProperty.call(obj, k)) {
+            if (Object.hasOwn(obj, k)) {
                 delete obj[k];
             }
 
@@ -220,7 +220,7 @@
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => {
-            if (Object.prototype.hasOwnProperty.call(obj, k)) {
+            if (Object.hasOwn(obj, k)) {
                 delete obj[k];
             }
 
@@ -259,8 +259,8 @@
                                 }
                             }
 
-                            const newROrder = (rOrder || []).filter(k => Object.prototype.hasOwnProperty.call(rMap, k));
-                            const newFOrder = (fOrder || []).filter(k => Object.prototype.hasOwnProperty.call(fMap, k));
+                            const newROrder = (rOrder || []).filter(k => Object.hasOwn(rMap, k));
+                            const newFOrder = (fOrder || []).filter(k => Object.hasOwn(fMap, k));
 
                             setAll(STORAGE_KEYS.RESULT_ORIGINS, rMap, () => {
                                 setAll(STORAGE_KEYS.FRAME_ZERO_URLS, fMap, () => {
@@ -835,7 +835,7 @@
             const k = tabKey(tabId);
 
             getAll(STORAGE_KEYS.RESULT_ORIGINS, (all) => {
-                if (!Object.prototype.hasOwnProperty.call(all, k)) {
+                if (!Object.hasOwn(all, k)) {
                     console.debug(`Result origins is undefined for tab ID ${tabId}`);
 
                     // Clears the badge if we don't have state for this tab

@@ -26,18 +26,26 @@ window.WarningSingleton = window.WarningSingleton || (() => {
     // Browser API compatibility between Chrome and Firefox
     const browserAPI = typeof browser === 'undefined' ? chrome : browser;
 
+    // The current origin integer, initialized to UNKNOWN
     let currentOriginInt = ProtectionResult.Origin.UNKNOWN;
 
+    // Cache for DOM elements
+    let domElements = {};
+
+    /**
+     * Applies visual elements based on the origin of the protection result.
+     *
+     * @param originInt - The integer representing the origin of the protection result.
+     */
     function applyOriginVisuals(originInt) {
         const systemName = ProtectionResult.FullName[originInt];
-        const reportedByElement = document.getElementById('reportedBy');
 
         // Update the visible "Reported by" label
-        if (reportedByElement) {
-            reportedByElement.textContent = systemName || "Unknown";
-            reportedByText = reportedByElement.textContent;
+        if (domElements.reportedBy) {
+            domElements.reportedBy.textContent = systemName || "Unknown";
+            reportedByText = domElements.reportedBy.textContent;
         } else {
-            console.warn("'reportedBy' element not found in the DOM.");
+            console.warn("'reportedBy' element not found in the WarningPage DOM.");
         }
     }
 
@@ -82,6 +90,14 @@ window.WarningSingleton = window.WarningSingleton || (() => {
      * Initialize the popup or refresh if already initialized.
      */
     function initialize() {
+        // Initializes the DOM element cache
+        domElements = Object.fromEntries(
+            ["reason", "url", "reportedBy", "reportWebsite", "allowWebsite", "backButton", "continueButton",
+                "warningTitle", "recommendation", "details", "urlLabel", "reportedByLabel", "reasonLabel", "logo",
+                "reportBreakpoint"]
+                .map(id => [id, document.getElementById(id)])
+        );
+
         // Extracts the threat code from the current page URL
         const pageUrl = window.document.URL;
         const result = UrlHelpers.extractResult(pageUrl);
@@ -96,32 +112,24 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         const resultText = ProtectionResult.ResultTypeName[result];
         const resultTextEN = ProtectionResult.ResultTypeNameEN[result];
 
-        // Cache for DOM elements
-        const domElements = Object.fromEntries(
-            ["reason", "url", "reportedBy", "reportWebsite", "allowWebsite", "backButton", "continueButton",
-                "warningTitle", "recommendation", "details", "urlLabel", "reportedByLabel", "reasonLabel", "logo",
-                "reportBreakpoint"]
-                .map(id => [id, document.getElementById(id)])
-        );
-
         /**
          * Localizes the page by replacing text content with localized messages.
          */
         function localizePage() {
             const bannerText = document.querySelector('.bannerText');
 
-            // Sets the banner text
-            if (bannerText) {
-                bannerText.textContent = LangUtil.BANNER_TEXT;
-            } else {
-                console.warn("'bannerText' element not found in the WarningPage DOM.");
-            }
-
             // Sets the document title text
             if (document.title) {
                 document.title = LangUtil.TITLE;
             } else {
                 console.warn("Document title element not found for the WarningPage.");
+            }
+
+            // Sets the banner text
+            if (bannerText) {
+                bannerText.textContent = LangUtil.BANNER_TEXT;
+            } else {
+                console.warn("'bannerText' element not found in the WarningPage DOM.");
             }
 
             // Sets the warning title text

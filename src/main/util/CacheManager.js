@@ -216,23 +216,6 @@ const CacheManager = (() => {
     }
 
     /**
-     * Retrieves the allowed cache for a specific provider.
-     *
-     * @param name {string} - The name of the provider (e.g., "precisionSec").
-     * @returns {*|null} - Returns the allowed cache map for the provider, or null if not found.
-     */
-    function getAllowedCache(name) {
-        // Returns if the allowed cache is not defined.
-        if (!allowedCaches || typeof allowedCaches !== 'object') {
-            console.warn('allowedCache is not defined or not an object');
-            return null;
-        }
-
-        // Returns the specific cache for the given name
-        return allowedCaches[name] || null;
-    }
-
-    /**
      * Clears all allowed caches.
      */
     function clearAllowedCache() {

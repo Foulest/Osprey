@@ -233,7 +233,7 @@
     }
 
     // Interval for map cleanups
-    const CLEANUP_INTERVAL = 1800000; // 30 minutes
+    const CLEANUP_INTERVAL = 300000; // 5 minutes
 
     // Cleans up maps automatically
     setInterval(() => {

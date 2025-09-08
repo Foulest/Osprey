@@ -88,8 +88,8 @@ const BrowserProtection = (() => {
         // Validates the URL format
         try {
             urlObject = new URL(urlString);
-        } catch (ignored) {
-            console.warn(`Invalid URL format: ${urlString}`);
+        } catch (error) {
+            console.warn(`Invalid URL format: ${error.message}`);
             return;
         }
 

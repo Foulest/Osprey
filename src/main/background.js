@@ -351,7 +351,7 @@
             try {
                 urlObject = new URL(urlString);
             } catch (error) {
-                console.warn(`Invalid URL format: ${urlString}; bailing out: ${error}`);
+                console.warn(`Invalid URL format: ${error.message}`);
                 return;
             }
 

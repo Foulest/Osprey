@@ -40,6 +40,11 @@ const BrowserProtection = (() => {
     function cleanupTabControllers() {
         // Remove controllers for tabs that no longer exist
         browserAPI.tabs.query({}, tabs => {
+            if (browserAPI.runtime.lastError) {
+                console.debug(`tabs.query failed: ${browserAPI.runtime.lastError.message}`);
+                return;
+            }
+
             const activeTabIds = new Set(tabs.map(tab => tab.id));
 
             for (const tabId of tabAbortControllers.keys()) {
@@ -72,30 +77,52 @@ const BrowserProtection = (() => {
      * @param {function} callback - The callback function to handle the result.
      */
     function checkIfUrlIsMalicious(tabId, urlString, callback) {
-        // Return early if any of the parameters are missing
+        // Returns early if any of the parameters are missing
         if (!tabId || !urlString || !callback) {
-            console.warn(`[BrowserProtection] Missing parameters: tabId=${tabId}, url=${urlString}, callback=${callback}`);
+            console.warn(`Missing parameters: tabId=${tabId}, url=${urlString}, callback=${callback}`);
             return;
         }
 
-        // Parse the URL to extract the hostname and pathname
-        const urlObject = new URL(urlString);
-        const urlHostname = urlObject.hostname;
+        let urlObject;
 
-        // Encode the URL components for use in API requests
+        // Validates the URL format
+        try {
+            urlObject = new URL(urlString);
+        } catch (ignored) {
+            console.warn(`Invalid URL format: ${urlString}`);
+            return;
+        }
+
+        // Returns early if the URL is missing a hostname
+        if (!urlObject.hostname) {
+            console.warn(`Invalid URL, missing hostname: ${urlString}`);
+            return;
+        }
+
+        const urlHostname = urlObject.hostname;
+        let encodedDNSQuery;
+
+        // Validates and encodes the DNS query
+        try {
+            encodedDNSQuery = UrlHelpers.encodeDNSQuery(urlHostname);
+        } catch (error) {
+            console.warn(`Failed to encode DNS query for hostname ${urlHostname}: ${error.message}`);
+            return;
+        }
+
+        // Encodes the URL components for use in API requests
         const encodedURL = encodeURIComponent(urlString);
         const encodedURLHostname = encodeURIComponent(urlHostname);
-        const encodedDNSQuery = UrlHelpers.encodeDNSQuery(urlHostname);
 
         // The non-filtering URL used for DNS lookups
         const nonFilteringURL = `https://cloudflare-dns.com/dns-query?name=${encodedURLHostname}`;
 
-        // Ensure there is an AbortController for the tab
+        // Ensures there is an AbortController for the tab
         if (!tabAbortControllers.has(tabId)) {
             tabAbortControllers.set(tabId, new AbortController());
         }
 
-        // Get the signal from the current AbortController
+        // Gets the signal from the current AbortController
         const signal = tabAbortControllers.get(tabId).signal;
 
         /**
@@ -861,7 +888,7 @@ const BrowserProtection = (() => {
                     nonFilteringData.Answer.length > 0) {
 
                     // And the data matches this specific pattern, it's blocked.
-                    if (filteringData[3] === 131) {
+                    if (filteringData.length >= 4 && filteringData[3] === 131) {
                         console.debug(`[${shortName}] Added URL to blocked cache: ${urlString}`);
                         CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.MALICIOUS);
                         callback(new ProtectionResult(urlString, ProtectionResult.ResultType.MALICIOUS, origin));
@@ -958,7 +985,7 @@ const BrowserProtection = (() => {
                     nonFilteringData.Answer.length > 0) {
 
                     // And the data matches this specific pattern, it's blocked.
-                    if (filteringData[3] === 131) {
+                    if (filteringData.length >= 4 && filteringData[3] === 131) {
                         console.debug(`[${shortName}] Added URL to blocked cache: ${urlString}`);
                         CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.ADULT_CONTENT);
                         callback(new ProtectionResult(urlString, ProtectionResult.ResultType.ADULT_CONTENT, origin));
@@ -1643,7 +1670,7 @@ const BrowserProtection = (() => {
                     nonFilteringData.Answer.length > 0) {
 
                     // And the data matches this specific pattern, it's blocked.
-                    if (filteringData[3] === 3) {
+                    if (filteringData.length >= 4 && filteringData[3] === 3) {
                         console.debug(`[${shortName}] Added URL to blocked cache: ${urlString}`);
                         CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.MALICIOUS);
                         callback(new ProtectionResult(urlString, ProtectionResult.ResultType.MALICIOUS, origin));

@@ -30,10 +30,19 @@ const StorageUtil = (() => {
      * @param {Function} callback - The function to call with the retrieved value.
      */
     function getFromLocalStore(key, callback) {
+        // Ensures the callback is a function
+        const fixedCallback = typeof callback === 'function' ? callback : () => {
+        };
+
+        // Ensures the key is a string
+        if (typeof key !== 'string') {
+            throw new Error('Key must be a string');
+        }
+
         // Checks if local storage is supported
         if (!browserAPI?.storage?.local) {
             console.error('Local storage API not available');
-            callback(null);
+            fixedCallback(null);
             return;
         }
 
@@ -41,7 +50,7 @@ const StorageUtil = (() => {
             // Handles errors in the storage process
             if (browserAPI.runtime.lastError) {
                 console.error('StorageUtil error:', browserAPI.runtime.lastError);
-                callback(null);
+                fixedCallback(null);
                 return;
             }
 
@@ -49,7 +58,7 @@ const StorageUtil = (() => {
             let value = result?.[key];
 
             // Calls the callback function with the retrieved value.
-            callback(value);
+            fixedCallback(value);
         });
     }
 
@@ -61,21 +70,26 @@ const StorageUtil = (() => {
      * @param {Function} [callback] - Optional callback to call after saving.
      */
     function setToLocalStore(key, value, callback) {
-        // Checks if local storage is supported
-        if (!browserAPI?.storage?.local) {
-            console.error('Local storage API not available');
-            callback(null);
-            return;
-        }
+        // Ensures the callback is a function
+        const fixedCallback = typeof callback === 'function' ? callback : () => {
+        };
 
         // Checks if the key is a string
         if (typeof key !== 'string') {
             throw new Error('Key must be a string');
         }
 
-        // The final callback variable
-        const finalCallback = typeof callback === 'function' ? callback : () => {
-        };
+        // Checks if the value is defined
+        if (typeof value === 'undefined') {
+            throw new Error('Value must be defined');
+        }
+
+        // Checks if local storage is supported
+        if (!browserAPI?.storage?.local) {
+            console.error('Local storage API not available');
+            fixedCallback(null);
+            return;
+        }
 
         // Creates an object to hold the key-value pair
         let data = {};
@@ -85,10 +99,12 @@ const StorageUtil = (() => {
             // Handles errors in the storage process
             if (browserAPI.runtime.lastError) {
                 console.error('StorageUtil error:', browserAPI.runtime.lastError);
+                fixedCallback(null);
+                return;
             }
 
             // Completes the callback
-            finalCallback();
+            fixedCallback();
         });
     }
 
@@ -99,10 +115,19 @@ const StorageUtil = (() => {
      * @param {Function} callback - The function to call with the retrieved value.
      */
     function getFromSessionStore(key, callback) {
+        // Ensures the callback is a function
+        const fixedCallback = typeof callback === 'function' ? callback : () => {
+        };
+
+        // Checks if the key is a string
+        if (typeof key !== 'string') {
+            throw new Error('Key must be a string');
+        }
+
         // Checks if session storage is supported
         if (!browserAPI?.storage?.session) {
             console.error('Session storage API not available');
-            callback(null);
+            fixedCallback(null);
             return;
         }
 
@@ -110,7 +135,7 @@ const StorageUtil = (() => {
             // Handles errors in the storage process
             if (browserAPI.runtime.lastError) {
                 console.error('StorageUtil error:', browserAPI.runtime.lastError);
-                callback(null);
+                fixedCallback(null);
                 return;
             }
 
@@ -118,7 +143,7 @@ const StorageUtil = (() => {
             let value = result?.[key];
 
             // Calls the callback function with the retrieved value.
-            callback(value);
+            fixedCallback(value);
         });
     }
 
@@ -130,21 +155,26 @@ const StorageUtil = (() => {
      * @param {Function} [callback] - Optional callback to call after saving.
      */
     function setToSessionStore(key, value, callback) {
-        // Checks if session storage is supported
-        if (!browserAPI?.storage?.session) {
-            console.error('Session storage API not available');
-            callback(null);
-            return;
-        }
+        // Ensures the callback is a function
+        const fixedCallback = typeof callback === 'function' ? callback : () => {
+        };
 
         // Checks if the key is a string
         if (typeof key !== 'string') {
             throw new Error('Key must be a string');
         }
 
-        // The final callback variable
-        const finalCallback = typeof callback === 'function' ? callback : () => {
-        };
+        // Checks if the value is defined
+        if (typeof value === 'undefined') {
+            throw new Error('Value must be defined');
+        }
+
+        // Checks if session storage is supported
+        if (!browserAPI?.storage?.session) {
+            console.error('Session storage API not available');
+            fixedCallback(null);
+            return;
+        }
 
         // Creates an object to hold the key-value pair
         let data = {};
@@ -154,10 +184,12 @@ const StorageUtil = (() => {
             // Handles errors in the storage process
             if (browserAPI.runtime.lastError) {
                 console.error('StorageUtil error:', browserAPI.runtime.lastError);
+                fixedCallback(null);
+                return;
             }
 
             // Completes the callback
-            finalCallback();
+            fixedCallback();
         });
     }
 

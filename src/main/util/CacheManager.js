@@ -42,7 +42,10 @@ const CacheManager = (() => {
 
     // Sets the expiration time for cache entries based on user settings
     Settings.get(settings => {
-        expirationTime = settings.cacheExpirationSeconds;
+        const expSeconds = Number(settings?.cacheExpirationSeconds);
+        const min = 60;
+        const def = 86400;
+        expirationTime = Number.isFinite(expSeconds) && expSeconds >= min ? expSeconds : def;
     });
 
     const providers = [
@@ -89,8 +92,7 @@ const CacheManager = (() => {
                 if (storedBlocked[name]) {
                     blockedCaches[name] = new Map(
                         Object.entries(storedBlocked[name]).map(([url, entry]) => [
-                            url,
-                            {exp: entry.exp, resultType: entry.resultType}
+                            url, {exp: entry.exp, resultType: entry.resultType}
                         ])
                     );
                 }
@@ -513,7 +515,7 @@ const CacheManager = (() => {
         // Returns if the blocked cache is not defined.
         if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
-            return;
+            return null;
         }
 
         try {
@@ -686,7 +688,7 @@ const CacheManager = (() => {
         // Checks if the processing cache is valid
         if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
-            return null;
+            return [];
         }
 
         const results = [];

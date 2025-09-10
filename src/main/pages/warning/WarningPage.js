@@ -251,6 +251,9 @@ window.WarningSingleton = window.WarningSingleton || (() => {
                     // Sets the reported by text with the count of other systems
                     domElements.reportedBy.textContent = `${reportedByText} ${othersText}`;
 
+                    // Replace each system with its short name
+                    message.systems = message.systems.map(system => ProtectionResult.ShortName[system] || system);
+
                     // Make the innerText hoverable and set the hover text
                     const alsoReportedBy = LangUtil.REPORTED_BY_ALSO;
                     const wrappedTitle = wrapSystemNamesText(`${alsoReportedBy}${message.systems.join(', ')}`);

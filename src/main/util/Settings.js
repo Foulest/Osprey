@@ -103,7 +103,7 @@ const Settings = (() => {
     function get(callback) {
         StorageUtil.getFromLocalStore(settingsKey, function (storedSettings) {
             // Clones the default settings object
-            let mergedSettings = JSON.parse(JSON.stringify(defaultSettings));
+            let mergedSettings = structuredClone(defaultSettings);
 
             // Merges any stored settings into the cloned default settings
             updateIfChanged(mergedSettings, storedSettings);
@@ -122,7 +122,7 @@ const Settings = (() => {
     function set(newSettings, callback) {
         StorageUtil.getFromLocalStore(settingsKey, function (storedSettings) {
             // Clones the default settings object
-            let mergedSettings = JSON.parse(JSON.stringify(defaultSettings));
+            let mergedSettings = structuredClone(defaultSettings);
 
             // Merges stored settings and new settings into the cloned default settings
             storedSettings && updateIfChanged(mergedSettings, storedSettings);

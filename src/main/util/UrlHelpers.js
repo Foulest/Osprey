@@ -307,7 +307,7 @@ const UrlHelpers = (() => {
 
         // IPv4 dotted-decimal only
         if (/^\d{1,3}(\.\d{1,3}){3}$/.test(s)) {
-            const nums = s.split('.').map(n => Number(n));
+            const nums = s.split('.').map(Number);
 
             // Each number must be between 0 and 255
             if (nums.some(n => n < 0 || n > 255)) {
@@ -334,7 +334,7 @@ const UrlHelpers = (() => {
                     return null;
                 }
 
-                const nums = tail.split(".").map(n => Number(n));
+                const nums = tail.split(".").map(Number);
 
                 // Each number must be between 0 and 255
                 if (nums.some(n => n < 0 || n > 255)) {

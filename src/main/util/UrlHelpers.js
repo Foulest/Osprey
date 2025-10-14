@@ -416,7 +416,7 @@ const UrlHelpers = (() => {
         let bin = '';
 
         for (const byte of packet) {
-            bin += String.fromCharCode(byte);
+            bin += String.fromCodePoint(byte);
         }
         return btoa(bin).replaceAll('+', '-').replaceAll('/', '_').replace(/=+$/, '');
     }

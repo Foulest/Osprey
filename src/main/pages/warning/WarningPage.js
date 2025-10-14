@@ -236,9 +236,9 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
 
         // Gets the origin information
         const origin = UrlHelpers.extractOrigin(pageUrl);
-        const originInt = parseInt(origin);
+        const originInt = Number.parseInt(origin);
 
-        currentOriginInt = isNaN(originInt) ? ProtectionResult.Origin.UNKNOWN : originInt;
+        currentOriginInt = Number.isNaN(originInt) ? ProtectionResult.Origin.UNKNOWN : originInt;
         applyOriginVisuals(currentOriginInt);
 
         // Listens for PONG messages to update the reported by count

@@ -146,6 +146,29 @@ const Settings = (() => {
     }
 
     /**
+     * Checks if all DNS provider settings are disabled.
+     *
+     * @param settings - The settings object to check.
+     * @returns {boolean} - Returns true if all DNS provider settings are disabled, false otherwise.
+     */
+    function allDNSProvidersDisabled(settings) {
+        return !settings.adGuardSecurityEnabled &&
+            !settings.adGuardFamilyEnabled &&
+            !settings.controlDSecurityEnabled &&
+            !settings.controlDFamilyEnabled &&
+            !settings.certEEEnabled &&
+            !settings.cleanBrowsingSecurityEnabled &&
+            !settings.cleanBrowsingFamilyEnabled &&
+            !settings.cloudflareSecurityEnabled &&
+            !settings.cloudflareFamilyEnabled &&
+            !settings.dns0SecurityEnabled &&
+            !settings.dns0FamilyEnabled &&
+            !settings.dns4EUSecurityEnabled &&
+            !settings.dns4EUFamilyEnabled &&
+            !settings.quad9Enabled;
+    }
+
+    /**
      * Checks if all partner settings are disabled.
      *
      * @param settings - The settings object to check.
@@ -190,6 +213,6 @@ const Settings = (() => {
         set,
         restoreDefaultSettings,
         allPartnersDisabled,
-        allProvidersDisabled
+        allProvidersDisabled,
     };
 })();

@@ -375,7 +375,7 @@ const UrlHelpers = (() => {
      */
     function encodeDNSQuery(domain, type = 1) {
         if (typeof domain !== 'string') {
-            throw new Error('domain must be a string');
+            throw new TypeError('domain must be a string');
         }
 
         // Strip trailing dot; DNS wire format carries labels explicitly

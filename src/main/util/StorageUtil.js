@@ -36,7 +36,7 @@ const StorageUtil = (() => {
 
         // Ensures the key is a string
         if (typeof key !== 'string') {
-            throw new Error('Key must be a string');
+            throw new TypeError('Key must be a string');
         }
 
         // Checks if local storage is supported
@@ -81,7 +81,7 @@ const StorageUtil = (() => {
 
         // Checks if the value is undefined
         if (value === undefined) {
-            throw new Error('Value must be defined');
+            throw new TypeError('Value must be defined');
         }
 
         // Checks if local storage is supported
@@ -121,7 +121,7 @@ const StorageUtil = (() => {
 
         // Checks if the key is a string
         if (typeof key !== 'string') {
-            throw new Error('Key must be a string');
+            throw new TypeError('Key must be a string');
         }
 
         // Checks if session storage is supported
@@ -161,7 +161,7 @@ const StorageUtil = (() => {
 
         // Checks if the key is a string
         if (typeof key !== 'string') {
-            throw new Error('Key must be a string');
+            throw new TypeError('Key must be a string');
         }
 
         // Checks if the value is undefined

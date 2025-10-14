@@ -21,7 +21,7 @@ let reportedByText;
 
 // Use a global singleton pattern to ensure we don't duplicate resources
 // noinspection FunctionWithInconsistentReturnsJS
-window.WarningSingleton = window.WarningSingleton || (() => {
+globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
 
     // Browser API compatibility between Chrome and Firefox
     const browserAPI = typeof browser === 'undefined' ? chrome : browser;
@@ -99,7 +99,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         );
 
         // Extracts the threat code from the current page URL
-        const pageUrl = window.document.URL;
+        const pageUrl = globalThis.document.URL;
         const result = UrlHelpers.extractResult(pageUrl);
 
         // Checks if the result is valid
@@ -275,7 +275,7 @@ window.WarningSingleton = window.WarningSingleton || (() => {
         });
 
         // Re-apply icon & re-request counts on refresh / bfcache restore
-        window.addEventListener('pageshow', () => {
+        globalThis.addEventListener('pageshow', () => {
             applyOriginVisuals(currentOriginInt);
 
             browserAPI.runtime.sendMessage({
@@ -535,5 +535,5 @@ window.WarningSingleton = window.WarningSingleton || (() => {
 
 // Initializes when the DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-    window.WarningSingleton.initialize();
+    globalThis.WarningSingleton.initialize();
 });

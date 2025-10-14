@@ -18,7 +18,7 @@
 "use strict";
 
 // Use a global singleton pattern to ensure we don't duplicate resources
-window.PopupSingleton = window.PopupSingleton || (() => {
+globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
 
     // Browser API compatibility between Chrome and Firefox
     const browserAPI = typeof browser === 'undefined' ? chrome : browser;
@@ -222,7 +222,7 @@ window.PopupSingleton = window.PopupSingleton || (() => {
         });
 
         // Batches the DOM updates for performance
-        window.requestAnimationFrame(() => {
+        globalThis.requestAnimationFrame(() => {
             updates.forEach(update => update());
         });
     }
@@ -547,9 +547,9 @@ window.PopupSingleton = window.PopupSingleton || (() => {
 document.addEventListener("DOMContentLoaded", () => {
     Settings.get(settings => {
         if (settings.hideProtectionOptions) {
-            window.close();
+            globalThis.close();
         } else {
-            window.PopupSingleton.initialize();
+            globalThis.PopupSingleton.initialize();
         }
     });
 });

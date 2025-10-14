@@ -351,7 +351,7 @@ const BrowserProtection = (() => {
             CacheManager.addUrlToProcessingCache(urlObject, cacheName, tabId);
 
             const apiUrl = `https://api.alphamountain.ai/filter/uri`;
-            const payload = {
+            const body = {
                 uri: urlString,
                 license: alphaMountainKey,
                 type: "user.main",
@@ -364,7 +364,7 @@ const BrowserProtection = (() => {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(payload),
+                    body: JSON.stringify(body),
                     signal
                 });
 

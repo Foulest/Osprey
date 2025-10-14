@@ -130,9 +130,36 @@ const UrlHelpers = (() => {
      * @returns {boolean|boolean} - If a hostname is locally hosted.
      */
     function isLocalHostname(hostname) {
-        return hostname === "localhost" ||
-            hostname.endsWith(".localhost") ||
-            hostname.endsWith(".local");
+        let h = (hostname || "").trim().toLowerCase();
+
+        // Strip brackets and zone/scope id for IPv6 literals
+        if (h.startsWith("[") && h.endsWith("]")) {
+            h = h.slice(1, -1);
+        }
+
+        const pct = h.indexOf("%");
+
+        // Remove zone index
+        if (pct !== -1) {
+            h = h.slice(0, pct);
+        }
+
+        // localhost and .localhost/.local domains
+        if (h === "localhost" || h.endsWith(".localhost") || h.endsWith(".local")) {
+            return true;
+        }
+
+        // IPv6 loopback/unspecified (compressed and full)
+        if (h.includes(":")) {
+            if (h === "::1" || h === "0:0:0:0:0:0:0:1") {
+                return true;
+            }
+            return h === "::" || h === "0:0:0:0:0:0:0:0";
+        }
+
+        // IPv4 loopback/unspecified
+        const ip = normalizeIP(h);
+        return ip ? ip.startsWith("127.") || ip === "0.0.0.0" : false;
     }
 
     /**
@@ -146,15 +173,44 @@ const UrlHelpers = (() => {
             return true;
         }
 
-        // Check for IPv6 addresses
-        if (hostname.includes(':')) {
-            const h = hostname.toLowerCase();
+        let h = (hostname || "").trim().toLowerCase();
 
-            // ::1 is loopback, fc00::/7 is unique local, fe80::/10 is link-local
-            return h === '::1' || h.startsWith('fc') || h.startsWith('fd') || h.startsWith('fe80:');
+        // Strip brackets and zone/scope id for IPv6 literals
+        if (h.startsWith("[") && h.endsWith("]")) {
+            h = h.slice(1, -1);
         }
 
-        const ip = normalizeIP(hostname); // IPv4 dotted‑decimal only
+        const pct = h.indexOf("%");
+
+        // Remove zone index
+        if (pct !== -1) {
+            h = h.slice(0, pct);
+        }
+
+        // IPv6 checks
+        if (h.includes(":")) {
+            // :: or ::1 handled by isLocalHostname; cover ULA/link-local here
+            // ULA fc00::/7 => prefixes "fc" or "fd"
+            if (h.startsWith("fc") || h.startsWith("fd")) {
+                return true;
+            }
+
+            // Link-local fe80::/10 => fe80..febf (quick prefix test)
+            if (/^fe([89ab])[0-9a-f]{2}:/i.test(h)) {
+                return true;
+            }
+
+            // IPv4-mapped ::ffff:a.b.c.d -> check embedded IPv4 range
+            if (h.startsWith("::ffff:")) {
+                const v4 = h.slice(7);
+                const v4n = normalizeIP(v4);
+                return v4n ? isPrivateIP(v4n) : false;
+            }
+            return false;
+        }
+
+        // IPv4 checks
+        const ip = normalizeIP(h); // IPv4 or simple IPv6 normalization
         return ip ? isPrivateIP(ip) : false;
     }
 
@@ -165,11 +221,67 @@ const UrlHelpers = (() => {
      * @returns {boolean|boolean|boolean} - If the IP address is private/locally hosted.
      */
     function isPrivateIP(ip) {
-        return ip.startsWith("127.") ||
-            ip.startsWith("10.") ||
-            /^172\.(1[6-9]|2\d|3[0-1])\./.test(ip) ||
-            ip.startsWith("192.168.") ||
-            ip.startsWith("0.0.0.0");
+        let s = (ip || "").trim().toLowerCase();
+
+        // Strip brackets and zone/scope id for IPv6 literals
+        if (s.startsWith("[") && s.endsWith("]")) {
+            s = s.slice(1, -1);
+        }
+
+        const pct = s.indexOf("%");
+
+        // Remove zone index
+        if (pct !== -1) {
+            s = s.slice(0, pct);
+        }
+
+        // IPv6 ranges
+        if (s.includes(":")) {
+            // Loopback / unspecified
+            if (s === "::1" || s === "0:0:0:0:0:0:0:1") {
+                return true;
+            }
+            if (s === "::" || s === "0:0:0:0:0:0:0:0") {
+                return true;
+            }
+
+            // ULA fc00::/7
+            if (s.startsWith("fc") || s.startsWith("fd")) {
+                return true;
+            }
+
+            // Link-local fe80::/10
+            if (/^fe([89ab])[0-9a-f]{2}:/i.test(s)) {
+                return true;
+            }
+
+            // IPv4-mapped ::ffff:a.b.c.d
+            if (s.startsWith("::ffff:")) {
+                const v4 = s.slice(7);
+                const v4n = normalizeIP(v4);
+
+                if (!v4n) {
+                    return false;
+                }
+
+                return v4n.startsWith("127.") ||               // loopback
+                    v4n.startsWith("10.") ||                // 10/8
+                    /^172\.(1[6-9]|2\d|3[0-1])\./.test(v4n) || // 172.16/12
+                    v4n.startsWith("192.168.") ||           // 192.168/16
+                    v4n.startsWith("169.254.") ||           // link-local
+                    v4n === "0.0.0.0";                      // unspecified
+            }
+            return false;
+        }
+
+        // IPv4 ranges
+        const v4n = normalizeIP(s);
+        return v4n ? v4n.startsWith("127.") ||
+            v4n.startsWith("10.") ||
+            /^172\.(1[6-9]|2\d|3[0-1])\./.test(v4n) ||
+            v4n.startsWith("192.168.") ||
+            v4n.startsWith("169.254.") ||
+            v4n === "0.0.0.0" : false;
     }
 
     /**
@@ -179,17 +291,62 @@ const UrlHelpers = (() => {
      * @returns {null|string} - The normalized IP address.
      */
     function normalizeIP(hostname) {
-        // Accept only dotted‑decimal IPv4 (no octal/hex/decimal-int shorthands)
-        if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(hostname)) {
-            return null;
+        let s = (hostname || "").trim().toLowerCase();
+
+        // Strip brackets and zone/scope id (e.g., %eth0)
+        if (s.startsWith("[") && s.endsWith("]")) {
+            s = s.slice(1, -1);
         }
 
-        const nums = hostname.split('.').map(n => Number(n));
+        const pct = s.indexOf("%");
 
-        if (nums.some(n => n < 0 || n > 255)) {
-            return null;
+        // Remove zone index
+        if (pct !== -1) {
+            s = s.slice(0, pct);
         }
-        return nums.join('.');
+
+        // IPv4 dotted-decimal only
+        if (/^\d{1,3}(\.\d{1,3}){3}$/.test(s)) {
+            const nums = s.split('.').map(n => Number(n));
+
+            // Each number must be between 0 and 255
+            if (nums.some(n => n < 0 || n > 255)) {
+                return null;
+            }
+            return nums.join('.');
+        }
+
+        // Minimal IPv6 acceptance (including IPv4-mapped tails)
+        if (s.includes(":")) {
+            // Allow hex, colons, and optional dotted tail; reject other chars
+            if (!/^[0-9a-f:.\s]+$/.test(s)) {
+                return null;
+            }
+
+            const lastColon = s.lastIndexOf(":");
+
+            // If IPv4 tail exists, ensure it's a valid dotted-decimal
+            if (s.includes(".") && lastColon !== -1) {
+                const tail = s.slice(lastColon + 1);
+
+                // Basic dotted-decimal check
+                if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(tail)) {
+                    return null;
+                }
+
+                const nums = tail.split(".").map(n => Number(n));
+
+                // Each number must be between 0 and 255
+                if (nums.some(n => n < 0 || n > 255)) {
+                    return null;
+                }
+            }
+
+            // Basic shape check: at least one colon, not more than 7 colon separators unless compressed
+            // (We’re intentionally permissive; detailed parsing would add complexity.)
+            return s;
+        }
+        return null;
     }
 
     /**

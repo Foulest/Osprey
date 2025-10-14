@@ -357,7 +357,6 @@
 
             // Canonicalizes the URL
             urlObject.hash = "";
-            urlObject.host = "";
             urlObject.password = "";
             urlObject.port = "";
             urlObject.search = "";
@@ -434,8 +433,11 @@
             }
 
             if (hasHostname) {
-                // Ignores hostnames with no dots at all
-                if (!hostname.includes('.')) {
+                // Ignores hostnames with no dots at all (excludes IPv6)
+                if (!hostname.includes('.') &&
+                    !hostname.includes("[") &&
+                    !hostname.includes("]") &&
+                    !hostname.includes(":")) {
                     console.debug(`Hostname has no dots: ${hostname}; bailing out.`);
                     return;
                 }

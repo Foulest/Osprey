@@ -661,7 +661,7 @@
 
     // Creates the context menu and sets managed policies
     browserAPI.storage.managed.get(policyKeys, policies => {
-        if (typeof policies === 'undefined') {
+        if (policies === undefined) {
             supportsManagedPolicies = false;
             console.debug("Managed policies are not supported or setup correctly in this browser.");
         } else {

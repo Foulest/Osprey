@@ -323,7 +323,7 @@
     }, CLEANUP_INTERVAL);
 
     // List of valid protocols to check for
-    const validProtocols = ['http:', 'https:'];
+    const validProtocols = new Set(['http:', 'https:']);
 
     /**
      * Function to handle navigation checks.
@@ -404,7 +404,7 @@
             }
 
             // Checks if the URL has a valid protocol (HTTP or HTTPS)
-            if (!validProtocols.includes(protocol.toLowerCase()) && !previouslyBlob) {
+            if (!validProtocols.has(protocol.toLowerCase()) && !previouslyBlob) {
                 console.debug(`Invalid protocol: ${protocol}; bailing out.`);
                 return;
             }

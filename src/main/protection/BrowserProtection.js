@@ -388,24 +388,24 @@ const BrowserProtection = (() => {
                 }
 
                 // Untrusted Categories
-                const untrustedCategories = [
+                const untrustedCategories = new Set([
                     11, // Child Sexual Abuse Material (CSAM)
                     15, // Drugs/Controlled Substances
                     55, // Potentially Unwanted Applications (PUA)
-                ];
+                ]);
 
                 // Malicious Categories
-                const maliciousCategories = [
+                const maliciousCategories = new Set([
                     39, // Malicious
-                ];
+                ]);
 
                 // Phishing Categories
-                const phishingCategories = [
+                const phishingCategories = new Set([
                     51, // Phishing
-                ];
+                ]);
 
                 // Check if the URL falls into any of the untrusted categories
-                if (categories.some(category => untrustedCategories.includes(category))) {
+                if (categories.some(category => untrustedCategories.has(category))) {
                     console.debug(`[${shortName}] Added URL to blocked cache: ${urlString}`);
                     CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.UNTRUSTED);
                     callback(new ProtectionResult(urlString, ProtectionResult.ResultType.UNTRUSTED, origin));
@@ -413,7 +413,7 @@ const BrowserProtection = (() => {
                 }
 
                 // Check if the URL falls into any of the malicious categories
-                if (categories.some(category => maliciousCategories.includes(category))) {
+                if (categories.some(category => maliciousCategories.has(category))) {
                     console.debug(`[${shortName}] Added URL to blocked cache: ${urlString}`);
                     CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.MALICIOUS);
                     callback(new ProtectionResult(urlString, ProtectionResult.ResultType.MALICIOUS, origin));
@@ -421,7 +421,7 @@ const BrowserProtection = (() => {
                 }
 
                 // Check if the URL falls into any of the phishing categories
-                if (categories.some(category => phishingCategories.includes(category))) {
+                if (categories.some(category => phishingCategories.has(category))) {
                     console.debug(`[${shortName}] Added URL to blocked cache: ${urlString}`);
                     CacheManager.addUrlToBlockedCache(urlObject, cacheName, ProtectionResult.ResultType.PHISHING);
                     callback(new ProtectionResult(urlString, ProtectionResult.ResultType.PHISHING, origin));

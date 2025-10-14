@@ -68,27 +68,27 @@ const CacheManager = (() => {
     ];
 
     // Initialize caches for each provider
-    providers.forEach(name => {
+    for (const name of providers) {
         allowedCaches[name] = new Map();
         blockedCaches[name] = new Map();
         processingCaches[name] = new Map();
-    });
+    }
 
     // Load allowed caches (without tabId) from local storage
     StorageUtil.getFromLocalStore(allowedKey, storedAllowed => {
         if (storedAllowed) {
-            Object.keys(allowedCaches).forEach(name => {
+            for (const name of Object.keys(allowedCaches)) {
                 if (storedAllowed[name]) {
                     allowedCaches[name] = new Map(Object.entries(storedAllowed[name]));
                 }
-            });
+            }
         }
     });
 
     // Load blocked caches (without tabId) from local storage
     StorageUtil.getFromLocalStore(blockedKey, storedBlocked => {
         if (storedBlocked) {
-            Object.keys(blockedCaches).forEach(name => {
+            for (const name of Object.keys(blockedCaches)) {
                 if (storedBlocked[name]) {
                     blockedCaches[name] = new Map(
                         Object.entries(storedBlocked[name]).map(([url, entry]) => [
@@ -96,18 +96,18 @@ const CacheManager = (() => {
                         ])
                     );
                 }
-            });
+            }
         }
     });
 
     // Load processing caches (with tabId) from session storage
     StorageUtil.getFromSessionStore(processingKey, storedProcessing => {
         if (storedProcessing) {
-            Object.keys(processingCaches).forEach(name => {
+            for (const name of Object.keys(processingCaches)) {
                 if (storedProcessing[name]) {
                     processingCaches[name] = new Map(Object.entries(storedProcessing[name]));
                 }
-            });
+            }
         }
     });
 
@@ -131,18 +131,18 @@ const CacheManager = (() => {
             const allowedOut = {};
             const blockedOut = {};
 
-            Object.keys(allowedCaches).forEach(name => {
+            for (const name of Object.keys(allowedCaches)) {
                 allowedOut[name] = Object.fromEntries(allowedCaches[name]);
-            });
+            }
 
-            Object.keys(blockedCaches).forEach(name => {
+            for (const name of Object.keys(blockedCaches)) {
                 blockedOut[name] = Object.fromEntries(
                     Array.from(blockedCaches[name], ([url, entry]) => [
                         url,
                         {exp: entry.exp, resultType: entry.resultType}
                     ])
                 );
-            });
+            }
 
             StorageUtil.setToLocalStore(allowedKey, allowedOut);
             StorageUtil.setToLocalStore(blockedKey, blockedOut);
@@ -168,9 +168,9 @@ const CacheManager = (() => {
         const write = () => {
             const out = {};
 
-            Object.keys(processingCaches).forEach(name => {
+            for (const name of Object.keys(processingCaches)) {
                 out[name] = Object.fromEntries(processingCaches[name]);
-            });
+            }
 
             StorageUtil.setToSessionStore(processingKey, out);
         };
@@ -192,7 +192,7 @@ const CacheManager = (() => {
         let removed = 0;
 
         const cleanGroup = (group, onDirty) => {
-            Object.values(group).forEach(map => {
+            for (const map of Object.values(group)) {
                 for (const [key, value] of map.entries()) {
                     const expTime = value && typeof value === 'object' && 'exp' in value ? value.exp : value;
 
@@ -203,7 +203,7 @@ const CacheManager = (() => {
                         removed++;
                     }
                 }
-            });
+            }
 
             // Sets the dirty flag if keys were removed
             if (removed > 0) {
@@ -227,7 +227,11 @@ const CacheManager = (() => {
             return;
         }
 
-        Object.values(allowedCaches).forEach(m => m.clear());
+        // Clears all allowed caches
+        for (const cache of Object.values(allowedCaches)) {
+            cache.clear();
+        }
+
         updateLocalStorage();
     }
 
@@ -241,7 +245,11 @@ const CacheManager = (() => {
             return;
         }
 
-        Object.values(blockedCaches).forEach(m => m.clear());
+        // Clears all blocked caches
+        for (const cache of Object.values(blockedCaches)) {
+            cache.clear();
+        }
+
         updateLocalStorage();
     }
 
@@ -255,7 +263,11 @@ const CacheManager = (() => {
             return;
         }
 
-        Object.values(processingCaches).forEach(m => m.clear());
+        // Clears all processing caches
+        for (const cache of Object.values(processingCaches)) {
+            cache.clear();
+        }
+
         updateSessionStorage();
     }
 
@@ -386,7 +398,9 @@ const CacheManager = (() => {
             const expTime = Date.now() + expirationTime * 1000;
 
             if (name === "all") {
-                Object.values(allowedCaches).forEach(m => m.set(key, expTime));
+                for (const cache of Object.values(allowedCaches)) {
+                    cache.set(key, expTime);
+                }
             } else if (allowedCaches[name]) {
                 allowedCaches[name].set(key, expTime);
             } else {
@@ -417,7 +431,9 @@ const CacheManager = (() => {
             const expTime = 0;
 
             if (name === "all") {
-                Object.values(allowedCaches).forEach(m => m.set(str, expTime));
+                for (const cache of Object.values(allowedCaches)) {
+                    cache.set(str, expTime);
+                }
             } else if (allowedCaches[name]) {
                 allowedCaches[name].set(str, expTime);
             } else {
@@ -488,9 +504,9 @@ const CacheManager = (() => {
             const cache = blockedCaches[name];
 
             if (name === "all") {
-                Object.values(blockedCaches).forEach(m =>
-                    m.set(key, {exp: expTime, resultType: resultType})
-                );
+                for (const cache of Object.values(blockedCaches)) {
+                    cache.set(key, {exp: expTime, resultType: resultType});
+                }
             } else if (cache) {
                 cache.set(key, {exp: expTime, resultType: resultType});
             } else {
@@ -558,7 +574,9 @@ const CacheManager = (() => {
             const key = UrlHelpers.normalizeUrl(url);
 
             if (name === "all") {
-                Object.values(blockedCaches).forEach(m => m.delete(key));
+                for (const cache of Object.values(blockedCaches)) {
+                    cache.delete(key);
+                }
             } else if (blockedCaches[name]) {
                 blockedCaches[name].delete(key);
             } else {
@@ -631,7 +649,9 @@ const CacheManager = (() => {
             const entry = {exp: expTime, tabId: tabId};
 
             if (name === "all") {
-                Object.values(processingCaches).forEach(m => m.set(key, entry));
+                for (const cache of Object.values(processingCaches)) {
+                    cache.set(key, entry);
+                }
             } else if (processingCaches[name]) {
                 processingCaches[name].set(key, entry);
             } else {
@@ -662,7 +682,9 @@ const CacheManager = (() => {
             const key = UrlHelpers.normalizeUrl(url);
 
             if (name === "all") {
-                Object.values(processingCaches).forEach(m => m.delete(key));
+                for (const cache of Object.values(processingCaches)) {
+                    cache.delete(key);
+                }
             } else if (processingCaches[name]) {
                 processingCaches[name].delete(key);
             } else {
@@ -731,12 +753,12 @@ const CacheManager = (() => {
 
         let removedCount = 0;
 
-        Object.keys(processingCaches).forEach(name => {
+        for (const name of Object.keys(processingCaches)) {
             const map = processingCaches[name];
 
             // Checks if the cache is valid
             if (!map) {
-                return;
+                continue;
             }
 
             for (const [key, entry] of map.entries()) {
@@ -745,7 +767,7 @@ const CacheManager = (() => {
                     map.delete(key);
                 }
             }
-        });
+        }
 
         // Persist the changes to session storage
         if (removedCount > 0) {

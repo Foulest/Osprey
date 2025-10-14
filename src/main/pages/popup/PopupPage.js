@@ -223,7 +223,9 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
 
         // Batches the DOM updates for performance
         globalThis.requestAnimationFrame(() => {
-            updates.forEach(update => update());
+            for (const update of updates) {
+                update();
+            }
         });
     }
 
@@ -274,11 +276,11 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
      */
     function reset() {
         // Removes click handlers from all switches
-        securitySystems.forEach(system => {
+        for (const system of securitySystems) {
             // Validates name before sending the message
             if (!system.name) {
                 console.error(`No name defined for system with origin ${system.origin}; cannot remove click handler.`);
-                return;
+                continue;
             }
 
             const elements = systemElements[system.name];
@@ -286,7 +288,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
             if (elements?.switchElement) {
                 elements.switchElement.onclick = null;
             }
-        });
+        }
 
         // Keeps the DOM elements cache, but resets initialized status
         isInitialized = false;
@@ -331,80 +333,80 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
             }
 
             // Sets titles and aria-labels for star symbols and partner labels
-            document.querySelectorAll('.starSymbol, .partnerLabel').forEach(element => {
+            for (const element of document.querySelectorAll('.starSymbol, .partnerLabel')) {
                 element.setAttribute('title', LangUtil.OFFICIAL_PARTNER_TITLE);
                 element.setAttribute('aria-label', LangUtil.OFFICIAL_PARTNER_TITLE);
-            });
+            }
 
             // Sets the alt text for the AdGuard logo
-            document.querySelectorAll('.adGuardLogo').forEach(element => {
+            for (const element of document.querySelectorAll('.adGuardLogo')) {
                 element.alt = LangUtil.ADGUARD_LOGO_ALT;
                 element.setAttribute('title', LangUtil.ADGUARD_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.ADGUARD_LOGO_ALT);
-            });
+            }
 
             // Sets the alt text for the alphaMountain logo
-            document.querySelectorAll('.alphaMountainLogo').forEach(element => {
+            for (const element of document.querySelectorAll('.alphaMountainLogo')) {
                 element.alt = LangUtil.ALPHA_MOUNTAIN_LOGO_ALT;
                 element.setAttribute('title', LangUtil.ALPHA_MOUNTAIN_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.ALPHA_MOUNTAIN_LOGO_ALT);
-            });
+            }
 
             // Sets the alt text for the Control D logo
-            document.querySelectorAll('.controlDLogo').forEach(element => {
+            for (const element of document.querySelectorAll('.controlDLogo')) {
                 element.alt = LangUtil.CONTROL_D_LOGO_ALT;
                 element.setAttribute('title', LangUtil.CONTROL_D_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.CONTROL_D_LOGO_ALT);
-            });
+            }
 
             // Sets the alt text for the PrecisionSec logo
-            document.querySelectorAll('.precisionSecLogo').forEach(element => {
+            for (const element of document.querySelectorAll('.precisionSecLogo')) {
                 element.alt = LangUtil.PRECISION_SEC_LOGO_ALT;
                 element.setAttribute('title', LangUtil.PRECISION_SEC_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.PRECISION_SEC_LOGO_ALT);
-            });
+            }
 
             // Sets the alt text for the CERT-EE logo
-            document.querySelectorAll('.certEELogo').forEach(element => {
+            for (const element of document.querySelectorAll('.certEELogo')) {
                 element.alt = LangUtil.CERT_EE_LOGO_ALT;
                 element.setAttribute('title', LangUtil.CERT_EE_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.CERT_EE_LOGO_ALT);
-            });
+            }
 
             // Sets the alt text for the CleanBrowsing logo
-            document.querySelectorAll('.cleanBrowsingLogo').forEach(element => {
+            for (const element of document.querySelectorAll('.cleanBrowsingLogo')) {
                 element.alt = LangUtil.CLEAN_BROWSING_LOGO_ALT;
                 element.setAttribute('title', LangUtil.CLEAN_BROWSING_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.CLEAN_BROWSING_LOGO_ALT);
-            });
+            }
 
             // Sets the alt text for the Cloudflare logo
-            document.querySelectorAll('.cloudflareLogo').forEach(element => {
+            for (const element of document.querySelectorAll('.cloudflareLogo')) {
                 element.alt = LangUtil.CLOUDFLARE_LOGO_ALT;
                 element.setAttribute('title', LangUtil.CLOUDFLARE_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.CLOUDFLARE_LOGO_ALT);
-            });
+            }
 
             // Sets the alt text for the DNS0.eu logo
-            document.querySelectorAll('.dns0Logo').forEach(element => {
+            for (const element of document.querySelectorAll('.dns0Logo')) {
                 element.alt = LangUtil.DNS0_LOGO_ALT;
                 element.setAttribute('title', LangUtil.DNS0_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.DNS0_LOGO_ALT);
-            });
+            }
 
             // Sets the alt text for the DNS4EU logo
-            document.querySelectorAll('.dns4EULogo').forEach(element => {
+            for (const element of document.querySelectorAll('.dns4EULogo')) {
                 element.alt = LangUtil.DNS4EU_LOGO_ALT;
                 element.setAttribute('title', LangUtil.DNS4EU_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.DNS4EU_LOGO_ALT);
-            });
+            }
 
             // Sets the alt text for the Quad9 logo
-            document.querySelectorAll('.quad9Logo').forEach(element => {
+            for (const element of document.querySelectorAll('.quad9Logo')) {
                 element.alt = LangUtil.QUAD9_LOGO_ALT;
                 element.setAttribute('title', LangUtil.QUAD9_LOGO_ALT);
                 element.setAttribute('aria-label', LangUtil.QUAD9_LOGO_ALT);
-            });
+            }
 
             // Sets the alt text for the Osprey logo
             if (domElements.logo) {
@@ -446,7 +448,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
         localizePage();
 
         // Sets up switch elements and click handlers
-        securitySystems.forEach(system => {
+        for (const system of securitySystems) {
             const elements = getSystemElements(system);
 
             if (elements.switchElement) {
@@ -462,20 +464,20 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
             } else {
                 console.warn(`'switchElement' not found for ${system.name} in the PopupPage DOM; cannot set click handler.`);
             }
-        });
+        }
 
         // Loads and applies settings
         Settings.get(settings => {
-            securitySystems.forEach(system => {
+            for (const system of securitySystems) {
                 // Validates name before sending the message
                 if (!system.name) {
                     console.error(`No name defined for system with origin ${system.origin}; cannot apply settings.`);
-                    return;
+                    continue;
                 }
 
                 const isEnabled = settings[system.name];
                 updateProtectionStatusUI(system, isEnabled);
-            });
+            }
         });
 
         // Updates the version display

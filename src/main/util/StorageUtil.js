@@ -79,8 +79,8 @@ const StorageUtil = (() => {
             throw new Error('Key must be a string');
         }
 
-        // Checks if the value is defined
-        if (typeof value === 'undefined') {
+        // Checks if the value is undefined
+        if (value === undefined) {
             throw new Error('Value must be defined');
         }
 
@@ -164,8 +164,8 @@ const StorageUtil = (() => {
             throw new Error('Key must be a string');
         }
 
-        // Checks if the value is defined
-        if (typeof value === 'undefined') {
+        // Checks if the value is undefined
+        if (value === undefined) {
             throw new Error('Value must be defined');
         }
 

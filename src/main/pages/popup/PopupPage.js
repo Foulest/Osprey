@@ -505,11 +505,9 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
                 currentPage = 1;
             }
 
-            // Toggles the active status of each page
+            // Toggles the active status
             for (let i = 0; i < pages.length; i++) {
-                if (i + 1 === currentPage) {
-                    pages[i].classList.add('active');
-                }
+                pages[i].classList.toggle('active', i + 1 === currentPage);
             }
 
             // Updates the page indicator

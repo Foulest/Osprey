@@ -669,15 +669,11 @@
             let settings = {};
 
             // Checks and sets the context menu settings using the policy
-            if (policies.DisableContextMenu === undefined) {
-                settings.contextMenuEnabled = true;
+            if (policies.DisableContextMenu !== undefined && policies.DisableContextMenu === true) {
+                settings.contextMenuEnabled = false;
+                console.debug("Context menu is disabled by system policy.");
             } else {
-                if (policies.DisableContextMenu === true) {
-                    settings.contextMenuEnabled = false;
-                    console.debug("Context menu is disabled by system policy.");
-                } else {
-                    settings.contextMenuEnabled = true;
-                }
+                settings.contextMenuEnabled = true;
             }
 
             const defaultCacheExpiration = 86400; // 24 hours in seconds
@@ -698,51 +694,35 @@
             }
 
             // Checks and sets the continue buttons settings using the policy
-            if (policies.HideContinueButtons === undefined) {
-                settings.hideContinueButtons = false;
+            if (policies.HideContinueButtons !== undefined && policies.HideContinueButtons === true) {
+                settings.hideContinueButtons = policies.HideContinueButtons;
+                console.debug("Continue buttons are managed by system policy.");
             } else {
-                if (policies.HideContinueButtons === true) {
-                    settings.hideContinueButtons = policies.HideContinueButtons;
-                    console.debug("Continue buttons are managed by system policy.");
-                } else {
-                    settings.hideContinueButtons = false;
-                }
+                settings.hideContinueButtons = false;
             }
 
             // Checks and sets the report button settings using the policy
-            if (policies.HideReportButton === undefined) {
-                settings.hideReportButton = false;
+            if (policies.HideReportButton !== undefined && policies.HideReportButton === true) {
+                settings.hideReportButton = policies.HideReportButton;
+                console.debug("Report button is managed by system policy.");
             } else {
-                if (policies.HideReportButton === true) {
-                    settings.hideReportButton = policies.HideReportButton;
-                    console.debug("Report button is managed by system policy.");
-                } else {
-                    settings.hideReportButton = false;
-                }
+                settings.hideReportButton = false;
             }
 
             // Checks and sets the lock protection options using the policy
-            if (policies.LockProtectionOptions === undefined) {
-                settings.lockProtectionOptions = false;
+            if (policies.LockProtectionOptions !== undefined && policies.LockProtectionOptions === true) {
+                settings.lockProtectionOptions = policies.LockProtectionOptions;
+                console.debug("Protection options are locked by system policy.");
             } else {
-                if (policies.LockProtectionOptions === true) {
-                    settings.lockProtectionOptions = policies.LockProtectionOptions;
-                    console.debug("Protection options are locked by system policy.");
-                } else {
-                    settings.lockProtectionOptions = false;
-                }
+                settings.lockProtectionOptions = false;
             }
 
             // Checks and sets the hide protection options using the policy
-            if (policies.HideProtectionOptions === undefined) {
-                settings.hideProtectionOptions = false;
+            if (policies.HideProtectionOptions !== undefined && policies.HideProtectionOptions === true) {
+                settings.hideProtectionOptions = policies.HideProtectionOptions;
+                console.debug("Protection options are hidden by system policy.");
             } else {
-                if (policies.HideProtectionOptions === true) {
-                    settings.hideProtectionOptions = policies.HideProtectionOptions;
-                    console.debug("Protection options are hidden by system policy.");
-                } else {
-                    settings.hideProtectionOptions = false;
-                }
+                settings.hideProtectionOptions = false;
             }
 
             // Checks and sets the AdGuard Security settings using the policy
@@ -1120,13 +1100,10 @@
                 if (validProtocols.includes(reportUrlObject.protocol.toLowerCase())) {
                     console.debug(`Navigating to report URL: ${message.reportUrl}`);
                     browserAPI.tabs.create({url: message.reportUrl});
+                } else if (reportUrlObject.protocol === "mailto:") {
+                    browserAPI.tabs.create({url: message.reportUrl});
                 } else {
-                    // Ignores the mailto: protocol (used in the warning page)
-                    if (reportUrlObject.protocol === "mailto:") {
-                        browserAPI.tabs.create({url: message.reportUrl});
-                    } else {
-                        console.warn(`Invalid protocol in report URL: ${message.reportUrl}; doing nothing.`);
-                    }
+                    console.warn(`Invalid protocol in report URL: ${message.reportUrl}; doing nothing.`);
                 }
                 break;
             }

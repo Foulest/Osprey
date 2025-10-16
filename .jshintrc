@@ -6,6 +6,7 @@
   "-W016": false,
   "-W030": false,
   "-W062": false,
+  "-W083": false,
   "-W097": false,
   "-W117": false,
   "-W127": false,

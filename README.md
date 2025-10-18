@@ -34,7 +34,6 @@ possible. Check out some of our partners below:
 <p align="center">
   <a href="https://adguard-dns.io/?utm_source=osprey" title="AdGuard DNS"><img src="https://i.imgur.com/4AXgbsC.png" alt="AdGuard DNS"></a>
   <a href="https://alphamountain.ai/?utm_source=osprey" title="alphaMountain"><img src="https://i.imgur.com/EbcGHb2.png" alt="alphaMountain"></a>
-  <a href="https://controld.com/?utm_source=osprey" title="Control D"><img src="https://i.imgur.com/xh7qTT8.png" alt="Control D"></a>
   <a href="https://precisionsec.com/?utm_source=osprey" title="PrecisionSec"><img src="https://i.imgur.com/gf9ahFa.png" alt="PrecisionSec"></a>
 </p>
 
@@ -48,6 +47,7 @@ some of the companies that love Osprey:
 ###
 
 <p align="center">
+  <a href="https://controld.com/?utm_source=osprey" title="Control D"><img src="https://i.imgur.com/xh7qTT8.png" alt="Control D"></a>
   <a href="https://concourse-cloud.com/?utm_source=osprey" title="Concourse Cloud"><img src="https://i.imgur.com/pfAZVvp.png" alt="Concourse Cloud"></a>
 </p>
 
@@ -55,18 +55,19 @@ some of the companies that love Osprey:
 
 ## Our Mission
 
-Our mission is simple: become the most trusted, transparent, and effective browser protection extension for home users
-and businesses by empowering open-source intelligence to combat malware, phishing, and scams across the globe with our
-partners. The best protection is free protection, and building a privacy-first, open-source tool that IT teams, security
-researchers, and end-users can trust to secure their browsing, wherever they go, is the best way to provide it.
+Our mission is simple: become the most **trusted**, **transparent**, and **effective** browser protection extension for
+home users and businesses by empowering **open-source intelligence** to combat malware, phishing, and scams across the
+globe with our partners. The best protection is **free protection**, and building a privacy-first, open-source tool that
+IT teams, security researchers, and end-users can trust to secure their browsing, wherever they go, is the best way to
+provide it.
 
 Osprey is committed to being non-profit, non-commercial, and open-source, **forever**, with no plans to monetize the
-project in any way.
-Unlike other free browser extensions, Osprey doesn't collect, profile,
+project in any way. Unlike other free browser extensions, Osprey doesn't collect, profile,
 and [sell your browsing data](https://ftc.gov/news-events/news/press-releases/2024/02/ftc-order-will-ban-avast-selling-browsing-data-advertising-purposes-require-it-pay-165-million-over/?utm_source=osprey)
-behind your back. We're fully GDPR-compliant and committed to being as transparent as possible. We don't use centralized
-servers or user accounts to protect your devices. Osprey runs locally on your device, offline or online, with zero
-telemetry or back-end analytics. Check out our [Privacy Policy here](https://osprey.ac/privacy) for more info.
+behind your back. We're **fully GDPR-compliant** and committed to being as transparent as possible. We don't use
+centralized servers or user accounts to protect your devices. Osprey runs **locally** on your device, offline or online,
+with **zero telemetry** or back-end analytics. Check out our [Privacy Policy here](https://osprey.ac/privacy) for more
+info.
 
 The more protection providers join the project, the better the Osprey threat intelligence platform becomes. If you're
 interested in improving global threat intelligence and want to join the project, feel free to get in contact with me
@@ -120,13 +121,13 @@ The following providers are **disabled** by default:
 
 #### Security Filters
 
-- [ ] **[Control D Security DNS](https://controld.com/?utm_source=osprey)**
+- [ ] [Control D Security DNS](https://controld.com/?utm_source=osprey)
 - [ ] [CERT-EE Security DNS](https://ria.ee/en/news/application-developed-cert-ee-protects-against-phishing-and-malware/?utm_source=osprey)
 
 #### Adult Content Filters
 
 - [ ] **[AdGuard Family DNS](https://adguard-dns.io/?utm_source=osprey)**
-- [ ] **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
+- [ ] [Control D Family DNS](https://controld.com/?utm_source=osprey)
 - [ ] [CleanBrowsing Family DNS](https://cleanbrowsing.org/filters/?utm_source=osprey)
 - [ ] [Cloudflare Family DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/?utm_source=osprey)
 - [ ] [DNS4EU Family DNS](https://joindns4.eu/for-public/?utm_source=osprey)

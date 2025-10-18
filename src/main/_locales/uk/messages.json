@@ -143,9 +143,6 @@
   "cloudflareLogoAlt": {
     "message": "Логотип Cloudflare"
   },
-  "dns0LogoAlt": {
-    "message": "Логотип DNS0.eu"
-  },
   "dns4EULogoAlt": {
     "message": "Логотип DNS4EU"
   },

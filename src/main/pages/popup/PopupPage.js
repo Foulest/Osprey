@@ -59,22 +59,6 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
             messageType: Messages.ALPHAMOUNTAIN_TOGGLED,
         },
         {
-            origin: ProtectionResult.Origin.CONTROL_D_SECURITY,
-            name: "controlDSecurityEnabled",
-            title: ProtectionResult.FullName[this.origin],
-            labelElementId: "controlDSecurityStatus",
-            switchElementId: "controlDSecuritySwitch",
-            messageType: Messages.CONTROL_D_SECURITY_TOGGLED,
-        },
-        {
-            origin: ProtectionResult.Origin.CONTROL_D_FAMILY,
-            name: "controlDFamilyEnabled",
-            title: ProtectionResult.FullName[this.origin],
-            labelElementId: "controlDFamilyStatus",
-            switchElementId: "controlDFamilySwitch",
-            messageType: Messages.CONTROL_D_FAMILY_TOGGLED,
-        },
-        {
             origin: ProtectionResult.Origin.PRECISIONSEC,
             name: "precisionSecEnabled",
             title: ProtectionResult.FullName[this.origin],
@@ -123,20 +107,20 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
             messageType: Messages.CLOUDFLARE_FAMILY_TOGGLED,
         },
         {
-            origin: ProtectionResult.Origin.DNS0_SECURITY,
-            name: "dns0SecurityEnabled",
+            origin: ProtectionResult.Origin.CONTROL_D_SECURITY,
+            name: "controlDSecurityEnabled",
             title: ProtectionResult.FullName[this.origin],
-            labelElementId: "dns0SecurityStatus",
-            switchElementId: "dns0SecuritySwitch",
-            messageType: Messages.DNS0_SECURITY_TOGGLED,
+            labelElementId: "controlDSecurityStatus",
+            switchElementId: "controlDSecuritySwitch",
+            messageType: Messages.CONTROL_D_SECURITY_TOGGLED,
         },
         {
-            origin: ProtectionResult.Origin.DNS0_FAMILY,
-            name: "dns0FamilyEnabled",
+            origin: ProtectionResult.Origin.CONTROL_D_FAMILY,
+            name: "controlDFamilyEnabled",
             title: ProtectionResult.FullName[this.origin],
-            labelElementId: "dns0FamilyStatus",
-            switchElementId: "dns0FamilySwitch",
-            messageType: Messages.DNS0_FAMILY_TOGGLED,
+            labelElementId: "controlDFamilyStatus",
+            switchElementId: "controlDFamilySwitch",
+            messageType: Messages.CONTROL_D_FAMILY_TOGGLED,
         },
         {
             origin: ProtectionResult.Origin.DNS4EU_SECURITY,
@@ -173,7 +157,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
      * @param {Object} system - The system object
      * @returns {Object} Object containing the label and switch elements
      */
-    function getSystemElements(system) {
+    const getSystemElements = system => {
         if (!systemElements[system.name]) {
             systemElements[system.name] = {
                 label: document.getElementById(system.labelElementId),
@@ -181,7 +165,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
             };
         }
         return systemElements[system.name];
-    }
+    };
 
     /**
      * Updates the UI for a specific security system using batched DOM operations.
@@ -189,7 +173,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
      * @param {Object} system - The system object being updated.
      * @param {boolean} isOn - Whether the protection is enabled for the system.
      */
-    function updateProtectionStatusUI(system, isOn) {
+    const updateProtectionStatusUI = (system, isOn) => {
         const updates = [];
 
         // Gets cached DOM elements or fetches them if not cached
@@ -227,14 +211,14 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
                 update();
             }
         });
-    }
+    };
 
     /**
      * Toggles the state of a security system and updates its UI.
      *
      * @param {Object} system - The system object being toggled.
      */
-    function toggleProtection(system) {
+    const toggleProtection = system => {
         Settings.get(settings => {
             // Validates name before sending the message
             if (!system.name) {
@@ -269,12 +253,12 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
                 });
             });
         });
-    }
+    };
 
     /**
      * Resets to initial state to prevent memory leaks.
      */
-    function reset() {
+    const reset = () => {
         // Removes click handlers from all switches
         for (const system of securitySystems) {
             // Validates name before sending the message
@@ -292,12 +276,12 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
 
         // Keeps the DOM elements cache, but resets initialized status
         isInitialized = false;
-    }
+    };
 
     /**
      * Initializes the popup or refresh if already initialized.
      */
-    function initialize() {
+    const initialize = () => {
         // Initializes the DOM element cache
         domElements = Object.fromEntries(
             ["popupTitle", "githubLink", "version", "privacyPolicy", "logo", "prevPage", "nextPage", "pageIndicator"]
@@ -315,7 +299,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
         /**
          * Localizes the page by replacing text content with localized messages.
          */
-        function localizePage() {
+        const localizePage = () => {
             const bannerText = document.querySelector('.bannerText');
 
             // Sets the document title text
@@ -352,13 +336,6 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
                 element.setAttribute('aria-label', LangUtil.ALPHA_MOUNTAIN_LOGO_ALT);
             }
 
-            // Sets the alt text for the Control D logo
-            for (const element of document.querySelectorAll('.controlDLogo')) {
-                element.alt = LangUtil.CONTROL_D_LOGO_ALT;
-                element.setAttribute('title', LangUtil.CONTROL_D_LOGO_ALT);
-                element.setAttribute('aria-label', LangUtil.CONTROL_D_LOGO_ALT);
-            }
-
             // Sets the alt text for the PrecisionSec logo
             for (const element of document.querySelectorAll('.precisionSecLogo')) {
                 element.alt = LangUtil.PRECISION_SEC_LOGO_ALT;
@@ -387,11 +364,11 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
                 element.setAttribute('aria-label', LangUtil.CLOUDFLARE_LOGO_ALT);
             }
 
-            // Sets the alt text for the DNS0.eu logo
-            for (const element of document.querySelectorAll('.dns0Logo')) {
-                element.alt = LangUtil.DNS0_LOGO_ALT;
-                element.setAttribute('title', LangUtil.DNS0_LOGO_ALT);
-                element.setAttribute('aria-label', LangUtil.DNS0_LOGO_ALT);
+            // Sets the alt text for the Control D logo
+            for (const element of document.querySelectorAll('.controlDLogo')) {
+                element.alt = LangUtil.CONTROL_D_LOGO_ALT;
+                element.setAttribute('title', LangUtil.CONTROL_D_LOGO_ALT);
+                element.setAttribute('aria-label', LangUtil.CONTROL_D_LOGO_ALT);
             }
 
             // Sets the alt text for the DNS4EU logo
@@ -442,7 +419,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
             } else {
                 console.warn("'privacyPolicy' element not found in the PopupPage DOM.");
             }
-        }
+        };
 
         // Localizes the page content
         localizePage();
@@ -482,7 +459,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
 
         // Updates the version display
         if (domElements.version) {
-            const version = manifest.version;
+            const {version} = manifest;
             domElements.version.textContent += version;
         } else {
             console.warn("'version' element not found in the PopupPage DOM.");
@@ -499,7 +476,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
             return;
         }
 
-        function updatePageDisplay() {
+        const updatePageDisplay = () => {
             // Checks for invalid current page numbers
             if (currentPage < 1 || currentPage > totalPages) {
                 currentPage = 1;
@@ -516,7 +493,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
             } else {
                 console.warn("'pageIndicator' element not found in the PopupPage DOM.");
             }
-        }
+        };
 
         if (domElements.prevPage) {
             domElements.prevPage.addEventListener("click", function () {
@@ -538,7 +515,7 @@ globalThis.PopupSingleton = globalThis.PopupSingleton || (() => {
 
         // Initializes the page display
         updatePageDisplay();
-    }
+    };
 
     return {
         initialize

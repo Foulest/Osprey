@@ -73,16 +73,6 @@
       "description": "If set to true, alphaMountain will be enabled.",
       "type": "boolean"
     },
-    "ControlDSecurityEnabled": {
-      "title": "Control D Security Enabled",
-      "description": "If set to true, Control D Security will be enabled.",
-      "type": "boolean"
-    },
-    "ControlDFamilyEnabled": {
-      "title": "Control D Family Enabled",
-      "description": "If set to true, Control D Family will be enabled.",
-      "type": "boolean"
-    },
     "PrecisionSecEnabled": {
       "title": "PrecisionSec Enabled",
       "description": "If set to true, PrecisionSec will be enabled.",
@@ -113,14 +103,14 @@
       "description": "If set to true, Cloudflare Family will be enabled.",
       "type": "boolean"
     },
-    "DNS0SecurityEnabled": {
-      "title": "DNS0.eu Security Enabled",
-      "description": "If set to true, DNS0.eu Security will be enabled.",
+    "ControlDSecurityEnabled": {
+      "title": "Control D Security Enabled",
+      "description": "If set to true, Control D Security will be enabled.",
       "type": "boolean"
     },
-    "DNS0FamilyEnabled": {
-      "title": "DNS0.eu Family Enabled",
-      "description": "If set to true, DNS0.eu Family will be enabled.",
+    "ControlDFamilyEnabled": {
+      "title": "Control D Family Enabled",
+      "description": "If set to true, Control D Family will be enabled.",
       "type": "boolean"
     },
     "DNS4EUSecurityEnabled": {

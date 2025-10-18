@@ -113,7 +113,6 @@ The following providers are **enabled** by default:
 - [x] **[PrecisionSec Web Protection](https://precisionsec.com/?utm_source=osprey)**
 - [x] [CleanBrowsing Security DNS](https://cleanbrowsing.org/filters/?utm_source=osprey)
 - [x] [Cloudflare Security DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/?utm_source=osprey)
-- [x] [DNS0.eu Security DNS](https://dns0.eu/?utm_source=osprey)
 - [x] [DNS4EU Security DNS](https://joindns4.eu/for-public/?utm_source=osprey)
 - [x] [Quad9 Security DNS](https://quad9.net/?utm_source=osprey)
 
@@ -130,7 +129,6 @@ The following providers are **disabled** by default:
 - [ ] **[Control D Family DNS](https://controld.com/?utm_source=osprey)**
 - [ ] [CleanBrowsing Family DNS](https://cleanbrowsing.org/filters/?utm_source=osprey)
 - [ ] [Cloudflare Family DNS](https://blog.cloudflare.com/introducing-1-1-1-1-for-families/?utm_source=osprey)
-- [ ] [DNS0.eu Family DNS](https://dns0.eu/kids/?utm_source=osprey)
 - [ ] [DNS4EU Family DNS](https://joindns4.eu/for-public/?utm_source=osprey)
 
 Providers disabled by default are either due to:

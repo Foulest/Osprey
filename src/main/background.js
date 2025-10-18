@@ -76,9 +76,9 @@
      * @param key - The key to send in the message.
      * @param callback - Callback function to execute after sending the message.
      */
-    function getOrder(key, callback) {
+    const getOrder = (key, callback) => {
         StorageUtil.getFromSessionStore(key, (order) => callback(Array.isArray(order) ? order : []));
-    }
+    };
 
     /**
      * Sets the order of keys in session storage.
@@ -87,9 +87,9 @@
      * @param order - The array of keys representing the order.
      * @param callback - Callback function to execute after setting.
      */
-    function setOrder(key, order, callback) {
+    const setOrder = (key, order, callback) => {
         StorageUtil.setToSessionStore(key, order, () => typeof callback === 'function' ? callback() : undefined);
-    }
+    };
 
     /**
      * Appends a key to the end of an ordered list stored in session storage.
@@ -98,7 +98,7 @@
      * @param keyStr - The key to append to the list.
      * @param callback - Callback function to execute after appending.
      */
-    function appendKeyToEnd(orderKey, keyStr, callback) {
+    const appendKeyToEnd = (orderKey, keyStr, callback) => {
         getOrder(orderKey, (ord) => {
             const next = ord.filter(k => k !== keyStr);
 
@@ -106,7 +106,7 @@
             next.push(keyStr);
             setOrder(orderKey, next, callback);
         });
-    }
+    };
 
     /**
      * Retrieves all key-value pairs from a map stored in session storage.
@@ -114,9 +114,9 @@
      * @param mapKey - The key for the map in session storage.
      * @param callback - Callback function to execute with the retrieved object.
      */
-    function getAll(mapKey, callback) {
+    const getAll = (mapKey, callback) => {
         StorageUtil.getFromSessionStore(mapKey, (obj) => callback(obj && typeof obj === 'object' ? obj : {}));
-    }
+    };
 
     /**
      * Sets all key-value pairs in a map stored in session storage.
@@ -125,9 +125,9 @@
      * @param obj - The object containing key-value pairs to set.
      * @param callback - Callback function to execute after setting.
      */
-    function setAll(mapKey, obj, callback) {
+    const setAll = (mapKey, obj, callback) => {
         StorageUtil.setToSessionStore(mapKey, obj, () => typeof callback === 'function' ? callback() : undefined);
-    }
+    };
 
     /**
      * Appends a result origin to the list for a specific tab.
@@ -137,7 +137,7 @@
      * @param callback - Callback function to execute after appending.
      * @param attempt - Current attempt count for retrying in.
      */
-    function appendResultOrigin(tabId, origin, callback, attempt = 0) {
+    const appendResultOrigin = (tabId, origin, callback, attempt = 0) => {
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => {
@@ -163,7 +163,7 @@
                 });
             });
         });
-    }
+    };
 
     /**
      * Retrieves the list of result origins for a specific tab.
@@ -171,10 +171,10 @@
      * @param tabId - The ID of the tab.
      * @param callback - Callback function to execute with the retrieved array.
      */
-    function getResultOrigins(tabId, callback) {
+    const getResultOrigins = (tabId, callback) => {
         const k = tabKey(tabId);
         getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => callback(obj[k] || []));
-    }
+    };
 
     /**
      * Sets the list of result origins for a specific tab.
@@ -183,7 +183,7 @@
      * @param origins - The array of origins to set.
      * @param callback - Callback function to execute after setting.
      */
-    function setResultOrigins(tabId, origins, callback) {
+    const setResultOrigins = (tabId, origins, callback) => {
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => {
@@ -193,7 +193,7 @@
                 appendKeyToEnd(STORAGE_KEYS.RESULT_ORIGINS_ORDER, k, callback)
             );
         });
-    }
+    };
 
     /**
      * Deletes the result origins for a specific tab.
@@ -201,7 +201,7 @@
      * @param tabId - The ID of the tab.
      * @param callback - Callback function to execute after deletion.
      */
-    function deleteResultOrigins(tabId, callback) {
+    const deleteResultOrigins = (tabId, callback) => {
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.RESULT_ORIGINS, (obj) => {
@@ -215,7 +215,7 @@
                 );
             });
         });
-    }
+    };
 
     /**
      * Retrieves the frame-zero URL for a specific tab.
@@ -223,10 +223,10 @@
      * @param tabId - The ID of the tab.
      * @param callback - Callback function to execute with the retrieved URL.
      */
-    function getFrameZeroUrl(tabId, callback) {
+    const getFrameZeroUrl = (tabId, callback) => {
         const k = tabKey(tabId);
         getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => callback(obj[k]));
-    }
+    };
 
     /**
      * Sets the frame-zero URL for a specific tab.
@@ -235,7 +235,7 @@
      * @param url - The URL to set.
      * @param callback - Callback function to execute after setting.
      */
-    function setFrameZeroUrl(tabId, url, callback) {
+    const setFrameZeroUrl = (tabId, url, callback) => {
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => {
@@ -245,7 +245,7 @@
                 appendKeyToEnd(STORAGE_KEYS.FRAME_ZERO_URLS_ORDER, k, callback)
             );
         });
-    }
+    };
 
     /**
      * Deletes the frame-zero URL for a specific tab.
@@ -253,7 +253,7 @@
      * @param tabId - The ID of the tab.
      * @param callback - Callback function to execute after deletion.
      */
-    function deleteFrameZeroUrl(tabId, callback) {
+    const deleteFrameZeroUrl = (tabId, callback) => {
         const k = tabKey(tabId);
 
         getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (obj) => {
@@ -267,7 +267,7 @@
                 );
             });
         });
-    }
+    };
 
     // Interval for map cleanups
     const CLEANUP_INTERVAL = 300000; // 5 minutes
@@ -322,6 +322,20 @@
         getAll(STORAGE_KEYS.FRAME_ZERO_URLS, (fMap) => console.debug(`[After] FRAME_ZERO_URLS:`, fMap));
     }, CLEANUP_INTERVAL);
 
+    /**
+     * Sends the user to the new tab page.
+     *
+     * @param {number} tabId - The ID of the tab to be closed. (Firefox only)
+     */
+    const sendToNewTabPage = tabId => {
+        if (isFirefox) {
+            browserAPI.tabs.remove(tabId);
+            browserAPI.tabs.create({});
+        } else {
+            browserAPI.tabs.update(tabId, {url: "about:newtab"});
+        }
+    };
+
     // List of valid protocols to check for
     const validProtocols = new Set(['http:', 'https:']);
 
@@ -330,7 +344,7 @@
      *
      * @param navigationDetails - The navigation details to handle.
      */
-    function handleNavigation(navigationDetails) {
+    const handleNavigation = navigationDetails => {
         Settings.get(settings => {
             // Retrieves settings to check if protection is enabled
             if (Settings.allProvidersDisabled(settings)) {
@@ -365,8 +379,7 @@
             // Debug info for the URL object
             console.debug(urlObject);
 
-            let hostname = urlObject.hostname;
-            let protocol = urlObject.protocol;
+            let {hostname, protocol} = urlObject;
 
             // Checks if the URL has a href
             if (!urlObject.href || urlObject.href.length === 0) {
@@ -507,7 +520,7 @@
                 const cacheName = ProtectionResult.CacheName[result.origin];
                 const fullName = ProtectionResult.FullName[result.origin];
                 const shortName = ProtectionResult.ShortName[result.origin];
-                const resultType = result.resultType;
+                const {resultType} = result;
                 const resultTypeNameEN = ProtectionResult.ResultTypeNameEN[resultType];
 
                 // Removes the URL from the system's processing cache on every callback
@@ -534,13 +547,12 @@
                             const pendingUrl = tab.pendingUrl || tab.url;
 
                             // Checks if the tab is at an extension page
-                            if (!(urlString !== pendingUrl && frameId === 0)) {
-                                if (pendingUrl.startsWith("chrome-extension:") ||
-                                    pendingUrl.startsWith("moz-extension:") ||
-                                    pendingUrl.startsWith("extension:")) {
-                                    console.debug(`[${shortName}] The tab is at an extension page; bailing out. ${pendingUrl} ${frameId}`);
-                                    return;
-                                }
+                            if (!(urlString !== pendingUrl && frameId === 0) &&
+                                (pendingUrl.startsWith("chrome-extension:") ||
+                                pendingUrl.startsWith("moz-extension:") ||
+                                pendingUrl.startsWith("extension:"))) {
+                                console.debug(`[${shortName}] The tab is at an extension page; bailing out. ${pendingUrl} ${frameId}`);
+                                return;
                             }
 
                             const targetUrl = frameId === 0 ? urlString : pendingUrl;
@@ -625,7 +637,118 @@
                 }
             });
         });
-    }
+    };
+
+    /**
+     * Creates the context menu for the extension.
+     */
+    const createContextMenu = () => {
+        Settings.get(settings => {
+            // Removes existing menu items to avoid duplicates
+            contextMenuAPI.removeAll();
+
+            // Checks if the context menu is disabled by policies
+            if (!settings.contextMenuEnabled) {
+                return;
+            }
+
+            // Creates the toggle notifications menu item
+            contextMenuAPI.create({
+                id: "toggleNotifications",
+                title: LangUtil.TOGGLE_NOTIFICATIONS_CONTEXT,
+                type: "checkbox",
+                checked: settings.notificationsEnabled,
+                contexts: ["action"],
+            });
+
+            // Creates the toggle frame navigation menu item
+            contextMenuAPI.create({
+                id: "toggleFrameNavigation",
+                title: LangUtil.TOGGLE_FRAME_NAVIGATION_CONTEXT,
+                type: "checkbox",
+                checked: settings.ignoreFrameNavigation,
+                contexts: ["action"],
+            });
+
+            // Creates the clear allowed websites menu item
+            contextMenuAPI.create({
+                id: "clearAllowedWebsites",
+                title: LangUtil.CLEAR_ALLOWED_WEBSITES_CONTEXT,
+                contexts: ["action"],
+            });
+
+            // Creates the restore default settings menu item
+            contextMenuAPI.create({
+                id: "restoreDefaultSettings",
+                title: LangUtil.RESTORE_DEFAULTS_CONTEXT,
+                contexts: ["action"],
+            });
+
+            // Returns early if managed policies are not supported
+            if (!supportsManagedPolicies) {
+                return;
+            }
+
+            // Gathers the policy values for updating the context menu
+            const policyKeys = [
+                "DisableNotifications",
+                "DisableClearAllowedWebsites",
+                "IgnoreFrameNavigation",
+                "DisableRestoreDefaultSettings"
+            ];
+
+            browserAPI.storage.managed.get(policyKeys, policies => {
+                let updatedSettings = {};
+
+                // Checks if the enable notifications button should be disabled
+                if (policies.DisableNotifications !== undefined) {
+                    contextMenuAPI.update("toggleNotifications", {
+                        enabled: false,
+                        checked: !policies.DisableNotifications,
+                    });
+
+                    updatedSettings.notificationsEnabled = !policies.DisableNotifications;
+                    console.debug("Notifications are managed by system policy.");
+                }
+
+                // Checks if the ignore frame navigation button should be disabled
+                if (policies.IgnoreFrameNavigation !== undefined) {
+                    contextMenuAPI.update("toggleFrameNavigation", {
+                        enabled: false,
+                        checked: policies.IgnoreFrameNavigation,
+                    });
+
+                    updatedSettings.ignoreFrameNavigation = policies.IgnoreFrameNavigation;
+                    console.debug("Ignoring frame navigation is managed by system policy.");
+                }
+
+                // Checks if the clear allowed websites button should be disabled
+                if (policies.DisableClearAllowedWebsites !== undefined && policies.DisableClearAllowedWebsites) {
+                    contextMenuAPI.update("clearAllowedWebsites", {
+                        enabled: false,
+                    });
+
+                    console.debug("Clear allowed websites button is managed by system policy.");
+                }
+
+                // Checks if the restore default settings button should be disabled
+                if (policies.DisableRestoreDefaultSettings !== undefined && policies.DisableRestoreDefaultSettings) {
+                    contextMenuAPI.update("restoreDefaultSettings", {
+                        enabled: false,
+                    });
+
+                    console.debug("Restore default settings button is managed by system policy.");
+                }
+
+                // Updates settings cumulatively if any policy-based changes were made
+                if (Object.keys(updatedSettings).length > 0) {
+                    Settings.set(updatedSettings, () => {
+                        console.debug("Updated settings from context menu creation:", updatedSettings);
+                    });
+                }
+            });
+        });
+    };
 
     // Sets all policy keys needed for managed policies
     const policyKeys = [
@@ -652,8 +775,6 @@
         'CleanBrowsingFamilyEnabled',
         'CloudflareSecurityEnabled',
         'CloudflareFamilyEnabled',
-        'DNS0SecurityEnabled',
-        'DNS0FamilyEnabled',
         'DNS4EUSecurityEnabled',
         'DNS4EUFamilyEnabled',
         'Quad9Enabled',
@@ -789,18 +910,6 @@
             if (policies.CloudflareFamilyEnabled !== undefined) {
                 settings.cloudflareFamilyEnabled = policies.CloudflareFamilyEnabled;
                 console.debug("Cloudflare Family is managed by system policy.");
-            }
-
-            // Checks and sets the DNS0.eu Security settings using the policy
-            if (policies.DNS0SecurityEnabled !== undefined) {
-                settings.dns0SecurityEnabled = policies.DNS0SecurityEnabled;
-                console.debug("DNS0.eu Security is managed by system policy.");
-            }
-
-            // Checks and sets the DNS0.eu Family settings using the policy
-            if (policies.DNS0FamilyEnabled !== undefined) {
-                settings.dns0FamilyEnabled = policies.DNS0FamilyEnabled;
-                console.debug("DNS0.eu Family is managed by system policy.");
             }
 
             // Checks and sets the DNS4EU Security settings using the policy
@@ -1053,7 +1162,7 @@
                     return;
                 }
 
-                const origin = message.origin;
+                const {origin} = message;
 
                 if (origin === 0) {
                     console.warn(`Unknown origin: ${message.origin}`);
@@ -1187,8 +1296,6 @@
             case Messages.CLOUDFLARE_SECURITY_TOGGLED:
             case Messages.CONTROL_D_FAMILY_TOGGLED:
             case Messages.CONTROL_D_SECURITY_TOGGLED:
-            case Messages.DNS0_FAMILY_TOGGLED:
-            case Messages.DNS0_SECURITY_TOGGLED:
             case Messages.DNS4EU_FAMILY_TOGGLED:
             case Messages.DNS4EU_SECURITY_TOGGLED:
             case Messages.PRECISIONSEC_TOGGLED:
@@ -1280,129 +1387,4 @@
                 break;
         }
     });
-
-    /**
-     * Creates the context menu for the extension.
-     */
-    function createContextMenu() {
-        Settings.get(settings => {
-            // Removes existing menu items to avoid duplicates
-            contextMenuAPI.removeAll();
-
-            // Checks if the context menu is disabled by policies
-            if (!settings.contextMenuEnabled) {
-                return;
-            }
-
-            // Creates the toggle notifications menu item
-            contextMenuAPI.create({
-                id: "toggleNotifications",
-                title: LangUtil.TOGGLE_NOTIFICATIONS_CONTEXT,
-                type: "checkbox",
-                checked: settings.notificationsEnabled,
-                contexts: ["action"],
-            });
-
-            // Creates the toggle frame navigation menu item
-            contextMenuAPI.create({
-                id: "toggleFrameNavigation",
-                title: LangUtil.TOGGLE_FRAME_NAVIGATION_CONTEXT,
-                type: "checkbox",
-                checked: settings.ignoreFrameNavigation,
-                contexts: ["action"],
-            });
-
-            // Creates the clear allowed websites menu item
-            contextMenuAPI.create({
-                id: "clearAllowedWebsites",
-                title: LangUtil.CLEAR_ALLOWED_WEBSITES_CONTEXT,
-                contexts: ["action"],
-            });
-
-            // Creates the restore default settings menu item
-            contextMenuAPI.create({
-                id: "restoreDefaultSettings",
-                title: LangUtil.RESTORE_DEFAULTS_CONTEXT,
-                contexts: ["action"],
-            });
-
-            // Returns early if managed policies are not supported
-            if (!supportsManagedPolicies) {
-                return;
-            }
-
-            // Gathers the policy values for updating the context menu
-            const policyKeys = [
-                "DisableNotifications",
-                "DisableClearAllowedWebsites",
-                "IgnoreFrameNavigation",
-                "DisableRestoreDefaultSettings"
-            ];
-
-            browserAPI.storage.managed.get(policyKeys, policies => {
-                let updatedSettings = {};
-
-                // Checks if the enable notifications button should be disabled
-                if (policies.DisableNotifications !== undefined) {
-                    contextMenuAPI.update("toggleNotifications", {
-                        enabled: false,
-                        checked: !policies.DisableNotifications,
-                    });
-
-                    updatedSettings.notificationsEnabled = !policies.DisableNotifications;
-                    console.debug("Notifications are managed by system policy.");
-                }
-
-                // Checks if the ignore frame navigation button should be disabled
-                if (policies.IgnoreFrameNavigation !== undefined) {
-                    contextMenuAPI.update("toggleFrameNavigation", {
-                        enabled: false,
-                        checked: policies.IgnoreFrameNavigation,
-                    });
-
-                    updatedSettings.ignoreFrameNavigation = policies.IgnoreFrameNavigation;
-                    console.debug("Ignoring frame navigation is managed by system policy.");
-                }
-
-                // Checks if the clear allowed websites button should be disabled
-                if (policies.DisableClearAllowedWebsites !== undefined && policies.DisableClearAllowedWebsites) {
-                    contextMenuAPI.update("clearAllowedWebsites", {
-                        enabled: false,
-                    });
-
-                    console.debug("Clear allowed websites button is managed by system policy.");
-                }
-
-                // Checks if the restore default settings button should be disabled
-                if (policies.DisableRestoreDefaultSettings !== undefined && policies.DisableRestoreDefaultSettings) {
-                    contextMenuAPI.update("restoreDefaultSettings", {
-                        enabled: false,
-                    });
-
-                    console.debug("Restore default settings button is managed by system policy.");
-                }
-
-                // Updates settings cumulatively if any policy-based changes were made
-                if (Object.keys(updatedSettings).length > 0) {
-                    Settings.set(updatedSettings, () => {
-                        console.debug("Updated settings from context menu creation:", updatedSettings);
-                    });
-                }
-            });
-        });
-    }
-
-    /**
-     * Sends the user to the new tab page.
-     *
-     * @param {number} tabId - The ID of the tab to be closed. (Firefox only)
-     */
-    function sendToNewTabPage(tabId) {
-        if (isFirefox) {
-            browserAPI.tabs.remove(tabId);
-            browserAPI.tabs.create({});
-        } else {
-            browserAPI.tabs.update(tabId, {url: "about:newtab"});
-        }
-    }
 })();

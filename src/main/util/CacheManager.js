@@ -55,14 +55,13 @@ const CacheManager = (() => {
         // Official Partners
         "adGuardSecurity", "adGuardFamily",
         "alphaMountain",
-        "controlDSecurity", "controlDFamily",
         "precisionSec",
 
         // Non-Partnered Providers
         "certEE",
         "cleanBrowsingSecurity", "cleanBrowsingFamily",
         "cloudflareSecurity", "cloudflareFamily",
-        "dns0Security", "dns0Family",
+        "controlDSecurity", "controlDFamily",
         "dns4EUSecurity", "dns4EUFamily",
         "quad9",
     ];
@@ -114,7 +113,7 @@ const CacheManager = (() => {
     /**
      * Update the caches that use localStorage (allowed and blocked caches).
      */
-    function updateLocalStorage() {
+    const updateLocalStorage = () => {
         // Checks if the allowed caches are valid
         if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
@@ -153,12 +152,12 @@ const CacheManager = (() => {
             clearTimeout(localStorageTimeoutID);
         }
         localStorageTimeoutID = setTimeout(write, debounceDelay);
-    }
+    };
 
     /**
      * Update the caches that use sessionStorage (processing caches).
      */
-    function updateSessionStorage() {
+    const updateSessionStorage = () => {
         // Checks if the processing cache is valid
         if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCache is not defined or not an object');
@@ -180,14 +179,14 @@ const CacheManager = (() => {
             clearTimeout(sessionStorageTimeoutID);
         }
         sessionStorageTimeoutID = setTimeout(write, debounceDelay);
-    }
+    };
 
     /**
      * Cleans up expired entries from all caches.
      *
      * @returns {number} - The number of expired entries removed from all caches.
      */
-    function cleanExpiredEntries() {
+    const cleanExpiredEntries = () => {
         const now = Date.now();
         let removed = 0;
 
@@ -215,12 +214,12 @@ const CacheManager = (() => {
         cleanGroup(blockedCaches, () => updateLocalStorage());
         cleanGroup(processingCaches, () => updateSessionStorage());
         return removed;
-    }
+    };
 
     /**
      * Clears all allowed caches.
      */
-    function clearAllowedCache() {
+    const clearAllowedCache = () => {
         // Returns if the allowed cache is not defined.
         if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
@@ -233,12 +232,12 @@ const CacheManager = (() => {
         }
 
         updateLocalStorage();
-    }
+    };
 
     /**
      * Clears all blocked caches.
      */
-    function clearBlockedCache() {
+    const clearBlockedCache = () => {
         // Returns if the blocked cache is not defined.
         if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
@@ -251,12 +250,12 @@ const CacheManager = (() => {
         }
 
         updateLocalStorage();
-    }
+    };
 
     /**
      * Clears all processing caches.
      */
-    function clearProcessingCache() {
+    const clearProcessingCache = () => {
         // Checks if the processing cache is valid
         if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCache is not defined or not an object');
@@ -269,7 +268,7 @@ const CacheManager = (() => {
         }
 
         updateSessionStorage();
-    }
+    };
 
     /**
      * Checks if a URL is in the allowed cache for a specific provider.
@@ -278,7 +277,7 @@ const CacheManager = (() => {
      * @param name {string} - The name of the provider (e.g., "precisionSec").
      * @returns {boolean} - Returns true if the URL is in the allowed cache and not expired, false otherwise.
      */
-    function isUrlInAllowedCache(url, name) {
+    const isUrlInAllowedCache = (url, name) => {
         // Returns if the allowed cache is not defined.
         if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
@@ -308,7 +307,7 @@ const CacheManager = (() => {
             console.error(`Error checking allowed cache for ${url}:`, error);
         }
         return false;
-    }
+    };
 
     /**
      * Checks if a string is in the allowed cache for a specific provider.
@@ -317,7 +316,7 @@ const CacheManager = (() => {
      * @param name {string} - The name of the provider (e.g., "precisionSec").
      * @returns {boolean} - Returns true if the string is in the allowed cache and not expired, false otherwise.
      */
-    function isStringInAllowedCache(str, name) {
+    const isStringInAllowedCache = (str, name) => {
         // Returns if the allowed cache is not defined.
         if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
@@ -338,7 +337,7 @@ const CacheManager = (() => {
             console.error(`Error checking allowed cache for string "${str}":`, error);
         }
         return false;
-    }
+    };
 
     /**
      * Checks if a string is in the allowed cache for a specific provider.
@@ -347,7 +346,7 @@ const CacheManager = (() => {
      * @param name {string} - The name of the provider (e.g., "precisionSec").
      * @returns {boolean} - Returns true if the string is in the allowed cache and not expired, false otherwise.
      */
-    function isPatternInAllowedCache(str, name) {
+    const isPatternInAllowedCache = (str, name) => {
         // Returns if the allowed cache is not defined.
         if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
@@ -378,7 +377,7 @@ const CacheManager = (() => {
             console.error(`Error checking allowed cache for string "${str}":`, error);
         }
         return false;
-    }
+    };
 
     /**
      * Add a URL to the allowed cache for a specific provider.
@@ -386,7 +385,7 @@ const CacheManager = (() => {
      * @param url {string|URL} - The URL to add, can be a string or a URL object.
      * @param name {string} - The name of the provider (e.g., "precisionSec").
      */
-    function addUrlToAllowedCache(url, name) {
+    const addUrlToAllowedCache = (url, name) => {
         // Returns if the allowed cache is not defined.
         if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
@@ -412,7 +411,7 @@ const CacheManager = (() => {
         } catch (error) {
             console.error(`Error adding URL to allowed cache for ${url}:`, error);
         }
-    }
+    };
 
     /**
      * Add a string key to the allowed cache for a specific provider.
@@ -420,7 +419,7 @@ const CacheManager = (() => {
      * @param str {string} - The string to add.
      * @param name {string} - The name of the cache (e.g., "precisionSec", "global").
      */
-    function addStringToAllowedCache(str, name) {
+    const addStringToAllowedCache = (str, name) => {
         // Returns if the allowed cache is not defined.
         if (!allowedCaches || typeof allowedCaches !== 'object') {
             console.warn('allowedCache is not defined or not an object');
@@ -445,7 +444,7 @@ const CacheManager = (() => {
         } catch (error) {
             console.error(`Error adding string to allowed cache for "${str}":`, error);
         }
-    }
+    };
 
     /**
      * Checks if a URL is in the blocked cache for a specific provider.
@@ -454,7 +453,7 @@ const CacheManager = (() => {
      * @param name {string} - The name of the provider (e.g., "precisionSec").
      * @returns {boolean} - Returns true if the URL is in the allowed cache and not expired, false otherwise.
      */
-    function isUrlInBlockedCache(url, name) {
+    const isUrlInBlockedCache = (url, name) => {
         // Returns if the blocked cache is not defined.
         if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
@@ -482,7 +481,7 @@ const CacheManager = (() => {
             console.error(`Error checking blocked cache for ${url}:`, error);
         }
         return false;
-    }
+    };
 
     /**
      * Add a URL to the blocked cache for a specific provider.
@@ -491,7 +490,7 @@ const CacheManager = (() => {
      * @param name {string} - The name of the provider (e.g., "precisionSec").
      * @param resultType {string} - The resultType of the URL (e.g., "malicious", "phishing").
      */
-    function addUrlToBlockedCache(url, name, resultType) {
+    const addUrlToBlockedCache = (url, name, resultType) => {
         // Returns if the blocked cache is not defined.
         if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
@@ -518,7 +517,7 @@ const CacheManager = (() => {
         } catch (error) {
             console.error(`Error adding URL to blocked cache for ${url}:`, error);
         }
-    }
+    };
 
     /**
      * Get the result type of a blocked URL from the cache for a specific provider.
@@ -527,7 +526,7 @@ const CacheManager = (() => {
      * @param name {string} - The name of the provider (e.g., "precisionSec").
      * @returns {*|null} - Returns the result type (e.g., "Malicious", "Phishing") if found and not expired, null otherwise.
      */
-    function getBlockedResultType(url, name) {
+    const getBlockedResultType = (url, name) => {
         // Returns if the blocked cache is not defined.
         if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
@@ -555,7 +554,7 @@ const CacheManager = (() => {
             console.error(`Error getting blocked result type for ${url}:`, error);
         }
         return null;
-    }
+    };
 
     /**
      * Remove a URL from the blocked cache for a specific provider.
@@ -563,7 +562,7 @@ const CacheManager = (() => {
      * @param url {string|URL} - The URL to remove, can be a string or a URL object.
      * @param name {string} - The name of the provider (e.g., "precisionSec").
      */
-    function removeUrlFromBlockedCache(url, name) {
+    const removeUrlFromBlockedCache = (url, name) => {
         // Returns if the blocked cache is not defined.
         if (!blockedCaches || typeof blockedCaches !== 'object') {
             console.warn('blockedCache is not defined or not an object');
@@ -588,7 +587,7 @@ const CacheManager = (() => {
         } catch (error) {
             console.error(`Error removing URL from blocked cache for ${url}:`, error);
         }
-    }
+    };
 
     /**
      * Checks if a URL is in the processing cache for a specific provider.
@@ -597,7 +596,7 @@ const CacheManager = (() => {
      * @param name {string} - The name of the provider (e.g., "precisionSec").
      * @returns {boolean} - Returns true if the URL is in the processing cache and not expired, false otherwise.
      */
-    function isUrlInProcessingCache(url, name) {
+    const isUrlInProcessingCache = (url, name) => {
         // Checks if the processing cache is valid
         if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
@@ -627,7 +626,7 @@ const CacheManager = (() => {
             console.error(`Error checking processing cache for ${url}:`, error);
         }
         return false;
-    }
+    };
 
     /**
      * Add a URL to the processing cache, associating it with a specific tabId.
@@ -636,7 +635,7 @@ const CacheManager = (() => {
      * @param {string} name - The name of the provider (e.g., "precisionSec").
      * @param {number} tabId - The ID of the tab associated with this URL.
      */
-    function addUrlToProcessingCache(url, name, tabId) {
+    const addUrlToProcessingCache = (url, name, tabId) => {
         // Checks if the processing cache is valid
         if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
@@ -663,7 +662,7 @@ const CacheManager = (() => {
         } catch (error) {
             console.error(`Error adding URL to processing cache for ${url}:`, error);
         }
-    }
+    };
 
     /**
      * Remove a URL from the processing cache for a specific provider.
@@ -671,7 +670,7 @@ const CacheManager = (() => {
      * @param url {string|URL} - The URL to remove, can be a string or a URL object.
      * @param name {string} - The name of the provider (e.g., "precisionSec").
      */
-    function removeUrlFromProcessingCache(url, name) {
+    const removeUrlFromProcessingCache = (url, name) => {
         // Checks if the processing cache is valid
         if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
@@ -696,7 +695,7 @@ const CacheManager = (() => {
         } catch (error) {
             console.error(`Error removing URL from processing cache for ${url}:`, error);
         }
-    }
+    };
 
     /**
      * Retrieve all normalized-URL keys (or string keys) in the processing cache for a given provider
@@ -706,7 +705,7 @@ const CacheManager = (() => {
      * @param {number} tabId - The ID of the tab to filter by.
      * @returns {string[]} - An array of keys (normalized URLs or strings) that match the criteria.
      */
-    function getKeysByTabId(name, tabId) {
+    const getKeysByTabId = (name, tabId) => {
         // Checks if the processing cache is valid
         if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
@@ -737,14 +736,14 @@ const CacheManager = (() => {
         cleanExpiredEntries();
         updateSessionStorage();
         return results;
-    }
+    };
 
     /**
      * Remove all entries in the processing cache for all keys associated with a specific tabId.
      *
      * @param tabId - The ID of the tab whose entries should be removed.
      */
-    function removeKeysByTabId(tabId) {
+    const removeKeysByTabId = tabId => {
         // Checks if the processing cache is valid
         if (!processingCaches || typeof processingCaches !== 'object') {
             console.warn('processingCaches is not defined or not an object');
@@ -774,7 +773,7 @@ const CacheManager = (() => {
             console.debug(`Removed ${removedCount} entries from processing cache for tab ID ${tabId}`);
             updateSessionStorage();
         }
-    }
+    };
 
     return {
         clearAllowedCache,

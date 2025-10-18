@@ -53,12 +53,11 @@ const LangUtil = {
     OFFICIAL_PARTNER_TITLE: browserAPI.i18n.getMessage('officialPartnerTitle'),
     ADGUARD_LOGO_ALT: browserAPI.i18n.getMessage('adGuardLogoAlt'),
     ALPHA_MOUNTAIN_LOGO_ALT: browserAPI.i18n.getMessage('alphaMountainLogoAlt'),
-    CONTROL_D_LOGO_ALT: browserAPI.i18n.getMessage('controlDLogoAlt'),
     PRECISION_SEC_LOGO_ALT: browserAPI.i18n.getMessage('precisionSecLogoAlt'),
     CERT_EE_LOGO_ALT: browserAPI.i18n.getMessage('certEELogoAlt'),
     CLEAN_BROWSING_LOGO_ALT: browserAPI.i18n.getMessage('cleanBrowsingLogoAlt'),
     CLOUDFLARE_LOGO_ALT: browserAPI.i18n.getMessage('cloudflareLogoAlt'),
-    DNS0_LOGO_ALT: browserAPI.i18n.getMessage('dns0LogoAlt'),
+    CONTROL_D_LOGO_ALT: browserAPI.i18n.getMessage('controlDLogoAlt'),
     DNS4EU_LOGO_ALT: browserAPI.i18n.getMessage('dns4EULogoAlt'),
     QUAD9_LOGO_ALT: browserAPI.i18n.getMessage('quad9LogoAlt'),
 

@@ -37,7 +37,7 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
      *
      * @param originInt - The integer representing the origin of the protection result.
      */
-    function applyOriginVisuals(originInt) {
+    const applyOriginVisuals = originInt => {
         const systemName = ProtectionResult.FullName[originInt];
 
         // Update the visible "Reported by" label
@@ -47,7 +47,7 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
         } else {
             console.warn("'reportedBy' element not found in the WarningPage DOM.");
         }
-    }
+    };
 
     /**
      * Wraps system names text to fit within a specified maximum line length.
@@ -55,7 +55,7 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
      * @param text - The text to wrap, typically a comma-separated list of system names.
      * @returns {string} - The wrapped text, with each line not exceeding the specified maximum length.
      */
-    function wrapSystemNamesText(text) {
+    const wrapSystemNamesText = text => {
         const parts = text.split(', ');
         const lines = [];
         let currentLine = '';
@@ -84,12 +84,12 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
             lines.push(currentLine);
         }
         return lines.join('\n');
-    }
+    };
 
     /**
      * Initialize the popup or refresh if already initialized.
      */
-    function initialize() {
+    const initialize = () => {
         // Initializes the DOM element cache
         domElements = Object.fromEntries(
             ["reason", "url", "reportedBy", "reportWebsite", "allowWebsite", "backButton", "continueButton",
@@ -115,7 +115,7 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
         /**
          * Localizes the page by replacing text content with localized messages.
          */
-        function localizePage() {
+        const localizePage = () => {
             const bannerText = document.querySelector('.bannerText');
 
             // Sets the document title text
@@ -208,7 +208,7 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
             } else {
                 console.warn("'logo' element not found in the WarningPage DOM.");
             }
-        }
+        };
 
         // Localizes the page content
         localizePage();
@@ -289,7 +289,7 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
          *
          * @returns {URL|null} - The report URL.
          */
-        function getReportUrl() {
+        const getReportUrl = () => {
             switch (originInt) {
                 case ProtectionResult.Origin.ADGUARD_SECURITY:
                     return new URL("mailto:support@adguard.com?subject=False%20Positive&body=Hello%2C" +
@@ -313,26 +313,6 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
 
                 case ProtectionResult.Origin.ALPHAMOUNTAIN:
                     return new URL("https://alphamountain.freshdesk.com/support/tickets/new");
-
-                case ProtectionResult.Origin.CONTROL_D_SECURITY:
-                    return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C" +
-                        "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
-                        "%0A%0AProduct%3A%20Control%20D%20Security%20DNS" +
-                        "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
-                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.ac");
-
-                case ProtectionResult.Origin.CONTROL_D_FAMILY:
-                    return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C" +
-                        "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
-                        "%0A%0AProduct%3A%20Control%20D%20Family%20DNS" +
-                        "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
-                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
-                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
-                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
-                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.PRECISIONSEC:
                     return new URL("mailto:info@precisionsec.com?subject=False%20Positive&body=Hello%2C" +
@@ -378,9 +358,25 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
                 case ProtectionResult.Origin.CLOUDFLARE_FAMILY:
                     return new URL("https://radar.cloudflare.com/domains/feedback/" + encodedBlockedUrl);
 
-                case ProtectionResult.Origin.DNS0_SECURITY:
-                case ProtectionResult.Origin.DNS0_FAMILY:
-                    return new URL("https://www.dns0.eu/report");
+                case ProtectionResult.Origin.CONTROL_D_SECURITY:
+                    return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C" +
+                        "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
+                        "%0A%0AProduct%3A%20Control%20D%20Security%20DNS" +
+                        "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.ac");
+
+                case ProtectionResult.Origin.CONTROL_D_FAMILY:
+                    return new URL("mailto:help@controld.com?subject=False%20Positive&body=Hello%2C" +
+                        "%0A%0AI%20would%20like%20to%20report%20a%20false%20positive." +
+                        "%0A%0AProduct%3A%20Control%20D%20Family%20DNS" +
+                        "%0AURL%3A%20" + encodedBlockedUrl + "%20%28or%20the%20hostname%20itself%29" +
+                        "%0ADetected%20as%3A%20" + encodedResultTextEN +
+                        "%0A%0AI%20believe%20this%20website%20is%20legitimate." +
+                        "%0A%0ASent%20with%20Osprey:%20Browser%20Protection" +
+                        "%0AWebsite:%20https://osprey.ac");
 
                 case ProtectionResult.Origin.DNS4EU_SECURITY:
                 case ProtectionResult.Origin.DNS4EU_FAMILY:
@@ -392,7 +388,7 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
                 default:
                     return null;
             }
-        }
+        };
 
         /**
          * Sends a message to the background script with the specified message type and additional data.
@@ -401,7 +397,7 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
          * @param additionalData - Additional data to include in the message.
          * @returns {Promise<void>} - A promise that resolves when the message is sent.
          */
-        async function sendMessage(messageType, additionalData = {}) {
+        const sendMessage = async (messageType, additionalData = {}) => {
             try {
                 // Creates the message object and converts URL objects to strings
                 const message = {
@@ -422,7 +418,7 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
             } catch (error) {
                 console.error(`Error sending message ${messageType}:`, error);
             }
-        }
+        };
 
         // Extracts the blocked URL from the current page URL
         const continueUrl = UrlHelpers.extractContinueUrl(pageUrl);
@@ -517,7 +513,7 @@ globalThis.WarningSingleton = globalThis.WarningSingleton || (() => {
                 console.warn("'backButton' element not found in the WarningPage DOM.");
             }
         });
-    }
+    };
 
     return {
         initialize

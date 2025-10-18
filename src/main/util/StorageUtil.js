@@ -29,7 +29,7 @@ const StorageUtil = (() => {
      * @param {string} key - The key to retrieve from local storage.
      * @param {Function} callback - The function to call with the retrieved value.
      */
-    function getFromLocalStore(key, callback) {
+    const getFromLocalStore = (key, callback) => {
         // Ensures the callback is a function
         const fixedCallback = typeof callback === 'function' ? callback : () => {
         };
@@ -60,7 +60,7 @@ const StorageUtil = (() => {
             // Calls the callback function with the retrieved value.
             fixedCallback(value);
         });
-    }
+    };
 
     /**
      * Saves data to the browser's local storage.
@@ -69,7 +69,7 @@ const StorageUtil = (() => {
      * @param {any} value - The value to store.
      * @param {Function} [callback] - Optional callback to call after saving.
      */
-    function setToLocalStore(key, value, callback) {
+    const setToLocalStore = (key, value, callback) => {
         // Ensures the callback is a function
         const fixedCallback = typeof callback === 'function' ? callback : () => {
         };
@@ -106,7 +106,7 @@ const StorageUtil = (() => {
             // Completes the callback
             fixedCallback();
         });
-    }
+    };
 
     /**
      * Retrieves data from the browser's session storage.
@@ -114,7 +114,7 @@ const StorageUtil = (() => {
      * @param {string} key - The key to retrieve from session storage.
      * @param {Function} callback - The function to call with the retrieved value.
      */
-    function getFromSessionStore(key, callback) {
+    const getFromSessionStore = (key, callback) => {
         // Ensures the callback is a function
         const fixedCallback = typeof callback === 'function' ? callback : () => {
         };
@@ -145,7 +145,7 @@ const StorageUtil = (() => {
             // Calls the callback function with the retrieved value.
             fixedCallback(value);
         });
-    }
+    };
 
     /**
      * Saves data to the browser's session storage.
@@ -154,7 +154,7 @@ const StorageUtil = (() => {
      * @param {any} value - The value to store.
      * @param {Function} [callback] - Optional callback to call after saving.
      */
-    function setToSessionStore(key, value, callback) {
+    const setToSessionStore = (key, value, callback) => {
         // Ensures the callback is a function
         const fixedCallback = typeof callback === 'function' ? callback : () => {
         };
@@ -191,7 +191,7 @@ const StorageUtil = (() => {
             // Completes the callback
             fixedCallback();
         });
-    }
+    };
 
     return {
         getFromLocalStore,

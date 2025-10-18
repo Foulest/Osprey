@@ -28,9 +28,7 @@ const Settings = (() => {
         adGuardSecurityEnabled: true,
         adGuardFamilyEnabled: false,
         alphaMountainEnabled: true,
-        controlDSecurityEnabled: false,
-        controlDFamilyEnabled: false,
-        precisionSecEnabled: true,
+        precisionSecEnabled: false, // Temporarily disabled due to service issues
 
         // Non-Partnered Providers
         certEEEnabled: false,
@@ -38,8 +36,8 @@ const Settings = (() => {
         cleanBrowsingFamilyEnabled: false,
         cloudflareSecurityEnabled: true,
         cloudflareFamilyEnabled: false,
-        dns0SecurityEnabled: true,
-        dns0FamilyEnabled: false,
+        controlDSecurityEnabled: false,
+        controlDFamilyEnabled: false,
         dns4EUSecurityEnabled: true,
         dns4EUFamilyEnabled: false,
         quad9Enabled: true,
@@ -62,7 +60,7 @@ const Settings = (() => {
      * @param {Object} source - The source object to compare with.
      * @returns {boolean} - Returns true if any values were updated, false otherwise.
      */
-    function updateIfChanged(target, source) {
+    const updateIfChanged = (target, source) => {
         // Checks if the target is valid
         if (!target || typeof target !== 'object') {
             throw new Error('Target must be an object');
@@ -79,11 +77,9 @@ const Settings = (() => {
             // Iterates through the source object properties
             // If the values differ, update the target and mark changes
             for (const key in source) {
-                if (Object.hasOwn(source, key)) {
-                    if (source[key] !== target[key]) {
-                        target[key] = source[key];
-                        hasChanges = true;
-                    }
+                if (Object.hasOwn(source, key) && source[key] !== target[key]) {
+                    target[key] = source[key];
+                    hasChanges = true;
                 }
             }
         } catch (error) {
@@ -93,14 +89,14 @@ const Settings = (() => {
 
         // Returns whether any changes were made
         return hasChanges;
-    }
+    };
 
     /**
      * Retrieves settings from local storage and merges them with default settings.
      *
      * @param {Function} callback - The function to call with the retrieved settings.
      */
-    function get(callback) {
+    const get = callback => {
         StorageUtil.getFromLocalStore(settingsKey, function (storedSettings) {
             // Clones the default settings object
             let mergedSettings = structuredClone(defaultSettings);
@@ -111,7 +107,7 @@ const Settings = (() => {
             // Invokes the callback with the merged settings
             callback?.(mergedSettings);
         });
-    }
+    };
 
     /**
      * Saves settings to local storage, merging them with any previously stored settings.
@@ -119,7 +115,7 @@ const Settings = (() => {
      * @param {Object} newSettings - The new settings to save.
      * @param {Function} [callback] - Optional callback to call after settings are saved.
      */
-    function set(newSettings, callback) {
+    const set = (newSettings, callback) => {
         StorageUtil.getFromLocalStore(settingsKey, function (storedSettings) {
             // Clones the default settings object
             let mergedSettings = structuredClone(defaultSettings);
@@ -131,42 +127,19 @@ const Settings = (() => {
             // Saves the merged settings back to local storage
             StorageUtil.setToLocalStore(settingsKey, mergedSettings, callback);
         });
-    }
+    };
 
     /**
      * Restore the default settings.
      *
      * @param callback - Callback function that will be called after restoring the settings.
      */
-    function restoreDefaultSettings(callback) {
+    const restoreDefaultSettings = callback => {
         // Saves the default settings back to local storage
         StorageUtil.getFromLocalStore(settingsKey, function () {
             StorageUtil.setToLocalStore(settingsKey, defaultSettings, callback);
         });
-    }
-
-    /**
-     * Checks if all DNS provider settings are disabled.
-     *
-     * @param settings - The settings object to check.
-     * @returns {boolean} - Returns true if all DNS provider settings are disabled, false otherwise.
-     */
-    function allDNSProvidersDisabled(settings) {
-        return !settings.adGuardSecurityEnabled &&
-            !settings.adGuardFamilyEnabled &&
-            !settings.controlDSecurityEnabled &&
-            !settings.controlDFamilyEnabled &&
-            !settings.certEEEnabled &&
-            !settings.cleanBrowsingSecurityEnabled &&
-            !settings.cleanBrowsingFamilyEnabled &&
-            !settings.cloudflareSecurityEnabled &&
-            !settings.cloudflareFamilyEnabled &&
-            !settings.dns0SecurityEnabled &&
-            !settings.dns0FamilyEnabled &&
-            !settings.dns4EUSecurityEnabled &&
-            !settings.dns4EUFamilyEnabled &&
-            !settings.quad9Enabled;
-    }
+    };
 
     /**
      * Checks if all partner settings are disabled.
@@ -174,14 +147,11 @@ const Settings = (() => {
      * @param settings - The settings object to check.
      * @returns {boolean} - Returns true if all partner settings are disabled, false otherwise.
      */
-    function allPartnersDisabled(settings) {
-        return !settings.adGuardSecurityEnabled &&
-            !settings.adGuardFamilyEnabled &&
-            !settings.alphaMountainEnabled &&
-            !settings.controlDSecurityEnabled &&
-            !settings.controlDFamilyEnabled &&
-            !settings.precisionSecEnabled;
-    }
+    const allPartnersDisabled = settings =>
+        !settings.adGuardSecurityEnabled &&
+        !settings.adGuardFamilyEnabled &&
+        !settings.alphaMountainEnabled &&
+        !settings.precisionSecEnabled;
 
     /**
      * Checks if all security providers are disabled.
@@ -189,24 +159,21 @@ const Settings = (() => {
      * @param settings - The settings object to check.
      * @returns {boolean} - Returns true if all security providers are disabled, false otherwise.
      */
-    function allProvidersDisabled(settings) {
-        return !settings.adGuardSecurityEnabled &&
-            !settings.adGuardFamilyEnabled &&
-            !settings.alphaMountainEnabled &&
-            !settings.controlDSecurityEnabled &&
-            !settings.controlDFamilyEnabled &&
-            !settings.precisionSecEnabled &&
-            !settings.certEEEnabled &&
-            !settings.cleanBrowsingSecurityEnabled &&
-            !settings.cleanBrowsingFamilyEnabled &&
-            !settings.cloudflareSecurityEnabled &&
-            !settings.cloudflareFamilyEnabled &&
-            !settings.dns0SecurityEnabled &&
-            !settings.dns0FamilyEnabled &&
-            !settings.dns4EUSecurityEnabled &&
-            !settings.dns4EUFamilyEnabled &&
-            !settings.quad9Enabled;
-    }
+    const allProvidersDisabled = settings =>
+        !settings.adGuardSecurityEnabled &&
+        !settings.adGuardFamilyEnabled &&
+        !settings.alphaMountainEnabled &&
+        !settings.precisionSecEnabled &&
+        !settings.certEEEnabled &&
+        !settings.cleanBrowsingSecurityEnabled &&
+        !settings.cleanBrowsingFamilyEnabled &&
+        !settings.cloudflareSecurityEnabled &&
+        !settings.cloudflareFamilyEnabled &&
+        !settings.controlDSecurityEnabled &&
+        !settings.controlDFamilyEnabled &&
+        !settings.dns4EUSecurityEnabled &&
+        !settings.dns4EUFamilyEnabled &&
+        !settings.quad9Enabled;
 
     return {
         get,

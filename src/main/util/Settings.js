@@ -28,7 +28,7 @@ const Settings = (() => {
         adGuardSecurityEnabled: true,
         adGuardFamilyEnabled: false,
         alphaMountainEnabled: true,
-        precisionSecEnabled: false, // Temporarily disabled due to service issues
+        precisionSecEnabled: true,
 
         // Non-Partnered Providers
         certEEEnabled: false,

@@ -1139,7 +1139,7 @@
                 }
 
                 // Redirects to the new tab page if the blocked URL is not a valid HTTP(S) URL
-                if (!validProtocols.includes(blockedUrlObject.protocol.toLowerCase())) {
+                if (!validProtocols.has(blockedUrlObject.protocol.toLowerCase())) {
                     console.debug(`Invalid protocol in blocked URL: ${message.blockedUrl}; sending to new tab page.`);
                     sendToNewTabPage(tabId);
                     return;
@@ -1156,7 +1156,7 @@
                 }
 
                 // Redirects to the new tab page if the continue URL is not a valid HTTP(S) URL
-                if (!validProtocols.includes(continueUrlObject.protocol.toLowerCase())) {
+                if (!validProtocols.has(continueUrlObject.protocol.toLowerCase())) {
                     console.debug(`Invalid protocol in continue URL: ${message.continueUrl}; sending to new tab page.`);
                     sendToNewTabPage(tabId);
                     return;
@@ -1206,7 +1206,7 @@
 
                 let reportUrlObject = new URL(message.reportUrl);
 
-                if (validProtocols.includes(reportUrlObject.protocol.toLowerCase())) {
+                if (validProtocols.has(reportUrlObject.protocol.toLowerCase())) {
                     console.debug(`Navigating to report URL: ${message.reportUrl}`);
                     browserAPI.tabs.create({url: message.reportUrl});
                 } else if (reportUrlObject.protocol === "mailto:") {
@@ -1249,7 +1249,7 @@
                 }
 
                 // Redirects to the new tab page if the blocked URL is not a valid HTTP(S) URL
-                if (!validProtocols.includes(blockedUrlObject.protocol.toLowerCase())) {
+                if (!validProtocols.has(blockedUrlObject.protocol.toLowerCase())) {
                     console.debug(`Invalid protocol in blocked URL: ${message.blockedUrl}; sending to new tab page.`);
                     sendToNewTabPage(tabId);
                     return;
@@ -1272,7 +1272,7 @@
                 }
 
                 // Redirects to the new tab page if the continue URL is not a valid HTTP(S) URL
-                if (!validProtocols.includes(continueUrlObject.protocol.toLowerCase())) {
+                if (!validProtocols.has(continueUrlObject.protocol.toLowerCase())) {
                     console.debug(`Invalid protocol in continue URL: ${message.continueUrl}; sending to new tab page.`);
                     sendToNewTabPage(tabId);
                     return;

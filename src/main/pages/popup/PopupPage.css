@@ -229,3 +229,23 @@ section {
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
+
+#adGuardSecurityDivSwitch,
+#adGuardFamilyDivSwitch,
+#alphaMountainDivSwitch,
+#precisionSecDivSwitch,
+#certEEDivSwitch,
+#cleanBrowsingSecurityDivSwitch,
+#cleanBrowsingFamilyDivSwitch,
+#cloudflareSecurityDivSwitch,
+#cloudflareFamilyDivSwitch,
+#controlDSecurityDivSwitch,
+#controlDFamilyDivSwitch,
+#dns4EUSecurityDivSwitch,
+#dns4EUFamilyDivSwitch,
+#quad9DivSwitch {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}

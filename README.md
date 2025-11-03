@@ -1,4 +1,4 @@
-# Osprey: Browser Protection
+<img width="287" height="62" alt="image" src="https://github.com/user-attachments/assets/7666cdf8-805b-4552-b31f-554c87a03f2a" /># Osprey: Browser Protection
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![CodeQL](https://github.com/Foulest/Osprey/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Foulest/Osprey/actions/workflows/github-code-scanning/codeql)
@@ -42,13 +42,16 @@ possible. Check out some of our partners below:
 ## Other Partners
 
 Osprey doesn't just endorse our partnered security providers. We also support businesses that love what we do! Check out
-some of the companies that love Osprey:
+some of the organizations that love Osprey:
 
 ###
 
 <p align="center">
-  <a href="https://ria.ee/en?utm_source=osprey" title"CERT-EE"><img src="https://i.imgur.com/EiOmmHB.png" alt="CERT-EE"></a>
+  <a href="https://ria.ee/en?utm_source=osprey" title="CERT-EE"><img src="https://i.imgur.com/EiOmmHB.png" alt="CERT-EE"></a>
+  <a href="https://i.imgur.com/9dqoUX4.png" title="CleanBrowsing"><img src="https://i.imgur.com/8qgGCY8.png" alt="CleanBrowsing"></a>
   <a href="https://controld.com/?utm_source=osprey" title="Control D"><img src="https://i.imgur.com/xh7qTT8.png" alt="Control D"></a>
+  <a href="https://joindns4.eu/?utm_source=osprey" title="DNS4EU"><img src="https://i.imgur.com/z5Ed69J.png" alt="DNS4EU"></a>
+  <a href="https://quad9.net/?utm_source=osprey" title="Quad9"><img src="https://i.imgur.com/HUrIKS9.png" alt="Quad9"></a>
   <a href="https://concourse-cloud.com/?utm_source=osprey" title="Concourse Cloud"><img src="https://i.imgur.com/pfAZVvp.png" alt="Concourse Cloud"></a>
 </p>
 

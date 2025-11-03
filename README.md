@@ -47,6 +47,7 @@ some of the companies that love Osprey:
 ###
 
 <p align="center">
+  <a href="https://ria.ee/en?utm_source=osprey" title"CERT-EE"><img src="https://i.imgur.com/EiOmmHB.png" alt="CERT-EE"></a>
   <a href="https://controld.com/?utm_source=osprey" title="Control D"><img src="https://i.imgur.com/xh7qTT8.png" alt="Control D"></a>
   <a href="https://concourse-cloud.com/?utm_source=osprey" title="Concourse Cloud"><img src="https://i.imgur.com/pfAZVvp.png" alt="Concourse Cloud"></a>
 </p>

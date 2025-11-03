@@ -1,4 +1,4 @@
-<img width="287" height="62" alt="image" src="https://github.com/user-attachments/assets/7666cdf8-805b-4552-b31f-554c87a03f2a" /># Osprey: Browser Protection
+# Osprey: Browser Protection
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![CodeQL](https://github.com/Foulest/Osprey/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Foulest/Osprey/actions/workflows/github-code-scanning/codeql)
